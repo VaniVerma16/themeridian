@@ -885,7 +885,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
                 <img id="four-photo-img" alt="Recovered archive photograph" hidden>
                 <div id="four-photo-placeholder" class="four-photo-placeholder"><span>PHOTOGRAPH A</span><strong>Image pending</strong><small>Awaiting original photographic scan</small></div>
               </div>
-              <button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Consult street directory</span><span aria-hidden="true">↗</span></button><p class="four-photo-caption" id="four-photo-caption">Reference PH–01 · Catalogue date and location missing</p>
+              <button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Open supplementary notes</span><span aria-hidden="true">↗</span></button><p class="four-photo-caption" id="four-photo-caption">Reference PH–01 · Catalogue date and location missing</p>
               <div class="four-bearing"><div><label for="four-bearing">Camera direction</label><output id="four-bearing-output">North · 0°</output></div><input type="range" id="four-bearing" min="0" max="350" step="10" value="0"><div class="four-bearing-ends"><span>N</span><span>E</span><span>S</span><span>W</span><span>N</span></div></div><div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
             </div>
             <div class="four-map-col">
@@ -908,17 +908,15 @@ body{overflow-x:clip;overscroll-behavior-x:none}
   </div>
 
   <div id="transition-flash" aria-hidden="true"></div>
-  <div id="directory-modal" class="directory-overlay" role="dialog" aria-modal="true" aria-label="Meridian street directory" hidden>
+  <div id="directory-modal" class="directory-overlay" role="dialog" aria-modal="true" aria-label="Supplementary archival notes" hidden>
     <div class="directory-shell">
-      <div class="directory-toolbar"><span>REFERENCE MATERIAL · 1993</span><button id="directory-close" type="button">Close ×</button></div>
+      <div class="directory-toolbar"><span>FIELD NOTES · RECOVERED MATERIAL</span><button id="directory-close" type="button">Close ×</button></div>
       <div class="directory-book">
         <div class="directory-page" id="directory-page">
           <div class="directory-page-content" id="directory-content"></div>
-          <div class="directory-page-bottom"><span>MERIDIAN COUNTY STREET DIRECTORY</span><span id="directory-folio">01</span></div>
+          <div class="directory-page-bottom"><span>THE MERIDIAN · LOCATION RECORDS</span><span id="directory-folio">01</span></div>
         </div>
-        <div class="directory-navigation">
-          <button id="directory-prev" type="button">← Previous page</button><span id="directory-count">1 / 4</span><button id="directory-next" type="button">Next page →</button>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -1169,7 +1167,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       {label:'B',file:'station-road2.jpg',ref:'PH–02'},
       {label:'C',file:'pub.jpg',ref:'PH–03'}
     ];
-    const fourLandmarks=[{name:'Town Centre',lat:334,lng:475},{name:'Station Road',lat:358,lng:762},{name:'Meridian Station',lat:427,lng:934},{name:'West End',lat:409,lng:94},{name:'Riverside',lat:175,lng:182},{name:'North Orchards',lat:599,lng:742}];
+    const fourLandmarks=[{name:'Clock Tower',lat:550,lng:468},{name:'Prince Arthur',lat:390,lng:657},{name:'Filling Station',lat:515,lng:840},{name:'School',lat:260,lng:865},{name:'West Bridge',lat:532,lng:90},{name:'Meridian Station',lat:635,lng:587}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null;
     const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
     function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
@@ -1178,8 +1176,8 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     fourBearing.addEventListener('input',updateBearing);
     function nearestLandmark(lat,lng){let best=fourLandmarks[0],distance=Infinity;fourLandmarks.forEach(site=>{const d=Math.hypot(lat-site.lat,lng-site.lng);if(d<distance){best=site;distance=d}});return best.name}
     function ensureFourMap(){if(fourLeaflet){fourLeaflet.invalidateSize();return}if(!window.L){document.getElementById('four-feedback').textContent='The map could not load. Please refresh.';return}
-      const canvas=[[0,0],[667,1000]];
-      fourLeaflet=L.map('four-map',{crs:L.CRS.Simple,minZoom:-1.4,maxZoom:2,zoomSnap:.25,scrollWheelZoom:false,zoomControl:true,attributionControl:false,maxBounds:[[-60,-60],[727,1060]],maxBoundsViscosity:1});
+      const canvas=[[0,0],[750,1000]];
+      fourLeaflet=L.map('four-map',{crs:L.CRS.Simple,minZoom:-1.4,maxZoom:2,zoomSnap:.25,scrollWheelZoom:false,zoomControl:true,attributionControl:false,maxBounds:[[-60,-60],[810,1060]],maxBoundsViscosity:1});
       L.imageOverlay('meridian-town-map.png',canvas,{interactive:false,alt:'Meridian County fictional street survey'}).addTo(fourLeaflet);
       fourLeaflet.fitBounds(canvas,{padding:[8,8]});
       fourLeaflet.on('click',event=>updateFourMarker(event.latlng.lat,event.latlng.lng));
@@ -1211,30 +1209,24 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       document.getElementById('four-summary').hidden=false;
     });
 
-    const directoryPages=[
-      '<p class="directory-kicker">COUNTY SURVEY OFFICE · REVISED EDITION, 1993</p><h2>Meridian Street Directory</h2><div class="directory-rule"></div><p>An index of civic buildings, roads and commercial premises, compiled to accompany the county town survey.</p><p>Street entries describe junctions and neighbouring buildings, rather than photographic positions. Some premises may have changed names since publication.</p><p><em>Use the map in conjunction with these descriptions to determine where an image could have been taken.</em></p>',
-      '<p class="directory-kicker">SECTION A · TOWN CENTRE</p><h2>High Street</h2><dl><dt>Clock tower</dt><dd>At the northern end of the pedestrian approach to Town Centre. The tower faces the principal shopping street.</dd><dt>Town Hall</dt><dd>West of High Street, reached by a short turning off Market Street.</dd><dt>Market Street</dt><dd>Leaves the centre towards the station district; rows of shopfronts continue on both sides of the road.</dd></dl>',
-      '<p class="directory-kicker">SECTION B · EASTERN WARD</p><h2>Station Road</h2><dl><dt>Commercial frontage</dt><dd>A long block of offices and shops stands opposite a shorter row of houses and small businesses.</dd><dt>Petrol filling station</dt><dd>On the road towards Meridian Station, close to the turning for the southward residential lanes.</dd><dt>Railway approach</dt><dd>The tracks lie farther east. The roadway runs broadly towards the station before turning near the goods yard.</dd></dl><p><em>Note: the station is not necessarily visible from every point on the road.</em></p>',
-      '<p class="directory-kicker">SECTION C · PUBLIC HOUSES</p><h2>Corner Premises</h2><dl><dt>Prince Arthur Public House</dt><dd>A three-storey brick public house at a street corner, with its principal entrance facing the wider road. A narrow side street passes the building’s end wall.</dd><dt>Adjacent plot</dt><dd>The neighbouring parcel was recorded as under renovation in the early 1990s.</dd></dl><div class="directory-rule"></div><p><em>Cross-reference: Station Road and nearby turning lanes. Building use and signage may have changed.</em></p>'
-    ];
     const directoryModal=document.getElementById('directory-modal');
-    let directoryIndex=0, directoryReturnFocus=null;
-    function renderDirectory(){
-      document.getElementById('directory-content').innerHTML=directoryPages[directoryIndex];
-      document.getElementById('directory-count').textContent=(directoryIndex+1)+' / '+directoryPages.length;
-      document.getElementById('directory-folio').textContent=String(directoryIndex+1).padStart(2,'0');
-      document.getElementById('directory-prev').disabled=directoryIndex===0;
-      document.getElementById('directory-next').disabled=directoryIndex===directoryPages.length-1;
-      document.getElementById('directory-page').scrollTop=0;
-    }
-    function openDirectory(){directoryReturnFocus=document.activeElement;directoryIndex=0;renderDirectory();directoryModal.hidden=false;document.getElementById('directory-close').focus()}
+    let directoryReturnFocus=null;
+    document.getElementById('directory-content').innerHTML=[
+      '<p class="directory-kicker">THE MERIDIAN · SUPPLEMENTARY FIELD NOTES</p>',
+      '<h2>Recovered notes</h2>',
+      '<p>These loose observations were found with the photographic survey. They were never entered into the main catalogue.</p>',
+      '<div class="directory-rule"></div>',
+      '<p><strong>01 / The shopping street.</strong> The photographer seems to have stood looking towards the clock tower. It is visible at the far end of the street, beyond a row of shops.</p>',
+      '<p><strong>02 / Commercial frontage.</strong> The tall modern block stood opposite older houses and small shops. A filling station appears farther along the same road.</p>',
+      '<p><strong>03 / Corner building.</strong> Apparently someone on the team got a bit distracted by the Prince Arthur while documenting the area. I suppose everyone deserves a break! The photograph was kept with the street survey anyway.</p>',
+      '<p><em>Locations should be checked against the town survey before the files are catalogued.</em></p>'
+    ].join('');
+    document.getElementById('directory-folio').textContent='01';
     function closeDirectory(){directoryModal.hidden=true;if(directoryReturnFocus&&directoryReturnFocus.focus)directoryReturnFocus.focus()}
-    document.getElementById('directory-open').addEventListener('click',openDirectory);
+    document.getElementById('directory-open').addEventListener('click',()=>{directoryReturnFocus=document.activeElement;directoryModal.hidden=false;document.getElementById('directory-close').focus()});
     document.getElementById('directory-close').addEventListener('click',closeDirectory);
-    document.getElementById('directory-prev').addEventListener('click',()=>{if(directoryIndex>0){directoryIndex--;renderDirectory()}});
-    document.getElementById('directory-next').addEventListener('click',()=>{if(directoryIndex<directoryPages.length-1){directoryIndex++;renderDirectory()}});
     directoryModal.addEventListener('click',event=>{if(event.target===directoryModal)closeDirectory()});
-    document.addEventListener('keydown',event=>{if(directoryModal.hidden)return;if(event.key==='Escape')closeDirectory();if(event.key==='ArrowRight'&&directoryIndex<directoryPages.length-1){directoryIndex++;renderDirectory()}if(event.key==='ArrowLeft'&&directoryIndex>0){directoryIndex--;renderDirectory()}});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!directoryModal.hidden)closeDirectory()});
     renderFourPhoto();
     let flashPending=false;
     function flashToLevelFour(){
