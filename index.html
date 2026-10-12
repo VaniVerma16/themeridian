@@ -651,6 +651,11 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .archived-article-body .article-section{font-size:11px;letter-spacing:.12em;margin:20px 0 12px;color:#686158}
 .archived-article-body h2{font-size:clamp(27px,4vw,40px);line-height:1.16;margin:0 0 24px}
 .archived-article-body p{font-size:17px;line-height:1.75;margin:0 0 18px}
+.archived-article-panel{width:min(800px,96vw);background:#17191b;color:#e8e5df;padding:16px}
+.archived-article-panel .modal-top h3{color:#c8c6c0}
+.archived-article-panel .close-modal{color:#e8e5df;background:transparent;border-color:#6b6b69}
+.archived-full-clipping{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+#level-three .archive-headline-image{width:100%;height:auto;display:block}
   </style>
 </head>
 <body>
@@ -736,9 +741,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           <p class="task-line">Match each recovered story to its reporter and original publication year. Use each reporter and year once.</p>
           
           <div class="archive-roster">
-            <article class="roster-card"><small>CLIPPING A</small><button class="archive-open" type="button" data-article="orchards" aria-label="Read full clipping: New Concerns Raised About Pesticide Use Near Orchards"><img class="archive-headline-image" src="orchards.png" alt="New Concerns Raised About Pesticide Use Near Orchards"><span>Read clipping ↗</span></button></article>
-            <article class="roster-card"><small>CLIPPING B</small><button class="archive-open" type="button" data-article="debate" aria-label="Read full clipping: Students Bring Home Regional Debate Victory"><img class="archive-headline-image" src="debate.png" alt="Students Bring Home Regional Debate Victory"><span>Read clipping ↗</span></button></article>
-            <article class="roster-card"><small>CLIPPING C</small><button class="archive-open" type="button" data-article="library" aria-label="Read full clipping: Town Library Unveils Newly Restored Reading Hall"><img class="archive-headline-image" src="reading-hall.png" alt="Town Library Unveils Newly Restored Reading Hall"><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING A</small><button class="archive-open" type="button" data-article="orchards" aria-label="Read full clipping: New Concerns Raised About Pesticide Use Near Orchards"><img class="archive-headline-image" src="orchards-article.png" alt="New Concerns Raised About Pesticide Use Near Orchards"><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING B</small><button class="archive-open" type="button" data-article="debate" aria-label="Read full clipping: Students Bring Home Regional Debate Victory"><img class="archive-headline-image" src="debate-article.png" alt="Students Bring Home Regional Debate Victory"><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING C</small><button class="archive-open" type="button" data-article="library" aria-label="Read full clipping: Town Library Unveils Newly Restored Reading Hall"><img class="archive-headline-image" src="library-article.png" alt="Town Library Unveils Newly Restored Reading Hall"><span>Read clipping ↗</span></button></article>
           </div>
           <div class="archive-key">
             <div class="archive-key-group"><span class="key-title">REPORTERS</span><div class="key-values"><span>Harriet</span><span>Jane</span><span>Elliot</span></div></div>
@@ -816,6 +821,15 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     document.querySelectorAll('.archive-open').forEach(button=>button.addEventListener('click',()=>{
       const article=archivedArticles[button.dataset.article];
       articleBody.replaceChildren();
+      const clippingSources={orchards:"orchards-article.png",debate:"debate-article.png",library:"library-article.png"};
+      const clipping=document.createElement('img');
+      clipping.src=clippingSources[button.dataset.article];
+      clipping.alt=article.title;
+      clipping.className='archived-full-clipping';
+      articleBody.appendChild(clipping);
+      articleModal.hidden=false;
+      articleModal.setAttribute('aria-hidden','false');
+      return;
       const section=document.createElement('div');section.className='article-section';section.textContent=article.section;
       const title=document.createElement('h2');title.textContent=article.title;
       articleBody.append(section,title);
