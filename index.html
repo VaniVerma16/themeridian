@@ -523,6 +523,13 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
 #level-one .transcription-paper h2{font-size:31px;line-height:1.09;text-align:left;font-weight:700}
 #level-one .transcription-paper p{color:#2b251f!important;line-height:1.58}
 #level-one .transcription-clipping-image{display:block;width:100%;height:auto;object-fit:contain}
+
+/* Prevent sideways page drift and horizontal rubber-band overscroll. */
+html{overflow-x:clip;overscroll-behavior-x:none}
+body{overflow-x:clip;overscroll-behavior-x:none}
+.wrapper{min-width:0}
+.wrapper>main{min-width:0}
+.logic-board-scroll{overscroll-behavior-x:contain}
   </style>
 </head>
 <body>
