@@ -599,6 +599,12 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     min-height:0;align-items:flex-start;padding:48px 0 65px;
   }
 }
+
+/* Full-bleed rules; keep header and footer contents aligned with the page. */
+#mini-header{position:relative;border-bottom:0!important}
+#mini-header::after{content:"";position:absolute;bottom:0;left:50%;width:100vw;transform:translateX(-50%);border-bottom:1px solid var(--rule);pointer-events:none}
+.wrapper>footer{position:relative;border-top:0!important}
+.wrapper>footer::before{content:"";position:absolute;top:0;left:50%;width:100vw;transform:translateX(-50%);border-top:1px solid var(--rule);pointer-events:none}
   </style>
 </head>
 <body>
@@ -633,7 +639,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         <button id="get-started" class="primary" type="button">Get started</button>
       </section>
 
-<section id="read-one" class="reading-page" aria-label="Assessment one introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT one · A NOTE FROM YOUR GUIDE</div><h1>A brief assessment.</h1><div class="reading-copy"><p>These are some basic tests to help us make sure that you are well suited for the task at hand!</p></div><button id="begin-one" class="primary" type="button">Let's begin</button></div></section>
+<section id="read-one" class="reading-page" aria-label="Assessment one introduction" hidden><div class="reading-inner"><h1>A brief assessment.</h1><div class="reading-copy"><p>These are some basic tests to help us make sure that you are well suited for the task at hand!</p></div><button id="begin-one" class="primary" type="button">Let's begin</button></div></section>
       <section id="level-one" class="level" aria-label="Transcription review" hidden>
         <div class="puzzle-label">01 / TRANSCRIPTION REVIEW</div>
         <div class="assignment transcription-assignment">
@@ -654,7 +660,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         </div>
       </section>
 
-<section id="read-two" class="reading-page" aria-label="Assessment two introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT 02 · A NOTE FROM YOUR GUIDE</div><h1>Sort by dates.</h1><div class="reading-copy"><p>Hi! I thought this would be a good next test.</p><p>Take a look at these old articles and <strong>SORT</strong> them by date.</p><p>I know it’s simple, but I need to make sure you can read through these as well!</p></div><button id="begin-two" class="primary" type="button">Let's take a look</button></div></section>
+<section id="read-two" class="reading-page" aria-label="Assessment two introduction" hidden><div class="reading-inner"><h1>Sort by dates.</h1><div class="reading-copy"><p>Hi! I thought this would be a good next test.</p><p>Take a look at these old articles and <strong>SORT</strong> them by date.</p><p>I know it’s simple, but I need to make sure you can read through these as well!</p></div><button id="begin-two" class="primary" type="button">Let's take a look</button></div></section>
       <section id="level-two" class="level" aria-labelledby="level-two-title" hidden>
 <div class="puzzle-label">02 / SORT BY DATES</div>
         <div class="assignment">
@@ -665,7 +671,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         </div>
       </section>
 
-<section id="read-three" class="reading-page" aria-label="Assessment 03 introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT 03 · A NOTE FROM YOUR GUIDE</div>        <div id="narrator-intro" class="narrator-letter">
+<section id="read-three" class="reading-page" aria-label="Assessment 03 introduction" hidden><div class="reading-inner">        <div id="narrator-intro" class="narrator-letter">
           <h1>The Missing Editions</h1>
           <p>Amazing work so far! I think you're really getting the hang of this.</p>
           <p>Most people I've tested so far can't make it through all the assessments. I really hope you do, though!</p>
