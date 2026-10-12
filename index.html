@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#17191b">
   <title>The Meridian | An Independent Publishing Project</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     :root{color-scheme:light;--paper:#f8f8f6;--ink:#121212;--muted:#646464;--rule:#d4d4d2;--green:#39826b;--red:#bf554d;--blue:#4778b1;--card:#fff;--shadow:0 6px 18px rgba(0,0,0,.08)}
     *{box-sizing:border-box}
@@ -723,6 +724,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 #four-bearing{width:100%;margin:14px 0 6px;accent-color:#bbb5a5;cursor:pointer}
 .four-bearing-ends{display:flex;justify-content:space-between;color:#a9a69e;font-size:11px}
 #four-map text{pointer-events:none}
+#four-map{height:470px;width:100%;background:#e6e3dc}.meridian-name{background:#f8f4e9;padding:3px 6px;border:1px solid #c6c0b3;color:#343933;font:12px Georgia,serif;white-space:nowrap}.meridian-camera{background:transparent;border:0}.meridian-camera svg{overflow:visible}.leaflet-container{font:13px Georgia,serif}@media(max-width:600px){#four-map{height:370px}}
   </style>
 </head>
 <body>
@@ -865,31 +867,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
             <div class="four-map-col">
               <div class="four-map-head"><div><strong>Town survey map</strong></div></div>
               <div class="four-map-viewport">
-                <svg id="four-map" viewBox="0 0 660 470" role="img" aria-label="Interactive Meridian town street plan" xmlns="http://www.w3.org/2000/svg">
-<defs><pattern id="houses" width="27" height="28" patternUnits="userSpaceOnUse"><rect x="3" y="3" width="10" height="9" fill="#aaa99d" stroke="#88897d" stroke-width=".5"/><rect x="16" y="4" width="8" height="13" fill="#b6b4a8" stroke="#88897d" stroke-width=".5"/><rect x="3" y="18" width="13" height="7" fill="#b0aea2" stroke="#88897d" stroke-width=".5"/></pattern><pattern id="grove" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="3.1" fill="#8c9b81"/></pattern></defs>
-<rect width="660" height="470" fill="#e5dfd1"/>
-<path d="M0 0H660V115L490 101 200 108 0 125Z" fill="#d9dfce"/>
-<path d="M0 409L208 394 254 443V470H0Z" fill="#d6dac9"/>
-<rect x="16" y="24" width="628" height="426" fill="url(#houses)" opacity=".72"/>
-<rect x="274" y="15" width="159" height="87" fill="#d7deca"/><rect x="274" y="15" width="159" height="87" fill="url(#grove)"/>
-<path d="M111 -20Q70 70 129 151T139 302Q116 360 179 490" fill="none" stroke="#d9d5c6" stroke-width="57"/>
-<path d="M111 -20Q70 70 129 151T139 302Q116 360 179 490" fill="none" stroke="#a7bdc0" stroke-width="44"/>
-<path d="M566 -12L648 487" fill="none" stroke="#747d76" stroke-width="11"/>
-<path d="M566 -12L648 487" fill="none" stroke="#e5dfd1" stroke-width="5"/>
-<path d="M562 -12L644 487M570 -12L652 487" fill="none" stroke="#555e57" stroke-width="1.5"/>
-<g stroke="#a9a697" fill="none" stroke-width="16" stroke-linejoin="round" stroke-linecap="round"><path d="M0 147L232 152 339 163 456 152 660 145"/><path d="M0 277L255 276 430 269 660 270"/><path d="M0 387L222 370 451 375 660 364"/><path d="M229 0V470M344 0V470M453 0V470M548 0V470"/><path d="M230 110L313 198 455 194 546 117"/><path d="M220 383L308 327 446 323 558 272"/></g>
-<g stroke="#f9f3e7" fill="none" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"><path d="M0 147L232 152 339 163 456 152 660 145"/><path d="M0 277L255 276 430 269 660 270"/><path d="M0 387L222 370 451 375 660 364"/><path d="M229 0V470M344 0V470M453 0V470M548 0V470"/><path d="M230 110L313 198 455 194 546 117"/><path d="M220 383L308 327 446 323 558 272"/></g>
-<path d="M83 277L197 276" stroke="#838c88" stroke-width="17"/><path d="M83 277L197 276" stroke="#f9f3e7" stroke-width="12"/>
-<rect x="276" y="171" width="157" height="94" fill="#d1c6b5" stroke="#a9a18f" stroke-width="1"/>
-<g fill="#aaa69b" stroke="#7b7d75" stroke-width=".8"><rect x="286" y="178" width="26" height="31"/><rect x="317" y="175" width="26" height="30"/><rect x="376" y="177" width="47" height="31"/><rect x="287" y="218" width="32" height="37"/><rect x="381" y="217" width="40" height="38"/><rect x="490" y="333" width="48" height="34"/><rect x="576" y="183" width="37" height="45"/></g>
-<rect x="336" y="214" width="34" height="34" fill="#a19d90" stroke="#7b7d75"/><circle cx="353" cy="227" r="6" fill="#e9e5d6" stroke="#7b7d75"/>
-<rect x="480" y="313" width="65" height="79" fill="#cad4c1" opacity=".77"/><rect x="489" y="330" width="50" height="29" fill="#a4a79a" stroke="#888b7f"/>
-<g fill="#566157" font-family="Georgia,serif" font-size="12" letter-spacing=".8"><text x="346" y="294" text-anchor="middle">TOWN SQUARE</text><text x="353" y="112" text-anchor="middle">NORTH ORCHARDS</text><text x="29" y="189">WEST END</text><text x="26" y="348">RIVERSIDE</text><text x="485" y="405">SOUTH WARD</text><text x="544" y="253">STATION ROAD</text></g>
-<g fill="#6d766a" font-family="Georgia,serif" font-style="italic" font-size="10"><text x="246" y="131">Orchard Lane</text><text x="260" y="317">Market Street</text><text x="363" y="350">Mill Road</text><text x="474" y="291">Station Road</text><text x="481" y="424">School Lane</text></g>
-<g fill="#5d665c" font-size="10" font-family="Georgia,serif"><text x="16" y="20">MERIDIAN · COUNTY SURVEY</text><text x="16" y="459">CENTRAL DISTRICT · 1993</text></g>
-<g transform="translate(631 16)" stroke="#4b574c" fill="none"><path d="M0 27V0L-6 10M0 0L6 10" stroke-width="1.5"/><text x="0" y="39" stroke="none" fill="#4b574c" font-size="11" text-anchor="middle">N</text></g>
-<g id="four-map-marker" visibility="hidden"><circle r="12" fill="#f6f0e5" stroke="#8e3029" stroke-width="2"/><circle r="4" fill="#8e3029"/><g id="four-direction-marker"><path d="M0 -12V-53" stroke="#8e3029" stroke-width="3"/><path d="M-8 -43L0 -56L8 -43" stroke="#8e3029" fill="none" stroke-width="3"/></g></g>
-</svg>
+                <div id="four-map" role="application" aria-label="Interactive town map"></div>
               </div>
               <p class="four-location">Your marker: <strong id="four-location-name">Not placed</strong></p>
               <div class="four-editor-note"><span>EDITOR'S LOG</span><p>Original photograph references restored. Please consult me before making further revisions to these entries.</p></div>
@@ -919,6 +897,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     </div>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
 
     const archivedArticles={
