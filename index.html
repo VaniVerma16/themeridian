@@ -670,6 +670,16 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 #level-three .archive-roster .archive-headline-image,
 #level-three .archive-roster img{display:none!important}
 #level-three .archive-roster .archive-headline-text{display:block!important}
+
+/* Only heading scans in Level 3 cards; full articles in the reader. */
+#level-three .archive-roster img.archive-heading-image{display:block!important;width:100%;height:auto;object-fit:contain}
+#level-three .archive-roster .archive-open{width:100%;display:block}
+#level-three .archive-roster .roster-card{min-width:0}
+.archived-article-panel{width:min(770px,95vw);background:#17191b;color:#eceae5;padding:16px}
+.archived-article-panel .modal-top h3{color:#b8b4ac}
+.archived-article-panel .close-modal{background:transparent;color:#eeeae4;border-color:#686661}
+.archived-article-body .archived-full-clipping{display:block;width:100%;height:auto}
+.archived-article-body .archive-supplement{font-size:14px;line-height:1.7;color:#d0cbc1;margin:18px 8px 4px}
   </style>
 </head>
 <body>
@@ -755,9 +765,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           <p class="task-line">Match each recovered story to its reporter and original publication year. Use each reporter and year once.</p>
           
           <div class="archive-roster">
-            <article class="roster-card"><small>CLIPPING A</small><button class="archive-open" type="button" data-article="orchards" aria-label="Read full clipping: New Concerns Raised About Pesticide Use Near Orchards"><strong class="archive-headline-text">New Concerns Raised About Pesticide Use Near Orchards</strong><span>Read clipping ↗</span></button></article>
-            <article class="roster-card"><small>CLIPPING B</small><button class="archive-open" type="button" data-article="debate" aria-label="Read full clipping: Students Bring Home Regional Debate Victory"><strong class="archive-headline-text">Students Bring Home Regional Debate Victory</strong><span>Read clipping ↗</span></button></article>
-            <article class="roster-card"><small>CLIPPING C</small><button class="archive-open" type="button" data-article="library" aria-label="Read full clipping: Town Library Unveils Newly Restored Reading Hall"><strong class="archive-headline-text">Town Library Unveils Newly Restored Reading Hall</strong><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING A</small><button class="archive-open" type="button" data-article="orchards" aria-label="Read full clipping: New Concerns Raised About Pesticide Use Near Orchards"><img class="archive-heading-image" src="orchards-heading.png" alt="New Concerns Raised About Pesticide Use Near Orchards"><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING B</small><button class="archive-open" type="button" data-article="debate" aria-label="Read full clipping: Students Bring Home Regional Debate Victory"><img class="archive-heading-image" src="debate-heading.png" alt="Students Bring Home Regional Debate Victory"><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING C</small><button class="archive-open" type="button" data-article="library" aria-label="Read full clipping: Town Library Unveils Newly Restored Reading Hall"><img class="archive-heading-image" src="library-heading.png" alt="Town Library Unveils Newly Restored Reading Hall"><span>Read clipping ↗</span></button></article>
           </div>
           <div class="archive-key">
             <div class="archive-key-group"><span class="key-title">REPORTERS</span><div class="key-values"><span>Harriet</span><span>Jane</span><span>Elliot</span></div></div>
@@ -835,10 +845,18 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     document.querySelectorAll('.archive-open').forEach(button=>button.addEventListener('click',()=>{
       const article=archivedArticles[button.dataset.article];
       articleBody.replaceChildren();
-      const section=document.createElement('div');section.className='article-section';section.textContent=article.section;
-      const title=document.createElement('h2');title.textContent=article.title;
-      articleBody.append(section,title);
-      article.paragraphs.forEach(copy=>{const p=document.createElement('p');p.textContent=copy;articleBody.appendChild(p)});
+      const images={orchards:'orchards-article.png',debate:'debate-article.png',library:'library-article.png'};
+      const scan=document.createElement('img');
+      scan.className='archived-full-clipping';
+      scan.src=images[button.dataset.article];
+      scan.alt=article.title;
+      articleBody.appendChild(scan);
+      if(button.dataset.article==='debate'){
+        const caption=document.createElement('p');
+        caption.className='archive-supplement';
+        caption.textContent='Photograph caption, filed separately: The closing speaker is pictured with the small red notebook he carried to every round.';
+        articleBody.appendChild(caption);
+      }
       articleModal.hidden=false;articleModal.setAttribute('aria-hidden','false');
     }));
     function closeArchivedArticle(){articleModal.hidden=true;articleModal.setAttribute('aria-hidden','true')}
