@@ -773,13 +773,12 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 #level-four .four-workspace{gap:18px}
 #level-four .four-bearing{margin-top:10px}
 #level-four .four-map-head{margin-bottom:5px}
-#five-interference{display:none;position:fixed;inset:0;z-index:10000;background:#f4f0e9;align-items:center;justify-content:center;text-align:center;padding:28px}
-#five-interference.active{display:flex;animation:five-glitch 2s steps(1,end) both}
-#five-interference span{color:#9d2928;font-family:Georgia,serif;font-size:clamp(28px,5vw,65px);font-weight:bold;letter-spacing:-.015em}
-@keyframes five-glitch{0%,12%,28%,47%,70%,91%{background:#f4f0e9}8%,22%,43%,65%,87%{background:#8b1b20}8%,22%,43%,65%,87%{color:#fff}8%,22%,43%,65%,87%{}}
-#five-interference.active span{animation:five-words 2s steps(1,end) both}
-@keyframes five-words{0%,12%,28%,47%,70%,91%{color:#9d2928}8%,22%,43%,65%,87%{color:#fff}}
-@media(prefers-reduced-motion:reduce){#five-interference.active,#five-interference.active span{animation:none;background:#f4f0e9;color:#9d2928}}
+#five-interference{display:none;position:fixed;inset:0;z-index:10000;background:#080808;align-items:center;justify-content:center;text-align:center;padding:28px}
+#five-interference.active{display:flex;background:#080808}
+#five-interference span{font-family:Georgia,serif;font-size:clamp(28px,5vw,65px);font-weight:bold;letter-spacing:-.015em;animation:five-words 2s steps(1,end) both}
+@keyframes five-words{0%,14%,30%,48%,69%,90%{color:#b42b32}8%,23%,39%,59%,82%,96%{color:#f4f0e9}}
+@media(prefers-reduced-motion:reduce){#five-interference.active span{animation:none;color:#f4f0e9}}
+#dev-pass{font:12px Georgia,serif;padding:5px 9px;border:1px solid #777;background:transparent;color:inherit;white-space:nowrap}
   </style>
 </head>
 <body>
@@ -801,6 +800,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         <option value="readThree">Level 3 intro</option><option value="three">Level 3 puzzle</option>
         <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="readFive">Level 5 intro</option><option value="five">Level 5 puzzle</option><option value="complete">End screen</option>
       </select>
+      <button id="dev-pass" type="button" title="Development only: run the next-level transition">Skip →</button>
     </aside>
     <main>
       <section id="home" class="hero" aria-labelledby="home-title">
@@ -1210,6 +1210,15 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       if(selections.every((v,i)=>v===correct[i])){flashToLevelFour()}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
     });
     document.getElementById('dev-level').addEventListener('change',e=>show(e.target.value));
+    // DEV ONLY — bypass puzzles while preserving scripted transitions. Remove before release.
+    document.getElementById('dev-pass').addEventListener('click',()=>{
+      const current=document.getElementById('dev-level').value;
+      const next={home:'readOne',readOne:'level',level:'readTwo',readTwo:'two',two:'readThree',readThree:'three',three:'flashFour',readFour:'four',four:'flashFive',readFive:'five',five:'complete'};
+      const destination=next[current];
+      if(destination==='flashFour')flashToLevelFour();
+      else if(destination==='flashFive')flashToLevelFive();
+      else if(destination)show(destination);
+    });
     document.getElementById('begin-four').addEventListener('click',()=>show('four'));
     document.getElementById('begin-five').addEventListener('click',()=>show('five'));
     document.getElementById('five-finish').addEventListener('click',()=>show('complete'));
