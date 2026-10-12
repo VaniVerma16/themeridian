@@ -656,6 +656,15 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .archived-article-panel .close-modal{color:#e8e5df;background:transparent;border-color:#6b6b69}
 .archived-full-clipping{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
 #level-three .archive-headline-image{width:100%;height:auto;display:block}
+
+/* Show only article headlines until a clipping is opened. */
+#level-three .archive-open .archive-headline-text{display:block;font-size:clamp(19px,2vw,27px);line-height:1.2;font-weight:700;padding:22px 18px 26px;background:#e7e3d9;color:#242321;min-height:128px}
+#level-three .archive-open:hover .archive-headline-text{background:#e7e3d9}
+.archived-article-panel{background:#e7e3d9;color:#242321;padding:clamp(22px,4vw,40px)}
+.archived-article-panel .modal-top h3{color:#59554e}
+.archived-article-panel .close-modal{color:#242321;border-color:#a5a093}
+.archived-article-body h2{color:#242321}
+.archived-article-body p{color:#282622}
   </style>
 </head>
 <body>
@@ -741,9 +750,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           <p class="task-line">Match each recovered story to its reporter and original publication year. Use each reporter and year once.</p>
           
           <div class="archive-roster">
-            <article class="roster-card"><small>CLIPPING A</small><button class="archive-open" type="button" data-article="orchards" aria-label="Read full clipping: New Concerns Raised About Pesticide Use Near Orchards"><img class="archive-headline-image" src="orchards-article.png" alt="New Concerns Raised About Pesticide Use Near Orchards"><span>Read clipping ↗</span></button></article>
-            <article class="roster-card"><small>CLIPPING B</small><button class="archive-open" type="button" data-article="debate" aria-label="Read full clipping: Students Bring Home Regional Debate Victory"><img class="archive-headline-image" src="debate-article.png" alt="Students Bring Home Regional Debate Victory"><span>Read clipping ↗</span></button></article>
-            <article class="roster-card"><small>CLIPPING C</small><button class="archive-open" type="button" data-article="library" aria-label="Read full clipping: Town Library Unveils Newly Restored Reading Hall"><img class="archive-headline-image" src="library-article.png" alt="Town Library Unveils Newly Restored Reading Hall"><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING A</small><button class="archive-open" type="button" data-article="orchards" aria-label="Read full clipping: New Concerns Raised About Pesticide Use Near Orchards"><strong class="archive-headline-text">New Concerns Raised About Pesticide Use Near Orchards</strong><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING B</small><button class="archive-open" type="button" data-article="debate" aria-label="Read full clipping: Students Bring Home Regional Debate Victory"><strong class="archive-headline-text">Students Bring Home Regional Debate Victory</strong><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING C</small><button class="archive-open" type="button" data-article="library" aria-label="Read full clipping: Town Library Unveils Newly Restored Reading Hall"><strong class="archive-headline-text">Town Library Unveils Newly Restored Reading Hall</strong><span>Read clipping ↗</span></button></article>
           </div>
           <div class="archive-key">
             <div class="archive-key-group"><span class="key-title">REPORTERS</span><div class="key-values"><span>Harriet</span><span>Jane</span><span>Elliot</span></div></div>
@@ -807,7 +816,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       ]},
       debate:{title:"Students Bring Home Regional Debate Victory",section:"EDUCATION",paragraphs:[
         "The town's secondary school debate team returned with the regional championship title on Friday after defeating six competing schools in a day of closely contested rounds. The final debate, held before a panel of teachers and visiting adjudicators, was decided by a narrow margin.",
-        "Team member Adam was singled out by the judges for a composed closing argument that drew together evidence presented throughout the contest. His coach credited the entire group with weeks of preparation and said its strongest quality had been the students' willingness to challenge one another's assumptions.",
+        "One of the team's speakers was singled out by the judges for a composed closing argument that drew together evidence presented throughout the contest. The coach credited the entire group with weeks of preparation and said its strongest quality had been the students' willingness to challenge one another's assumptions.",
         "The school plans to recognise the team at its next assembly. Organisers said this year's tournament attracted a larger field than in previous years, reflecting growing interest in competitive debating across the district."
       ]},
       library:{title:"Town Library Unveils Newly Restored Reading Hall",section:"COMMUNITY",paragraphs:[
@@ -821,15 +830,6 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     document.querySelectorAll('.archive-open').forEach(button=>button.addEventListener('click',()=>{
       const article=archivedArticles[button.dataset.article];
       articleBody.replaceChildren();
-      const clippingSources={orchards:"orchards-article.png",debate:"debate-article.png",library:"library-article.png"};
-      const clipping=document.createElement('img');
-      clipping.src=clippingSources[button.dataset.article];
-      clipping.alt=article.title;
-      clipping.className='archived-full-clipping';
-      articleBody.appendChild(clipping);
-      articleModal.hidden=false;
-      articleModal.setAttribute('aria-hidden','false');
-      return;
       const section=document.createElement('div');section.className='article-section';section.textContent=article.section;
       const title=document.createElement('h2');title.textContent=article.title;
       articleBody.append(section,title);
