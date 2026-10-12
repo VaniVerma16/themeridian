@@ -585,6 +585,20 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 /* Separate Level 1 instructions from column labels. */
 #level-one .transcription-assignment>.task-line{margin-bottom:54px!important}
 @media(max-width:780px){#level-one .transcription-assignment>.task-line{margin-bottom:34px!important}}
+
+/* Balance short reading introductions vertically between the header and footer. */
+@media(min-width:900px){
+  #read-one.reading-page,#read-two.reading-page,#read-three.reading-page{
+    min-height:calc(100dvh - 215px);
+    padding:35px 0 55px;
+    align-items:center;
+  }
+}
+@media(min-width:900px) and (max-height:650px){
+  #read-one.reading-page,#read-two.reading-page,#read-three.reading-page{
+    min-height:0;align-items:flex-start;padding:48px 0 65px;
+  }
+}
   </style>
 </head>
 <body>
