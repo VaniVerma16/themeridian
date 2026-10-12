@@ -716,6 +716,13 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .four-summary-items p,#four-summary-items p{padding:13px 0;border-bottom:1px solid #555}
 @media(max-width:950px){.four-workspace{grid-template-columns:1fr}.four-topline{flex-direction:column;gap:10px}}
 @media(max-width:540px){.four-controls{flex-direction:column;align-items:stretch}.four-controls .primary{width:100%}.four-map-head{align-items:start}.four-map-head small{display:none}}
+
+.four-bearing{margin-top:20px;border-top:1px solid #535550;padding-top:16px}
+.four-bearing>div:first-child{display:flex;justify-content:space-between;align-items:center;font-size:14px;gap:12px}
+#four-bearing-output{color:#d4d0c8;font-size:13px}
+#four-bearing{width:100%;margin:14px 0 6px;accent-color:#bbb5a5;cursor:pointer}
+.four-bearing-ends{display:flex;justify-content:space-between;color:#a9a69e;font-size:11px}
+#four-map text{pointer-events:none}
   </style>
 </head>
 <body>
@@ -845,7 +852,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       </section>
       <section id="level-four" class="level" aria-label="Photographic archive" hidden>
         <div class="assignment four-assignment">
-          <div class="four-topline"><div><h1>A Life in Three Acts</h1><p>Photographic archive · Identify where each recovered image was taken.</p></div><div id="four-counter" class="four-counter">PHOTOGRAPH 01 / 03</div></div>
+          <div class="four-topline"><div><h1>A Life in Three Acts</h1><p>Photographic archive · Find the camera position and viewing direction for each photograph.</p></div><div id="four-counter" class="four-counter">PHOTOGRAPH 01 / 03</div></div>
           <div class="four-workspace">
             <div class="four-photograph-col">
               <div class="four-photo-frame" id="four-photo-frame">
@@ -853,54 +860,63 @@ body{overflow-x:clip;overscroll-behavior-x:none}
                 <div id="four-photo-placeholder" class="four-photo-placeholder"><span>PHOTOGRAPH A</span><strong>Image pending</strong><small>Awaiting original photographic scan</small></div>
               </div>
               <p class="four-photo-caption" id="four-photo-caption">Reference PH–01 · Catalogue date and location missing</p>
-              <div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
+              <div class="four-bearing"><div><label for="four-bearing">Camera direction</label><output id="four-bearing-output">North · 0°</output></div><input type="range" id="four-bearing" min="0" max="350" step="10" value="0"><div class="four-bearing-ends"><span>N</span><span>E</span><span>S</span><span>W</span><span>N</span></div></div><div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
             </div>
             <div class="four-map-col">
-              <div class="four-map-head"><div><strong>Town survey map</strong><span>Click the site you believe matches the photograph</span></div><small>ARCHIVE BASE MAP / 1990s</small></div>
+              <div class="four-map-head"><div><strong>Town survey map</strong><span>Place the camera, then rotate its viewing direction</span></div><small>ARCHIVE BASE MAP / 1990s</small></div>
               <div class="four-map-viewport">
-                <svg id="four-map" viewBox="0 0 660 470" role="img" aria-label="Illustrated town map with town square, school, orchards, riverside, west end and station road. Click to mark a location." xmlns="http://www.w3.org/2000/svg">
-                  <rect x="0" y="0" width="660" height="470" fill="#d5d2ca"/>
-                  <path d="M0 58 L170 72 258 48 365 86 660 52" fill="none" stroke="#b5b0a5" stroke-width="2"/>
-                  <path d="M0 408 L130 391 234 429 399 386 660 410" fill="none" stroke="#b5b0a5" stroke-width="2"/>
-                  <path d="M18 0 L44 165 25 297 66 470" fill="none" stroke="#b8b4a9" stroke-width="1.5"/>
-                  <path d="M571 0 L547 169 603 338 580 470" fill="none" stroke="#b8b4a9" stroke-width="1.5"/>
-                  <path d="M85 0 C130 95 112 154 180 225 S220 357 249 470" fill="none" stroke="#a6b8bb" stroke-width="45" opacity=".8"/>
-                  <path d="M85 0 C130 95 112 154 180 225 S220 357 249 470" fill="none" stroke="#e5e4db" stroke-width="3" opacity=".65"/>
-                  <g stroke="#eceae3" fill="none" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"><path d="M0 255 L660 255"/><path d="M348 0 L348 470"/><path d="M88 114 L640 114"/><path d="M0 365 L660 365"/><path d="M460 18 L460 451"/><path d="M250 0 L250 215"/></g>
-                  <g stroke="#aaa497" stroke-width="1.3" fill="none" opacity=".8"><path d="M0 255 L660 255"/><path d="M348 0 L348 470"/><path d="M88 114 L640 114"/><path d="M0 365 L660 365"/><path d="M460 18 L460 451"/><path d="M250 0 L250 215"/></g>
-                  <g fill="#bab6a9" stroke="#9c978a" stroke-width="1"><rect x="286" y="153" width="41" height="55"/><rect x="376" y="149" width="53" height="72"/><rect x="380" y="286" width="52" height="46"/><rect x="487" y="284" width="45" height="45"/><rect x="515" y="149" width="58" height="69"/><rect x="280" y="288" width="43" height="39"/><rect x="46" y="281" width="61" height="53"/><rect x="42" y="152" width="48" height="58"/></g>
-                  <g stroke="#858376" fill="none" stroke-width="2"><path d="M487 0 L618 470"/><path d="M493 0 L624 470"/></g>
-                  <g stroke="#858376" stroke-width="1.3"><path d="M501 35 l-21 7 M514 81 l-22 7 M527 126 l-22 7 M540 172 l-22 7 M553 219 l-22 7 M566 265 l-22 7 M579 311 l-22 7 M592 358 l-22 7 M605 404 l-22 7"/></g>
-                  <g fill="#818575" opacity=".26"><ellipse cx="265" cy="59" rx="85" ry="43"/><ellipse cx="590" cy="62" rx="48" ry="42"/><ellipse cx="95" cy="427" rx="69" ry="28"/></g>
-                  <g fill="#454741" font-size="17" text-anchor="middle"><text x="342" y="246" font-size="18">TOWN SQUARE</text><text x="388" y="83">NORTH ORCHARDS</text><text x="531" y="252">STATION ROAD</text><text x="495" y="349">SCHOOL</text><text x="104" y="355">RIVERSIDE</text><text x="130" y="181">WEST END</text></g>
-                  <g fill="#6c6b62" font-size="11" letter-spacing="1.5"><text x="18" y="22">MERIDIAN COUNTY · LOCAL SURVEY</text><text x="545" y="455">N ↑</text></g>
-
-                  <g opacity=".33" fill="none" stroke="#8f8b80" stroke-width="1">
-                    <path d="M4 75 Q105 24 202 89 T465 62 T654 84"/><path d="M0 435 Q96 379 180 444 T410 420 T650 445"/>
-                    <path d="M56 205 Q142 185 225 200 M50 330 Q129 306 220 322 M282 50 Q395 29 510 46"/>
-                  </g>
-                  <g fill="#aeaa9e" stroke="#938e83" stroke-width=".8">
-                    <path d="M265 138h17v20h-17z M287 124h32v21h-32z M291 222h30v17h-30z M364 130h20v15h-20z M393 222h26v16h-26z M422 171h28v20h-28z M474 167h30v35h-30z M540 285h27v30h-27z M473 381h36v24h-36z M378 391h46v20h-46z M293 378h28v29h-28z M62 232h32v16H62z M57 116h26v26H57z M105 146h26v28h-26z M114 292h20v24h-20z M145 371h38v23h-38z M185 303h19v28h-19z M553 177h23v23h-23z M572 299h24v32h-24z"/>
-                  </g>
-                  <g stroke="#ebe7de" stroke-width="7" fill="none" opacity=".9">
-                    <path d="M8 185L205 185 259 235 327 235 M35 300L220 300 271 344 439 344"/>
-                    <path d="M397 0L397 105 438 130 622 145 M280 470L280 416 368 416 444 470"/>
-                    <path d="M0 91L72 91 164 133 235 133 M505 0L505 91 660 91"/>
-                  </g>
-                  <g stroke="#aca699" stroke-width=".9" fill="none" opacity=".9">
-                    <path d="M8 185L205 185 259 235 327 235 M35 300L220 300 271 344 439 344"/>
-                    <path d="M397 0L397 105 438 130 622 145 M280 470L280 416 368 416 444 470"/>
-                    <path d="M0 91L72 91 164 133 235 133 M505 0L505 91 660 91"/>
-                  </g>
-                  <g fill="#7d846c" opacity=".52">
-                    <circle cx="276" cy="36" r="6"/><circle cx="292" cy="37" r="6"/><circle cx="309" cy="36" r="6"/><circle cx="326" cy="36" r="6"/><circle cx="343" cy="36" r="6"/><circle cx="360" cy="36" r="6"/><circle cx="276" cy="51" r="6"/><circle cx="292" cy="52" r="6"/><circle cx="309" cy="51" r="6"/><circle cx="326" cy="51" r="6"/><circle cx="343" cy="51" r="6"/><circle cx="360" cy="51" r="6"/>
-                    <circle cx="598" cy="38" r="9"/><circle cx="616" cy="48" r="8"/><circle cx="600" cy="67" r="8"/><circle cx="86" cy="410" r="9"/><circle cx="104" cy="427" r="8"/><circle cx="63" cy="431" r="10"/>
-                  </g>
-                  <g fill="#55564e" font-size="10" opacity=".9" font-style="italic"><text x="280" y="270">Civic Hall</text><text x="386" y="278">Mill Road</text><text x="110" y="116">Maple Road</text><text x="480" y="126">Orchard Lane</text><text x="443" y="439">South Fields</text></g>
-                  <g font-size="10" fill="#59574e"><text x="18" y="452">Survey revised 1993</text></g>
-                  <g transform="translate(624 20)" stroke="#454741" fill="none"><path d="M0 28L0 0 M-6 13L0 0 6 13" stroke-width="1.6"/><text x="0" y="39" font-size="11" fill="#454741" stroke="none" text-anchor="middle">N</text></g>
-                  <g id="four-map-marker" visibility="hidden"><circle r="15" fill="none" stroke="#852d27" stroke-width="2"/><circle r="5" fill="#852d27"/></g>
-                </svg>
+                <svg id="four-map" viewBox="0 0 660 470" role="img" aria-label="Detailed interactive plan of the fictional Meridian town. Click to place a camera position." xmlns="http://www.w3.org/2000/svg">
+ <rect width="660" height="470" fill="#d9d4c7"/>
+ <defs><pattern id="survey-grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" stroke="#8f9089" opacity=".17" stroke-width=".5" fill="none"/></pattern><pattern id="orchard-rows" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.6" fill="#848b77" opacity=".8"/></pattern></defs>
+ <rect width="660" height="470" fill="url(#survey-grid)"/>
+ <path d="M0 58L72 41 200 61 252 41 359 64 482 43 660 56V0H0Z" fill="#b5bea4" opacity=".29"/>
+ <path d="M0 429L111 382 203 450 338 431 431 460 660 421V470H0Z" fill="#b9b69f" opacity=".24"/>
+ <path d="M93 -18C65 80 145 124 123 192S80 295 138 360 174 430 151 488" fill="none" stroke="#aaa99b" stroke-width="48"/>
+ <path d="M93 -18C65 80 145 124 123 192S80 295 138 360 174 430 151 488" fill="none" stroke="#a2bac0" stroke-width="40"/>
+ <path d="M93 -18C65 80 145 124 123 192S80 295 138 360 174 430 151 488" fill="none" stroke="#d8ddd9" stroke-width="1.4" stroke-dasharray="9 17"/>
+ <rect x="278" y="20" width="158" height="73" fill="#b7c09d" opacity=".5"/>
+ <rect x="278" y="20" width="158" height="73" fill="url(#orchard-rows)"/>
+ <path d="M569 -15L652 480" stroke="#85857e" stroke-width="10" fill="none"/>
+ <path d="M574 -15L657 480" stroke="#d9d4c7" stroke-width="2" fill="none"/>
+ <path d="M563 -15L646 480 M577 -15L660 480" stroke="#464b49" stroke-width="1.5" fill="none"/>
+ <g fill="#bdb9a9" stroke="#8b8b83" stroke-width=".7"><rect x="10.0" y="17.5" width="12.4" height="16.5" rx="0"/><rect x="38.2" y="10.6" width="14.7" height="19.2" rx="0"/><rect x="155.9" y="17.0" width="10.0" height="18.3" rx="0"/><rect x="210.6" y="13.2" width="10.8" height="15.9" rx="0"/><rect x="235.5" y="13.5" width="21.3" height="10.9" rx="0"/><rect x="484.2" y="13.4" width="16.5" height="14.5" rx="0"/><rect x="515.8" y="17.4" width="17.4" height="19.2" rx="0"/><rect x="15.5" y="41.0" width="22.9" height="17.2" rx="0"/><rect x="177.7" y="39.1" width="10.6" height="11.7" rx="0"/><rect x="210.8" y="41.4" width="13.3" height="14.3" rx="0"/><rect x="487.5" y="41.1" width="22.7" height="14.7" rx="0"/><rect x="518.8" y="37.1" width="18.4" height="13.1" rx="0"/><rect x="13.8" y="66.3" width="19.7" height="16.8" rx="0"/><rect x="43.8" y="63.6" width="12.0" height="9.3" rx="0"/><rect x="154.9" y="63.8" width="22.3" height="9.5" rx="0"/><rect x="178.7" y="65.1" width="12.4" height="19.5" rx="0"/><rect x="205.9" y="62.9" width="14.0" height="14.5" rx="0"/><rect x="489.1" y="62.9" width="13.4" height="16.7" rx="0"/><rect x="519.7" y="65.2" width="14.9" height="18.7" rx="0"/><rect x="42.4" y="120.8" width="16.7" height="12.5" rx="0"/><rect x="177.9" y="119.1" width="10.6" height="17.5" rx="0"/><rect x="235.6" y="119.2" width="18.8" height="16.2" rx="0"/><rect x="318.6" y="121.0" width="20.3" height="8.3" rx="0"/><rect x="487.5" y="119.1" width="12.1" height="11.0" rx="0"/><rect x="513.4" y="121.0" width="23.0" height="14.6" rx="0"/><rect x="11.8" y="146.3" width="14.6" height="16.8" rx="0"/><rect x="39.9" y="146.0" width="10.6" height="17.3" rx="0"/><rect x="69.5" y="142.2" width="12.8" height="16.7" rx="0"/><rect x="177.3" y="140.7" width="15.0" height="11.9" rx="0"/><rect x="484.2" y="145.3" width="13.4" height="8.7" rx="0"/><rect x="515.1" y="146.4" width="10.4" height="12.8" rx="0"/><rect x="575.0" y="146.3" width="16.7" height="8.4" rx="0"/><rect x="604.0" y="141.5" width="19.5" height="19.2" rx="0"/><rect x="631.1" y="142.9" width="19.0" height="10.4" rx="0"/><rect x="40.7" y="170.7" width="19.5" height="9.0" rx="0"/><rect x="72.0" y="168.1" width="13.0" height="8.7" rx="0"/><rect x="179.0" y="167.7" width="10.6" height="15.5" rx="0"/><rect x="484.5" y="173.0" width="14.2" height="14.8" rx="0"/><rect x="512.6" y="170.2" width="20.9" height="11.2" rx="0"/><rect x="574.9" y="168.8" width="19.6" height="18.0" rx="0"/><rect x="630.0" y="172.6" width="20.8" height="9.2" rx="0"/><rect x="15.0" y="193.4" width="13.9" height="12.5" rx="0"/><rect x="43.8" y="195.7" width="17.4" height="16.2" rx="0"/><rect x="181.1" y="195.3" width="22.0" height="12.5" rx="0"/><rect x="207.9" y="193.0" width="16.0" height="9.7" rx="0"/><rect x="491.5" y="196.7" width="22.0" height="17.6" rx="0"/><rect x="515.2" y="196.7" width="14.4" height="15.2" rx="0"/><rect x="571.3" y="196.9" width="15.1" height="8.8" rx="0"/><rect x="15.0" y="245.3" width="18.8" height="15.3" rx="0"/><rect x="42.0" y="245.7" width="11.9" height="16.7" rx="0"/><rect x="71.2" y="250.5" width="12.5" height="17.6" rx="0"/><rect x="212.0" y="247.8" width="16.0" height="13.1" rx="0"/><rect x="233.6" y="245.0" width="19.4" height="13.2" rx="0"/><rect x="490.4" y="248.1" width="22.1" height="13.3" rx="0"/><rect x="515.8" y="245.6" width="19.1" height="14.0" rx="0"/><rect x="575.2" y="246.5" width="20.9" height="13.2" rx="0"/><rect x="602.1" y="249.3" width="11.4" height="19.3" rx="0"/><rect x="626.2" y="247.9" width="13.0" height="19.2" rx="0"/><rect x="38.1" y="270.8" width="22.7" height="9.8" rx="0"/><rect x="65.2" y="275.8" width="18.4" height="9.9" rx="0"/><rect x="96.9" y="272.5" width="13.3" height="17.1" rx="0"/><rect x="208.6" y="274.0" width="15.4" height="18.6" rx="0"/><rect x="491.3" y="271.8" width="16.7" height="20.0" rx="0"/><rect x="518.4" y="273.6" width="14.2" height="15.8" rx="0"/><rect x="571.2" y="272.6" width="15.1" height="12.7" rx="0"/><rect x="603.0" y="275.2" width="19.6" height="12.3" rx="0"/><rect x="631.9" y="274.2" width="17.9" height="19.8" rx="0"/><rect x="10.7" y="303.5" width="11.9" height="16.3" rx="0"/><rect x="37.3" y="300.2" width="13.1" height="14.5" rx="0"/><rect x="69.0" y="298.1" width="13.4" height="12.9" rx="0"/><rect x="98.6" y="301.3" width="17.1" height="10.4" rx="0"/><rect x="208.4" y="299.9" width="17.9" height="8.9" rx="0"/><rect x="234.0" y="298.4" width="12.4" height="14.6" rx="0"/><rect x="484.6" y="296.8" width="12.1" height="10.5" rx="0"/><rect x="514.3" y="300.9" width="13.7" height="17.8" rx="0"/><rect x="625.8" y="296.8" width="18.7" height="16.1" rx="0"/><rect x="8.8" y="353.6" width="13.4" height="18.9" rx="0"/><rect x="67.2" y="352.8" width="17.9" height="11.7" rx="0"/><rect x="98.4" y="355.4" width="21.1" height="18.8" rx="0"/><rect x="121.6" y="349.0" width="12.6" height="12.4" rx="0"/><rect x="233.7" y="354.7" width="16.2" height="17.8" rx="0"/><rect x="321.9" y="355.1" width="19.7" height="15.5" rx="0"/><rect x="375.1" y="352.5" width="12.8" height="16.7" rx="0"/><rect x="405.1" y="350.3" width="10.8" height="8.8" rx="0"/><rect x="430.4" y="349.0" width="11.3" height="15.2" rx="0"/><rect x="11.4" y="376.1" width="11.5" height="18.9" rx="0"/><rect x="38.7" y="374.6" width="19.0" height="12.0" rx="0"/><rect x="70.9" y="379.7" width="17.3" height="8.0" rx="0"/><rect x="233.7" y="381.0" width="15.8" height="19.3" rx="0"/><rect x="289.5" y="379.5" width="14.6" height="13.9" rx="0"/><rect x="374.6" y="375.9" width="22.9" height="9.7" rx="0"/><rect x="403.7" y="377.8" width="12.4" height="13.5" rx="0"/><rect x="13.1" y="432.7" width="13.2" height="9.0" rx="0"/><rect x="39.2" y="427.9" width="15.1" height="14.7" rx="0"/><rect x="71.2" y="429.8" width="21.8" height="12.9" rx="0"/><rect x="92.0" y="429.8" width="19.6" height="17.5" rx="0"/><rect x="126.1" y="432.7" width="13.1" height="16.4" rx="0"/><rect x="322.3" y="430.8" width="21.6" height="8.1" rx="0"/><rect x="372.9" y="428.4" width="21.6" height="17.1" rx="0"/><rect x="405.9" y="428.9" width="19.8" height="18.9" rx="0"/><rect x="429.5" y="431.1" width="21.3" height="15.6" rx="0"/></g>
+ <g stroke="#aaa496" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M0 212H660"/><path d="M0 324H660"/><path d="M244 0V470"/><path d="M355 0V470"/><path d="M448 0V470"/><path d="M551 0V470"/><path d="M0 103H660"/><path d="M0 411H660"/>
+ <path d="M0 272L250 272 325 320 660 320"/><path d="M250 103L300 156 450 156 530 103"/><path d="M250 413L330 360 445 360 540 410"/>
+ </g>
+ <g stroke="#eeeae0" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M0 212H660"/><path d="M0 324H660"/><path d="M244 0V470"/><path d="M355 0V470"/><path d="M448 0V470"/><path d="M551 0V470"/><path d="M0 103H660"/><path d="M0 411H660"/>
+ <path d="M0 272L250 272 325 320 660 320"/><path d="M250 103L300 156 450 156 530 103"/><path d="M250 413L330 360 445 360 540 410"/>
+ </g>
+ <g fill="#b1afa1" stroke="#89887e" stroke-width="1.1">
+ <rect x="275" y="173" width="55" height="28"/><rect x="377" y="176" width="51" height="28"/>
+ <rect x="273" y="228" width="58" height="56"/><rect x="376" y="228" width="54" height="56"/>
+ <rect x="480" y="143" width="40" height="52"/><rect x="569" y="245" width="48" height="51"/>
+ <rect x="471" y="351" width="60" height="47"/><rect x="562" y="346" width="41" height="48"/>
+ </g>
+ <rect x="310" y="231" width="80" height="56" fill="#bdb49b" stroke="#9e9589" stroke-width=".8"/>
+ <path d="M350 240V278M323 259H377" stroke="#e6dfcf" stroke-width="5"/>
+ <rect x="335" y="249" width="30" height="22" fill="#9a9180"/>
+ <circle cx="350" cy="259" r="5" fill="#e2ded2" stroke="#66695f"/>
+ <g fill="#7e8671" opacity=".7"><circle cx="462" cy="27" r="12"/><circle cx="483" cy="51" r="13"/><circle cx="508" cy="22" r="11"/><circle cx="37" cy="455" r="14"/><circle cx="57" cy="433" r="10"/><circle cx="82" cy="452" r="13"/></g>
+ <g font-family="Georgia, serif" fill="#454b47">
+ <text x="359" y="224" font-size="14" letter-spacing="1.2" text-anchor="middle">TOWN SQUARE</text>
+ <text x="354" y="17" font-size="13" text-anchor="middle" letter-spacing="1.1">NORTH ORCHARDS</text>
+ <text x="50" y="162" font-size="13" letter-spacing="1.2">WEST END</text>
+ <text x="12" y="385" font-size="13" letter-spacing="1.2">RIVERSIDE</text>
+ <text x="483" y="338" font-size="13" letter-spacing="1.2">SOUTH WARD</text>
+ <text x="570" y="235" font-size="12" letter-spacing="1.1">STATION</text>
+ <text x="570" y="249" font-size="12" letter-spacing="1.1">ROAD</text>
+ </g>
+ <g font-family="Georgia,serif" fill="#62665d" font-size="10" font-style="italic">
+ <text x="266" y="117">Orchard Lane</text><text x="10" y="200">Brookfield Rd.</text>
+ <text x="450" y="201">Market Street</text><text x="356" y="341">Mill Road</text><text x="558" y="400">School Lane</text>
+ <text x="185" y="307">Riverside Bridge</text>
+ </g>
+ <g fill="#6b7069" font-size="10" font-family="Georgia,serif"><text x="17" y="17">MERIDIAN COUNTY SURVEY · REVISED 1993</text><text x="14" y="456">SHEET 04 / CENTRAL WARD</text></g>
+ <g transform="translate(633 23)" stroke="#424943" fill="none"><path d="M0 24V0L-6 11M0 0L6 11" stroke-width="1.7"/><text x="0" y="36" text-anchor="middle" font-size="10" stroke="none" fill="#424943">N</text></g>
+ <g id="four-map-marker" visibility="hidden"><path d="M0 0L0 -22" stroke="#8e3029" stroke-width="3"/><circle r="9" fill="#eee7d7" stroke="#8e3029" stroke-width="3"/><circle r="3" fill="#8e3029"/><g id="four-direction-marker"><path d="M0 -8L0 -52" stroke="#8e3029" stroke-width="3"/><path d="M-8 -42L0 -55L8 -42" stroke="#8e3029" fill="none" stroke-width="3"/></g></g>
+ </svg>
               </div>
               <p class="four-location">Your marker: <strong id="four-location-name">Not placed</strong></p>
               <div class="four-editor-note"><span>EDITOR'S LOG · RECORD 04</span><p>Original photograph references restored. Please consult me before making further revisions to these entries.</p></div>
@@ -1158,14 +1174,19 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     document.getElementById('begin-four').addEventListener('click',()=>show('four'));
     document.getElementById('four-finish').addEventListener('click',()=>show('complete'));
     const fourPhotos=[
-      {label:'A',file:'case-photo-01.jpg',ref:'PH–01'},
-      {label:'B',file:'case-photo-02.jpg',ref:'PH–02'},
-      {label:'C',file:'case-photo-03.jpg',ref:'PH–03'}
+      {label:'A',file:'towncentre.jpg',ref:'PH–01'},
+      {label:'B',file:'station-road2.jpg',ref:'PH–02'},
+      {label:'C',file:'pub.jpg',ref:'PH–03'}
     ];
-    const fourLandmarks=[['Town Square',340,243],['North Orchards',387,79],['Station Road',542,252],['School',497,347],['Riverside',104,355],['West End',132,180]];
+    const fourLandmarks=[['Town Square',350,259],['North Orchards',351,61],['Station Road',578,257],['South Ward',500,369],['Riverside',60,366],['West End',65,177]];
     const fourGuesses=[];
     let fourCurrent=0;let fourMarker=null;
     const fourMap=document.getElementById('four-map');
+    const fourBearing=document.getElementById('four-bearing');
+    const fourBearingOutput=document.getElementById('four-bearing-output');
+    function formatBearing(value){const deg=Number(value);const dir=['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8];return dir+' · '+deg+'°'}
+    function updateBearing(){fourBearingOutput.textContent=formatBearing(fourBearing.value);document.getElementById('four-direction-marker').setAttribute('transform','rotate('+fourBearing.value+')')}
+    fourBearing.addEventListener('input',updateBearing);
     function nearestLandmark(x,y){let result=fourLandmarks[0],dist=Infinity;fourLandmarks.forEach(place=>{const d=(place[1]-x)**2+(place[2]-y)**2;if(d<dist){dist=d;result=place}});return result[0]}
     function updateFourMarker(x,y){
       fourMarker={x,y,name:nearestLandmark(x,y)};
@@ -1189,7 +1210,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       pic.hidden=true;placeholder.hidden=false;placeholder.querySelector('span').textContent='PHOTOGRAPH '+item.label;
       pic.onload=()=>{pic.hidden=false;placeholder.hidden=true};pic.onerror=()=>{pic.hidden=true;placeholder.hidden=false};
       pic.src=item.file;
-      fourMarker=null;document.getElementById('four-map-marker').setAttribute('visibility','hidden');
+      fourBearing.value='0';updateBearing();fourMarker=null;document.getElementById('four-map-marker').setAttribute('visibility','hidden');
       document.getElementById('four-location-name').textContent='Not placed';
       document.getElementById('four-feedback').textContent='Select a point on the map to record your estimate.';
       document.getElementById('four-next').disabled=true;
@@ -1198,10 +1219,10 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     }
     document.getElementById('four-next').addEventListener('click',()=>{
       if(!fourMarker)return;
-      fourGuesses[fourCurrent]={ref:fourPhotos[fourCurrent].ref,location:fourMarker.name,x:fourMarker.x,y:fourMarker.y};
+      fourGuesses[fourCurrent]={ref:fourPhotos[fourCurrent].ref,location:fourMarker.name,x:fourMarker.x,y:fourMarker.y,bearing:Number(fourBearing.value)};
       if(fourCurrent<2){fourCurrent++;renderFourPhoto();return}
       const list=document.getElementById('four-summary-items');list.replaceChildren();
-      fourGuesses.forEach(guess=>{const p=document.createElement('p');p.textContent=guess.ref+' — '+guess.location;list.appendChild(p)});
+      fourGuesses.forEach(guess=>{const p=document.createElement('p');p.textContent=guess.ref+' — '+guess.location+' · facing '+formatBearing(guess.bearing);list.appendChild(p)});
       document.querySelector('.four-workspace').hidden=true;
       document.getElementById('four-summary').hidden=false;
     });
