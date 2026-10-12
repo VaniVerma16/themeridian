@@ -638,6 +638,19 @@ body{overflow-x:clip;overscroll-behavior-x:none}
    flex-shrink:0;padding-bottom:22px;
  }
 }
+
+/* Click-to-read archive clippings for assessment three */
+#level-three .archive-open{display:block;width:100%;border:0;background:none;color:inherit;padding:0;text-align:left;box-shadow:none!important;transform:none!important}
+#level-three .archive-open img{display:block;width:100%;height:auto}
+#level-three .archive-open span{display:block;padding:10px 0 0;text-decoration:underline;text-underline-offset:4px;font-size:13px;color:#cecbc5}
+#level-three .archive-open:hover span{opacity:.75}
+.archived-article-panel{width:min(700px,94vw);max-height:85dvh;background:#e4dfd4;color:#292621;padding:clamp(24px,4vw,44px)}
+.archived-article-panel .modal-top{border-bottom:1px solid #898176;padding-bottom:15px}
+.archived-article-panel .modal-top h3{font-size:12px;letter-spacing:.13em;color:#4b4842}
+.archived-article-panel .close-modal{color:#292621}
+.archived-article-body .article-section{font-size:11px;letter-spacing:.12em;margin:20px 0 12px;color:#686158}
+.archived-article-body h2{font-size:clamp(27px,4vw,40px);line-height:1.16;margin:0 0 24px}
+.archived-article-body p{font-size:17px;line-height:1.75;margin:0 0 18px}
   </style>
 </head>
 <body>
@@ -723,9 +736,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           <p class="task-line">Match each recovered story to its reporter and original publication year. Use each reporter and year once.</p>
           
           <div class="archive-roster">
-            <article class="roster-card"><small>CLIPPING A</small><img class="archive-headline-image" src="orchards.png" alt="New Concerns Raised About Pesticide Use Near Orchards"></article>
-            <article class="roster-card"><small>CLIPPING B</small><img class="archive-headline-image" src="debate.png" alt="Students Bring Home Regional Debate Victory"></article>
-            <article class="roster-card"><small>CLIPPING C</small><img class="archive-headline-image" src="reading-hall.png" alt="Town Library Unveils Newly Restored Reading Hall"></article>
+            <article class="roster-card"><small>CLIPPING A</small><button class="archive-open" type="button" data-article="orchards" aria-label="Read full clipping: New Concerns Raised About Pesticide Use Near Orchards"><img class="archive-headline-image" src="orchards.png" alt="New Concerns Raised About Pesticide Use Near Orchards"><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING B</small><button class="archive-open" type="button" data-article="debate" aria-label="Read full clipping: Students Bring Home Regional Debate Victory"><img class="archive-headline-image" src="debate.png" alt="Students Bring Home Regional Debate Victory"><span>Read clipping ↗</span></button></article>
+            <article class="roster-card"><small>CLIPPING C</small><button class="archive-open" type="button" data-article="library" aria-label="Read full clipping: Town Library Unveils Newly Restored Reading Hall"><img class="archive-headline-image" src="reading-hall.png" alt="Town Library Unveils Newly Restored Reading Hall"><span>Read clipping ↗</span></button></article>
           </div>
           <div class="archive-key">
             <div class="archive-key-group"><span class="key-title">REPORTERS</span><div class="key-values"><span>Harriet</span><span>Jane</span><span>Elliot</span></div></div>
@@ -766,6 +779,12 @@ body{overflow-x:clip;overscroll-behavior-x:none}
   </div>
 
   <div id="transition-flash" aria-hidden="true"></div>
+  <div id="article-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Archived article">
+    <div class="modal-panel archived-article-panel">
+      <div class="modal-top"><h3>THE MERIDIAN · ARCHIVE</h3><button class="close-modal" id="close-article" type="button">Close</button></div>
+      <article id="article-body" class="archived-article-body"></article>
+    </div>
+  </div>
   <div id="modal" class="modal" hidden aria-hidden="true">
     <div class="modal-panel">
       <div class="modal-top"><h3 id="modal-title">Clipping</h3><button class="close-modal" id="close-modal" type="button">Close</button></div>
@@ -774,6 +793,39 @@ body{overflow-x:clip;overscroll-behavior-x:none}
   </div>
 
   <script>
+
+    const archivedArticles={
+      orchards:{title:"New Concerns Raised About Pesticide Use Near Orchards",section:"LOCAL NEWS",paragraphs:[
+        "Residents living near the northern orchards have raised fresh concerns about pesticide spraying close to their homes. Several families say they have asked local officials for more information about the chemicals used during the growing season.",
+        "A spokesperson for the growers said the orchards follow existing guidelines and that spraying is scheduled to limit disruption to neighbouring streets.",
+        "The council has requested a report from its environmental committee. Residents are expected to discuss the matter at the next public meeting."
+      ]},
+      debate:{title:"Students Bring Home Regional Debate Victory",section:"EDUCATION",paragraphs:[
+        "The local secondary school's debate team returned home this week with first place in the regional championships. The students impressed judges with their research, preparation and confident responses throughout the final round.",
+        "Among the team's standout speakers was Adam, whose closing argument helped secure the deciding result. His coach described him as thoughtful and ambitious, with a particular gift for finding the important detail in an argument.",
+        "The team is expected to receive recognition at next week's school assembly. Several members said they hope to continue competing in the coming year."
+      ]},
+      library:{title:"Town Library Unveils Newly Restored Reading Hall",section:"COMMUNITY",paragraphs:[
+        "The town library has reopened its reading hall following months of restoration work. Visitors were welcomed back this week to find refinished woodwork, repaired windows and freshly painted bookshelves.",
+        "Library staff say the improvements will make the space more comfortable for readers while preserving its familiar character. Several long-time visitors attended the reopening.",
+        "A programme of public readings and school visits is planned for the coming months."
+      ]}
+    };
+    const articleModal=document.getElementById('article-modal');
+    const articleBody=document.getElementById('article-body');
+    document.querySelectorAll('.archive-open').forEach(button=>button.addEventListener('click',()=>{
+      const article=archivedArticles[button.dataset.article];
+      articleBody.replaceChildren();
+      const section=document.createElement('div');section.className='article-section';section.textContent=article.section;
+      const title=document.createElement('h2');title.textContent=article.title;
+      articleBody.append(section,title);
+      article.paragraphs.forEach(copy=>{const p=document.createElement('p');p.textContent=copy;articleBody.appendChild(p)});
+      articleModal.hidden=false;articleModal.setAttribute('aria-hidden','false');
+    }));
+    function closeArchivedArticle(){articleModal.hidden=true;articleModal.setAttribute('aria-hidden','true')}
+    document.getElementById('close-article').addEventListener('click',closeArchivedArticle);
+    articleModal.addEventListener('click',event=>{if(event.target===articleModal)closeArchivedArticle()});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!articleModal.hidden)closeArchivedArticle()});
     const originalTranscript = [
       'After a lengthy public hearing, the town council voted 114 on June 13 to approve renovation plans for Market Square.',
       'Several residents described the proposed redesign as necessary, citing concerns about the loss of parking and the cost of replacing the original stone pavement.',
