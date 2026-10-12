@@ -839,13 +839,13 @@ body{overflow-x:clip;overscroll-behavior-x:none}
             <p>I think we can finally start on the actual work now! It's really nice having someone help me out. Isn't it always wonderful to have good people to work with?</p>
             <p>Every year, The Meridian revisits stories from our archives for our Annual Revival Project. And this year, we've chosen a particularly fascinating case. Tragic, of course. But really quite remarkable.</p>
             <p>We'll piece together the original timeline and put the story back together for our readers. I'll tell you more as we go. I don't want to overwhelm you all at once!</p>
-            <p>First, we have three photographs with incomplete catalogue details. Take a look at each one, place it on the town map, and estimate when it was taken. You don't need to be exact. Just make your best guess!</p>
+            <p>First, we have three photographs with incomplete catalogue details. Take a look at each one, place it on the town map, using the clues in the scene. You don't need to be exact. Just make your best guess!</p>
           </div><button class="primary" type="button" id="begin-four">Let's take a look</button>
         </div>
       </section>
       <section id="level-four" class="level" aria-label="Photographic archive" hidden>
         <div class="assignment four-assignment">
-          <div class="four-topline"><div><h1>A Life in Three Acts</h1><p>Photographic archive · Establish the place and approximate year of each recovered image.</p></div><div id="four-counter" class="four-counter">PHOTOGRAPH 01 / 03</div></div>
+          <div class="four-topline"><div><h1>A Life in Three Acts</h1><p>Photographic archive · Identify where each recovered image was taken.</p></div><div id="four-counter" class="four-counter">PHOTOGRAPH 01 / 03</div></div>
           <div class="four-workspace">
             <div class="four-photograph-col">
               <div class="four-photo-frame" id="four-photo-frame">
@@ -853,11 +853,10 @@ body{overflow-x:clip;overscroll-behavior-x:none}
                 <div id="four-photo-placeholder" class="four-photo-placeholder"><span>PHOTOGRAPH A</span><strong>Image pending</strong><small>Awaiting original photographic scan</small></div>
               </div>
               <p class="four-photo-caption" id="four-photo-caption">Reference PH–01 · Catalogue date and location missing</p>
-              <div class="four-date"><div class="four-date-heading"><label for="four-year">Estimated year</label><output id="four-year-output" for="four-year">1994</output></div><input id="four-year" type="range" min="1988" max="2000" value="1994" step="1"><div class="four-range"><span>1988</span><span>2000</span></div></div>
               <div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
             </div>
             <div class="four-map-col">
-              <div class="four-map-head"><div><strong>Town survey map</strong><span>Click anywhere to place a marker</span></div><small>ARCHIVE BASE MAP / 1990s</small></div>
+              <div class="four-map-head"><div><strong>Town survey map</strong><span>Click the site you believe matches the photograph</span></div><small>ARCHIVE BASE MAP / 1990s</small></div>
               <div class="four-map-viewport">
                 <svg id="four-map" viewBox="0 0 660 470" role="img" aria-label="Illustrated town map with town square, school, orchards, riverside, west end and station road. Click to mark a location." xmlns="http://www.w3.org/2000/svg">
                   <rect x="0" y="0" width="660" height="470" fill="#d5d2ca"/>
@@ -875,6 +874,31 @@ body{overflow-x:clip;overscroll-behavior-x:none}
                   <g fill="#818575" opacity=".26"><ellipse cx="265" cy="59" rx="85" ry="43"/><ellipse cx="590" cy="62" rx="48" ry="42"/><ellipse cx="95" cy="427" rx="69" ry="28"/></g>
                   <g fill="#454741" font-size="17" text-anchor="middle"><text x="342" y="246" font-size="18">TOWN SQUARE</text><text x="388" y="83">NORTH ORCHARDS</text><text x="531" y="252">STATION ROAD</text><text x="495" y="349">SCHOOL</text><text x="104" y="355">RIVERSIDE</text><text x="130" y="181">WEST END</text></g>
                   <g fill="#6c6b62" font-size="11" letter-spacing="1.5"><text x="18" y="22">MERIDIAN COUNTY · LOCAL SURVEY</text><text x="545" y="455">N ↑</text></g>
+
+                  <g opacity=".33" fill="none" stroke="#8f8b80" stroke-width="1">
+                    <path d="M4 75 Q105 24 202 89 T465 62 T654 84"/><path d="M0 435 Q96 379 180 444 T410 420 T650 445"/>
+                    <path d="M56 205 Q142 185 225 200 M50 330 Q129 306 220 322 M282 50 Q395 29 510 46"/>
+                  </g>
+                  <g fill="#aeaa9e" stroke="#938e83" stroke-width=".8">
+                    <path d="M265 138h17v20h-17z M287 124h32v21h-32z M291 222h30v17h-30z M364 130h20v15h-20z M393 222h26v16h-26z M422 171h28v20h-28z M474 167h30v35h-30z M540 285h27v30h-27z M473 381h36v24h-36z M378 391h46v20h-46z M293 378h28v29h-28z M62 232h32v16H62z M57 116h26v26H57z M105 146h26v28h-26z M114 292h20v24h-20z M145 371h38v23h-38z M185 303h19v28h-19z M553 177h23v23h-23z M572 299h24v32h-24z"/>
+                  </g>
+                  <g stroke="#ebe7de" stroke-width="7" fill="none" opacity=".9">
+                    <path d="M8 185L205 185 259 235 327 235 M35 300L220 300 271 344 439 344"/>
+                    <path d="M397 0L397 105 438 130 622 145 M280 470L280 416 368 416 444 470"/>
+                    <path d="M0 91L72 91 164 133 235 133 M505 0L505 91 660 91"/>
+                  </g>
+                  <g stroke="#aca699" stroke-width=".9" fill="none" opacity=".9">
+                    <path d="M8 185L205 185 259 235 327 235 M35 300L220 300 271 344 439 344"/>
+                    <path d="M397 0L397 105 438 130 622 145 M280 470L280 416 368 416 444 470"/>
+                    <path d="M0 91L72 91 164 133 235 133 M505 0L505 91 660 91"/>
+                  </g>
+                  <g fill="#7d846c" opacity=".52">
+                    <circle cx="276" cy="36" r="6"/><circle cx="292" cy="37" r="6"/><circle cx="309" cy="36" r="6"/><circle cx="326" cy="36" r="6"/><circle cx="343" cy="36" r="6"/><circle cx="360" cy="36" r="6"/><circle cx="276" cy="51" r="6"/><circle cx="292" cy="52" r="6"/><circle cx="309" cy="51" r="6"/><circle cx="326" cy="51" r="6"/><circle cx="343" cy="51" r="6"/><circle cx="360" cy="51" r="6"/>
+                    <circle cx="598" cy="38" r="9"/><circle cx="616" cy="48" r="8"/><circle cx="600" cy="67" r="8"/><circle cx="86" cy="410" r="9"/><circle cx="104" cy="427" r="8"/><circle cx="63" cy="431" r="10"/>
+                  </g>
+                  <g fill="#55564e" font-size="10" opacity=".9" font-style="italic"><text x="280" y="270">Civic Hall</text><text x="386" y="278">Mill Road</text><text x="110" y="116">Maple Road</text><text x="480" y="126">Orchard Lane</text><text x="443" y="439">South Fields</text></g>
+                  <g font-size="10" fill="#59574e"><text x="18" y="452">Survey revised 1993</text></g>
+                  <g transform="translate(624 20)" stroke="#454741" fill="none"><path d="M0 28L0 0 M-6 13L0 0 6 13" stroke-width="1.6"/><text x="0" y="39" font-size="11" fill="#454741" stroke="none" text-anchor="middle">N</text></g>
                   <g id="four-map-marker" visibility="hidden"><circle r="15" fill="none" stroke="#852d27" stroke-width="2"/><circle r="5" fill="#852d27"/></g>
                 </svg>
               </div>
@@ -882,7 +906,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
               <div class="four-editor-note"><span>EDITOR'S LOG · RECORD 04</span><p>Original photograph references restored. Please consult me before making further revisions to these entries.</p></div>
             </div>
           </div>
-          <div id="four-summary" class="four-summary" hidden><h2>Estimates recorded</h2><p>Your proposed dates and locations have been added to the working file. We'll review the original records once the photographic evidence is available.</p><div id="four-summary-items"></div><button id="four-finish" class="primary" type="button">Continue</button></div>
+          <div id="four-summary" class="four-summary" hidden><h2>Estimates recorded</h2><p>Your proposed locations have been added to the working file. We'll review the original records once the photographic evidence is available.</p><div id="four-summary-items"></div><button id="four-finish" class="primary" type="button">Continue</button></div>
         </div>
       </section>
       <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
@@ -1141,8 +1165,6 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     const fourGuesses=[];
     let fourCurrent=0;let fourMarker=null;
     const fourMap=document.getElementById('four-map');
-    const fourYear=document.getElementById('four-year');
-    fourYear.addEventListener('input',()=>{document.getElementById('four-year-output').textContent=fourYear.value});
     function nearestLandmark(x,y){let result=fourLandmarks[0],dist=Infinity;fourLandmarks.forEach(place=>{const d=(place[1]-x)**2+(place[2]-y)**2;if(d<dist){dist=d;result=place}});return result[0]}
     function updateFourMarker(x,y){
       fourMarker={x,y,name:nearestLandmark(x,y)};
@@ -1171,15 +1193,14 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       document.getElementById('four-feedback').textContent='Select a point on the map to record your estimate.';
       document.getElementById('four-next').disabled=true;
       document.getElementById('four-next').textContent=fourCurrent===2?'Review estimates':'Save estimate';
-      fourYear.value='1994';document.getElementById('four-year-output').textContent='1994';
       document.getElementById('four-summary').hidden=true;
     }
     document.getElementById('four-next').addEventListener('click',()=>{
       if(!fourMarker)return;
-      fourGuesses[fourCurrent]={ref:fourPhotos[fourCurrent].ref,year:fourYear.value,location:fourMarker.name,x:fourMarker.x,y:fourMarker.y};
+      fourGuesses[fourCurrent]={ref:fourPhotos[fourCurrent].ref,location:fourMarker.name,x:fourMarker.x,y:fourMarker.y};
       if(fourCurrent<2){fourCurrent++;renderFourPhoto();return}
       const list=document.getElementById('four-summary-items');list.replaceChildren();
-      fourGuesses.forEach(guess=>{const p=document.createElement('p');p.textContent=guess.ref+' — '+guess.year+' · '+guess.location;list.appendChild(p)});
+      fourGuesses.forEach(guess=>{const p=document.createElement('p');p.textContent=guess.ref+' — '+guess.location;list.appendChild(p)});
       document.querySelector('.four-workspace').hidden=true;
       document.getElementById('four-summary').hidden=false;
     });
