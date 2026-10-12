@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f8f6">
+  <meta name="theme-color" content="#17191b">
   <title>The Meridian | An Independent Publishing Project</title>
   <style>
     :root{color-scheme:light;--paper:#f8f8f6;--ink:#121212;--muted:#646464;--rule:#d4d4d2;--green:#39826b;--red:#bf554d;--blue:#4778b1;--card:#fff;--shadow:0 6px 18px rgba(0,0,0,.08)}
@@ -198,6 +198,32 @@
     .logic-cell[data-state="2"]{background:#dce8dd;color:#245b3d}
     .answer-row select{background:#e8e3da;color:#27221c;border:1px solid #958d81}
     @media(max-width:700px){.archive-roster{grid-template-columns:1fr 1fr}.clue-cards,.logic-grids{grid-template-columns:1fr}}
+
+    /* Consistent Meridian editorial design system */
+    :root{--paper:#17191b;--ink:#eeeae3;--muted:#b1ada6;--rule:#414244;--card:#212326}
+    body{font-family:Georgia,'Times New Roman',serif;line-height:1.55}
+    .utility,nav,.masthead .tagline,.kicker,.puzzle-label,.reading-eyebrow,.assignment-title span,.mini-title,
+    .dev-tag,#dev-navigation,button,select,.roster-card small,.clue-card>span,.feedback,footer{font-family:Arial,Helvetica,sans-serif}
+    .masthead .brand{font-size:clamp(36px,5.2vw,58px);letter-spacing:-.055em}
+    h1,.level h1,.reading-inner h1,.complete h1{font-size:clamp(30px,3.4vw,40px);line-height:1.2;letter-spacing:-.025em;font-weight:400}
+    .hero h1{font-size:clamp(33px,4vw,46px)}
+    .reading-inner{max-width:620px}
+    .reading-inner .narrator-letter p,.reading-copy p{font-size:17px;line-height:1.68;margin-bottom:15px}
+    .lead{font-size:18px}.copy{font-size:16px;line-height:1.7}
+    .level{max-width:820px}.assignment-title h2{font-size:15px}.level .assignment{max-width:750px}
+    .primary,.secondary,.close-modal,.zoom-button,.sort-buttons button,.logic-cell,.clipping-card,
+    .sort-card,.target,.roster-card,.clue-card,.logic-panel,.modal-panel,.answer-row select,.instruction-box{border-radius:7px}
+    .primary{min-width:0;padding:12px 24px;font-size:12px;letter-spacing:.025em;text-transform:none;font-weight:600}
+    .secondary{border:1px solid #616267;padding:9px 13px;text-decoration:none}
+    .tile{border-radius:5px}.clipping-card,.roster-card,.clue-card,.logic-panel{box-shadow:none}
+    .reading-page{padding-top:32px}.reading-inner h1{margin:14px 0 22px}
+    .assignment p.task-line{font-size:16px}.answer-row strong{font-size:15px}
+    footer{letter-spacing:.04em}
+    #dev-navigation{position:fixed;right:15px;bottom:16px;z-index:45;display:flex;align-items:center;gap:9px;background:#303235;color:#edeae4;border:1px solid #636364;padding:9px 11px;border-radius:10px;box-shadow:0 7px 25px #0007;font-size:11px}
+    #dev-navigation .dev-tag{font-size:9px;font-weight:700;letter-spacing:.09em;color:#c6c0b5}
+    #dev-level{background:#1b1d1f;color:#f2f0eb;border:1px solid #68696a;border-radius:7px;padding:8px 9px;font-size:12px;max-width:165px}
+    @media(max-width:650px){#dev-navigation{bottom:8px;right:8px;left:8px;justify-content:center}.dev-tag{display:none}.reading-inner .narrator-letter p,.reading-copy p{font-size:16px}.hero h1{font-size:34px}footer{padding-bottom:95px}}
+
   </style>
 </head>
 <body>
@@ -209,6 +235,17 @@
       <nav aria-label="Site navigation"><span>Research &amp; Preservation</span><span>Independent since 1985</span></nav>
     </header>
     <div id="mini-header" aria-label="The Meridian"><span class="mini-mark">M.</span><span class="mini-title">THE MERIDIAN</span></div>
+    <!-- TEMPORARY DEVELOPER NAVIGATION: remove for public demo -->
+    <aside id="dev-navigation" aria-label="Developer level navigation">
+      <span class="dev-tag">DEV PREVIEW</span>
+      <label for="dev-level">Jump to</label>
+      <select id="dev-level">
+        <option value="home">Home</option><option value="readOne">Level 1 intro</option><option value="level">Level 1 puzzle</option>
+        <option value="readTwo">Level 2 intro</option><option value="two">Level 2 puzzle</option>
+        <option value="readThree">Level 3 intro</option><option value="three">Level 3 puzzle</option>
+        <option value="complete">End screen</option>
+      </select>
+    </aside>
     <main>
       <section id="home" class="hero" aria-labelledby="home-title">
         <div class="kicker">An invitation to participate</div>
@@ -335,6 +372,7 @@
     function show(section){
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
+      document.getElementById('dev-level').value=section;
       window.scrollTo({top:0,left:0,behavior:'instant'});
     }
 
@@ -478,6 +516,7 @@
       const f=document.getElementById('three-feedback');
       if(selections.every((v,i)=>v===correct[i])){show('complete')}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
     });
+    document.getElementById('dev-level').addEventListener('change',e=>show(e.target.value));
     renderLogicGrid();renderAnswers();
     renderClippings();
     update();
