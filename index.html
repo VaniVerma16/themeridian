@@ -530,6 +530,23 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .wrapper{min-width:0}
 .wrapper>main{min-width:0}
 .logic-board-scroll{overscroll-behavior-x:contain}
+
+/* Level 1: instructions above two contained, balanced columns. */
+#level-one{width:100%;max-width:1320px}
+#level-one .assignment.transcription-assignment{display:block!important;width:100%;max-width:1240px}
+#level-one .transcription-assignment>.task-line{display:block;width:100%;max-width:none;margin:0 0 30px;text-align:left}
+#level-one .transcription-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;align-items:start;width:100%;margin:0}
+#level-one .transcription-source,#level-one .transcription-review,#level-one .transcription-text{min-width:0;max-width:100%}
+#level-one .transcription-review h2{font-size:clamp(24px,2.2vw,31px);overflow-wrap:break-word;line-height:1.22}
+#level-one .transcription-text p{font-size:clamp(16px,1.35vw,20px)!important;line-height:1.72!important;overflow-wrap:break-word;white-space:normal}
+#level-one .transcript-word{font-size:inherit!important;letter-spacing:normal;line-height:inherit!important}
+#level-one .transcription-clipping-image{max-width:100%}
+#level-one .feedback{margin-top:24px;text-align:center}
+#level-one .actions{justify-content:center}
+@media(max-width:780px){
+ #level-one .transcription-layout{grid-template-columns:minmax(0,1fr);gap:30px}
+ #level-one .transcription-assignment>.task-line{text-align:left}
+}
   </style>
 </head>
 <body>
