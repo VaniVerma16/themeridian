@@ -806,10 +806,16 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
       const overlay=document.getElementById('transition-flash');
       overlay.classList.add('visible');
       window.setTimeout(()=>{
-        show('four');
         overlay.classList.remove('visible');
-        flashPending=false;
-      },85);
+        window.setTimeout(()=>{
+          overlay.classList.add('visible');
+          window.setTimeout(()=>{
+            show('four');
+            overlay.classList.remove('visible');
+            flashPending=false;
+          },65);
+        },90);
+      },65);
     }
     renderLogicGrid();renderAnswers();
     renderClippings();
