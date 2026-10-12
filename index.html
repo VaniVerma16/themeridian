@@ -638,6 +638,26 @@ body{overflow-x:clip;overscroll-behavior-x:none}
    flex-shrink:0;padding-bottom:22px;
  }
 }
+
+/* Intro pages: natural document height; footer follows the text instead of filling an artificial viewport. */
+body:has(.reading-page:not([hidden])) .wrapper{
+  min-height:0!important;height:auto!important;
+}
+body:has(.reading-page:not([hidden])) .wrapper>main{
+  min-height:0!important;flex:0 0 auto!important;display:block!important;
+}
+body:has(.reading-page:not([hidden])) .reading-page{
+  min-height:0!important;height:auto!important;
+  padding:clamp(42px,7vh,78px) 0 16px!important;
+  display:block!important;
+}
+body:has(.reading-page:not([hidden])) .wrapper>footer{
+  margin-top:clamp(32px,6vh,64px)!important;
+  padding-bottom:24px!important;
+}
+@media(min-width:900px){
+  #read-one .reading-inner,#read-two .reading-inner{align-items:start}
+}
   </style>
 </head>
 <body>
@@ -942,7 +962,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       sampleArticles.forEach((article,i)=>{
         const row=document.createElement('div');row.className='answer-row';
         const title=document.createElement('strong');title.textContent=article;row.append(title);
-        [sampleReporters,sampleSections].forEach((options,j)=>{const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose year':'Choose reporter';select.appendChild(empty);options.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
+        [sampleReporters,sampleSections].forEach((optionPool,j)=>{const options=[...optionPool];for(let k=options.length-1;k>0;k--){const n=Math.floor(Math.random()*(k+1));[options[k],options[n]]=[options[n],options[k]];}{const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose year':'Choose reporter';select.appendChild(empty);options.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
         host.appendChild(row);
       });
     }
