@@ -962,7 +962,7 @@ body:has(.reading-page:not([hidden])) .wrapper>footer{
       sampleArticles.forEach((article,i)=>{
         const row=document.createElement('div');row.className='answer-row';
         const title=document.createElement('strong');title.textContent=article;row.append(title);
-        [sampleReporters,sampleSections].forEach((optionPool,j)=>{const options=[...optionPool];for(let k=options.length-1;k>0;k--){const n=Math.floor(Math.random()*(k+1));[options[k],options[n]]=[options[n],options[k]];}{const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose year':'Choose reporter';select.appendChild(empty);options.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
+        [sampleReporters,sampleSections].forEach((optionPool,j)=>{const options=[...optionPool];for(let k=options.length-1;k>0;k--){const n=Math.floor(Math.random()*(k+1));[options[k],options[n]]=[options[n],options[k]];}const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose year':'Choose reporter';select.appendChild(empty);options.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
         host.appendChild(row);
       });
     }
