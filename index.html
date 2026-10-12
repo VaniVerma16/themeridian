@@ -1141,7 +1141,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     function nearestLandmark(lat,lng){let best=fourLandmarks[0],distance=Infinity;fourLandmarks.forEach(site=>{const d=L.latLng(lat,lng).distanceTo([site.lat,site.lng]);if(d<distance){best=site;distance=d}});return best.name}
     function ensureFourMap(){if(fourLeaflet){fourLeaflet.invalidateSize();return}if(!window.L){document.getElementById('four-feedback').textContent='Map library could not load; check your connection.';return}
       fourLeaflet=L.map('four-map',{minZoom:13,maxZoom:18,scrollWheelZoom:false,zoomSnap:0.5}).setView([52.0612,-1.3383],14.5);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'&copy; OpenStreetMap contributors &copy; CARTO'}).addTo(fourLeaflet);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>'}).addTo(fourLeaflet);
       fourLeaflet.setMaxBounds([[52.047,-1.364],[52.080,-1.310]]);
       fourLandmarks.forEach(site=>{L.circleMarker([site.lat,site.lng],{radius:4,color:'#666e65',weight:1,fillOpacity:.9,fillColor:'#f6f1e7',interactive:false}).addTo(fourLeaflet);L.marker([site.lat,site.lng],{interactive:false,icon:L.divIcon({className:'meridian-label',html:'<span class="meridian-name">'+site.name+'</span>',iconSize:[100,25],iconAnchor:[-8,26]})}).addTo(fourLeaflet)});
       fourLeaflet.on('click',e=>updateFourMarker(e.latlng.lat,e.latlng.lng));requestAnimationFrame(()=>fourLeaflet.invalidateSize());}
