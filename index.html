@@ -474,6 +474,11 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
 @media(max-width:700px){#level-three .level-three-workbench{margin-top:28px}}
 #transition-flash{position:fixed;inset:0;z-index:9999;background:#fff;opacity:0;visibility:hidden;pointer-events:none}
 #transition-flash.visible{opacity:1;visibility:visible}
+
+/* Keep the page header at its top and the footer at the bottom on short pages. */
+.wrapper{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.wrapper>main{flex:1 0 auto}
+.wrapper>footer{margin-top:auto}
   </style>
 </head>
 <body>
