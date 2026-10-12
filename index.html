@@ -680,6 +680,42 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .archived-article-panel .close-modal{background:transparent;color:#eeeae4;border-color:#686661}
 .archived-article-body .archived-full-clipping{display:block;width:100%;height:auto}
 .archived-article-body .archive-supplement{font-size:14px;line-height:1.7;color:#d0cbc1;margin:18px 8px 4px}
+
+/* Level 4: photographic field survey, not another logic puzzle. */
+#level-four{max-width:1420px;margin:34px auto 75px}
+#level-four .four-assignment{max-width:1380px;margin:0}
+.four-topline{display:flex;justify-content:space-between;align-items:start;gap:30px;border-bottom:1px solid #565856;padding-bottom:18px;margin-bottom:24px}
+.four-topline h1{font-size:34px;margin:0 0 9px}
+.four-topline p{font-size:15px;margin:0;color:#c6c2ba}
+.four-counter{font-size:11px;letter-spacing:.13em;color:#a9a79f;white-space:nowrap;margin-top:12px}
+.four-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px}
+.four-photo-frame{width:100%;aspect-ratio:1.47;background:#252727;border:1px solid #666763;display:grid;place-items:center;overflow:hidden}
+.four-photo-frame img{display:block;width:100%;height:100%;object-fit:contain}
+.four-photo-placeholder{text-align:center;color:#d6d2c9;display:flex;flex-direction:column;align-items:center;gap:8px}
+.four-photo-placeholder span,.four-photo-placeholder small{font-size:11px;letter-spacing:.12em;color:#9b9c98}
+.four-photo-placeholder strong{font-size:27px;font-weight:normal}
+.four-photo-caption{font-size:12px!important;color:#a6a39d!important;margin:12px 0 30px!important}
+.four-date{border-top:1px solid #525451;padding-top:20px}
+.four-date-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.four-date-heading label{font-size:15px}.four-date-heading output{font-size:25px;font-weight:normal}
+#four-year{display:block;width:100%;accent-color:#bdbdb8;cursor:pointer}
+.four-range{display:flex;justify-content:space-between;color:#a5a39c;font-size:12px}
+.four-controls{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:25px}
+.four-controls p{font-size:13px!important;color:#aaa7a0!important;margin:0!important}
+.four-controls button{margin:0;min-width:150px}
+.four-map-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:12px}
+.four-map-head>div{display:flex;flex-direction:column;gap:3px}
+.four-map-head strong{font-size:16px}.four-map-head span,.four-map-head small{font-size:11px;color:#aaa8a3;letter-spacing:.04em}
+.four-map-viewport{border:1px solid #72736e;overflow:hidden}
+#four-map{display:block;width:100%;height:auto;cursor:crosshair;touch-action:manipulation}
+.four-location{font-size:13px!important;color:#bebbb4!important;margin:10px 0 22px!important}
+.four-editor-note{border-top:1px solid #575955;padding-top:16px;max-width:620px}
+.four-editor-note span{font-size:11px;letter-spacing:.13em;color:#a7a59f}
+.four-editor-note p{font-size:14px!important;line-height:1.7!important;margin:8px 0!important;color:#bebbb4!important}
+.four-summary{max-width:650px;padding:40px 0 65px}.four-summary h2{font-size:29px;font-weight:normal}
+.four-summary-items p,#four-summary-items p{padding:13px 0;border-bottom:1px solid #555}
+@media(max-width:950px){.four-workspace{grid-template-columns:1fr}.four-topline{flex-direction:column;gap:10px}}
+@media(max-width:540px){.four-controls{flex-direction:column;align-items:stretch}.four-controls .primary{width:100%}.four-map-head{align-items:start}.four-map-head small{display:none}}
   </style>
 </head>
 <body>
@@ -699,7 +735,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         <option value="home">Home</option><option value="readOne">Level 1 intro</option><option value="level">Level 1 puzzle</option>
         <option value="readTwo">Level 2 intro</option><option value="two">Level 2 puzzle</option>
         <option value="readThree">Level 3 intro</option><option value="three">Level 3 puzzle</option>
-        <option value="four">Level 4 test</option><option value="complete">End screen</option>
+        <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="complete">End screen</option>
       </select>
     </aside>
     <main>
@@ -796,9 +832,58 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           <div class="actions"><button class="primary" type="button" id="check-three">Submit deduction</button></div>
         </div>
       </section>
-      <section id="level-four" class="level" aria-label="Assessment 04 test" hidden>
-        
-        <div class="assignment"><h1 style="font-size:34px;font-weight:normal">Assessment 04</h1><p>Level 4 is not ready yet.</p><p>This page is here to test the transition.</p><button class="primary" type="button" id="four-finish">Continue</button></div>
+      <section id="read-four" class="reading-page" aria-label="Case introduction" hidden>
+        <div class="reading-inner"><h1>Let's get started.</h1>
+          <div class="reading-copy">
+            <p>Good job! I'm really happy seeing your progress. I really, truly am.</p>
+            <p>I think we can finally start on the actual work now! It's really nice having someone help me out. Isn't it always wonderful to have good people to work with?</p>
+            <p>Every year, The Meridian revisits stories from our archives for our Annual Revival Project. And this year, we've chosen a particularly fascinating case. Tragic, of course. But really quite remarkable.</p>
+            <p>We'll piece together the original timeline and put the story back together for our readers. I'll tell you more as we go. I don't want to overwhelm you all at once!</p>
+            <p>First, we have three photographs with incomplete catalogue details. Take a look at each one, place it on the town map, and estimate when it was taken. You don't need to be exact. Just make your best guess!</p>
+          </div><button class="primary" type="button" id="begin-four">Let's take a look</button>
+        </div>
+      </section>
+      <section id="level-four" class="level" aria-label="Photographic archive" hidden>
+        <div class="assignment four-assignment">
+          <div class="four-topline"><div><h1>A Life in Three Acts</h1><p>Photographic archive · Establish the place and approximate year of each recovered image.</p></div><div id="four-counter" class="four-counter">PHOTOGRAPH 01 / 03</div></div>
+          <div class="four-workspace">
+            <div class="four-photograph-col">
+              <div class="four-photo-frame" id="four-photo-frame">
+                <img id="four-photo-img" alt="Recovered archive photograph" hidden>
+                <div id="four-photo-placeholder" class="four-photo-placeholder"><span>PHOTOGRAPH A</span><strong>Image pending</strong><small>Awaiting original photographic scan</small></div>
+              </div>
+              <p class="four-photo-caption" id="four-photo-caption">Reference PH–01 · Catalogue date and location missing</p>
+              <div class="four-date"><div class="four-date-heading"><label for="four-year">Estimated year</label><output id="four-year-output" for="four-year">1994</output></div><input id="four-year" type="range" min="1988" max="2000" value="1994" step="1"><div class="four-range"><span>1988</span><span>2000</span></div></div>
+              <div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
+            </div>
+            <div class="four-map-col">
+              <div class="four-map-head"><div><strong>Town survey map</strong><span>Click anywhere to place a marker</span></div><small>ARCHIVE BASE MAP / 1990s</small></div>
+              <div class="four-map-viewport">
+                <svg id="four-map" viewBox="0 0 660 470" role="img" aria-label="Illustrated town map with town square, school, orchards, riverside, west end and station road. Click to mark a location." xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0" y="0" width="660" height="470" fill="#d5d2ca"/>
+                  <path d="M0 58 L170 72 258 48 365 86 660 52" fill="none" stroke="#b5b0a5" stroke-width="2"/>
+                  <path d="M0 408 L130 391 234 429 399 386 660 410" fill="none" stroke="#b5b0a5" stroke-width="2"/>
+                  <path d="M18 0 L44 165 25 297 66 470" fill="none" stroke="#b8b4a9" stroke-width="1.5"/>
+                  <path d="M571 0 L547 169 603 338 580 470" fill="none" stroke="#b8b4a9" stroke-width="1.5"/>
+                  <path d="M85 0 C130 95 112 154 180 225 S220 357 249 470" fill="none" stroke="#a6b8bb" stroke-width="45" opacity=".8"/>
+                  <path d="M85 0 C130 95 112 154 180 225 S220 357 249 470" fill="none" stroke="#e5e4db" stroke-width="3" opacity=".65"/>
+                  <g stroke="#eceae3" fill="none" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"><path d="M0 255 L660 255"/><path d="M348 0 L348 470"/><path d="M88 114 L640 114"/><path d="M0 365 L660 365"/><path d="M460 18 L460 451"/><path d="M250 0 L250 215"/></g>
+                  <g stroke="#aaa497" stroke-width="1.3" fill="none" opacity=".8"><path d="M0 255 L660 255"/><path d="M348 0 L348 470"/><path d="M88 114 L640 114"/><path d="M0 365 L660 365"/><path d="M460 18 L460 451"/><path d="M250 0 L250 215"/></g>
+                  <g fill="#bab6a9" stroke="#9c978a" stroke-width="1"><rect x="286" y="153" width="41" height="55"/><rect x="376" y="149" width="53" height="72"/><rect x="380" y="286" width="52" height="46"/><rect x="487" y="284" width="45" height="45"/><rect x="515" y="149" width="58" height="69"/><rect x="280" y="288" width="43" height="39"/><rect x="46" y="281" width="61" height="53"/><rect x="42" y="152" width="48" height="58"/></g>
+                  <g stroke="#858376" fill="none" stroke-width="2"><path d="M487 0 L618 470"/><path d="M493 0 L624 470"/></g>
+                  <g stroke="#858376" stroke-width="1.3"><path d="M501 35 l-21 7 M514 81 l-22 7 M527 126 l-22 7 M540 172 l-22 7 M553 219 l-22 7 M566 265 l-22 7 M579 311 l-22 7 M592 358 l-22 7 M605 404 l-22 7"/></g>
+                  <g fill="#818575" opacity=".26"><ellipse cx="265" cy="59" rx="85" ry="43"/><ellipse cx="590" cy="62" rx="48" ry="42"/><ellipse cx="95" cy="427" rx="69" ry="28"/></g>
+                  <g fill="#454741" font-size="17" text-anchor="middle"><text x="342" y="246" font-size="18">TOWN SQUARE</text><text x="388" y="83">NORTH ORCHARDS</text><text x="531" y="252">STATION ROAD</text><text x="495" y="349">SCHOOL</text><text x="104" y="355">RIVERSIDE</text><text x="130" y="181">WEST END</text></g>
+                  <g fill="#6c6b62" font-size="11" letter-spacing="1.5"><text x="18" y="22">MERIDIAN COUNTY · LOCAL SURVEY</text><text x="545" y="455">N ↑</text></g>
+                  <g id="four-map-marker" visibility="hidden"><circle r="15" fill="none" stroke="#852d27" stroke-width="2"/><circle r="5" fill="#852d27"/></g>
+                </svg>
+              </div>
+              <p class="four-location">Your marker: <strong id="four-location-name">Not placed</strong></p>
+              <div class="four-editor-note"><span>EDITOR'S LOG · RECORD 04</span><p>Original photograph references restored. Please consult me before making further revisions to these entries.</p></div>
+            </div>
+          </div>
+          <div id="four-summary" class="four-summary" hidden><h2>Estimates recorded</h2><p>Your proposed dates and locations have been added to the working file. We'll review the original records once the photographic evidence is available.</p><div id="four-summary-items"></div><button id="four-finish" class="primary" type="button">Continue</button></div>
+        </div>
       </section>
       <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
         <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button>
@@ -906,7 +991,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     let sortOrder=[...initialOrder];
     let draggedId=null;
 
-    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),complete:document.getElementById('completed')};
+    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),readFour:document.getElementById("read-four"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),complete:document.getElementById('completed')};
     const sortFeedback=document.getElementById('sort-feedback');
     const modal=document.getElementById('modal');
     const modalTitle=document.getElementById('modal-title');
@@ -1045,7 +1130,60 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       if(selections.every((v,i)=>v===correct[i])){flashToLevelFour()}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
     });
     document.getElementById('dev-level').addEventListener('change',e=>show(e.target.value));
+    document.getElementById('begin-four').addEventListener('click',()=>show('four'));
     document.getElementById('four-finish').addEventListener('click',()=>show('complete'));
+    const fourPhotos=[
+      {label:'A',file:'case-photo-01.jpg',ref:'PH–01'},
+      {label:'B',file:'case-photo-02.jpg',ref:'PH–02'},
+      {label:'C',file:'case-photo-03.jpg',ref:'PH–03'}
+    ];
+    const fourLandmarks=[['Town Square',340,243],['North Orchards',387,79],['Station Road',542,252],['School',497,347],['Riverside',104,355],['West End',132,180]];
+    const fourGuesses=[];
+    let fourCurrent=0;let fourMarker=null;
+    const fourMap=document.getElementById('four-map');
+    const fourYear=document.getElementById('four-year');
+    fourYear.addEventListener('input',()=>{document.getElementById('four-year-output').textContent=fourYear.value});
+    function nearestLandmark(x,y){let result=fourLandmarks[0],dist=Infinity;fourLandmarks.forEach(place=>{const d=(place[1]-x)**2+(place[2]-y)**2;if(d<dist){dist=d;result=place}});return result[0]}
+    function updateFourMarker(x,y){
+      fourMarker={x,y,name:nearestLandmark(x,y)};
+      const marker=document.getElementById('four-map-marker');marker.setAttribute('transform','translate('+x+' '+y+')');marker.setAttribute('visibility','visible');
+      document.getElementById('four-location-name').textContent=fourMarker.name;
+      document.getElementById('four-feedback').textContent='Ready to save this estimate.';
+      document.getElementById('four-next').disabled=false;
+    }
+    fourMap.addEventListener('click',e=>{
+      const rect=fourMap.getBoundingClientRect();if(!rect.width||!rect.height)return;
+      const pt=fourMap.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
+      const matrix=fourMap.getScreenCTM();if(!matrix)return;
+      const loc=pt.matrixTransform(matrix.inverse());
+      updateFourMarker(Math.max(0,Math.min(660,Math.round(loc.x))),Math.max(0,Math.min(470,Math.round(loc.y))));
+    });
+    function renderFourPhoto(){
+      const item=fourPhotos[fourCurrent];
+      document.getElementById('four-counter').textContent='PHOTOGRAPH '+String(fourCurrent+1).padStart(2,'0')+' / 03';
+      document.getElementById('four-photo-caption').textContent='Reference '+item.ref+' · Catalogue date and location missing';
+      const pic=document.getElementById('four-photo-img');const placeholder=document.getElementById('four-photo-placeholder');
+      pic.hidden=true;placeholder.hidden=false;placeholder.querySelector('span').textContent='PHOTOGRAPH '+item.label;
+      pic.onload=()=>{pic.hidden=false;placeholder.hidden=true};pic.onerror=()=>{pic.hidden=true;placeholder.hidden=false};
+      pic.src=item.file;
+      fourMarker=null;document.getElementById('four-map-marker').setAttribute('visibility','hidden');
+      document.getElementById('four-location-name').textContent='Not placed';
+      document.getElementById('four-feedback').textContent='Select a point on the map to record your estimate.';
+      document.getElementById('four-next').disabled=true;
+      document.getElementById('four-next').textContent=fourCurrent===2?'Review estimates':'Save estimate';
+      fourYear.value='1994';document.getElementById('four-year-output').textContent='1994';
+      document.getElementById('four-summary').hidden=true;
+    }
+    document.getElementById('four-next').addEventListener('click',()=>{
+      if(!fourMarker)return;
+      fourGuesses[fourCurrent]={ref:fourPhotos[fourCurrent].ref,year:fourYear.value,location:fourMarker.name,x:fourMarker.x,y:fourMarker.y};
+      if(fourCurrent<2){fourCurrent++;renderFourPhoto();return}
+      const list=document.getElementById('four-summary-items');list.replaceChildren();
+      fourGuesses.forEach(guess=>{const p=document.createElement('p');p.textContent=guess.ref+' — '+guess.year+' · '+guess.location;list.appendChild(p)});
+      document.querySelector('.four-workspace').hidden=true;
+      document.getElementById('four-summary').hidden=false;
+    });
+    renderFourPhoto();
     let flashPending=false;
     function flashToLevelFour(){
       if(flashPending)return;
@@ -1057,7 +1195,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         window.setTimeout(()=>{
           overlay.classList.add('visible');
           window.setTimeout(()=>{
-            show('four');
+            show('readFour');
             overlay.classList.remove('visible');
             flashPending=false;
           },65);
