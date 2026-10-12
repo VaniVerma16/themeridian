@@ -1140,7 +1140,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       {label:'B',file:'station-road2.jpg',ref:'PH–02'},
       {label:'C',file:'pub.jpg',ref:'PH–03'}
     ];
-    const fourLandmarks=[{name:'Civic Square',lat:370,lng:468},{name:'High Street',lat:385,lng:485},{name:'Commercial Road',lat:375,lng:745},{name:'West End',lat:415,lng:220},{name:'Riverside',lat:205,lng:290},{name:'School Lane',lat:165,lng:670}];
+    const fourLandmarks=[{name:'Town Centre',lat:380,lng:486},{name:'Commercial Road',lat:250,lng:724},{name:'Station Road',lat:312,lng:805},{name:'West End',lat:483,lng:155},{name:'Riverside',lat:163,lng:165},{name:'North Orchards',lat:570,lng:784}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null;
     const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
     function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
@@ -1150,48 +1150,11 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     function nearestLandmark(lat,lng){let best=fourLandmarks[0],distance=Infinity;fourLandmarks.forEach(site=>{const d=Math.hypot(lat-site.lat,lng-site.lng);if(d<distance){best=site;distance=d}});return best.name}
     function ensureFourMap(){if(fourLeaflet){fourLeaflet.invalidateSize();return}if(!window.L){document.getElementById('four-feedback').textContent='The map could not load. Please refresh.';return}
       const canvas=[[0,0],[700,1000]];
-      fourLeaflet=L.map('four-map',{crs:L.CRS.Simple,minZoom:-1,maxZoom:2,zoomSnap:.25,scrollWheelZoom:false,zoomControl:true,attributionControl:false, maxBounds:[[0,0],[700,1000]],maxBoundsViscosity:1});
-      L.rectangle(canvas,{color:'#c7c1b3',weight:1,fillColor:'#e7e2d7',fillOpacity:1,interactive:false}).addTo(fourLeaflet);
-      const land=(bounds,fill)=>L.rectangle(bounds,{stroke:false,fillColor:fill,fillOpacity:1,interactive:false}).addTo(fourLeaflet);
-      land([[515,700],[688,984]],'#d7dcca');land([[12,14],[120,320]],'#d6ddcb');land([[540,100],[660,280]],'#d8dfce');
-      const river=[[701,95],[640,118],[577,136],[510,143],[455,177],[394,190],[330,218],[274,237],[204,255],[137,280],[74,296],[0,334]];
-      L.polyline(river,{color:'#bbc1b6',weight:47,interactive:false}).addTo(fourLeaflet);L.polyline(river,{color:'#a6bfc2',weight:36,interactive:false}).addTo(fourLeaflet);
-      const tracks=[[700,890],[610,875],[505,866],[390,855],[280,836],[170,827],[0,811]];
-      L.polyline(tracks,{color:'#85877f',weight:9,interactive:false}).addTo(fourLeaflet);L.polyline(tracks,{color:'#e7e2d7',weight:5,interactive:false}).addTo(fourLeaflet);
-      const streets=[
-        [[650,60],[620,250],[605,455],[598,770],[604,980]],
-        [[475,25],[470,210],[460,390],[461,620],[460,975]],
-        [[330,25],[333,270],[337,470],[333,665],[323,976]],
-        [[175,50],[175,255],[176,420],[173,710],[173,965]],
-        [[30,490],[200,487],[350,485],[570,480],[690,486]],
-        [[30,685],[175,694],[340,700],[480,696],[675,685]],
-        [[30,340],[185,346],[330,357],[468,350],[650,335]],
-        [[570,300],[480,390],[420,465],[330,545],[215,640]],
-        [[475,695],[400,758],[334,790],[200,768]],
-        [[125,520],[235,575],[335,620],[475,650]]
-      ];
-      streets.forEach(path=>{L.polyline(path,{color:'#b9b6ad',weight:14,interactive:false}).addTo(fourLeaflet);L.polyline(path,{color:'#fffaf0',weight:10,interactive:false}).addTo(fourLeaflet)});
-      L.polyline([[337,177],[337,305]],{color:'#888d87',weight:16,interactive:false}).addTo(fourLeaflet);L.polyline([[337,177],[337,305]],{color:'#fffaf0',weight:11,interactive:false}).addTo(fourLeaflet);
-      const blocks=[
-        [[497,395],[569,450]],[[497,515],[567,560]],[[358,397],[437,451]],[[365,519],[435,557]],
-        [[515,721],[566,773]],[[382,722],[436,747]],[[369,787],[422,828]],[[226,702],[276,743]],
-        [[214,545],[292,595]],[[216,417],[288,456]],[[90,550],[144,620]],[[87,730],[149,772]],
-        [[511,325],[558,380]],[[365,303],[430,322]],[[213,359],[287,406]],[[531,555],[582,595]],
-        [[215,85],[278,130]],[[369,76],[430,122]],[[508,60],[566,101]],[[85,372],[146,423]]
-      ];
-      blocks.forEach(bounds=>L.rectangle(bounds,{color:'#aaa89e',weight:.8,fillColor:'#bdbbae',fillOpacity:.78,interactive:false}).addTo(fourLeaflet));
-      for(let row=0;row<5;row++)for(let col=0;col<11;col++)L.circle([555+row*17,715+col*19],{radius:4,color:'#8a9c80',weight:0,fillColor:'#8a9c80',fillOpacity:.85,interactive:false}).addTo(fourLeaflet);
-      L.rectangle([[344,441],[411,527]],{color:'#b9ab96',weight:1,fillColor:'#d8ccba',fillOpacity:1,interactive:false}).addTo(fourLeaflet);
-      L.rectangle([[357,462],[388,496]],{color:'#747d76',weight:1,fillColor:'#aaa99e',fillOpacity:1,interactive:false}).addTo(fourLeaflet);
-      L.circleMarker([370,480],{radius:4,color:'#f1ece2',weight:1,fillColor:'#555b55',fillOpacity:1,interactive:false}).addTo(fourLeaflet);
-      L.rectangle([[244,714],[290,760]],{color:'#9fa89a',weight:1,fillColor:'#cdd6c6',fillOpacity:1,interactive:false}).addTo(fourLeaflet);
-      const name=(text,point,cls='street')=>L.marker(point,{interactive:false,icon:L.divIcon({className:'meridian-place '+cls,html:text,iconSize:[130,18],iconAnchor:[65,9]})}).addTo(fourLeaflet);
-      name('CIVIC SQUARE',[420,475],'district');name('HIGH STREET',[545,476]);name('COMMERCIAL ROAD',[477,743]);name('MARKET STREET',[315,600]);
-      name('WEST END',[551,254],'district');name('RIVERSIDE',[115,340],'district');name('ORCHARDS',[650,777],'district');name('STATION LANE',[176,876]);name('SCHOOL LANE',[100,638]);
-      // Minimal symbols hint at landmarks without displaying their answers.
-      name('◷',[369,480],'symbol');name('P',[245,745],'symbol');name('⌑',[388,788],'symbol');
-      fourLeaflet.fitBounds(canvas,{padding:[6,6]});
-      fourLeaflet.on('click',event=>updateFourMarker(event.latlng.lat,event.latlng.lng));requestAnimationFrame(()=>fourLeaflet.invalidateSize());
+      fourLeaflet=L.map('four-map',{crs:L.CRS.Simple,minZoom:-1.4,maxZoom:2,zoomSnap:.25,scrollWheelZoom:false,zoomControl:true,attributionControl:false,maxBounds:[[-60,-60],[760,1060]],maxBoundsViscosity:1});
+      L.imageOverlay('meridian-town-map.svg',canvas,{interactive:false,alt:'Meridian County fictional street survey'}).addTo(fourLeaflet);
+      fourLeaflet.fitBounds(canvas,{padding:[8,8]});
+      fourLeaflet.on('click',event=>updateFourMarker(event.latlng.lat,event.latlng.lng));
+      requestAnimationFrame(()=>fourLeaflet.invalidateSize());
     }
     function updateFourMarker(lat,lng){if(!fourLeaflet)return;fourMarker={lat,lng,name:nearestLandmark(lat,lng)};if(fourCameraMarker){fourCameraMarker.setLatLng([lat,lng]);fourCameraMarker.setIcon(cameraIcon())}else fourCameraMarker=L.marker([lat,lng],{icon:cameraIcon(),keyboard:false}).addTo(fourLeaflet);document.getElementById('four-location-name').textContent=fourMarker.name;document.getElementById('four-feedback').textContent='Ready to save this estimate.';document.getElementById('four-next').disabled=false;}
     function renderFourPhoto(){
