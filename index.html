@@ -749,6 +749,22 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .directory-page-bottom{position:absolute;bottom:16px;left:32px;right:31px;display:flex;justify-content:space-between;border-top:1px solid #bdb09a;padding-top:10px;font:10px Georgia,serif;letter-spacing:.08em;color:#706a60}
 .directory-navigation{display:flex;justify-content:space-between;align-items:center;gap:9px;background:#252725;color:#ddd9cf;padding:11px}.directory-navigation button{background:transparent;border:1px solid #706f68;color:#e7e1d5;padding:9px 11px;font:13px Georgia,serif}.directory-navigation button:disabled{opacity:.32;cursor:default}.directory-navigation span{font:12px Georgia,serif;color:#b6b4ab}
 @media(max-width:520px){.directory-page{min-height:410px;padding:29px 23px 57px}.directory-page-content{font-size:15px}.directory-page-content h2{font-size:26px}.directory-navigation button{font-size:11px;padding:8px}}
+
+/* Compact photographic review; handwritten editorial reminder. */
+#level-four{margin-top:18px}
+.four-topline{margin-bottom:14px;padding-bottom:10px}
+.four-topline h1{font-size:30px}
+.four-workspace{gap:20px}
+.four-photo-caption{margin:6px 0 10px!important}
+.directory-trigger{margin-top:8px;padding:7px 10px}
+.four-bearing{margin-top:10px;padding-top:10px}
+.four-controls{margin-top:12px;gap:12px}
+.four-map-head{margin-bottom:6px}
+.four-location{margin:6px 0 10px!important}
+.four-editor-note{background:#e7dcb7;color:#343027;border:0;border-left:5px solid #b7a173;padding:17px 19px 19px;box-shadow:3px 4px 0 rgba(0,0,0,.22);transform:rotate(-.5deg);max-width:440px}
+.four-editor-note span{display:block;color:#574b34;font-size:12px;font-weight:800;letter-spacing:.10em;margin-bottom:7px}
+.four-editor-note p{color:#35302a!important;margin:0!important;font-size:15px!important;line-height:1.45!important}
+.four-editor-note strong{font-weight:800}
   </style>
 </head>
 <body>
@@ -885,7 +901,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
                 <img id="four-photo-img" alt="Recovered archive photograph" hidden>
                 <div id="four-photo-placeholder" class="four-photo-placeholder"><span>PHOTOGRAPH A</span><strong>Image pending</strong><small>Awaiting original photographic scan</small></div>
               </div>
-              <button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Open supplementary notes</span><span aria-hidden="true">↗</span></button><p class="four-photo-caption" id="four-photo-caption">Reference PH–01 · Catalogue date and location missing</p>
+              <button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Open supplementary notes</span><span aria-hidden="true">↗</span></button><p class="four-photo-caption" id="four-photo-caption">PH–01 · Position unverified</p>
               <div class="four-bearing"><div><label for="four-bearing">Camera direction</label><output id="four-bearing-output">North · 0°</output></div><input type="range" id="four-bearing" min="0" max="350" step="10" value="0"><div class="four-bearing-ends"><span>N</span><span>E</span><span>S</span><span>W</span><span>N</span></div></div><div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
             </div>
             <div class="four-map-col">
@@ -894,7 +910,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
                 <div id="four-map" role="application" aria-label="Interactive town map"></div>
               </div>
               <p class="four-location">Your marker: <strong id="four-location-name">Not placed</strong></p>
-              <div class="four-editor-note"><span>EDITOR'S LOG</span><p>Original photograph references restored. Please consult me before making further revisions to these entries.</p></div>
+              <div class="four-editor-note"><span>EDITOR'S LOG</span><p>Original photograph references restored. <strong>Please consult me before making further revisions to these entries.</strong></p></div>
             </div>
           </div>
           <div id="four-summary" class="four-summary" hidden><h2>Photographic records verified</h2><p>All three photographic locations and viewing directions have been verified against the reconstructed town survey.</p><div id="four-summary-items"></div><button id="four-finish" class="primary" type="button">Continue</button></div>
@@ -1163,16 +1179,16 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     document.getElementById('begin-four').addEventListener('click',()=>show('four'));
     document.getElementById('four-finish').addEventListener('click',()=>show('complete'));
     const fourPhotos=[
-      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:372,lng:476,bearing:0},site:'Clock Tower / High Street'},
-      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:510,lng:749,bearing:90},site:'Station Road / Filling Station'},
-      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:360,lng:714,bearing:315},site:'Prince Arthur / Albert Road'}
+      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:442,lng:405,bearing:20},site:'Clock Tower / High Street'},
+      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:500,lng:785,bearing:90},site:'Station Road / Filling Station'},
+      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:385,lng:660,bearing:315},site:'Prince Arthur / Albert Road'}
     ];
     const fourLandmarks=[{name:'Clock Tower',lat:550,lng:468},{name:'Prince Arthur',lat:390,lng:657},{name:'Filling Station',lat:515,lng:840},{name:'School',lat:260,lng:865},{name:'West Bridge',lat:532,lng:90},{name:'Meridian Station',lat:635,lng:587}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null,fourVerified=false;
     const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
     function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
     function cameraIcon(){return L.divIcon({className:'meridian-camera',html:'<svg width="52" height="52" viewBox="0 0 52 52"><g transform="rotate('+fourBearing.value+' 26 26)"><path d="M26 19V4 M20 12L26 4L32 12" stroke="#343b38" stroke-width="2" fill="none"/></g><circle cx="26" cy="26" r="7.5" fill="#f5f1e7" stroke="#343b38" stroke-width="2"/><circle cx="26" cy="26" r="2" fill="#343b38"/></svg>',iconSize:[52,52],iconAnchor:[26,26]})}
-    function updateBearing(){fourBearingOutput.textContent=formatBearing(fourBearing.value);if(fourCameraMarker)fourCameraMarker.setIcon(cameraIcon());if(fourMarker)fourVerified=false;}
+    function updateBearing(){fourBearingOutput.textContent=formatBearing(fourBearing.value);if(fourCameraMarker)fourCameraMarker.setIcon(cameraIcon());if(fourMarker){fourVerified=false;document.getElementById('four-next').textContent='Check position';}}
     fourBearing.addEventListener('input',updateBearing);
     function nearestLandmark(lat,lng){let best=fourLandmarks[0],distance=Infinity;fourLandmarks.forEach(site=>{const d=Math.hypot(lat-site.lat,lng-site.lng);if(d<distance){best=site;distance=d}});return best.name}
     function ensureFourMap(){if(fourLeaflet){fourLeaflet.invalidateSize();return}if(!window.L){document.getElementById('four-feedback').textContent='The map could not load. Please refresh.';return}
@@ -1183,11 +1199,11 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       fourLeaflet.on('click',event=>updateFourMarker(event.latlng.lat,event.latlng.lng));
       requestAnimationFrame(()=>fourLeaflet.invalidateSize());
     }
-    function updateFourMarker(lat,lng){if(!fourLeaflet)return;fourVerified=false;fourMarker={lat,lng,name:nearestLandmark(lat,lng)};if(fourCameraMarker){fourCameraMarker.setLatLng([lat,lng]);fourCameraMarker.setIcon(cameraIcon())}else fourCameraMarker=L.marker([lat,lng],{icon:cameraIcon(),keyboard:false}).addTo(fourLeaflet);document.getElementById('four-location-name').textContent=fourMarker.name;document.getElementById('four-feedback').textContent='Ready to save this estimate.';document.getElementById('four-next').disabled=false;}
+    function updateFourMarker(lat,lng){if(!fourLeaflet)return;fourVerified=false;document.getElementById('four-next').textContent='Check position';fourMarker={lat,lng,name:nearestLandmark(lat,lng)};if(fourCameraMarker){fourCameraMarker.setLatLng([lat,lng]);fourCameraMarker.setIcon(cameraIcon())}else fourCameraMarker=L.marker([lat,lng],{icon:cameraIcon(),keyboard:false}).addTo(fourLeaflet);document.getElementById('four-location-name').textContent=fourMarker.name;document.getElementById('four-feedback').textContent='Ready to save this estimate.';document.getElementById('four-next').disabled=false;}
     function renderFourPhoto(){
       const item=fourPhotos[fourCurrent];
       document.getElementById('four-counter').textContent='PHOTOGRAPH '+String(fourCurrent+1).padStart(2,'0')+' / 03';
-      document.getElementById('four-photo-caption').textContent='Reference '+item.ref+' · Catalogue date and location missing';
+      document.getElementById('four-photo-caption').textContent='Reference '+item.ref+' · Camera position unverified';
       const pic=document.getElementById('four-photo-img');const placeholder=document.getElementById('four-photo-placeholder');
       pic.hidden=true;placeholder.hidden=false;placeholder.querySelector('span').textContent='PHOTOGRAPH '+item.label;
       pic.onload=()=>{pic.hidden=false;placeholder.hidden=true};pic.onerror=()=>{pic.hidden=true;placeholder.hidden=false};
@@ -1207,7 +1223,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         const expected=fourPhotos[fourCurrent].answer;
         const distance=Math.hypot(fourMarker.lat-expected.lat,fourMarker.lng-expected.lng);
         const heading=Math.abs(((Number(fourBearing.value)-expected.bearing+540)%360)-180);
-        const locationOK=distance<=105, directionOK=heading<=65;
+        const locationOK=distance<=190, directionOK=heading<=100;
         if(!locationOK||!directionOK){
           feedback.textContent=(!locationOK&&!directionOK)?'Not quite. Recheck the landmark and the direction of the road.':(!locationOK?'The direction looks plausible, but try another position.':'You found the right area. Rotate the camera to face the landmark.');
           feedback.classList.add('error');
