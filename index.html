@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f8f6">
+  <title>The Meridian | An Independent Publishing Project</title>
+  <style>
+    :root{color-scheme:light;--paper:#f8f8f6;--ink:#121212;--muted:#646464;--rule:#d4d4d2;--green:#39826b;--red:#bf554d;--blue:#4778b1;--card:#fff;--shadow:0 6px 18px rgba(0,0,0,.08)}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+    button{font:inherit;cursor:pointer}
+    button:focus-visible{outline:3px solid #171717;outline-offset:4px}
+    .wrapper{max-width:1060px;margin:0 auto;padding:0 34px}
+    .topline{height:9px;background:#111}
+    header{padding-top:21px}
+    .utility{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#525252}
+    .masthead{text-align:center;padding:26px 0 21px;border-bottom:3px double var(--ink)}
+    .masthead .brand{font:700 clamp(40px,7vw,79px)/.96 Georgia,'Times New Roman',serif;letter-spacing:-.072em}
+    .masthead .tagline{margin-top:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+    nav{border-bottom:1px solid var(--ink);padding:13px 0;display:flex;justify-content:space-between;gap:15px;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+    nav span:last-child{font-weight:400;color:var(--muted)}
+    main{min-height:60vh}
+    .hero{max-width:720px;margin:85px auto 102px;text-align:center}
+    .kicker{font-size:11px;text-transform:uppercase;font-weight:700;letter-spacing:.18em;color:#515151}
+    h1,h2,h3,p{margin-top:0}
+    h1{font:400 clamp(40px,5.3vw,65px)/1.12 Georgia,'Times New Roman',serif;letter-spacing:-.048em;margin:19px 0 24px}
+    .small-rule{height:1px;background:var(--rule);width:90px;margin:25px auto}
+    .lead{font:400 19px/1.7 Georgia,'Times New Roman',serif;margin-bottom:20px}
+    .copy{max-width:600px;margin:0 auto 15px;font:16px/1.78 Georgia,'Times New Roman',serif;color:#363636}
+    .primary{background:#121212;border:1px solid #121212;color:white;padding:15px 32px;margin-top:25px;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;min-width:185px;transition:background .16s,transform .16s}
+    .primary:hover{background:#3c3c3c;transform:translateY(-1px)}
+    .primary:disabled{background:#969696;border-color:#969696;cursor:not-allowed;transform:none}
+    .primary:not(:disabled):active{transform:translateY(0)}
+    .secondary{border:0;border-bottom:1px solid #777;background:transparent;color:#444;padding:4px 0;font-size:12px}
+    .level{max-width:860px;margin:58px auto 88px}
+    .level-header{border-bottom:1px solid var(--rule);padding-bottom:24px;text-align:center}
+    .level h1{font-size:clamp(34px,4.6vw,52px);margin:12px 0 15px}
+    .level-intro{font:17px/1.62 Georgia,'Times New Roman',serif;max-width:600px;margin:0 auto;color:#333}
+    .assignment{margin:40px auto 24px;max-width:760px}
+    .assignment-title{display:flex;justify-content:space-between;gap:15px;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:10px}
+    .assignment-title h2{font:700 14px Georgia,'Times New Roman',serif;margin:0}
+    .assignment-title span{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+    .assignment p{font:16px/1.7 Georgia,'Times New Roman',serif;margin:16px 0 20px}
+    .targets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 29px}
+    .target{border:1px solid var(--rule);padding:12px 10px;display:flex;gap:10px;align-items:center;justify-content:center;font-size:12px}
+    .swatch{width:10px;height:10px;flex:0 0 10px}
+    .swatch.green{background:var(--green)}.swatch.red{background:var(--red)}.swatch.blue{background:var(--blue)}
+    .counter{font-variant-numeric:tabular-nums;font-weight:700}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:410px;margin:0 auto}
+    .tile{aspect-ratio:1;border:0;position:relative;transition:transform .12s,box-shadow .15s,filter .15s;border-radius:1px}
+    .tile.green{background:var(--green)}.tile.red{background:var(--red)}.tile.blue{background:var(--blue)}
+    .tile:hover{filter:brightness(.92);transform:translateY(-2px)}
+    .tile.selected{box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 5px #121212}
+    .tile.selected::after{content:'✓';position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:29px;font-weight:700;text-shadow:0 1px 2px #3339}
+    .feedback{text-align:center;font-size:12px;color:#555;min-height:22px;margin:21px 0 0}
+    .feedback.error{color:#9f302d}
+    .actions{display:flex;align-items:center;justify-content:center;gap:25px;flex-wrap:wrap;margin:7px 0 0}
+    .actions .primary{margin-top:8px}
+    .clipping-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:24px 0}
+    .clipping-card{background:var(--card);border:1px solid #d3d0c9;padding:12px;box-shadow:var(--shadow);cursor:pointer;transition:transform .16s,box-shadow .16s}
+    .clipping-card:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.09)}
+    .clipping-card img{display:block;width:100%;height:auto;border:1px solid #ece8dd;background:#eee}
+    .clipping-caption{margin-top:10px;font:12px/1.45 Georgia,serif;color:#444}
+    .instruction-box{border:1px solid var(--rule);background:#fbfbfa;padding:12px 14px;margin:18px 0 0;font:14px/1.6 Georgia,serif;color:#4c4c4c}
+    .sorting{display:flex;flex-direction:column;gap:14px;margin:22px 0 12px}
+    .sort-card{display:grid;grid-template-columns:44px minmax(92px,122px) 1fr;gap:14px;align-items:center;border:1px solid #cfcbc1;background:white;padding:12px;box-shadow:0 2px 0 #eceae4;cursor:grab}
+    .sort-card.dragging{opacity:.46;cursor:grabbing}
+    .sort-card.drag-over{outline:2px dashed #888;outline-offset:2px}
+    .sort-position{font:700 13px Georgia,serif;color:#5d5d5d;letter-spacing:.08em;text-transform:uppercase;text-align:center}
+    .sort-thumb img{display:block;width:100%;height:auto;border:1px solid #e6e1d7}
+    .sort-text h3{font:700 18px/1.22 Georgia,serif;margin:0 0 4px}
+    .sort-text p{font:13px/1.5 Georgia,serif;color:#555;margin:0}
+    .note{font:14px/1.55 Georgia,serif;color:#666}
+    .complete{max-width:610px;text-align:center;margin:85px auto}
+    .complete .check{font:normal 42px Georgia,serif;margin-bottom:20px}
+    .complete p{font:18px/1.7 Georgia,serif;color:#444}
+    footer{border-top:1px solid var(--ink);padding:22px 0 40px;display:flex;justify-content:space-between;gap:20px;color:#555;font-size:10px;letter-spacing:.09em;text-transform:uppercase}
+    .modal{position:fixed;inset:0;background:rgba(18,18,18,.72);display:grid;place-items:center;padding:24px;z-index:50}
+    .modal-panel{background:#fffdf9;max-width:min(950px,100%);max-height:90vh;padding:16px;border:1px solid #d8d5ce;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:auto}
+    .modal-top{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:12px}
+    .modal-top h3{font:700 18px Georgia,serif;margin:0}
+    .close-modal{border:1px solid #aaa;background:white;padding:8px 10px;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+    .modal img{display:block;max-width:100%;height:auto;margin:0 auto}
+    .clipping-card{cursor:grab;position:relative;text-align:left;user-select:none}
+    .clipping-card.dragging{opacity:.45;cursor:grabbing}
+    .clipping-card.drag-over,.clipping-card.chosen{outline:3px solid #333;outline-offset:2px}
+    .zoom-button{margin-top:10px;border:0;border-bottom:1px solid #777;background:none;padding:4px 0;font-size:12px}
+    .narrator-letter{max-width:630px;margin:42px auto 80px;padding:0 8px}
+    .narrator-letter .kicker{margin-bottom:26px}
+    .narrator-letter p{font:18px/1.75 Georgia,'Times New Roman',serif;color:#292929;margin:0 0 20px}
+    .sample-documents{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 38px}
+    .sample-document{min-height:160px;background:#f0ede6;border:1px solid #d8d1c5;padding:18px;display:flex;flex-direction:column;gap:15px;font:14px/1.35 Georgia,serif}
+    .sample-document small{color:#787065;font:10px Arial,sans-serif;letter-spacing:.08em}
+    .sample-document strong{font-size:18px}
+    .sample-document span{font-size:12px;color:#777}
+    .clue-list{font:16px/1.75 Georgia,serif;max-width:650px;margin:24px 0 38px;padding-left:25px}
+    .clue-list li{padding:5px 0}
+    .logic-grids{display:grid;grid-template-columns:1fr;gap:20px;margin:22px 0 35px}
+    .logic-panel{border:1px solid var(--rule);padding:15px;overflow-x:auto}
+    .logic-panel h3{font:700 16px Georgia,serif;margin:0 0 15px}
+    .logic-table{width:100%;border-collapse:collapse;table-layout:fixed}
+    .logic-table th{font-size:11px;font-weight:normal;padding:8px 3px;text-align:center;overflow-wrap:anywhere}
+    .logic-table th:first-child{width:27%;text-align:left}
+    .logic-table td{padding:3px}
+    .logic-cell{width:100%;min-height:40px;border:1px solid #c9c9c9;background:#fff;color:#1d1d1d;font-size:20px}
+    .logic-cell[data-state="1"]{background:#f4eeee;color:#a7342f}
+    .logic-cell[data-state="2"]{background:#eaf2ed;color:#236746}
+    .answer-fields{display:grid;gap:10px;margin:20px 0}
+    .answer-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:center;border-bottom:1px solid var(--rule);padding:12px 0;font:14px Georgia,serif}
+    .answer-row select{background:#fff;border:1px solid #bcbcbc;min-width:0;padding:10px;font:13px Arial,sans-serif}
+    @media(max-width:600px){.sample-documents{grid-template-columns:1fr}.sample-document{min-height:110px}.answer-row{grid-template-columns:1fr}.narrator-letter p{font-size:17px}}
+    [hidden]{display:none!important}
+    @media(max-width:700px){.wrapper{padding:0 18px}.masthead{padding:22px 0 18px}.hero{margin:64px auto 78px}.copy{font-size:15px}.level{margin:48px auto 72px}.grid{gap:7px}.targets{gap:6px}.target{padding:10px 4px;gap:5px;font-size:11px}.tile.selected::after{font-size:23px}footer{font-size:9px}.clipping-grid{grid-template-columns:1fr}.sort-card{grid-template-columns:34px 84px 1fr;gap:10px}.utility{font-size:9px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+
+    /* Dark editorial theme: preserve the original newspaper imagery as light archival paper. */
+    :root{color-scheme:dark;--paper:#111316;--ink:#f0eee9;--muted:#a5a6a8;--rule:#383b3f;--card:#1b1e22;--shadow:0 6px 20px rgba(0,0,0,.23)}
+    body{background:var(--paper);color:var(--ink)}
+    .topline{background:#dedbd5}
+    .utility,.masthead .tagline,nav span:last-child,.kicker,.assignment-title span,footer,.note,.feedback,.level-intro,.lead,.copy,.assignment p,.sort-position{color:#c0bfc0}
+    nav,.masthead,.assignment-title,footer{border-color:var(--rule)}
+    .hero{margin:65px auto 78px}
+    .level{margin:35px auto 68px}
+    .level-header{padding-bottom:22px}
+    .level h1{font-size:clamp(32px,4vw,46px);margin:10px 0 14px}
+    .level-intro{font-size:16px;line-height:1.55;max-width:600px}
+    .assignment{margin:22px auto 24px}
+    .assignment .task-line{font:16px/1.6 Georgia,serif;color:#ebe7df;margin:4px 0 22px}
+    .prototype-note{font:12px Arial,sans-serif;color:#aaa;display:block;margin-top:8px}
+    .primary{background:#edeae4;border-color:#edeae4;color:#121316}
+    .primary:hover{background:#c7c3bd}
+    .primary:disabled{background:#666;color:#dedede;border-color:#666}
+    .secondary{color:#d6d3ce;border-color:#989898}
+    .target{border-color:var(--rule)}
+    .tile.selected{box-shadow:inset 0 0 0 3px #151515,inset 0 0 0 5px white}
+    .clipping-grid{gap:15px;margin:19px 0}
+    .clipping-card{background:#202226;border-color:#3c3e42;padding:10px;color:#f2eee6;box-shadow:var(--shadow)}
+    .clipping-card img{border-color:#5e5e5e}
+    .clipping-card.drag-over,.clipping-card.chosen{outline-color:#f0ede7}
+    .clipping-caption{color:#d6d5d2}
+    .zoom-button{color:#d2d0cb;border-color:#a8a8a8}
+    .instruction-box{background:#1a1c20;border-color:var(--rule);color:#c6c5c2}
+    .narrator-letter{margin:26px auto 55px;max-width:650px}
+    .narrator-letter .kicker{margin-bottom:18px}
+    .narrator-letter p{color:#ece9e4;font-size:17px;line-height:1.55;margin-bottom:12px}
+    .narrator-letter .actions{justify-content:flex-start}
+    .sample-document{background:#202226;border-color:#3b3d42;color:#efece7}
+    .sample-document small,.sample-document span{color:#b5b2ac}
+    .logic-panel{border-color:var(--rule)}
+    .logic-cell{background:#202327;border-color:#52545a;color:#f4f1ec}
+    .logic-cell[data-state="1"]{background:#482e31;color:#ffd3cf}
+    .logic-cell[data-state="2"]{background:#244036;color:#aaf0ce}
+    .answer-row select{background:#202327;border-color:#63666b;color:#f1eee8}
+    .feedback.error{color:#ff9a95}
+    .complete p{color:#ddd8d0}
+    .modal{background:rgba(0,0,0,.86)}
+    .modal-panel{background:#24262a;border-color:#555;color:#f2f0ed}
+    .close-modal{background:#161719;border-color:#777;color:#eee}
+    @media(max-width:700px){.hero{margin:50px auto 65px}.level{margin:28px auto 55px}.level-intro{font-size:15px}.narrator-letter p{font-size:16px}}
+
+    /* Narrator reading screens and minimal in-game identity */
+    #mini-header{display:none;max-width:790px;margin:0 auto;padding:26px 0 13px;align-items:center;gap:10px;border-bottom:1px solid var(--rule)}
+    .mini-mark{font:700 27px/.9 Georgia,serif;letter-spacing:-.08em;color:#eae6df}
+    .mini-title{font:10px Arial,sans-serif;letter-spacing:.17em;color:#8f9399}
+    body.game-active #full-header{display:none}
+    body.game-active #mini-header{display:flex}
+    .reading-page{min-height:calc(100vh - 230px);display:flex;align-items:center;justify-content:center;padding:30px 0 75px}
+    .reading-inner{max-width:640px;width:100%;padding:0 10px}
+    .reading-eyebrow,.puzzle-label{font:11px Arial,sans-serif;font-weight:700;letter-spacing:.17em;color:#94989e}
+    .reading-inner h1{font:400 clamp(32px,4vw,48px)/1.18 Georgia,serif;letter-spacing:-.035em;margin:22px 0 27px;color:#f2f0ea}
+    .reading-copy p,.reading-inner .narrator-letter p{font:18px/1.7 Georgia,serif;color:#ddd9d1;margin:0 0 17px}
+    .reading-inner .narrator-letter{margin:0;max-width:none}
+    .reading-inner .narrator-letter .actions{justify-content:flex-start}
+    .reading-inner>.primary{margin-top:22px}
+    .level{margin-top:42px}
+    .puzzle-label{margin-bottom:12px}
+    .level .assignment{margin-top:16px}
+    @media(max-width:700px){.reading-page{min-height:65vh;padding:35px 0 60px}.reading-copy p,.reading-inner .narrator-letter p{font-size:16px;line-height:1.65}}
+
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <div class="wrapper">
+    <header id="full-header">
+      <div class="utility"><span>An independent publishing platform</span><span>Established 1985</span></div>
+      <div class="masthead"><div class="brand">The Meridian</div><div class="tagline">Stories worth preserving</div></div>
+      <nav aria-label="Site navigation"><span>Research &amp; Preservation</span><span>Independent since 1985</span></nav>
+    </header>
+    <div id="mini-header" aria-label="The Meridian"><span class="mini-mark">M.</span><span class="mini-title">THE MERIDIAN</span></div>
+    <main>
+      <section id="home" class="hero" aria-labelledby="home-title">
+        <div class="kicker">An invitation to participate</div>
+        <h1 id="home-title">Help us bring a forgotten story back to life.</h1>
+        <div class="small-rule"></div>
+        <p class="lead">Hi! Thanks for visiting our website.</p>
+        <p class="copy">We are an independent publishing platform established in 1985 by U.N. Tor.</p>
+        <p class="copy">We recently retrieved research documents compiled by our storytelling team while covering a sensational case from the 1990s. The case spanned multiple years and produced hundreds of documents, which we are currently sorting through.</p>
+        <p class="copy">We need your help to make this revival project a success. More details will be shared as they become available.</p>
+        <button id="get-started" class="primary" type="button">Get started</button>
+      </section>
+
+<section id="read-one" class="reading-page" aria-label="Assessment one introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT one · A NOTE FROM YOUR GUIDE</div><h1>A brief assessment.</h1><div class="reading-copy"><p>These are some basic tests to help us make sure that you are well suited for the task at hand!</p></div><button id="begin-one" class="primary" type="button">Let's begin</button></div></section>
+      <section id="level-one" class="level" aria-labelledby="level-title" hidden>
+        <div class="puzzle-label">01 / COLOUR IDENTIFICATION</div>
+        <div class="assignment">
+          <p class="task-line">Select <strong>5 green, 3 red, and 1 blue</strong> tiles. Click again to deselect.</p>
+          <div class="targets" aria-label="Required tile selections">
+            <div class="target"><span class="swatch green"></span><span>5 green</span></div>
+            <div class="target"><span class="swatch red"></span><span>3 red</span></div>
+            <div class="target"><span class="swatch blue"></span><span>1 blue</span></div>
+          </div>
+          <div id="tile-grid" class="grid" role="group" aria-label="Grid of coloured tiles"></div>
+          <p id="feedback" class="feedback" role="status" aria-live="polite">Select the requested tiles to continue.</p>
+          <div class="actions"><button id="reset" class="secondary" type="button">Clear selection</button><button id="verify" class="primary" type="button">Submit selection</button></div>
+        </div>
+      </section>
+
+<section id="read-two" class="reading-page" aria-label="Assessment two introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT two · A NOTE FROM YOUR GUIDE</div><h1>Sort by dates.</h1><div class="reading-copy"><p>Hi! I thought this would be a good next test.</p><p>Take a look at these old articles and <strong>SORT</strong> them by date.</p><p>I know it’s simple, but I need to make sure you can read through these as well!</p></div><button id="begin-two" class="primary" type="button">Let's take a look</button></div></section>
+      <section id="level-two" class="level" aria-labelledby="level-two-title" hidden>
+<div class="puzzle-label">02 / SORT BY DATES</div>
+        <div class="assignment">
+          <p class="task-line">Drag the clippings into order, <strong>oldest to newest</strong>. Click “Enlarge” to inspect a clipping.</p>
+          <div class="clipping-grid" id="clipping-grid" aria-label="The Meridian newspaper clippings"></div>
+          <p class="feedback" id="sort-feedback" role="status" aria-live="polite">Drag the clippings into chronological order.</p>
+          <div class="actions"><button class="secondary" type="button" id="sort-reset">Reset order</button><button class="primary" type="button" id="sort-verify">Submit order</button></div>
+        </div>
+      </section>
+
+<section id="read-three" class="reading-page" aria-label="Assessment 03 introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT 03 · A NOTE FROM YOUR GUIDE</div>        <div id="narrator-intro" class="narrator-letter">
+          <h1>The Missing Editions</h1>
+          <p>Amazing work so far! I think you're really getting the hang of this.</p>
+          <p>Most people I've tested so far don't pass all the assessments. I really hope you do, though!</p>
+          <p>Anyway, this one's a little different.</p>
+          <p>We recovered a few articles whose original editorial records seem to have gone missing. Luckily, we still have some notes from the editorial team!</p>
+          <p>All you need to do is figure out who wrote which article and where each one belongs.</p>
+          <p>I've added a little grid for you, by the way. I find it helps to cross things out when there are too many possibilities. You don't have to use it, though!</p>
+          <p>Take your time. I think you'll be good at this.</p>
+          <div class="actions"><button type="button" class="primary" id="begin-three">Let's take a look</button></div>
+        </div>
+</div></section>
+      <section id="level-three" class="level" aria-labelledby="level-three-title" hidden>
+        <div class="puzzle-label">03 / THE MISSING EDITIONS</div>
+        <div id="deduction-workspace" class="assignment">
+          <button id="read-guide" class="secondary" type="button">Read your guide's message again</button>
+          <p class="task-line">Match each article to a reporter and newspaper section. <span class="prototype-note">Sample puzzle; original documents coming later.</span></p>
+          <div class="sample-documents">
+            <div class="sample-document"><small>ARTICLE A</small><strong>Town Council Approves New Park</strong><span>Byline missing · Section unknown</span></div>
+            <div class="sample-document"><small>ARTICLE B</small><strong>Local School Celebrates Centenary</strong><span>Byline missing · Section unknown</span></div>
+            <div class="sample-document"><small>ARTICLE C</small><strong>Community Theatre Reopens</strong><span>Byline missing · Section unknown</span></div>
+          </div>
+          <div class="assignment-title"><h2>Recovered editorial notes</h2><span>Sample clues</span></div>
+          <ol class="clue-list"><li>Robert Hayes did not write the town council report.</li><li>The education article was about the school's centenary.</li><li>Margaret Ellis worked on the Arts &amp; Culture section.</li><li>Helen Brooks did not write the theatre article.</li><li>The town council report was filed under Civic Affairs.</li></ol>
+          <div class="assignment-title"><h2>Your deduction grid</h2><span>Tap: blank → × → ✓</span></div>
+          <div id="logic-grids" class="logic-grids"></div>
+          <div class="assignment-title" style="margin-top:30px"><h2>Final answer</h2><span>Temporary demo</span></div>
+          <div id="answer-fields" class="answer-fields"></div>
+          <p class="feedback" id="three-feedback" role="status">Use the clues to reconstruct the missing records.</p>
+          <div class="actions"><button class="primary" type="button" id="check-three">Submit deduction</button></div>
+        </div>
+      </section>
+      <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
+        <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button>
+      </section>
+    </main>
+    <footer><span>© The Meridian · Independent Publishing</span><span>Established 1985</span></footer>
+  </div>
+
+  <div id="modal" class="modal" hidden aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-top"><h3 id="modal-title">Clipping</h3><button class="close-modal" id="close-modal" type="button">Close</button></div>
+      <img id="modal-image" alt="">
+    </div>
+  </div>
+
+  <script>
+    const requirements = {green:5,red:3,blue:1};
+    const tileColors = [
+      'green','blue','red','green',
+      'red','green','blue','red',
+      'blue','red','green','blue',
+      'green','blue','red','green'
+    ];
+
+    const articles=[
+      {id:'library',date:'MONDAY, SEPTEMBER 14, 1992',order:19920914,title:'Town Library Reopens After Six-Month Renovation',image:'assets/library.jpg'},
+      {id:'fair',date:'SATURDAY, JUNE 3, 1995',order:19950603,title:'Annual Summer Fair Draws Record Crowds',image:'assets/fair.jpg'},
+      {id:'bus',date:'THURSDAY, FEBRUARY 21, 1991',order:19910221,title:'New Bus Route Approved Following Residents’ Petition',image:'assets/bus.jpg'},
+      {id:'science',date:'MONDAY, NOVEMBER 8, 1993',order:19931108,title:'Local Students Win Regional Science Competition',image:'assets/science.jpg'}
+    ];
+
+    const initialOrder=['fair','science','library','bus'];
+    let sortOrder=[...initialOrder];
+    let draggedId=null;
+
+    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),complete:document.getElementById('completed')};
+    const grid=document.getElementById('tile-grid');
+    const selected=new Set();
+    const feedback=document.getElementById('feedback');
+    const verify=document.getElementById('verify');
+    const sortFeedback=document.getElementById('sort-feedback');
+    const modal=document.getElementById('modal');
+    const modalTitle=document.getElementById('modal-title');
+    const modalImage=document.getElementById('modal-image');
+
+    function show(section){
+      document.body.classList.toggle('game-active',section!=='home');
+      Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
+      window.scrollTo({top:0,left:0,behavior:'instant'});
+    }
+
+    function counts(){const c={green:0,red:0,blue:0};selected.forEach(index=>c[tileColors[index]]++);return c;}
+
+    function update(){
+      feedback.classList.remove('error');
+      feedback.textContent='Select the requested tiles, then submit your selection.';
+    }
+
+    function reset(){
+      selected.clear();
+      grid.querySelectorAll('.tile').forEach(tile=>{tile.classList.remove('selected');tile.setAttribute('aria-pressed','false')});
+      update();
+    }
+
+    tileColors.forEach((color,index)=>{
+      const tile=document.createElement('button');
+      tile.type='button';
+      tile.className=`tile ${color}`;
+      tile.setAttribute('aria-label',`${color} tile ${index+1}`);
+      tile.setAttribute('aria-pressed','false');
+      tile.addEventListener('click',()=>{
+        if(selected.has(index)){
+          selected.delete(index);tile.classList.remove('selected');tile.setAttribute('aria-pressed','false');
+        }else{
+          selected.add(index);tile.classList.add('selected');tile.setAttribute('aria-pressed','true');
+        }
+        update();
+      });
+      grid.appendChild(tile);
+    });
+
+    function getArticle(id){return articles.find(a=>a.id===id)}
+
+    function openModal(article){
+      modalTitle.textContent=article.title;
+      modalImage.src=article.image;
+      modalImage.alt=`Enlarged clipping: ${article.title}`;
+      modal.hidden=false;
+      modal.setAttribute('aria-hidden','false');
+    }
+
+    function closeModal(){
+      modal.hidden=true;
+      modal.setAttribute('aria-hidden','true');
+      modalImage.src='';
+    }
+
+    function renderClippings(){
+      const host=document.getElementById('clipping-grid');
+      host.replaceChildren();
+      sortOrder.forEach((id,index)=>{
+        const article=getArticle(id);
+        const card=document.createElement('article');
+        card.className='clipping-card';card.dataset.id=id;card.draggable=true;
+        card.setAttribute('aria-label',`Position ${index+1}: ${article.title}. Drag to rearrange`);
+        card.tabIndex=0;
+        card.addEventListener('dragstart',e=>{draggedId=id;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',id)});
+        card.addEventListener('dragend',()=>{draggedId=null;document.querySelectorAll('.clipping-card').forEach(x=>x.classList.remove('dragging','drag-over'))});
+        card.addEventListener('dragover',e=>{e.preventDefault();card.classList.add('drag-over')});
+        card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));
+        card.addEventListener('drop',e=>{e.preventDefault();reorderList(id)});
+        // Touch-friendly fallback: select one card then tap another card to move it.
+        card.addEventListener('click',e=>{if(e.target.closest('button'))return;if(selectedClipping===null){selectedClipping=id;card.classList.add('chosen')}else{const from=selectedClipping;selectedClipping=null;moveCard(from,id)}});
+        const zoom=document.createElement('button');zoom.type='button';zoom.className='zoom-button';zoom.textContent='View larger ↗';zoom.addEventListener('click',()=>openModal(article));
+        const img=document.createElement('img');img.src=article.image;img.alt=`Scanned article: ${article.title}`;img.draggable=false;
+        const caption=document.createElement('div');caption.className='clipping-caption';caption.textContent=`${String(index+1).padStart(2,'0')} · ${article.title}`;
+        card.append(img,caption,zoom);host.appendChild(card);
+      });
+    }
+    let selectedClipping=null;
+    function moveCard(source,target){
+      if(source!==target){const from=sortOrder.indexOf(source),to=sortOrder.indexOf(target);if(from>=0&&to>=0){sortOrder.splice(from,1);sortOrder.splice(to,0,source)}}
+      selectedClipping=null;renderClippings();sortFeedback.classList.remove('error');sortFeedback.textContent='Order updated. Submit when you’re ready.';
+    }
+    function reorderList(target){if(draggedId)moveCard(draggedId,target)}
+    function isCorrectOrder(){
+      for(let i=1;i<sortOrder.length;i++){
+        if(getArticle(sortOrder[i-1]).order>getArticle(sortOrder[i]).order) return false;
+      }
+      return true;
+    }
+
+    document.getElementById('get-started').addEventListener('click',()=>{reset();show('readOne')});
+    document.getElementById('begin-one').addEventListener('click',()=>show('level'));
+    document.getElementById('begin-two').addEventListener('click',()=>show('two'));
+    document.getElementById('reset').addEventListener('click',reset);
+    verify.addEventListener('click',()=>{if(Object.keys(requirements).every(color=>counts()[color]===requirements[color])){show('readTwo')}else{feedback.classList.add('error');feedback.textContent='Not quite! Have another look and try again.'}});
+    document.getElementById('return-home').addEventListener('click',()=>{reset();sortOrder=[...initialOrder];renderClippings();show('home')});
+    document.getElementById('sort-reset').addEventListener('click',()=>{
+      sortOrder=[...initialOrder];
+      renderClippings();
+      sortFeedback.textContent='Drag the clippings into chronological order.';
+      sortFeedback.classList.remove('error');
+    });
+    document.getElementById('sort-verify').addEventListener('click',()=>{
+      if(isCorrectOrder()){
+        show('readThree');
+      }else{
+        sortFeedback.textContent='Ah, not quite! These old scans aren’t always easy to read. Try once more?';
+        sortFeedback.classList.add('error');
+      }
+    });
+    document.getElementById('close-modal').addEventListener('click',closeModal);
+    modal.addEventListener('click',e=>{if(e.target===modal) closeModal()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape' && !modal.hidden) closeModal()});
+
+    renderClippings();
+    const sampleArticles=['Town Council','School Centenary','Theatre Reopening'];
+    const sampleReporters=['Helen Brooks','Robert Hayes','Margaret Ellis'];
+    const sampleSections=['Civic Affairs','Education','Arts & Culture'];
+    const pairs=[['Articles × Reporters',sampleArticles,sampleReporters],['Articles × Sections',sampleArticles,sampleSections],['Reporters × Sections',sampleReporters,sampleSections]];
+    function renderLogicGrid(){
+      const host=document.getElementById('logic-grids');host.replaceChildren();
+      pairs.forEach(([name,rows,columns])=>{
+        const panel=document.createElement('div');panel.className='logic-panel';
+        const heading=document.createElement('h3');heading.textContent=name;
+        const table=document.createElement('table');table.className='logic-table';
+        const tr=document.createElement('tr');tr.appendChild(document.createElement('th'));
+        columns.forEach(c=>{const th=document.createElement('th');th.textContent=c;tr.appendChild(th)});table.appendChild(tr);
+        rows.forEach(r=>{const row=document.createElement('tr');const th=document.createElement('th');th.textContent=r;row.appendChild(th);columns.forEach(c=>{const td=document.createElement('td');const b=document.createElement('button');b.type='button';b.className='logic-cell';b.setAttribute('aria-label',`${r} and ${c}: unmarked`);b.addEventListener('click',()=>{const states=['','×','✓'];const next=(states.indexOf(b.textContent)+1)%3;b.textContent=states[next];b.dataset.state=String(next);b.setAttribute('aria-label',`${r} and ${c}: ${['unmarked','ruled out','confirmed'][next]}`)});td.appendChild(b);row.appendChild(td)});table.appendChild(row)});
+        panel.append(heading,table);host.appendChild(panel);
+      });
+    }
+    function renderAnswers(){
+      const host=document.getElementById('answer-fields');
+      sampleArticles.forEach((article,i)=>{
+        const row=document.createElement('div');row.className='answer-row';
+        const title=document.createElement('strong');title.textContent=article;
+        row.append(title);
+        [sampleReporters,sampleSections].forEach((options,j)=>{const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose section':'Choose reporter';select.appendChild(empty);options.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
+        host.appendChild(row);
+      });
+    }
+    const intro=document.getElementById('narrator-intro'),workspace=document.getElementById('deduction-workspace');
+    document.getElementById('begin-three').addEventListener('click',()=>show('three'));
+    document.getElementById('read-guide').addEventListener('click',()=>show('readThree'));
+    document.getElementById('check-three').addEventListener('click',()=>{
+      const selections=[...document.querySelectorAll('#answer-fields select')].map(x=>x.value);
+      const correct=['Helen Brooks','Civic Affairs','Robert Hayes','Education','Margaret Ellis','Arts & Culture'];
+      const f=document.getElementById('three-feedback');
+      if(selections.every((v,i)=>v===correct[i])){show('complete')}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
+    });
+    renderLogicGrid();renderAnswers();
+    renderClippings();
+    update();
+  </script>
+</body>
+</html>
