@@ -178,6 +178,26 @@
     .level .assignment{margin-top:16px}
     @media(max-width:700px){.reading-page{min-height:65vh;padding:35px 0 60px}.reading-copy p,.reading-inner .narrator-letter p{font-size:16px;line-height:1.65}}
 
+
+    .archive-roster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:23px 0}
+    .roster-card,.clue-card{background:#ece7dc;color:#27231e;border:1px solid #bfb7a9;padding:16px}
+    .roster-card{display:flex;flex-direction:column;gap:9px;min-height:155px}
+    .roster-symbol{font:34px Georgia,serif;color:#6b5b49}
+    .roster-card small,.clue-card span{font:700 10px Arial,sans-serif;letter-spacing:.14em;color:#786d5d}
+    .roster-card strong{font:700 19px Georgia,serif}
+    .roster-card>span{font:12px Georgia,serif;color:#615c53}
+    .puzzle-options{font:13px/1.7 Georgia,serif!important;color:#ccc6bb!important}
+    .clue-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0 30px}
+    .clue-card p{color:#28231c!important;font:15px/1.55 Georgia,serif!important;margin:9px 0 0!important}
+    .logic-grids{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .logic-panel{background:#ebe5d9;color:#29251f;border:1px solid #bcb4a6}
+    .logic-panel h3{font:700 12px Arial,sans-serif;letter-spacing:.08em}
+    .logic-table th{color:#40372e}
+    .logic-cell{background:#faf7ef;color:#222;border-color:#aaa49a}
+    .logic-cell[data-state="1"]{background:#f0dfda;color:#8e322d}
+    .logic-cell[data-state="2"]{background:#dce8dd;color:#245b3d}
+    .answer-row select{background:#e8e3da;color:#27221c;border:1px solid #958d81}
+    @media(max-width:700px){.archive-roster{grid-template-columns:1fr 1fr}.clue-cards,.logic-grids{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -234,7 +254,7 @@
           <p>Most people I've tested so far don't pass all the assessments. I really hope you do, though!</p>
           <p>Anyway, this one's a little different.</p>
           <p>We recovered a few articles whose original editorial records seem to have gone missing. Luckily, we still have some notes from the editorial team!</p>
-          <p>All you need to do is figure out who wrote which article and where each one belongs.</p>
+          <p>All you need to do is figure out who wrote each article and when it was originally published.</p>
           <p>I've added a little grid for you, by the way. I find it helps to cross things out when there are too many possibilities. You don't have to use it, though!</p>
           <p>Take your time. I think you'll be good at this.</p>
           <div class="actions"><button type="button" class="primary" id="begin-three">Let's take a look</button></div>
@@ -244,17 +264,25 @@
         <div class="puzzle-label">03 / THE MISSING EDITIONS</div>
         <div id="deduction-workspace" class="assignment">
           <button id="read-guide" class="secondary" type="button">Read your guide's message again</button>
-          <p class="task-line">Match each article to a reporter and newspaper section. <span class="prototype-note">Sample puzzle; original documents coming later.</span></p>
-          <div class="sample-documents">
-            <div class="sample-document"><small>ARTICLE A</small><strong>Town Council Approves New Park</strong><span>Byline missing · Section unknown</span></div>
-            <div class="sample-document"><small>ARTICLE B</small><strong>Local School Celebrates Centenary</strong><span>Byline missing · Section unknown</span></div>
-            <div class="sample-document"><small>ARTICLE C</small><strong>Community Theatre Reopens</strong><span>Byline missing · Section unknown</span></div>
+          <p class="task-line">Match each recovered story to its reporter and original publication year. Use each reporter and year once.</p>
+          <div class="archive-roster">
+            <article class="roster-card"><div class="roster-symbol">⌁</div><small>ARTICLE 01</small><strong>Pesticides</strong><span>Research &amp; environment</span></article>
+            <article class="roster-card"><div class="roster-symbol">✧</div><small>ARTICLE 02</small><strong>School Debate Victory</strong><span>Education &amp; community</span></article>
+            <article class="roster-card"><div class="roster-symbol">▤</div><small>ARTICLE 03</small><strong>Library Renovation</strong><span>Local affairs</span></article>
           </div>
-          <div class="assignment-title"><h2>Recovered editorial notes</h2><span>Sample clues</span></div>
-          <ol class="clue-list"><li>Robert Hayes did not write the town council report.</li><li>The education article was about the school's centenary.</li><li>Margaret Ellis worked on the Arts &amp; Culture section.</li><li>Helen Brooks did not write the theatre article.</li><li>The town council report was filed under Civic Affairs.</li></ol>
+          <p class="puzzle-options"><strong>Reporters:</strong> Harriet · Jane · Elliot &nbsp;&nbsp; <strong>Years:</strong> 1991 · 1994 · 1998</p>
+          <div class="assignment-title"><h2>Recovered editorial notes</h2><span>Six clues</span></div>
+          <div class="clue-cards">
+            <article class="clue-card"><span>01</span><p>The article concerning pesticides was revised three years after its original publication, following new research findings.</p></article>
+            <article class="clue-card"><span>02</span><p>Jane covered a story about an achievement involving local students.</p></article>
+            <article class="clue-card"><span>03</span><p>Harriet's article was published before Jane's.</p></article>
+            <article class="clue-card"><span>04</span><p>The library renovation report was written by a journalist born on March 2, 1979.</p></article>
+            <article class="clue-card"><span>05</span><p>Elliot's article was published in the final year listed in these records.</p></article>
+            <article class="clue-card"><span>06</span><p>The pesticides report appeared before the library renovation article.</p></article>
+          </div>
           <div class="assignment-title"><h2>Your deduction grid</h2><span>Tap: blank → × → ✓</span></div>
           <div id="logic-grids" class="logic-grids"></div>
-          <div class="assignment-title" style="margin-top:30px"><h2>Final answer</h2><span>Temporary demo</span></div>
+          <div class="assignment-title" style="margin-top:30px"><h2>Final answer</h2><span>Submit all three matches</span></div>
           <div id="answer-fields" class="answer-fields"></div>
           <p class="feedback" id="three-feedback" role="status">Use the clues to reconstruct the missing records.</p>
           <div class="actions"><button class="primary" type="button" id="check-three">Submit deduction</button></div>
@@ -416,10 +444,10 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape' && !modal.hidden) closeModal()});
 
     renderClippings();
-    const sampleArticles=['Town Council','School Centenary','Theatre Reopening'];
-    const sampleReporters=['Helen Brooks','Robert Hayes','Margaret Ellis'];
-    const sampleSections=['Civic Affairs','Education','Arts & Culture'];
-    const pairs=[['Articles × Reporters',sampleArticles,sampleReporters],['Articles × Sections',sampleArticles,sampleSections],['Reporters × Sections',sampleReporters,sampleSections]];
+    const sampleArticles=['Pesticides','School Debate Victory','Library Renovation'];
+    const sampleReporters=['Harriet','Jane','Elliot'];
+    const sampleSections=['1991','1994','1998'];
+    const pairs=[['Stories × Reporters',sampleArticles,sampleReporters],['Stories × Years',sampleArticles,sampleSections],['Reporters × Years',sampleReporters,sampleSections]];
     function renderLogicGrid(){
       const host=document.getElementById('logic-grids');host.replaceChildren();
       pairs.forEach(([name,rows,columns])=>{
@@ -428,17 +456,16 @@
         const table=document.createElement('table');table.className='logic-table';
         const tr=document.createElement('tr');tr.appendChild(document.createElement('th'));
         columns.forEach(c=>{const th=document.createElement('th');th.textContent=c;tr.appendChild(th)});table.appendChild(tr);
-        rows.forEach(r=>{const row=document.createElement('tr');const th=document.createElement('th');th.textContent=r;row.appendChild(th);columns.forEach(c=>{const td=document.createElement('td');const b=document.createElement('button');b.type='button';b.className='logic-cell';b.setAttribute('aria-label',`${r} and ${c}: unmarked`);b.addEventListener('click',()=>{const states=['','×','✓'];const next=(states.indexOf(b.textContent)+1)%3;b.textContent=states[next];b.dataset.state=String(next);b.setAttribute('aria-label',`${r} and ${c}: ${['unmarked','ruled out','confirmed'][next]}`)});td.appendChild(b);row.appendChild(td)});table.appendChild(row)});
+        rows.forEach(r=>{const row=document.createElement('tr');const th=document.createElement('th');th.textContent=r;row.appendChild(th);columns.forEach(c=>{const td=document.createElement('td');const b=document.createElement('button');b.type='button';b.className='logic-cell';b.setAttribute('aria-label',r+' and '+c+': unmarked');b.addEventListener('click',()=>{const states=['','×','✓'];const next=(states.indexOf(b.textContent)+1)%3;b.textContent=states[next];b.dataset.state=String(next);b.setAttribute('aria-label',r+' and '+c+': '+['unmarked','ruled out','confirmed'][next])});td.appendChild(b);row.appendChild(td)});table.appendChild(row)});
         panel.append(heading,table);host.appendChild(panel);
       });
     }
     function renderAnswers(){
-      const host=document.getElementById('answer-fields');
+      const host=document.getElementById('answer-fields');host.replaceChildren();
       sampleArticles.forEach((article,i)=>{
         const row=document.createElement('div');row.className='answer-row';
-        const title=document.createElement('strong');title.textContent=article;
-        row.append(title);
-        [sampleReporters,sampleSections].forEach((options,j)=>{const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose section':'Choose reporter';select.appendChild(empty);options.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
+        const title=document.createElement('strong');title.textContent=article;row.append(title);
+        [sampleReporters,sampleSections].forEach((options,j)=>{const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose year':'Choose reporter';select.appendChild(empty);options.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
         host.appendChild(row);
       });
     }
@@ -447,7 +474,7 @@
     document.getElementById('read-guide').addEventListener('click',()=>show('readThree'));
     document.getElementById('check-three').addEventListener('click',()=>{
       const selections=[...document.querySelectorAll('#answer-fields select')].map(x=>x.value);
-      const correct=['Helen Brooks','Civic Affairs','Robert Hayes','Education','Margaret Ellis','Arts & Culture'];
+      const correct=['Harriet','1991','Jane','1994','Elliot','1998'];
       const f=document.getElementById('three-feedback');
       if(selections.every((v,i)=>v===correct[i])){show('complete')}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
     });
