@@ -1178,7 +1178,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     function ensureFourMap(){if(fourLeaflet){fourLeaflet.invalidateSize();return}if(!window.L){document.getElementById('four-feedback').textContent='The map could not load. Please refresh.';return}
       const canvas=[[0,0],[750,1000]];
       fourLeaflet=L.map('four-map',{crs:L.CRS.Simple,minZoom:-1.4,maxZoom:2,zoomSnap:.25,scrollWheelZoom:false,zoomControl:true,attributionControl:false,maxBounds:[[-60,-60],[810,1060]],maxBoundsViscosity:1});
-      L.imageOverlay('meridian-town-map.png',canvas,{interactive:false,alt:'Meridian County fictional street survey'}).addTo(fourLeaflet);
+      L.imageOverlay('meridian-town-map.png?v=b1b11cdbe0d0',canvas,{interactive:false,alt:'Meridian County fictional street survey'}).addTo(fourLeaflet);
       fourLeaflet.fitBounds(canvas,{padding:[8,8]});
       fourLeaflet.on('click',event=>updateFourMarker(event.latlng.lat,event.latlng.lng));
       requestAnimationFrame(()=>fourLeaflet.invalidateSize());
