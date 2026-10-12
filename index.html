@@ -618,6 +618,26 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 @media(max-width:700px){
   #mini-header,.wrapper>footer{width:calc(100vw - 36px)!important}
 }
+
+/* Short introduction screens occupy precisely one viewport, without dead scrolling. */
+@media(min-width:900px) and (min-height:651px){
+ body:has(#read-one:not([hidden])) .wrapper,
+ body:has(#read-two:not([hidden])) .wrapper{
+   height:100vh;height:100dvh;min-height:0;
+ }
+ body:has(#read-one:not([hidden])) .wrapper>main,
+ body:has(#read-two:not([hidden])) .wrapper>main{
+   flex:1 1 auto;min-height:0;display:flex;flex-direction:column;
+ }
+ #read-one.reading-page,#read-two.reading-page{
+   flex:1 1 auto;min-height:0;height:auto;padding:12px 0;
+   align-items:center;
+ }
+ body:has(#read-one:not([hidden])) .wrapper>footer,
+ body:has(#read-two:not([hidden])) .wrapper>footer{
+   flex-shrink:0;padding-bottom:22px;
+ }
+}
   </style>
 </head>
 <body>
