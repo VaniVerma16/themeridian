@@ -665,6 +665,11 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .archived-article-panel .close-modal{color:#242321;border-color:#a5a093}
 .archived-article-body h2{color:#242321}
 .archived-article-body p{color:#282622}
+
+/* Level 3 previews are headline-only. Never show full article scans in cards. */
+#level-three .archive-roster .archive-headline-image,
+#level-three .archive-roster img{display:none!important}
+#level-three .archive-roster .archive-headline-text{display:block!important}
   </style>
 </head>
 <body>
