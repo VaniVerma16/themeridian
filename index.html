@@ -472,6 +472,8 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
 #mini-header{width:100%;max-width:none;margin-left:0;margin-right:0}
 #level-three .level-three-workbench{margin-top:38px}
 @media(max-width:700px){#level-three .level-three-workbench{margin-top:28px}}
+#transition-flash{position:fixed;inset:0;z-index:9999;background:#fff;opacity:0;visibility:hidden;pointer-events:none}
+#transition-flash.visible{opacity:1;visibility:visible}
   </style>
 </head>
 <body>
@@ -491,7 +493,7 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
         <option value="home">Home</option><option value="readOne">Level 1 intro</option><option value="level">Level 1 puzzle</option>
         <option value="readTwo">Level 2 intro</option><option value="two">Level 2 puzzle</option>
         <option value="readThree">Level 3 intro</option><option value="three">Level 3 puzzle</option>
-        <option value="complete">End screen</option>
+        <option value="four">Level 4 test</option><option value="complete">End screen</option>
       </select>
     </aside>
     <main>
@@ -583,6 +585,10 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
           <div class="actions"><button class="primary" type="button" id="check-three">Submit deduction</button></div>
         </div>
       </section>
+      <section id="level-four" class="level" aria-label="Assessment 04 test" hidden>
+        <div class="puzzle-label">04 / ARCHIVE TEST</div>
+        <div class="assignment"><h1 style="font-size:34px;font-weight:normal">Assessment 04</h1><p>Level 4 is not ready yet.</p><p>This page is here to test the transition.</p><button class="primary" type="button" id="four-finish">Continue</button></div>
+      </section>
       <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
         <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button>
       </section>
@@ -590,6 +596,7 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
     <footer><span>© The Meridian · Independent Publishing</span><span>Established 1985</span></footer>
   </div>
 
+  <div id="transition-flash" aria-hidden="true"></div>
   <div id="modal" class="modal" hidden aria-hidden="true">
     <div class="modal-panel">
       <div class="modal-top"><h3 id="modal-title">Clipping</h3><button class="close-modal" id="close-modal" type="button">Close</button></div>
@@ -617,7 +624,7 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
     let sortOrder=[...initialOrder];
     let draggedId=null;
 
-    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),complete:document.getElementById('completed')};
+    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),complete:document.getElementById('completed')};
     const grid=document.getElementById('tile-grid');
     const selected=new Set();
     const feedback=document.getElementById('feedback');
@@ -788,9 +795,22 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
       const selections=[...document.querySelectorAll('#answer-fields select')].map(x=>x.value);
       const correct=['Harriet','1991','Jane','1994','Elliot','1998'];
       const f=document.getElementById('three-feedback');
-      if(selections.every((v,i)=>v===correct[i])){show('complete')}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
+      if(selections.every((v,i)=>v===correct[i])){flashToLevelFour()}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
     });
     document.getElementById('dev-level').addEventListener('change',e=>show(e.target.value));
+    document.getElementById('four-finish').addEventListener('click',()=>show('complete'));
+    let flashPending=false;
+    function flashToLevelFour(){
+      if(flashPending)return;
+      flashPending=true;
+      const overlay=document.getElementById('transition-flash');
+      overlay.classList.add('visible');
+      window.setTimeout(()=>{
+        show('four');
+        overlay.classList.remove('visible');
+        flashPending=false;
+      },85);
+    }
     renderLogicGrid();renderAnswers();
     renderClippings();
     update();
