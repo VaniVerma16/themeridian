@@ -765,6 +765,21 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .four-editor-note span{display:block;color:#574b34;font-size:12px;font-weight:800;letter-spacing:.10em;margin-bottom:7px}
 .four-editor-note p{color:#35302a!important;margin:0!important;font-size:15px!important;line-height:1.45!important}
 .four-editor-note strong{font-weight:800}
+
+/* Level 4: a continuous, compact working surface without decorative separators. */
+#level-four .four-topline{border-bottom:0!important;padding-bottom:0!important;margin-bottom:8px!important}
+#level-four .four-date,#level-four .four-bearing{border-top:0!important}
+#level-four .four-photo-caption,#level-four .four-counter{display:none!important}
+#level-four .four-workspace{gap:18px}
+#level-four .four-bearing{margin-top:10px}
+#level-four .four-map-head{margin-bottom:5px}
+#five-interference{display:none;position:fixed;inset:0;z-index:10000;background:#f4f0e9;align-items:center;justify-content:center;text-align:center;padding:28px}
+#five-interference.active{display:flex;animation:five-glitch 2s steps(1,end) both}
+#five-interference span{color:#9d2928;font-family:Georgia,serif;font-size:clamp(28px,5vw,65px);font-weight:bold;letter-spacing:-.015em}
+@keyframes five-glitch{0%,12%,28%,47%,70%,91%{background:#f4f0e9}8%,22%,43%,65%,87%{background:#8b1b20}8%,22%,43%,65%,87%{color:#fff}8%,22%,43%,65%,87%{}}
+#five-interference.active span{animation:five-words 2s steps(1,end) both}
+@keyframes five-words{0%,12%,28%,47%,70%,91%{color:#9d2928}8%,22%,43%,65%,87%{color:#fff}}
+@media(prefers-reduced-motion:reduce){#five-interference.active,#five-interference.active span{animation:none;background:#f4f0e9;color:#9d2928}}
   </style>
 </head>
 <body>
@@ -784,7 +799,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         <option value="home">Home</option><option value="readOne">Level 1 intro</option><option value="level">Level 1 puzzle</option>
         <option value="readTwo">Level 2 intro</option><option value="two">Level 2 puzzle</option>
         <option value="readThree">Level 3 intro</option><option value="three">Level 3 puzzle</option>
-        <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="complete">End screen</option>
+        <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="readFive">Level 5 intro</option><option value="five">Level 5 puzzle</option><option value="complete">End screen</option>
       </select>
     </aside>
     <main>
@@ -894,14 +909,14 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       </section>
       <section id="level-four" class="level" aria-label="Photographic archive" hidden>
         <div class="assignment four-assignment">
-          <div class="four-topline"><div><h1>A Life in Three Acts</h1></div><div id="four-counter" class="four-counter">PHOTOGRAPH 01 / 03</div></div>
+          <div class="four-topline"><div><h1>A Life in Three Acts</h1></div></div>
           <div class="four-workspace">
             <div class="four-photograph-col">
               <div class="four-photo-frame" id="four-photo-frame">
                 <img id="four-photo-img" alt="Recovered archive photograph" hidden>
                 <div id="four-photo-placeholder" class="four-photo-placeholder"><span>PHOTOGRAPH A</span><strong>Image pending</strong><small>Awaiting original photographic scan</small></div>
               </div>
-              <button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Open supplementary notes</span><span aria-hidden="true">↗</span></button><p class="four-photo-caption" id="four-photo-caption">PH–01 · Position unverified</p>
+              <button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Open supplementary notes</span><span aria-hidden="true">↗</span></button>
               <div class="four-bearing"><div><label for="four-bearing">Camera direction</label><output id="four-bearing-output">North · 0°</output></div><input type="range" id="four-bearing" min="0" max="350" step="10" value="0"><div class="four-bearing-ends"><span>N</span><span>E</span><span>S</span><span>W</span><span>N</span></div></div><div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
             </div>
             <div class="four-map-col">
@@ -916,6 +931,25 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           <div id="four-summary" class="four-summary" hidden><h2>Photographic records verified</h2><p>All three photographic locations and viewing directions have been verified against the reconstructed town survey.</p><div id="four-summary-items"></div><button id="four-finish" class="primary" type="button">Continue</button></div>
         </div>
       </section>
+      <section id="read-five" class="reading-page" aria-label="Original case file introduction" hidden>
+        <div class="reading-inner"><h1>Let's get right into it now.</h1>
+          <div class="reading-copy">
+            <p>You've done such lovely work for me so far that I think it's finally time to show you the actual case. You've been very reliable so far. No reason to think you'd disappoint me! :P</p>
+            <p>Our team was able to get hold of the original police records, along with the final verdict. Unfortunately, parts of the file are still missing, and I do need everything in place before I can start telling this story properly.</p>
+            <p>I'd really appreciate the help!</p>
+            <p>This time, you'll be working with four of the most relevant documents from the original investigation. Read them carefully and use them to reconstruct the official record: who died, where, when, and the recorded cause of death.</p>
+          </div>
+          <button id="begin-five" class="primary" type="button">Open the case file</button>
+        </div>
+      </section>
+      <section id="level-five" class="level" aria-label="Original case file" hidden>
+        <div class="assignment">
+          <h1>The Original Case File</h1>
+          <p>Four recovered police records. Four missing facts.</p>
+          <p>The case-file documents are being prepared.</p>
+          <button class="primary" id="five-finish" type="button">Continue</button>
+        </div>
+      </section>
       <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
         <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button>
       </section>
@@ -924,6 +958,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
   </div>
 
   <div id="transition-flash" aria-hidden="true"></div>
+  <div id="five-interference" aria-hidden="true"><span>What... is happening?</span></div>
   <div id="directory-modal" class="directory-overlay" role="dialog" aria-modal="true" aria-label="Supplementary archival notes" hidden>
     <div class="directory-shell">
       <div class="directory-toolbar"><span>FIELD NOTES · RECOVERED MATERIAL</span><button id="directory-close" type="button">Close ×</button></div>
@@ -1036,7 +1071,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     let sortOrder=[...initialOrder];
     let draggedId=null;
 
-    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),readFour:document.getElementById("read-four"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),complete:document.getElementById('completed')};
+    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),readFour:document.getElementById("read-four"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),readFive:document.getElementById('read-five'),five:document.getElementById('level-five'),complete:document.getElementById('completed')};
     const sortFeedback=document.getElementById('sort-feedback');
     const modal=document.getElementById('modal');
     const modalTitle=document.getElementById('modal-title');
@@ -1177,7 +1212,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     });
     document.getElementById('dev-level').addEventListener('change',e=>show(e.target.value));
     document.getElementById('begin-four').addEventListener('click',()=>show('four'));
-    document.getElementById('four-finish').addEventListener('click',()=>show('complete'));
+    document.getElementById('begin-five').addEventListener('click',()=>show('five'));
+    document.getElementById('five-finish').addEventListener('click',()=>show('complete'));
+    document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     const fourPhotos=[
       {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:442,lng:405,bearing:20},site:'Clock Tower / High Street'},
       {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:500,lng:785,bearing:90},site:'Station Road / Filling Station'},
@@ -1202,8 +1239,8 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     function updateFourMarker(lat,lng){if(!fourLeaflet)return;fourVerified=false;document.getElementById('four-next').textContent='Check position';fourMarker={lat,lng,name:nearestLandmark(lat,lng)};if(fourCameraMarker){fourCameraMarker.setLatLng([lat,lng]);fourCameraMarker.setIcon(cameraIcon())}else fourCameraMarker=L.marker([lat,lng],{icon:cameraIcon(),keyboard:false}).addTo(fourLeaflet);document.getElementById('four-location-name').textContent=fourMarker.name;document.getElementById('four-feedback').textContent='Ready to save this estimate.';document.getElementById('four-next').disabled=false;}
     function renderFourPhoto(){
       const item=fourPhotos[fourCurrent];
-      document.getElementById('four-counter').textContent='PHOTOGRAPH '+String(fourCurrent+1).padStart(2,'0')+' / 03';
-      document.getElementById('four-photo-caption').textContent='Reference '+item.ref+' · Camera position unverified';
+
+
       const pic=document.getElementById('four-photo-img');const placeholder=document.getElementById('four-photo-placeholder');
       pic.hidden=true;placeholder.hidden=false;placeholder.querySelector('span').textContent='PHOTOGRAPH '+item.label;
       pic.onload=()=>{pic.hidden=false;placeholder.hidden=true};pic.onerror=()=>{pic.hidden=true;placeholder.hidden=false};
@@ -1278,6 +1315,18 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           },65);
         },90);
       },65);
+    }
+    let fiveFlashPending=false;
+    function flashToLevelFive(){
+      if(fiveFlashPending)return;
+      fiveFlashPending=true;
+      const overlay=document.getElementById('five-interference');
+      overlay.classList.add('active');
+      window.setTimeout(()=>{
+        overlay.classList.remove('active');
+        show('readFive');
+        fiveFlashPending=false;
+      },2000);
     }
     renderLogicGrid();renderAnswers();
     renderClippings();
