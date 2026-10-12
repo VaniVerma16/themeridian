@@ -279,6 +279,28 @@
     #level-three .logic-cell[data-state="2"]{background:#dce7df;color:#386452}
     #level-three .logic-cell:hover{outline:2px solid #a18c62;outline-offset:-3px}
     @media(max-width:630px){#level-three .archive-roster{grid-template-columns:1fr 1fr}#level-three .clue-cards{padding:16px}#level-three .clue-card{grid-template-columns:28px 1fr}#level-three .logic-grids{min-width:610px}}
+
+/* Level 3: spare scanned-paper editorial layout rather than product-style cards */
+#level-three .assignment{max-width:810px}
+#level-three .archival-section-label{display:flex;justify-content:space-between;gap:12px;margin:30px 0 10px;color:#c3bdaf;font:700 10px/1.5 Arial,sans-serif;letter-spacing:.12em;border-bottom:1px solid #56534e;padding-bottom:9px}
+#level-three .archival-section-label span{font-weight:400}
+#level-three .archive-roster{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:0 0 12px}
+#level-three .roster-card{min-height:250px;background:#e7e5df;border:1px solid #a9a69f;border-top:4px double #393833;padding:16px 13px 12px;display:flex;gap:11px;align-items:center;justify-content:flex-start;text-align:center;border-radius:0}
+#level-three .roster-card small{align-self:stretch;text-align:left;font:700 9px Arial,sans-serif;color:#77736e;letter-spacing:.14em}
+#level-three .clipping-headline{display:flex;align-items:center;justify-content:center;flex:1;width:100%;font:400 clamp(17px,1.8vw,24px)/1.28 Georgia,'Times New Roman',serif;color:#1e1e1c}
+#level-three .roster-card>span{font:italic 11px Georgia,serif;color:#77736f;align-self:stretch;border-top:1px solid #bdbab3;padding-top:9px}
+#level-three .archive-note{color:#bbb6ac;font:14px/1.65 Georgia,serif;margin:17px 0}
+#level-three .reporter-strip{background:transparent;border:0;border-top:1px solid #56534e;border-bottom:1px solid #56534e;padding:12px 0;margin:17px 0 31px}
+#level-three .strip-label{font:700 10px Arial,sans-serif;letter-spacing:.12em;color:#aba69c;margin-bottom:8px}
+#level-three .reporter-tokens{gap:22px}
+#level-three .reporter-tokens>span{font:16px Georgia,serif;color:#e3ded5;display:inline}
+#level-three .editorial-memo{background:#e9e5d9;color:#312e29;border:1px solid #9e998e;padding:clamp(19px,3.8vw,37px);margin:18px 0 32px;box-shadow:3px 4px 0 #292a2b}
+#level-three .memo-meta{display:flex;justify-content:space-between;gap:12px;color:#777063;font:700 10px Arial,sans-serif;letter-spacing:.13em;border-bottom:1px solid #bcb4a6;padding-bottom:15px;margin-bottom:22px}
+#level-three .editorial-memo p{color:#312e29!important;font:15px/1.75 Georgia,serif!important;margin:0 0 17px!important}
+#level-three .editorial-memo p.memo-signoff{font-style:italic;margin:22px 0 0!important}
+#level-three .grid-help{margin-top:17px}
+@media(max-width:660px){#level-three .archive-roster{grid-template-columns:1fr}#level-three .roster-card{min-height:145px}#level-three .clipping-headline{font-size:21px}#level-three .archival-section-label span{display:none}}
+
   </style>
 </head>
 <body>
@@ -357,20 +379,25 @@
         <div id="deduction-workspace" class="assignment">
           <button id="read-guide" class="secondary" type="button">Read your guide's message again</button>
           <p class="task-line">Match each recovered story to its reporter and original publication year. Use each reporter and year once.</p>
+          <div class="archival-section-label">THREE UNATTRIBUTED CLIPPINGS <span>THE MERIDIAN / LOCAL ARCHIVE</span></div>
           <div class="archive-roster">
-            <article class="roster-card"><div class="roster-symbol">⌁</div><small>ARTICLE 01</small><strong>Pesticides</strong><span>Research &amp; environment</span></article>
-            <article class="roster-card"><div class="roster-symbol">✧</div><small>ARTICLE 02</small><strong>School Debate Victory</strong><span>Education &amp; community</span></article>
-            <article class="roster-card"><div class="roster-symbol">▤</div><small>ARTICLE 03</small><strong>Library Renovation</strong><span>Local affairs</span></article>
+            <article class="roster-card"><small>CLIPPING A</small><div class="clipping-headline">New Concerns Raised About Pesticide Use Near Orchards</div><span>Original byline missing</span></article>
+            <article class="roster-card"><small>CLIPPING B</small><div class="clipping-headline">Students Bring Home Regional Debate Victory</div><span>Original byline missing</span></article>
+            <article class="roster-card"><small>CLIPPING C</small><div class="clipping-headline">Town Library Unveils Newly Restored Reading Hall</div><span>Original byline missing</span></article>
           </div>
-          <div class="reporter-strip" aria-label="Available reporters"><span class="strip-label">REPORTERS</span><div class="reporter-tokens"><span><b>H</b>Harriet</span><span><b>J</b>Jane</span><span><b>E</b>Elliot</span></div></div><p class="puzzle-options"><strong>Original publication years:</strong> 1991 · 1994 · 1998</p>
-          <div class="assignment-title"><h2>Recovered editorial notes</h2><span>Six clues</span></div>
-          <div class="clue-cards"><div class="clues-strap">THE MERIDIAN <span>·</span> INTERNAL ARCHIVE TRANSCRIPT</div>
-            <article class="clue-card"><span>01</span><p>The article concerning pesticides was revised three years after its original publication, following new research findings.</p></article>
-            <article class="clue-card"><span>02</span><p>Jane covered a story about an achievement involving local students.</p></article>
-            <article class="clue-card"><span>03</span><p>Harriet's article was published before Jane's.</p></article>
-            <article class="clue-card"><span>04</span><p>The library renovation report was written by a journalist born on March 2, 1979.</p></article>
-            <article class="clue-card"><span>05</span><p>Elliot's article was published in the final year listed in these records.</p></article>
-            <article class="clue-card"><span>06</span><p>The pesticides report appeared before the library renovation article.</p></article>
+          <p class="archive-note">The dates and bylines were lost when the original catalogue was transferred. The three pieces appeared in <strong>1991, 1994 and 1998</strong>, one in each year.</p>
+          <div class="reporter-strip"><span class="strip-label">REPORTERS ON FILE</span><div class="reporter-tokens"><span>Harriet</span><span>Jane</span><span>Elliot</span></div></div>
+          <div class="assignment-title"><h2>A note found with the clippings</h2><span>Editorial correspondence</span></div>
+          <div class="editorial-memo">
+            <div class="memo-meta"><span>THE MERIDIAN</span><span>ARCHIVES / UNSIGNED</span></div>
+            <p>Found these in the old local-news box. I can remember some of the stories, at least.</p>
+            <p>Jane wouldn't let us crop the photograph of the students holding their debate trophy. She'd spent all afternoon with their coach.</p>
+            <p>I'm fairly sure the pesticide story went to press while we were still in our old office. We'd moved out by the beginning of 1992.</p>
+            <p>Harriet had left before the debate team story came in. She would have liked that one, I think.</p>
+            <p>Elliot was the one who went to see the restored reading hall. He came back talking about the smell of fresh paint.</p>
+            <p>The library feature ran two years before the new millennium. Hard to believe that was so long ago.</p>
+            <p>We pulled out the pesticide cutting again when we were preparing the school story; it was already an old clipping by then.</p>
+            <p class="memo-signoff">Hope that helps sort the records out.</p>
           </div>
           <div class="assignment-title"><h2>Your deduction grid</h2><span>Tap: blank → × → ✓</span></div>
           <p class="grid-help">Mark each possible pairing. Cross out impossibilities; check matches you can confirm. The grid is your notebook, not your final answer.</p><div class="logic-board-scroll"><div id="logic-grids" class="logic-grids"></div></div>
