@@ -479,6 +479,23 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
 .wrapper{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
 .wrapper>main{flex:1 0 auto}
 .wrapper>footer{margin-top:auto}
+
+/* Transcription assessment */
+#level-one .transcription-assignment{max-width:1240px;margin-top:24px}
+.transcription-layout{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;margin-top:26px}
+.transcription-label{color:#a5a4a1;letter-spacing:.13em;font-size:12px;margin-bottom:14px}
+.transcription-paper{background:#e8e6e0;color:#262626;padding:25px 27px;box-shadow:0 2px 12px #0002}
+.transcription-paper .paper-masthead{font-size:26px;text-align:center;letter-spacing:.12em;border-bottom:3px double #333;padding-bottom:8px}
+.transcription-paper .paper-date{text-align:center;font-size:11px;margin:10px 0 20px;letter-spacing:.06em}
+.transcription-paper h2{font-size:28px;line-height:1.15;text-align:center;margin:0 0 20px;color:#262626}
+.transcription-paper p{font-size:17px;line-height:1.55;margin:0 0 15px!important;color:#292929!important}
+.transcription-placeholder-note{font-size:12px!important;color:#a5a4a1!important;margin-top:12px!important}
+.transcription-review h2{font-size:25px;line-height:1.2;font-weight:normal;margin:0 0 22px}
+.transcription-text p{font-size:18px!important;line-height:1.8!important;margin:0 0 18px!important}
+.transcript-word{display:inline;background:transparent;border:0;color:inherit;padding:1px 0;font:inherit!important;line-height:inherit;white-space:normal;cursor:pointer;box-shadow:none!important;transform:none!important}
+.transcript-word:hover{text-decoration:underline;text-underline-offset:4px}
+.transcript-word.marked{background:#c8c6bf!important;color:#16181a;padding:1px 0}
+@media(max-width:780px){.transcription-layout{grid-template-columns:1fr;gap:28px}.transcription-paper{padding:18px}.transcription-text p{font-size:16px!important}}
   </style>
 </head>
 <body>
@@ -514,18 +531,31 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
       </section>
 
 <section id="read-one" class="reading-page" aria-label="Assessment one introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT one · A NOTE FROM YOUR GUIDE</div><h1>A brief assessment.</h1><div class="reading-copy"><p>These are some basic tests to help us make sure that you are well suited for the task at hand!</p></div><button id="begin-one" class="primary" type="button">Let's begin</button></div></section>
-      <section id="level-one" class="level" aria-labelledby="level-title" hidden>
-        <div class="puzzle-label">01 / COLOUR IDENTIFICATION</div>
-        <div class="assignment">
-          <p class="task-line">Select <strong>5 green, 3 red, and 1 blue</strong> tiles. Click again to deselect.</p>
-          <div class="targets" aria-label="Required tile selections">
-            <div class="target"><span class="swatch green"></span><span>5 green</span></div>
-            <div class="target"><span class="swatch red"></span><span>3 red</span></div>
-            <div class="target"><span class="swatch blue"></span><span>1 blue</span></div>
+      <section id="level-one" class="level" aria-label="Transcription review" hidden>
+        <div class="puzzle-label">01 / TRANSCRIPTION REVIEW</div>
+        <div class="assignment transcription-assignment">
+          <p class="task-line">Compare the archived article with its digital transcription. Select the <strong>four incorrect words or figures</strong> in the transcription.</p>
+          <div class="transcription-layout">
+            <div class="transcription-source">
+              <div class="transcription-label">ORIGINAL CLIPPING</div>
+              <div class="transcription-paper" id="transcription-source">
+                <div class="paper-masthead">THE MERIDIAN</div>
+                <div class="paper-date">SATURDAY, JUNE 18, 1994 · LOCAL NEWS</div>
+                <h2>Council Approves Market Square Renovation</h2>
+                <p>After a lengthy public hearing, the town council voted 11–4 on June 18 to approve renovation plans for Market Square.</p>
+                <p>Several residents described the proposed redesign as unnecessary, citing concerns about the loss of parking and the cost of replacing the original stone pavement.</p>
+                <p>Officials said the work would begin in 1995, once the necessary permits had been issued. Local shopkeepers were told that pedestrian access would be maintained throughout construction.</p>
+              </div>
+              <p class="transcription-placeholder-note">Temporary clipping preview — replace with your generated newspaper image later.</p>
+            </div>
+            <div class="transcription-review">
+              <div class="transcription-label">DIGITAL TRANSCRIPTION</div>
+              <h2>Council Approves Market Square Renovation</h2>
+              <div id="transcription-text" class="transcription-text" aria-label="Select incorrect words or figures in the transcript"></div>
+            </div>
           </div>
-          <div id="tile-grid" class="grid" role="group" aria-label="Grid of coloured tiles"></div>
-          <p id="feedback" class="feedback" role="status" aria-live="polite">Select the requested tiles to continue.</p>
-          <div class="actions"><button id="reset" class="secondary" type="button">Clear selection</button><button id="verify" class="primary" type="button">Submit selection</button></div>
+          <p id="feedback" class="feedback" role="status" aria-live="polite">Select four suspected transcription errors.</p>
+          <div class="actions"><button id="reset" class="secondary" type="button">Clear marks</button><button id="verify" class="primary" type="button">Verify transcription</button></div>
         </div>
       </section>
 
@@ -610,14 +640,38 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
   </div>
 
   <script>
-    const requirements = {green:5,red:3,blue:1};
-    const tileColors = [
-      'green','blue','red','green',
-      'red','green','blue','red',
-      'blue','red','green','blue',
-      'green','blue','red','green'
+    const originalTranscript = [
+      'After a lengthy public hearing, the town council voted 114 on June 13 to approve renovation plans for Market Square.',
+      'Several residents described the proposed redesign as necessary, citing concerns about the loss of parking and the cost of replacing the original stone pavement.',
+      'Officials said the work would begin in 1996, once the necessary permits had been issued. Local shopkeepers were told that pedestrian access would be maintained throughout construction.'
     ];
-
+    const transcriptionErrors = new Set(['114','13','necessary:0','1996']);
+    const markedTranscript = new Set();
+    const feedback=document.getElementById('feedback');
+    const verify=document.getElementById('verify');
+    function renderTranscript(){
+      const host=document.getElementById('transcription-text');host.replaceChildren();
+      let necessaryCount=0;
+      originalTranscript.forEach(paragraph=>{
+        const p=document.createElement('p');
+        paragraph.split(/(\s+)/).forEach(piece=>{
+          if(/^\s+$/.test(piece)){p.append(document.createTextNode(piece));return;}
+          const word=piece.replace(/^[^\w]+|[^\w]+$/g,'');
+          const key=word==='necessary'?'necessary:'+(necessaryCount++):word;
+          const b=document.createElement('button');b.type='button';b.className='transcript-word';b.textContent=piece;
+          b.dataset.key=key;b.setAttribute('aria-pressed',String(markedTranscript.has(key)));
+          b.addEventListener('click',()=>{
+            if(markedTranscript.has(key))markedTranscript.delete(key);else markedTranscript.add(key);
+            b.classList.toggle('marked',markedTranscript.has(key));b.setAttribute('aria-pressed',String(markedTranscript.has(key)));
+            feedback.classList.remove('error');feedback.textContent='Review your marks, then verify the transcription.';
+          });p.appendChild(b);
+        });host.appendChild(p);
+      });
+    }
+    function reset(){
+      markedTranscript.clear();renderTranscript();feedback.classList.remove('error');
+      feedback.textContent='Select four suspected transcription errors.';
+    }
     const articles=[
       {id:'library',date:'MONDAY, SEPTEMBER 14, 1992',order:19920914,title:'Town Library Reopens After Six-Month Renovation',image:'library.jpg'},
       {id:'fair',date:'SATURDAY, JUNE 3, 1995',order:19950603,title:'Annual Summer Fair Draws Record Crowds',image:'fair.jpg'},
@@ -630,51 +684,16 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
     let draggedId=null;
 
     const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),complete:document.getElementById('completed')};
-    const grid=document.getElementById('tile-grid');
-    const selected=new Set();
-    const feedback=document.getElementById('feedback');
-    const verify=document.getElementById('verify');
     const sortFeedback=document.getElementById('sort-feedback');
     const modal=document.getElementById('modal');
     const modalTitle=document.getElementById('modal-title');
     const modalImage=document.getElementById('modal-image');
-
     function show(section){
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
       window.scrollTo({top:0,left:0,behavior:'instant'});
     }
-
-    function counts(){const c={green:0,red:0,blue:0};selected.forEach(index=>c[tileColors[index]]++);return c;}
-
-    function update(){
-      feedback.classList.remove('error');
-      feedback.textContent='Select the requested tiles, then submit your selection.';
-    }
-
-    function reset(){
-      selected.clear();
-      grid.querySelectorAll('.tile').forEach(tile=>{tile.classList.remove('selected');tile.setAttribute('aria-pressed','false')});
-      update();
-    }
-
-    tileColors.forEach((color,index)=>{
-      const tile=document.createElement('button');
-      tile.type='button';
-      tile.className=`tile ${color}`;
-      tile.setAttribute('aria-label',`${color} tile ${index+1}`);
-      tile.setAttribute('aria-pressed','false');
-      tile.addEventListener('click',()=>{
-        if(selected.has(index)){
-          selected.delete(index);tile.classList.remove('selected');tile.setAttribute('aria-pressed','false');
-        }else{
-          selected.add(index);tile.classList.add('selected');tile.setAttribute('aria-pressed','true');
-        }
-        update();
-      });
-      grid.appendChild(tile);
-    });
 
     function getArticle(id){return articles.find(a=>a.id===id)}
 
@@ -731,7 +750,7 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
     document.getElementById('begin-one').addEventListener('click',()=>show('level'));
     document.getElementById('begin-two').addEventListener('click',()=>show('two'));
     document.getElementById('reset').addEventListener('click',reset);
-    verify.addEventListener('click',()=>{if(Object.keys(requirements).every(color=>counts()[color]===requirements[color])){show('readTwo')}else{feedback.classList.add('error');feedback.textContent='Not quite! Have another look and try again.'}});
+    verify.addEventListener('click',()=>{if(markedTranscript.size===4 && [...markedTranscript].every(key=>transcriptionErrors.has(key))){show('readTwo')}else{feedback.classList.add('error');feedback.textContent='Not quite. Check the original clipping again and reconsider your four marks.'}});
     document.getElementById('return-home').addEventListener('click',()=>{reset();sortOrder=[...initialOrder];renderClippings();show('home')});
     document.getElementById('sort-reset').addEventListener('click',()=>{
       sortOrder=[...initialOrder];
@@ -824,7 +843,7 @@ body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
     }
     renderLogicGrid();renderAnswers();
     renderClippings();
-    update();
+    renderTranscript();
   </script>
 </body>
 </html>
