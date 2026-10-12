@@ -448,6 +448,18 @@ body{font-family:var(--type-serif)}
 .level:not([hidden]) .assignment-title span{font:500 10px/1.4 var(--type-ui);letter-spacing:.06em}
 @media(max-width:700px){.reading-page .reading-inner{max-width:100%}.reading-page{padding-top:34px}.reading-page h1,.reading-page .reading-inner h1{font-size:32px}.reading-page .reading-copy p,.reading-page .narrator-letter p{font-size:16px}}
 
+
+/* Typography and controls — unified site-wide */
+html,body,body *,button,input,select,textarea{font-family:'Times New Roman',Times,serif!important}
+button,.primary,.secondary,.zoom-button,.close-modal,.logic-cell,.tile,#dev-navigation button{border-radius:0!important}
+button{transition:transform .16s ease,box-shadow .16s ease!important}
+button:not(:disabled):hover{transform:translateY(-2px)!important;filter:none!important;box-shadow:0 3px 0 rgba(185,181,173,.35)!important}
+button:not(:disabled):active{transform:translateY(0)!important;box-shadow:none!important}
+
+.primary:hover{background-color:#deddd8}
+#level-three .primary:hover{background-color:#deddd8}
+button:focus-visible{outline:2px solid #d5d1c8;outline-offset:3px}
+
   </style>
 </head>
 <body>
