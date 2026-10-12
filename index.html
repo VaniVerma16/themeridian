@@ -431,6 +431,23 @@ body:has(.level:not([hidden])) .wrapper{max-width:1440px}
 }
 @media(max-width:520px){#level-two .clipping-grid{grid-template-columns:1fr}#level-one .targets{flex-direction:column}}
 
+
+/* Editorial typography standard — one consistent reading hierarchy */
+:root{--type-serif:Georgia,'Times New Roman',serif;--type-ui:Arial,Helvetica,sans-serif}
+body{font-family:var(--type-serif)}
+.reading-page{align-items:flex-start;min-height:0;padding:clamp(38px,6vh,70px) 0 60px}
+.reading-page .reading-inner{width:min(100%,700px);max-width:700px;margin:0 auto}
+.reading-page .reading-eyebrow{font:600 11px/1.4 var(--type-ui);letter-spacing:.12em;color:#a4a5a5;text-transform:uppercase;margin-bottom:20px}
+.reading-page h1,.reading-page .reading-inner h1,.reading-page .narrator-letter h1{font:400 clamp(30px,3vw,39px)/1.2 var(--type-serif);letter-spacing:-.025em;margin:0 0 27px;color:#ebe9e3}
+.reading-page .reading-copy p,.reading-page .narrator-letter p{font:400 clamp(16px,1.4vw,18px)/1.72 var(--type-serif);letter-spacing:0;color:#d7d5d0;margin:0 0 15px;max-width:660px}
+.reading-page .reading-copy p strong,.reading-page .narrator-letter p strong{font-weight:700}
+.reading-page .primary{margin-top:17px}
+.level:not([hidden]) .task-line{font-family:var(--type-serif);font-size:16px;line-height:1.6;font-weight:400}
+.level:not([hidden]) .puzzle-label{font:600 11px/1.4 var(--type-ui);letter-spacing:.12em}
+.level:not([hidden]) .assignment-title h2{font-family:var(--type-serif);font-size:18px;font-weight:400;letter-spacing:-.01em}
+.level:not([hidden]) .assignment-title span{font:500 10px/1.4 var(--type-ui);letter-spacing:.06em}
+@media(max-width:700px){.reading-page .reading-inner{max-width:100%}.reading-page{padding-top:34px}.reading-page h1,.reading-page .reading-inner h1{font-size:32px}.reading-page .reading-copy p,.reading-page .narrator-letter p{font-size:16px}}
+
   </style>
 </head>
 <body>
@@ -481,7 +498,7 @@ body:has(.level:not([hidden])) .wrapper{max-width:1440px}
         </div>
       </section>
 
-<section id="read-two" class="reading-page" aria-label="Assessment two introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT two · A NOTE FROM YOUR GUIDE</div><h1>Sort by dates.</h1><div class="reading-copy"><p>Hi! I thought this would be a good next test.</p><p>Take a look at these old articles and <strong>SORT</strong> them by date.</p><p>I know it’s simple, but I need to make sure you can read through these as well!</p></div><button id="begin-two" class="primary" type="button">Let's take a look</button></div></section>
+<section id="read-two" class="reading-page" aria-label="Assessment two introduction" hidden><div class="reading-inner"><div class="reading-eyebrow">ASSESSMENT 02 · A NOTE FROM YOUR GUIDE</div><h1>Sort by dates.</h1><div class="reading-copy"><p>Hi! I thought this would be a good next test.</p><p>Take a look at these old articles and <strong>SORT</strong> them by date.</p><p>I know it’s simple, but I need to make sure you can read through these as well!</p></div><button id="begin-two" class="primary" type="button">Let's take a look</button></div></section>
       <section id="level-two" class="level" aria-labelledby="level-two-title" hidden>
 <div class="puzzle-label">02 / SORT BY DATES</div>
         <div class="assignment">
