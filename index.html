@@ -994,6 +994,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
       window.scrollTo({top:0,left:0,behavior:'instant'});
+      if(section==='four')requestAnimationFrame(()=>ensureFourMap());
     }
 
     function getArticle(id){return articles.find(a=>a.id===id)}
@@ -1130,30 +1131,21 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       {label:'B',file:'station-road2.jpg',ref:'PH–02'},
       {label:'C',file:'pub.jpg',ref:'PH–03'}
     ];
-    const fourLandmarks=[['Town Square',350,259],['North Orchards',351,61],['Station Road',578,257],['South Ward',500,369],['Riverside',60,366],['West End',65,177]];
-    const fourGuesses=[];
-    let fourCurrent=0;let fourMarker=null;
-    const fourMap=document.getElementById('four-map');
-    const fourBearing=document.getElementById('four-bearing');
-    const fourBearingOutput=document.getElementById('four-bearing-output');
-    function formatBearing(value){const deg=Number(value);const dir=['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8];return dir+' · '+deg+'°'}
-    function updateBearing(){fourBearingOutput.textContent=formatBearing(fourBearing.value);document.getElementById('four-direction-marker').setAttribute('transform','rotate('+fourBearing.value+')')}
+    const fourLandmarks=[{name:'Town Square',lat:52.0602,lng:-1.3364},{name:'North Orchards',lat:52.0678,lng:-1.3382},{name:'Station Road',lat:52.0599,lng:-1.3278},{name:'South Ward',lat:52.0548,lng:-1.3357},{name:'Riverside',lat:52.0591,lng:-1.3422},{name:'West End',lat:52.0622,lng:-1.3473}];
+    const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null;
+    const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
+    function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
+    function cameraIcon(){return L.divIcon({className:'meridian-camera',html:'<svg width="56" height="70" viewBox="0 0 56 70"><g class="camera-direction" transform="rotate('+fourBearing.value+' 28 48)"><path d="M28 44V9M20 18L28 8L36 18" stroke="#963a32" stroke-width="3" fill="none"/></g><circle cx="28" cy="48" r="9" fill="#faf4e7" stroke="#963a32" stroke-width="3"/><circle cx="28" cy="48" r="3" fill="#963a32"/></svg>',iconSize:[56,70],iconAnchor:[28,48]})}
+    function updateBearing(){fourBearingOutput.textContent=formatBearing(fourBearing.value);if(fourCameraMarker)fourCameraMarker.setIcon(cameraIcon())}
     fourBearing.addEventListener('input',updateBearing);
-    function nearestLandmark(x,y){let result=fourLandmarks[0],dist=Infinity;fourLandmarks.forEach(place=>{const d=(place[1]-x)**2+(place[2]-y)**2;if(d<dist){dist=d;result=place}});return result[0]}
-    function updateFourMarker(x,y){
-      fourMarker={x,y,name:nearestLandmark(x,y)};
-      const marker=document.getElementById('four-map-marker');marker.setAttribute('transform','translate('+x+' '+y+')');marker.setAttribute('visibility','visible');
-      document.getElementById('four-location-name').textContent=fourMarker.name;
-      document.getElementById('four-feedback').textContent='Ready to save this estimate.';
-      document.getElementById('four-next').disabled=false;
-    }
-    fourMap.addEventListener('click',e=>{
-      const rect=fourMap.getBoundingClientRect();if(!rect.width||!rect.height)return;
-      const pt=fourMap.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
-      const matrix=fourMap.getScreenCTM();if(!matrix)return;
-      const loc=pt.matrixTransform(matrix.inverse());
-      updateFourMarker(Math.max(0,Math.min(660,Math.round(loc.x))),Math.max(0,Math.min(470,Math.round(loc.y))));
-    });
+    function nearestLandmark(lat,lng){let best=fourLandmarks[0],distance=Infinity;fourLandmarks.forEach(site=>{const d=L.latLng(lat,lng).distanceTo([site.lat,site.lng]);if(d<distance){best=site;distance=d}});return best.name}
+    function ensureFourMap(){if(fourLeaflet){fourLeaflet.invalidateSize();return}if(!window.L){document.getElementById('four-feedback').textContent='Map library could not load; check your connection.';return}
+      fourLeaflet=L.map('four-map',{minZoom:13,maxZoom:18,scrollWheelZoom:false,zoomSnap:0.5}).setView([52.0612,-1.3383],14.5);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'&copy; OpenStreetMap contributors &copy; CARTO'}).addTo(fourLeaflet);
+      fourLeaflet.setMaxBounds([[52.047,-1.364],[52.080,-1.310]]);
+      fourLandmarks.forEach(site=>{L.circleMarker([site.lat,site.lng],{radius:4,color:'#666e65',weight:1,fillOpacity:.9,fillColor:'#f6f1e7',interactive:false}).addTo(fourLeaflet);L.marker([site.lat,site.lng],{interactive:false,icon:L.divIcon({className:'meridian-label',html:'<span class="meridian-name">'+site.name+'</span>',iconSize:[100,25],iconAnchor:[-8,26]})}).addTo(fourLeaflet)});
+      fourLeaflet.on('click',e=>updateFourMarker(e.latlng.lat,e.latlng.lng));requestAnimationFrame(()=>fourLeaflet.invalidateSize());}
+    function updateFourMarker(lat,lng){if(!fourLeaflet)return;fourMarker={lat,lng,name:nearestLandmark(lat,lng)};if(fourCameraMarker){fourCameraMarker.setLatLng([lat,lng]);fourCameraMarker.setIcon(cameraIcon())}else fourCameraMarker=L.marker([lat,lng],{icon:cameraIcon()}).addTo(fourLeaflet);document.getElementById('four-location-name').textContent=fourMarker.name;document.getElementById('four-feedback').textContent='Ready to save this estimate.';document.getElementById('four-next').disabled=false;}
     function renderFourPhoto(){
       const item=fourPhotos[fourCurrent];
       document.getElementById('four-counter').textContent='PHOTOGRAPH '+String(fourCurrent+1).padStart(2,'0')+' / 03';
@@ -1162,7 +1154,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       pic.hidden=true;placeholder.hidden=false;placeholder.querySelector('span').textContent='PHOTOGRAPH '+item.label;
       pic.onload=()=>{pic.hidden=false;placeholder.hidden=true};pic.onerror=()=>{pic.hidden=true;placeholder.hidden=false};
       pic.src=item.file;
-      fourBearing.value='0';updateBearing();fourMarker=null;document.getElementById('four-map-marker').setAttribute('visibility','hidden');
+      fourBearing.value='0';updateBearing();fourMarker=null;if(fourCameraMarker){fourCameraMarker.remove();fourCameraMarker=null;}
       document.getElementById('four-location-name').textContent='Not placed';
       document.getElementById('four-feedback').textContent='Select a point on the map to record your estimate.';
       document.getElementById('four-next').disabled=true;
@@ -1171,7 +1163,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     }
     document.getElementById('four-next').addEventListener('click',()=>{
       if(!fourMarker)return;
-      fourGuesses[fourCurrent]={ref:fourPhotos[fourCurrent].ref,location:fourMarker.name,x:fourMarker.x,y:fourMarker.y,bearing:Number(fourBearing.value)};
+      fourGuesses[fourCurrent]={ref:fourPhotos[fourCurrent].ref,location:fourMarker.name,lat:fourMarker.lat,lng:fourMarker.lng,bearing:Number(fourBearing.value)};
       if(fourCurrent<2){fourCurrent++;renderFourPhoto();return}
       const list=document.getElementById('four-summary-items');list.replaceChildren();
       fourGuesses.forEach(guess=>{const p=document.createElement('p');p.textContent=guess.ref+' — '+guess.location+' · facing '+formatBearing(guess.bearing);list.appendChild(p)});
