@@ -734,6 +734,21 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .meridian-place.symbol{font-size:20px;color:#4a534c;font-style:normal}
 .meridian-camera{pointer-events:none!important;border:0;background:transparent}
 .meridian-camera svg{overflow:visible;filter:drop-shadow(0 1px 1px rgba(0,0,0,.15))}
+
+.directory-trigger{display:inline-flex;align-items:center;gap:10px;border:1px solid #62635e;background:transparent;color:#e6e2da;padding:10px 12px;margin-top:16px;font:15px Georgia,serif;cursor:pointer}
+.directory-trigger:hover{background:#30312f}.directory-trigger svg{flex-shrink:0}.directory-trigger span:last-child{margin-left:12px}
+.directory-overlay[hidden]{display:none!important}.directory-overlay{position:fixed;inset:0;z-index:5000;background:rgba(8,9,9,.89);display:grid;place-items:center;padding:18px}
+.directory-shell{width:min(680px,100%);max-height:calc(100dvh - 36px);display:flex;flex-direction:column;gap:10px}
+.directory-toolbar{display:flex;justify-content:space-between;align-items:center;color:#bcb9b2;font:11px Georgia,serif;letter-spacing:.11em}
+.directory-toolbar button{color:#efebe3;background:none;border:1px solid #686a64;padding:8px 13px}
+.directory-book{min-height:0;display:flex;flex-direction:column;box-shadow:8px 9px 0 #2d2e2c}
+.directory-page{position:relative;background:#e7ddc7;color:#262820;min-height:440px;overflow:auto;border-left:12px solid #c7bba4;border-right:1px solid #b7a994;padding:38px clamp(22px,5vw,54px) 58px}
+.directory-page:before{content:"";position:absolute;top:0;bottom:0;left:0;width:18px;background:linear-gradient(90deg,rgba(84,73,58,.19),transparent);pointer-events:none}
+.directory-page-content{font:17px/1.65 Georgia,serif}.directory-page-content h2{font:small-caps 32px/1.13 Georgia,serif;letter-spacing:.03em;margin:0 0 16px;color:#292b25}.directory-page-content .directory-kicker{font:11px Georgia,serif;letter-spacing:.13em;color:#757062;margin:0 0 20px}.directory-page-content p{margin:12px 0}.directory-page-content .directory-rule{height:1px;background:#b1a58d;margin:21px 0}
+.directory-page-content dl{margin:0}.directory-page-content dt{font-weight:bold;margin-top:15px}.directory-page-content dd{margin:1px 0 13px 18px;font-size:15px}.directory-page-content em{color:#615b50}
+.directory-page-bottom{position:absolute;bottom:16px;left:32px;right:31px;display:flex;justify-content:space-between;border-top:1px solid #bdb09a;padding-top:10px;font:10px Georgia,serif;letter-spacing:.08em;color:#706a60}
+.directory-navigation{display:flex;justify-content:space-between;align-items:center;gap:9px;background:#252725;color:#ddd9cf;padding:11px}.directory-navigation button{background:transparent;border:1px solid #706f68;color:#e7e1d5;padding:9px 11px;font:13px Georgia,serif}.directory-navigation button:disabled{opacity:.32;cursor:default}.directory-navigation span{font:12px Georgia,serif;color:#b6b4ab}
+@media(max-width:520px){.directory-page{min-height:410px;padding:29px 23px 57px}.directory-page-content{font-size:15px}.directory-page-content h2{font-size:26px}.directory-navigation button{font-size:11px;padding:8px}}
   </style>
 </head>
 <body>
@@ -870,7 +885,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
                 <img id="four-photo-img" alt="Recovered archive photograph" hidden>
                 <div id="four-photo-placeholder" class="four-photo-placeholder"><span>PHOTOGRAPH A</span><strong>Image pending</strong><small>Awaiting original photographic scan</small></div>
               </div>
-              <p class="four-photo-caption" id="four-photo-caption">Reference PH–01 · Catalogue date and location missing</p>
+              <button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Consult street directory</span><span aria-hidden="true">↗</span></button><p class="four-photo-caption" id="four-photo-caption">Reference PH–01 · Catalogue date and location missing</p>
               <div class="four-bearing"><div><label for="four-bearing">Camera direction</label><output id="four-bearing-output">North · 0°</output></div><input type="range" id="four-bearing" min="0" max="350" step="10" value="0"><div class="four-bearing-ends"><span>N</span><span>E</span><span>S</span><span>W</span><span>N</span></div></div><div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
             </div>
             <div class="four-map-col">
@@ -893,6 +908,20 @@ body{overflow-x:clip;overscroll-behavior-x:none}
   </div>
 
   <div id="transition-flash" aria-hidden="true"></div>
+  <div id="directory-modal" class="directory-overlay" role="dialog" aria-modal="true" aria-label="Meridian street directory" hidden>
+    <div class="directory-shell">
+      <div class="directory-toolbar"><span>REFERENCE MATERIAL · 1993</span><button id="directory-close" type="button">Close ×</button></div>
+      <div class="directory-book">
+        <div class="directory-page" id="directory-page">
+          <div class="directory-page-content" id="directory-content"></div>
+          <div class="directory-page-bottom"><span>MERIDIAN COUNTY STREET DIRECTORY</span><span id="directory-folio">01</span></div>
+        </div>
+        <div class="directory-navigation">
+          <button id="directory-prev" type="button">← Previous page</button><span id="directory-count">1 / 4</span><button id="directory-next" type="button">Next page →</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="article-modal" class="modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Archived article">
     <div class="modal-panel archived-article-panel">
       <div class="modal-top"><h3>THE MERIDIAN · ARCHIVE</h3><button class="close-modal" id="close-article" type="button">Close</button></div>
@@ -1181,6 +1210,31 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       document.querySelector('.four-workspace').hidden=true;
       document.getElementById('four-summary').hidden=false;
     });
+
+    const directoryPages=[
+      '<p class="directory-kicker">COUNTY SURVEY OFFICE · REVISED EDITION, 1993</p><h2>Meridian Street Directory</h2><div class="directory-rule"></div><p>An index of civic buildings, roads and commercial premises, compiled to accompany the county town survey.</p><p>Street entries describe junctions and neighbouring buildings, rather than photographic positions. Some premises may have changed names since publication.</p><p><em>Use the map in conjunction with these descriptions to determine where an image could have been taken.</em></p>',
+      '<p class="directory-kicker">SECTION A · TOWN CENTRE</p><h2>High Street</h2><dl><dt>Clock tower</dt><dd>At the northern end of the pedestrian approach to Town Centre. The tower faces the principal shopping street.</dd><dt>Town Hall</dt><dd>West of High Street, reached by a short turning off Market Street.</dd><dt>Market Street</dt><dd>Leaves the centre towards the station district; rows of shopfronts continue on both sides of the road.</dd></dl>',
+      '<p class="directory-kicker">SECTION B · EASTERN WARD</p><h2>Station Road</h2><dl><dt>Commercial frontage</dt><dd>A long block of offices and shops stands opposite a shorter row of houses and small businesses.</dd><dt>Petrol filling station</dt><dd>On the road towards Meridian Station, close to the turning for the southward residential lanes.</dd><dt>Railway approach</dt><dd>The tracks lie farther east. The roadway runs broadly towards the station before turning near the goods yard.</dd></dl><p><em>Note: the station is not necessarily visible from every point on the road.</em></p>',
+      '<p class="directory-kicker">SECTION C · PUBLIC HOUSES</p><h2>Corner Premises</h2><dl><dt>Prince Arthur Public House</dt><dd>A three-storey brick public house at a street corner, with its principal entrance facing the wider road. A narrow side street passes the building’s end wall.</dd><dt>Adjacent plot</dt><dd>The neighbouring parcel was recorded as under renovation in the early 1990s.</dd></dl><div class="directory-rule"></div><p><em>Cross-reference: Station Road and nearby turning lanes. Building use and signage may have changed.</em></p>'
+    ];
+    const directoryModal=document.getElementById('directory-modal');
+    let directoryIndex=0, directoryReturnFocus=null;
+    function renderDirectory(){
+      document.getElementById('directory-content').innerHTML=directoryPages[directoryIndex];
+      document.getElementById('directory-count').textContent=(directoryIndex+1)+' / '+directoryPages.length;
+      document.getElementById('directory-folio').textContent=String(directoryIndex+1).padStart(2,'0');
+      document.getElementById('directory-prev').disabled=directoryIndex===0;
+      document.getElementById('directory-next').disabled=directoryIndex===directoryPages.length-1;
+      document.getElementById('directory-page').scrollTop=0;
+    }
+    function openDirectory(){directoryReturnFocus=document.activeElement;directoryIndex=0;renderDirectory();directoryModal.hidden=false;document.getElementById('directory-close').focus()}
+    function closeDirectory(){directoryModal.hidden=true;if(directoryReturnFocus&&directoryReturnFocus.focus)directoryReturnFocus.focus()}
+    document.getElementById('directory-open').addEventListener('click',openDirectory);
+    document.getElementById('directory-close').addEventListener('click',closeDirectory);
+    document.getElementById('directory-prev').addEventListener('click',()=>{if(directoryIndex>0){directoryIndex--;renderDirectory()}});
+    document.getElementById('directory-next').addEventListener('click',()=>{if(directoryIndex<directoryPages.length-1){directoryIndex++;renderDirectory()}});
+    directoryModal.addEventListener('click',event=>{if(event.target===directoryModal)closeDirectory()});
+    document.addEventListener('keydown',event=>{if(directoryModal.hidden)return;if(event.key==='Escape')closeDirectory();if(event.key==='ArrowRight'&&directoryIndex<directoryPages.length-1){directoryIndex++;renderDirectory()}if(event.key==='ArrowLeft'&&directoryIndex>0){directoryIndex--;renderDirectory()}});
     renderFourPhoto();
     let flashPending=false;
     function flashToLevelFour(){
