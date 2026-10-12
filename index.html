@@ -605,6 +605,19 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 #mini-header::after{content:"";position:absolute;bottom:0;left:50%;width:100vw;transform:translateX(-50%);border-bottom:1px solid var(--rule);pointer-events:none}
 .wrapper>footer{position:relative;border-top:0!important}
 .wrapper>footer::before{content:"";position:absolute;top:0;left:50%;width:100vw;transform:translateX(-50%);border-top:1px solid var(--rule);pointer-events:none}
+
+/* Shared header/footer alignment independent of the active page width. */
+#mini-header,.wrapper>footer{
+  width:calc(100vw - 64px)!important;
+  max-width:1360px!important;
+  left:50%;
+  transform:translateX(-50%);
+  margin-left:0!important;
+  margin-right:0!important;
+}
+@media(max-width:700px){
+  #mini-header,.wrapper>footer{width:calc(100vw - 36px)!important}
+}
   </style>
 </head>
 <body>
@@ -641,7 +654,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 
 <section id="read-one" class="reading-page" aria-label="Assessment one introduction" hidden><div class="reading-inner"><h1>A brief assessment.</h1><div class="reading-copy"><p>These are some basic tests to help us make sure that you are well suited for the task at hand!</p></div><button id="begin-one" class="primary" type="button">Let's begin</button></div></section>
       <section id="level-one" class="level" aria-label="Transcription review" hidden>
-        <div class="puzzle-label">01 / TRANSCRIPTION REVIEW</div>
+        
         <div class="assignment transcription-assignment">
           <p class="task-line">Compare the archived article with its digital transcription. Select the <strong>four incorrect words or figures</strong> in the transcription.</p>
           <div class="transcription-layout">
@@ -662,7 +675,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 
 <section id="read-two" class="reading-page" aria-label="Assessment two introduction" hidden><div class="reading-inner"><h1>Sort by dates.</h1><div class="reading-copy"><p>Hi! I thought this would be a good next test.</p><p>Take a look at these old articles and <strong>SORT</strong> them by date.</p><p>I know it’s simple, but I need to make sure you can read through these as well!</p></div><button id="begin-two" class="primary" type="button">Let's take a look</button></div></section>
       <section id="level-two" class="level" aria-labelledby="level-two-title" hidden>
-<div class="puzzle-label">02 / SORT BY DATES</div>
+
         <div class="assignment">
           <p class="task-line">Drag the clippings into order, <strong>oldest to newest</strong>. Click “Enlarge” to inspect a clipping.</p>
           <div class="clipping-grid" id="clipping-grid" aria-label="The Meridian newspaper clippings"></div>
@@ -684,7 +697,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         </div>
 </div></section>
       <section id="level-three" class="level" aria-labelledby="level-three-title" hidden>
-        <div class="puzzle-label">03 / THE MISSING EDITIONS</div>
+        
         <div id="deduction-workspace" class="assignment">
           <button id="read-guide" class="secondary" type="button">Read your guide's message again</button>
           <p class="task-line">Match each recovered story to its reporter and original publication year. Use each reporter and year once.</p>
@@ -722,7 +735,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         </div>
       </section>
       <section id="level-four" class="level" aria-label="Assessment 04 test" hidden>
-        <div class="puzzle-label">04 / ARCHIVE TEST</div>
+        
         <div class="assignment"><h1 style="font-size:34px;font-weight:normal">Assessment 04</h1><p>Level 4 is not ready yet.</p><p>This page is here to test the transition.</p><button class="primary" type="button" id="four-finish">Continue</button></div>
       </section>
       <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
