@@ -796,22 +796,22 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 
     const archivedArticles={
       orchards:{title:"New Concerns Raised About Pesticide Use Near Orchards",section:"LOCAL NEWS",paragraphs:[
-        "Residents living near the northern orchards have raised fresh concerns about pesticide spraying close to their homes. Several families say they have asked local officials for more information about the chemicals used during the growing season.",
-        "A spokesperson for the growers said the orchards follow existing guidelines and that spraying is scheduled to limit disruption to neighbouring streets.",
-        "The council has requested a report from its environmental committee. Residents are expected to discuss the matter at the next public meeting."
+        "Residents along the northern edge of town have asked the council to review pesticide spraying near commercial orchards following complaints about drifting chemicals and strong odours during the growing season. Several households said they received little advance notice of the most recent application.",
+        "Orchard operators maintain that spraying is conducted in accordance with current agricultural guidance. A representative said the work was necessary to protect crops and that crews had been instructed to avoid periods of high wind.",
+        "Council members have requested further information from local environmental officers before deciding whether additional restrictions are warranted. A public discussion is expected at next month's council meeting. Residents have been encouraged to submit written accounts of any incidents."
       ]},
       debate:{title:"Students Bring Home Regional Debate Victory",section:"EDUCATION",paragraphs:[
-        "The local secondary school's debate team returned home this week with first place in the regional championships. The students impressed judges with their research, preparation and confident responses throughout the final round.",
-        "Among the team's standout speakers was Adam, whose closing argument helped secure the deciding result. His coach described him as thoughtful and ambitious, with a particular gift for finding the important detail in an argument.",
-        "The team is expected to receive recognition at next week's school assembly. Several members said they hope to continue competing in the coming year."
+        "The town's secondary school debate team returned with the regional championship title on Friday after defeating six competing schools in a day of closely contested rounds. The final debate, held before a panel of teachers and visiting adjudicators, was decided by a narrow margin.",
+        "Team member Adam was singled out by the judges for a composed closing argument that drew together evidence presented throughout the contest. His coach credited the entire group with weeks of preparation and said its strongest quality had been the students' willingness to challenge one another's assumptions.",
+        "The school plans to recognise the team at its next assembly. Organisers said this year's tournament attracted a larger field than in previous years, reflecting growing interest in competitive debating across the district."
       ]},
       library:{title:"Town Library Unveils Newly Restored Reading Hall",section:"COMMUNITY",paragraphs:[
-        "The town library has reopened its reading hall following months of restoration work. Visitors were welcomed back this week to find refinished woodwork, repaired windows and freshly painted bookshelves.",
-        "Library staff say the improvements will make the space more comfortable for readers while preserving its familiar character. Several long-time visitors attended the reopening.",
-        "A programme of public readings and school visits is planned for the coming months."
+        "The town library reopened its main reading hall this week following a programme of repairs intended to preserve one of the building's most frequently used public spaces. The work included restoration of the original woodwork, repairs to several windows and the installation of improved reading lamps.",
+        "Library staff said the renovation was planned around the hall's historic features, many of which had deteriorated after years of daily use. Regular visitors attending the reopening welcomed the brighter room, although some expressed concern about the temporary reduction in available seating.",
+        "The library expects to resume its full programme of public readings and school visits next month. Officials said additional improvements to the building remain under consideration, subject to approval of next year's budget."
       ]}
     };
-    const articleModal=document.getElementById('article-modal');
+        const articleModal=document.getElementById('article-modal');
     const articleBody=document.getElementById('article-body');
     document.querySelectorAll('.archive-open').forEach(button=>button.addEventListener('click',()=>{
       const article=archivedArticles[button.dataset.article];
