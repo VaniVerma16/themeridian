@@ -463,6 +463,10 @@ button:focus-visible{outline:2px solid #d5d1c8;outline-offset:3px}
 
 /* Global square-edge treatment */
 *,*::before,*::after{border-radius:0!important}
+
+/* Prevent rubber-band overscroll from exposing a contrasting canvas. */
+html{background:#17191b;overscroll-behavior-y:none}
+body{background:#17191b;overscroll-behavior-y:none;min-height:100vh}
   </style>
 </head>
 <body>
