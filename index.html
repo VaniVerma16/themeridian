@@ -1238,6 +1238,45 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 @media(max-height:650px) and (min-width:701px){
   #completed .beta-corner-note{width:min(365px,calc(100vw - 38px))!important;font-size:12px!important;padding:13px 18px!important}
 }
+
+/* Quiet catalogue + one selected archival page, rather than a six-card wall. */
+#level-five #desk-slips-panel{max-width:1050px;width:100%;box-sizing:border-box}
+#level-five #desk-slips-panel .case-extras{padding:0;min-width:0}
+#level-five #desk-slips-panel .case-extras>.case-side-heading{display:block!important;color:#d8c9af;font:11px Georgia,serif;letter-spacing:.12em;margin:17px 0 12px}
+#level-five #desk-slips-panel .case-slip-layout{display:grid;grid-template-columns:minmax(185px,230px) minmax(0,1fr);align-items:stretch;gap:18px;width:100%;min-width:0}
+#level-five #desk-slips-panel .case-extra-cards{display:flex!important;flex-direction:column;grid-template-columns:none!important;gap:6px;min-width:0;align-items:stretch}
+#level-five #desk-slips-panel button.case-extra-card,
+#level-five #desk-slips-panel button.case-extra-card:nth-child(even){
+  display:flex!important;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:5px;
+  width:100%;min-height:0;padding:12px 13px!important;
+  transform:none!important;text-align:left!important;background:#e5dcc9!important;
+  color:#30291e!important;box-shadow:none!important;
+  border:1px solid #aa987b!important;border-left:3px solid transparent!important;border-radius:0;outline:0;
+}
+#level-five #desk-slips-panel button.case-extra-card:hover,
+#level-five #desk-slips-panel button.case-extra-card.selected{transform:none!important;background:#f3e8d0!important;border-left-color:#80434b!important;box-shadow:0 1px 5px #0002!important;outline:0}
+#level-five #desk-slips-panel button.case-extra-card:focus-visible{outline:2px solid #dba6ad!important;outline-offset:2px}
+#level-five #desk-slips-panel button.case-extra-card small{font:10px/1.2 Georgia,serif!important;letter-spacing:.12em;margin:0!important;color:#7d7060!important}
+#level-five #desk-slips-panel button.case-extra-card span{font:15px/1.25 Georgia,serif!important;color:#322a22!important;overflow-wrap:normal}
+#level-five #desk-slips-panel .case-extra-view{
+ display:block!important;position:static!important;width:auto!important;min-height:400px!important;max-height:none!important;
+ margin:0!important;box-sizing:border-box;padding:33px 40px!important;
+ background:#eae0c9!important;border:1px solid #a79372;color:#342b21;box-shadow:2px 4px 10px #0004;transform:none!important;
+}
+#level-five #desk-slips-panel .case-extra-view[hidden]{display:none!important}
+#level-five #desk-slips-panel .case-extra-view small{display:block;color:#665947;font:11px/1.5 Georgia,serif;letter-spacing:.07em}
+#level-five #desk-slips-panel .case-extra-view h3{color:#30291f;font:normal clamp(26px,2.8vw,35px)/1.15 Georgia,serif;margin:23px 0!important}
+#level-five #desk-slips-panel .case-extra-view p{font:17px/1.7 Georgia,serif;color:#3c3229;margin:0;white-space:pre-wrap}
+#level-five #desk-slips-panel .case-slip-foot{font:10px/1.4 Georgia,serif;letter-spacing:.1em;color:#766d5b;border-top:1px solid #c2b59e;padding-top:13px;margin-top:38px}
+#level-five #desk-slips-panel .archive-redaction{font-size:10px;vertical-align:baseline}
+@media(max-width:720px){
+ #level-five #desk-slips-panel .case-slip-layout{grid-template-columns:minmax(0,1fr);gap:12px}
+ #level-five #desk-slips-panel .case-extra-cards{display:flex!important;flex-direction:row;overflow-x:auto;gap:7px;padding:2px 2px 9px;scroll-snap-type:x proximity}
+ #level-five #desk-slips-panel button.case-extra-card,#level-five #desk-slips-panel button.case-extra-card:nth-child(even){flex:0 0 155px;width:155px;min-width:155px;padding:10px!important;scroll-snap-align:start}
+ #level-five #desk-slips-panel .case-extra-view{padding:23px 21px!important;min-height:310px!important}
+ #level-five #desk-slips-panel .case-extra-view h3{font-size:26px;margin:16px 0!important}
+ #level-five #desk-slips-panel .case-extra-view p{font-size:15px;line-height:1.65}
+}
 </style>
 </head>
 <body>
@@ -1370,6 +1409,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
             <p>Good job! I'm really happy seeing your progress. I really, truly am.</p>
             <p>I think we can finally start on the actual work now! It's really nice having someone help me out. Isn't it always wonderful to have good people to work with?</p>
             <p>Every year, The Meridian revisits stories from our archives for our Annual Revival Project. And this year, we've chosen a particularly fascinating case. Tragic, of course. But really quite remarkable.</p>
+            <p>We're doing this in 2027, but the story itself goes back to 1997. Thirty years! The original notes were written by the people working on it back then. I'm just here to help you sort through what's survived. There's quite a lot of it, as you might imagine!</p>
             <p>We'll piece together the original timeline and put the story back together for our readers. I'll tell you more as we go. I don't want to overwhelm you all at once!</p>
             <p>First, we have three photographs with incomplete catalogue details. Take a look at each one, place it on the town map, using the clues in the scene. You don't need to be exact. Just make your best guess!</p>
           </div><button class="primary" type="button" id="begin-four">Let's take a look</button>
@@ -1447,9 +1487,14 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       <div class="case-view-toolbar"><span id="case-page-counter">DOCUMENT 01 / 04</span><div><button type="button" id="case-zoom-out" aria-label="Decrease document zoom">−</button><span id="case-zoom-label">100%</span><button type="button" id="case-zoom-in" aria-label="Increase document zoom">+</button></div></div>
       <div class="case-paper-viewport"><article id="case-active-document" class="case-paper" aria-live="polite"></article></div>
       <div class="case-page-controls"><button type="button" id="case-prev">← Previous</button><button type="button" id="case-next">Next record →</button></div><div class="case-extras">
- <div class="case-side-heading">ARCHIVAL INSERT</div>
- <div class="case-extra-cards" id="case-extra-cards"></div>
- <div class="case-extra-view" id="case-extra-view" hidden role="region" aria-live="polite"><small id="case-extra-type"></small><h3 id="case-extra-title"></h3><p id="case-extra-text"></p><button type="button" id="case-extra-close">Close insert ×</button></div>
+ <div class="case-side-heading">LOOSE INSERTS · ARCHIVE INDEX</div>
+ <div class="case-slip-layout">
+   <nav class="case-extra-cards" id="case-extra-cards" aria-label="Supplementary records"></nav>
+   <article class="case-extra-view" id="case-extra-view" hidden role="region" aria-live="polite" aria-label="Selected archival insert">
+     <small id="case-extra-type"></small><h3 id="case-extra-title"></h3><p id="case-extra-text"></p>
+     <div class="case-slip-foot">THE MERIDIAN · RETAINED NEWSROOM COPY</div>
+   </article>
+ </div>
  </div>
       
     </div>
@@ -1876,7 +1921,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "ref": "NEWS/97-02",
     "body": [
       "Monday. We have a little more now. A police follow-up says he was twenty-seven, that his surname began with E, and that his birthday was in January. I found three possible names in our enquiry book. One looks promising, but I want to be really certain.",
-      "I remember him from a wedding announcement from last September as well. An engagement. Something about a new beginning after a difficult few years. I've kept the cutting; we can compare it once we know the name."
+      "One of the names seemed familiar. I think I remember seeing an engagement announcement last September. Something about a new beginning after a difficult few years. I've kept the cutting; we can compare it once we know the name."
 ],
     "note": "Finally, some identifying information. We can use this with the other slips to narrow down who the victim was."
   },
@@ -1957,49 +2002,23 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       });
     }
     const extraHost=document.getElementById('case-extra-cards');
-    // Inline critical layout so the evidence inserts retain their paper appearance
-    // even if an earlier legacy stylesheet rule conflicts with this section.
-    extraHost.style.setProperty('display','grid','important');
-    extraHost.style.gridTemplateColumns='repeat(2,minmax(0,1fr))';
-    extraHost.style.gap='12px';
+    let slipIndex=0;
     caseInserts.forEach((item,i)=>{
-      const btn=document.createElement('button');btn.type='button';btn.className='case-extra-card';
-      const k=document.createElement('small');showRedactedText(k,item.tag);const title=document.createElement('span');title.textContent=item.title;
-      btn.append(k,title);
-      btn.style.setProperty('display','flex','important');
-      btn.style.setProperty('flex-direction','column','important');
-      btn.style.setProperty('justify-content','space-between','important');
-      btn.style.setProperty('background','#e8dec8','important');
-      btn.style.setProperty('color','#30291e','important');
-      btn.style.setProperty('border','1px solid #8d7b60','important');
-      btn.style.setProperty('padding','15px 14px','important');
-      btn.style.setProperty('width','100%','important');
-      btn.style.setProperty('min-height','112px','important');
-      btn.style.setProperty('text-align','left','important');
-      btn.style.setProperty('white-space','normal','important');
-      btn.style.setProperty('box-shadow','2px 4px 8px #1e140b77','important');
-      btn.style.setProperty('box-sizing','border-box','important');
-      btn.style.setProperty('font-family','Georgia,serif','important');
-      btn.style.setProperty('transform',i%2?'rotate(1deg)':'rotate(-1deg)','important');
-      k.style.setProperty('display','block','important');
-      k.style.setProperty('font','10px/1.3 Georgia,serif','important');
-      k.style.setProperty('letter-spacing','.07em','important');
-      k.style.setProperty('color','#6d604e','important');
-      k.style.setProperty('margin-bottom','12px','important');
-      title.style.setProperty('display','block','important');
-      title.style.setProperty('font','17px/1.25 Georgia,serif','important');
-      title.style.setProperty('color','#30291e','important');
+      const btn=document.createElement('button');btn.type='button';btn.className='case-extra-card';btn.setAttribute('aria-pressed','false');
+      const num=document.createElement('small');num.textContent='SLIP '+String(i+1).padStart(2,'0');
+      const title=document.createElement('span');title.textContent=item.title;btn.append(num,title);
       btn.addEventListener('click',()=>{
+        slipIndex=i;
         showRedactedText(document.getElementById('case-extra-type'),item.tag);
         document.getElementById('case-extra-title').textContent=item.title;
         showRedactedText(document.getElementById('case-extra-text'),item.text);
         document.getElementById('case-extra-view').hidden=false;
-        extraHost.querySelectorAll('button').forEach((b,n)=>b.classList.toggle('selected',n===i));
-      });extraHost.appendChild(btn);
-    });
-    document.getElementById('case-extra-close').addEventListener('click',()=>{
-      document.getElementById('case-extra-view').hidden=true;
-      extraHost.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+        document.getElementById('desk-slip-counter').textContent='SLIP '+String(i+1).padStart(2,'0')+' / '+String(caseInserts.length).padStart(2,'0');
+        extraHost.querySelectorAll('.case-extra-card').forEach((b,n)=>{
+          b.classList.toggle('selected',n===i);b.setAttribute('aria-pressed',String(n===i));
+        });
+      });
+      extraHost.appendChild(btn);
     });
     let activeCaseFile=0,caseZoom=100;
     const caseTabs=document.getElementById('case-tabs');
@@ -2410,11 +2429,9 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     deskPanels.slips.append(document.querySelector('#level-five .case-extras'));
     let deskOpen='';
     const slipButtons=[...document.querySelectorAll('#case-extra-cards .case-extra-card')];
-    let slipIndex=0;
     function showSlip(index){
       slipIndex=(index+slipButtons.length)%slipButtons.length;
       slipButtons[slipIndex].click();
-      document.getElementById('desk-slip-counter').textContent='SLIP '+(slipIndex+1)+' / '+slipButtons.length;
     }
     function openDeskView(view){
       deskOpen=view;
