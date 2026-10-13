@@ -2054,7 +2054,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     const fourPhotos=[
       {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:565,lng:1105,bearing:270},site:'Albert Road / Meridian Secondary School'},
       {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:753,lng:1070,bearing:286},site:'Station Road / Filling Station approach'},
-      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:454,lng:1056,bearing:319},site:'Prince Arthur / Milton Street corner'}
+      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:500,lng:1010,bearing:315},site:'Prince Arthur / Milton Street corner'}
     ];
     const fourLandmarks=[
       {name:'West Bridge',lat:735,lng:153},
@@ -2066,7 +2066,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       {name:'Library',lat:462,lng:811},
       {name:'Meridian Secondary School',lat:416,lng:1260}
     ];
-    const fourChecks=[{location:75,bearing:45},{location:70,bearing:30},{location:85,bearing:35}];
+    const fourChecks=[{location:75,bearing:45},{location:70,bearing:30},{location:105,bearing:55}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null,fourVerified=false;
     const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
     function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
@@ -2118,6 +2118,12 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
           :fourCurrent===1
           // The station photograph covers a stretch of Station Road, not a single pinpoint.
           ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:773,lng:900},{lat:721,lng:1360})<=80
+          :fourCurrent===2
+          // The pub appears at the junction; allow positions on both approaches.
+          ?Math.min(
+            pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:505,lng:920},{lat:450,lng:1055}),
+            pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:590,lng:940},{lat:550,lng:1110})
+          )<=105
           :distance<=fourChecks[fourCurrent].location;
         // The illustrated town map is not perspective-accurate enough to establish
         // which end of this Station Road section the photographer faced.
