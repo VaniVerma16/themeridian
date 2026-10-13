@@ -784,6 +784,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 @keyframes five-offset-a{0%,24%,47%,67%,100%{opacity:0}12%,39%,59%,83%{opacity:.85;transform:translate(-9px,2px);clip-path:inset(12% 0 58% 0)}}
 @keyframes five-offset-b{0%,20%,45%,71%,100%{opacity:0}16%,34%,62%,88%{opacity:.9;transform:translate(8px,-2px);clip-path:inset(57% 0 16% 0)}}
 @media(prefers-reduced-motion:reduce){#five-interference.active,#five-interference.active span,#five-interference.active span::before,#five-interference.active span::after{animation:none;background:#050505;color:#fff}}
+#dev-audio{font:12px Georgia,serif;padding:5px 9px;border:1px solid #777;background:transparent;color:inherit;white-space:nowrap}
 #dev-pass{font:12px Georgia,serif;padding:5px 9px;border:1px solid #777;background:transparent;color:inherit;white-space:nowrap}
 
 #player-history[hidden]{display:none!important}
@@ -857,6 +858,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="readFive">Level 5 intro</option><option value="five">Level 5 puzzle</option><option value="complete">End screen</option>
       </select>
       <button id="dev-pass" type="button" title="Development only: run the next-level transition">Skip →</button>
+      <button id="dev-audio" type="button" title="Development only: test glitch audio">Test sound ♪</button>
     </aside>
     <main>
       <section id="home" class="hero" aria-labelledby="home-title">
@@ -1470,46 +1472,46 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         if(!AudioContextClass)return;
         if(!glitchAudioContext)glitchAudioContext=new AudioContextClass();
         const ctx=glitchAudioContext;
-        if(ctx.state==='suspended')ctx.resume().catch(()=>{});
-        const start=ctx.currentTime+0.012;
-        const duration=.54;
-        const level=ctx.createGain();
-        level.gain.setValueAtTime(0.0001,start);
-        level.gain.exponentialRampToValueAtTime(.12,start+.025);
-        level.gain.setValueAtTime(.075,start+.10);
-        level.gain.setValueAtTime(.11,start+.19);
-        level.gain.setValueAtTime(.045,start+.27);
-        level.gain.setValueAtTime(.09,start+.37);
-        level.gain.exponentialRampToValueAtTime(.0001,start+duration);
-        level.connect(ctx.destination);
-        const noise=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*duration),ctx.sampleRate);
-        const samples=noise.getChannelData(0);
-        for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*(.52+.48*Math.sin(i/31));
-        const source=ctx.createBufferSource();
-        source.buffer=noise;
-        const bandpass=ctx.createBiquadFilter();
-        bandpass.type='bandpass';
-        bandpass.frequency.setValueAtTime(420,start);
-        bandpass.frequency.exponentialRampToValueAtTime(3100,start+.23);
-        bandpass.frequency.exponentialRampToValueAtTime(300,start+duration);
-        bandpass.Q.value=.9;
-        source.connect(bandpass);
-        bandpass.connect(level);
-        source.start(start);
-        source.stop(start+duration);
-        const tone=ctx.createOscillator();
-        const toneLevel=ctx.createGain();
-        tone.type='sawtooth';
-        tone.frequency.setValueAtTime(170,start);
-        tone.frequency.exponentialRampToValueAtTime(62,start+duration);
-        toneLevel.gain.setValueAtTime(.018,start);
-        toneLevel.gain.exponentialRampToValueAtTime(.0001,start+duration);
-        tone.connect(toneLevel);
-        toneLevel.connect(ctx.destination);
-        tone.start(start);
-        tone.stop(start+duration);
-      }catch(error){/* The visual glitch works even if audio is unavailable. */}
+        const schedule=()=>{
+          const start=ctx.currentTime+.015;
+          const duration=.60;
+          const compressor=ctx.createDynamicsCompressor();
+          compressor.threshold.value=-18;
+          compressor.knee.value=7;
+          compressor.ratio.value=5;
+          compressor.attack.value=.003;
+          compressor.release.value=.13;
+          compressor.connect(ctx.destination);
+          const master=ctx.createGain();
+          master.gain.setValueAtTime(.0001,start);
+          master.gain.linearRampToValueAtTime(.6,start+.014);
+          master.gain.setValueAtTime(.6,start+.16);
+          master.gain.setValueAtTime(.15,start+.19);
+          master.gain.setValueAtTime(.58,start+.25);
+          master.gain.setValueAtTime(.12,start+.38);
+          master.gain.setValueAtTime(.5,start+.43);
+          master.gain.exponentialRampToValueAtTime(.0001,start+duration);
+          master.connect(compressor);
+          const noise=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*duration),ctx.sampleRate);
+          const samples=noise.getChannelData(0);
+          for(let i=0;i<samples.length;i++)samples[i]=Math.random()*2-1;
+          const source=ctx.createBufferSource();source.buffer=noise;
+          const highpass=ctx.createBiquadFilter();highpass.type='highpass';highpass.frequency.value=650;
+          const noiseGain=ctx.createGain();noiseGain.gain.value=.34;
+          source.connect(highpass);highpass.connect(noiseGain);noiseGain.connect(master);
+          source.start(start);source.stop(start+duration);
+          const tone=ctx.createOscillator();tone.type='sawtooth';
+          tone.frequency.setValueAtTime(340,start);
+          tone.frequency.exponentialRampToValueAtTime(95,start+duration);
+          const toneGain=ctx.createGain();toneGain.gain.value=.22;
+          tone.connect(toneGain);toneGain.connect(master);
+          tone.start(start);tone.stop(start+duration);
+        };
+        if(ctx.state==='running')schedule();
+        else ctx.resume().then(schedule).catch(()=>{});
+      }catch(error){console.warn('Glitch audio unavailable:',error);}
     }
+    document.getElementById('dev-audio').addEventListener('click',playInterference);
     let fiveFlashPending=false;
     function flashToLevelFive(){
       if(fiveFlashPending)return;
