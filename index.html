@@ -1343,13 +1343,13 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
                 <div id="four-map" role="application" aria-label="Interactive town map"></div>
               </div>
               <p class="four-location">Your marker: <strong id="four-location-name">Not placed</strong></p>
-              <div class="four-editor-note"><span>NOTE TO WHOEVER IS HANDLING THIS</span><p>I've been looking through these photographs again. It's funny how much of a place you remember from a sign or the corner of a building, and how little you remember about where you were standing. I thought the street map might help us put them back in order.</p></div>
+              <div class="four-editor-note"><span>NOTE TO WHOEVER IS HANDLING THIS</span><p>The description attached to PH–03 no longer matches the original inventory. I've left the photograph in this batch pending verification. Please don't amend the catalogue references without consulting me.</p></div>
             </div>
           </div>
           <div id="four-summary" class="four-summary" hidden>
             <h2>Recovered photographic records</h2>
             <div id="four-summary-items" class="four-record-grid"></div>
-            <div class="four-summary-editor"><span>NOTE TO WHOEVER IS HANDLING THIS</span><p>I've been looking through these photographs again. It's funny how much of a place you remember from a sign or the corner of a building, and how little you remember about where you were standing. I thought the street map might help us put them back in order.</p></div>
+            <div class="four-summary-editor"><span>NOTE TO WHOEVER IS HANDLING THIS</span><p>The description attached to PH–03 no longer matches the original inventory. I've left the photograph in this batch pending verification. Please don't amend the catalogue references without consulting me.</p></div>
             <button id="four-finish" class="primary" type="button">Continue</button>
           </div>
         </div>
@@ -2066,7 +2066,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       {name:'Library',lat:462,lng:811},
       {name:'Meridian Secondary School',lat:416,lng:1260}
     ];
-    const fourChecks=[{location:42,bearing:24},{location:34,bearing:14},{location:34,bearing:16}];
+    const fourChecks=[{location:75,bearing:45},{location:70,bearing:30},{location:85,bearing:35}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null,fourVerified=false;
     const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
     function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
@@ -2114,16 +2114,16 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
           return Math.hypot(lng-(a.lng+t*dx),lat-(a.lat+t*dy));
         };
         const locationOK=fourCurrent===0
-          ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:554,lng:1065},{lat:575,lng:1160})<=43
+          ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:535,lng:1010},{lat:590,lng:1330})<=85
           :fourCurrent===1
           // The station photograph covers a stretch of Station Road, not a single pinpoint.
-          ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:766,lng:955},{lat:731,lng:1285})<=45
+          ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:773,lng:900},{lat:721,lng:1360})<=80
           :distance<=fourChecks[fourCurrent].location;
         // The illustrated town map is not perspective-accurate enough to establish
         // which end of this Station Road section the photographer faced.
         // Accept either direction along its east–west axis for PH-02.
         const directionOK=fourCurrent===1
-          ?Math.min(heading,Math.abs(((Number(fourBearing.value)-100+540)%360)-180))<=25
+          ?Math.min(heading,Math.abs(((Number(fourBearing.value)-100+540)%360)-180))<=35
           :heading<=fourChecks[fourCurrent].bearing;
                 if(!locationOK||!directionOK){
           const subtleHints=[
@@ -2160,7 +2160,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     const directoryModal=document.getElementById('directory-modal');
     let directoryReturnFocus=null;
     const photoNotes=[
-      '<p class="directory-kicker">FIELD NOTE · PH–01</p><h2>The shopping street</h2><p>The clock tower dominates the skyline in this view, but the photograph was not taken from the square itself. The nearby rooftops may help identify the approach.</p>',
+      '<p class="directory-kicker">FIELD NOTE · PH–01</p><h2>Along the road</h2><p>I was looking at the school building again, and then I noticed how much of the street is in the photograph too. The older buildings farther along seemed familiar, though I might be mixing things up. Perhaps the position of the school and the road between them will help?</p>',
       '<p class="directory-kicker">FIELD NOTE · PH–02</p><h2>Commercial frontage</h2><p>The modern frontage is on one side of the street, older premises on the other. One business sign is visible farther down the road; check which way the street runs.</p>',
       '<p class="directory-kicker">FIELD NOTE · PH–03</p><h2>A small distraction</h2><p>Oh, this one is probably not important! Someone on the team seems to have wandered off for a break and taken a photograph while they were at it. I almost left it out, actually. But it was filed with the others, so we might as well keep it. Maybe the building in the background will help you place it!</p>'
     ];
