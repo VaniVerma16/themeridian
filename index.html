@@ -1460,6 +1460,11 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     const developerPreview = new URLSearchParams(window.location.search).get("dev") === "1";
     const devNavigation = document.getElementById("dev-navigation");
     if (developerPreview) devNavigation.hidden = false;
+    if (!developerPreview) {
+      document.querySelector('#completed .kicker').textContent='Preview complete';
+      document.querySelector('#completed-title').textContent='Thank you for helping us.';
+      document.querySelector('#completed p').textContent="That's all we've prepared for this preview. Your work has been very helpful!";
+    }
 
     const archivedArticles={
       orchards:{title:"New Concerns Raised About Pesticide Use Near Orchards",section:"LOCAL NEWS",paragraphs:[
