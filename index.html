@@ -1189,8 +1189,10 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 @media(prefers-reduced-motion:reduce){#level-five .archive-redaction::before,#level-five .archive-redaction::after{animation:none}}
 #dev-navigation[hidden]{display:none!important}
 #completed{position:relative}
-#completed .beta-corner-note{position:absolute;right:clamp(14px,4vw,56px);bottom:18px;max-width:300px;text-align:right;font:italic 13px/1.55 Georgia,serif;color:#b5afa5;opacity:.88}
-@media(max-width:700px){#completed .beta-corner-note{position:static;margin:35px 16px 0 auto;max-width:290px;font-size:12px}}
+/* Keep the informal demo credit outside the centered completion flow. */
+#completed{position:relative;padding-bottom:180px!important;min-height:680px}
+#completed .beta-corner-note{position:absolute!important;top:auto!important;left:auto!important;right:24px!important;bottom:20px!important;width:min(290px,calc(100% - 48px))!important;max-width:290px!important;margin:0!important;padding:0!important;text-align:right!important;font:italic 13px/1.5 Georgia,serif!important;color:#aaa39a!important;opacity:.85;transform:none!important;clear:both;z-index:1}
+@media(max-width:700px){#completed{padding-bottom:26px!important;min-height:0}#completed .beta-corner-note{position:static!important;margin:52px 16px 0 auto!important;width:min(290px,calc(100% - 32px))!important;text-align:right!important;font-size:12px!important}}
 </style>
 </head>
 <body>
