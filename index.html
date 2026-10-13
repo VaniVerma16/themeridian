@@ -1118,7 +1118,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         if(Number.isInteger(data.fourCurrent)&&data.fourCurrent>=0&&data.fourCurrent<3){fourCurrent=data.fourCurrent;renderFourPhoto();}
         const section=progressOrder.includes(data.section)&&progressOrder.indexOf(data.section)<=furthestSection?data.section:'home';
         show(section,false);
-        if(data.draftFour&&section==='four'&&window.L){updateFourMarker(data.draftFour.lat,data.draftFour.lng);fourBearing.value=String(data.draftFour.bearing||0);updateBearing();}
+        if(data.draftFour&&section==='four'&&window.L)requestAnimationFrame(()=>{if(!fourLeaflet)ensureFourMap();if(fourLeaflet){updateFourMarker(data.draftFour.lat,data.draftFour.lng);fourBearing.value=String(data.draftFour.bearing||0);updateBearing();if(data.fourVerified){fourVerified=true;document.getElementById('four-next').textContent=fourCurrent===2?'Review reconstructed records':'Next photograph';}}});
       }catch(err){show('home',false);}
       finally{sessionRestoring=false;}
     }
