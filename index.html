@@ -2041,7 +2041,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     });
     renderCaseStage();
     document.getElementById('five-continue').addEventListener('click',()=>show('complete'));
-    document.getElementById('four-finish').addEventListener('click',()=>{if(developerPreview)flashToLevelFive();else show('complete')});
+    document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     const fourPhotos=[
       {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:543,lng:290,bearing:110},site:'Clock Tower / High Street'},
       {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:510,lng:775,bearing:90},site:'Station Road / Filling Station'},
@@ -2224,7 +2224,6 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('dev-audio').addEventListener('click',()=>{if(developerPreview)playInterference()});
     let fiveFlashPending=false;
     function flashToLevelFive(){
-      if(!developerPreview){show('complete');return;}
       if(fiveFlashPending)return;
       fiveFlashPending=true;
       playInterference(()=>{
@@ -2232,7 +2231,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         overlay.classList.add('active');
         window.setTimeout(()=>{
           overlay.classList.remove('active');
-          show('readFive');
+          show(developerPreview?'readFive':'complete');
           fiveFlashPending=false;
         },INTERFERENCE_SECONDS*1000);
       });
