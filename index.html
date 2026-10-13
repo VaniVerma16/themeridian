@@ -1465,6 +1465,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     }
     // A short, self-contained interference sound. Starts only on the player's click.
     // No audio downloads or autoplay permissions required.
+    // Horror-sting synthesis: attack, dissonant cluster, noisy scrape and sub impact.
+    // Web Audio envelopes and scheduled sources keep the entire sting within the visual interruption.
+    const INTERFERENCE_SECONDS=.64;
     let glitchAudioContext=null;
     function playInterference(){
       try{
@@ -1473,45 +1476,51 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         if(!glitchAudioContext)glitchAudioContext=new AudioContextClass();
         const ctx=glitchAudioContext;
         const play=()=>{
-          const t=ctx.currentTime+.012, duration=.49;
-          // Compact horror sting: clustered shrill strings, a low impact and a decaying scrape.
-          // Gentle master gain and smooth attack avoid uncomfortable digital clipping.
+          const t=ctx.currentTime+.008, end=t+INTERFERENCE_SECONDS;
           const master=ctx.createGain();
           master.gain.setValueAtTime(.0001,t);
-          master.gain.linearRampToValueAtTime(.095,t+.014);
-          master.gain.setValueAtTime(.095,t+.09);
-          master.gain.exponentialRampToValueAtTime(.0001,t+duration);
-          master.connect(ctx.destination);
-          [622,659,740,831].forEach((frequency,i)=>{
-            const osc=ctx.createOscillator();osc.type='sawtooth';
+          master.gain.linearRampToValueAtTime(.20,t+.008);
+          master.gain.setValueAtTime(.16,t+.075);
+          master.gain.setValueAtTime(.11,t+.19);
+          master.gain.linearRampToValueAtTime(.14,t+.32);
+          master.gain.exponentialRampToValueAtTime(.0001,end);
+          const limiter=ctx.createDynamicsCompressor();
+          limiter.threshold.value=-19;limiter.knee.value=7;limiter.ratio.value=12;
+          limiter.attack.value=.002;limiter.release.value=.1;
+          master.connect(limiter);limiter.connect(ctx.destination);
+          // A dense, clashing brass/string stab, intentionally not a melody.
+          [330,349,466,494,698,739].forEach((frequency,i)=>{
+            const osc=ctx.createOscillator();osc.type=i%2?'sawtooth':'square';
             osc.frequency.setValueAtTime(frequency,t);
-            osc.frequency.linearRampToValueAtTime(frequency*(.87+i*.014),t+.31);
-            const gain=ctx.createGain();gain.gain.value=.085;
-            const filter=ctx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=1850;
-            osc.connect(filter);filter.connect(gain);gain.connect(master);
-            osc.start(t);osc.stop(t+duration);
+            osc.frequency.exponentialRampToValueAtTime(frequency*.82,end);
+            const eq=ctx.createBiquadFilter();eq.type='lowpass';eq.frequency.value=2100;
+            const layer=ctx.createGain();layer.gain.value=.085;
+            osc.connect(eq);eq.connect(layer);layer.connect(master);
+            osc.start(t);osc.stop(end);
           });
-          const low=ctx.createOscillator();low.type='triangle';
-          low.frequency.setValueAtTime(118,t);
-          low.frequency.exponentialRampToValueAtTime(51,t+.26);
-          const lowGain=ctx.createGain();lowGain.gain.value=.32;
-          low.connect(lowGain);lowGain.connect(master);
-          low.start(t);low.stop(t+.3);
-          const buffer=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*.31),ctx.sampleRate);
+          // Scraping noise enters immediately; its energy dies away with the image.
+          const buffer=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*INTERFERENCE_SECONDS),ctx.sampleRate);
           const data=buffer.getChannelData(0);
-          for(let i=0;i<data.length;i++)data[i]=Math.random()*2-1;
-          const scrape=ctx.createBufferSource();scrape.buffer=buffer;
-          const filter=ctx.createBiquadFilter();filter.type='bandpass';
-          filter.frequency.setValueAtTime(1700,t);
-          filter.frequency.exponentialRampToValueAtTime(400,t+.3);
-          filter.Q.value=.6;
-          const scrapeGain=ctx.createGain();scrapeGain.gain.value=.17;
-          scrape.connect(filter);filter.connect(scrapeGain);scrapeGain.connect(master);
-          scrape.start(t);scrape.stop(t+.31);
+          for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1);
+          const noise=ctx.createBufferSource();noise.buffer=buffer;
+          const band=ctx.createBiquadFilter();band.type='bandpass';
+          band.frequency.setValueAtTime(2600,t);
+          band.frequency.exponentialRampToValueAtTime(500,end);
+          band.Q.value=.7;
+          const ng=ctx.createGain();ng.gain.value=.21;
+          noise.connect(band);band.connect(ng);ng.connect(master);
+          noise.start(t);noise.stop(end);
+          // Low transient gives a physical impact, without an ear-piercing peak.
+          const bass=ctx.createOscillator();bass.type='triangle';
+          bass.frequency.setValueAtTime(95,t);
+          bass.frequency.exponentialRampToValueAtTime(48,t+.22);
+          const bg=ctx.createGain();bg.gain.setValueAtTime(.36,t);
+          bg.gain.exponentialRampToValueAtTime(.0001,t+.26);
+          bass.connect(bg);bg.connect(master);bass.start(t);bass.stop(t+.26);
         };
         if(ctx.state==='running')play();
         else ctx.resume().then(play).catch(()=>{});
-      }catch(error){console.warn('Glitch audio unavailable:',error);}
+      }catch(error){console.warn('Interference audio unavailable:',error);}
     }
     document.getElementById('dev-audio').addEventListener('click',playInterference);
     let fiveFlashPending=false;
@@ -1525,7 +1534,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         overlay.classList.remove('active');
         show('readFive');
         fiveFlashPending=false;
-      },640);
+      },INTERFERENCE_SECONDS*1000);
     }
     renderLogicGrid();renderAnswers();
     renderClippings();
