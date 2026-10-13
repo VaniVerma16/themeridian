@@ -1473,27 +1473,41 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         if(!glitchAudioContext)glitchAudioContext=new AudioContextClass();
         const ctx=glitchAudioContext;
         const play=()=>{
-          const t=ctx.currentTime+.012;
-          const master=ctx.createGain();master.gain.value=.23;master.connect(ctx.destination);
-          // Brief, slightly dissonant piano-like stabs, rather than buzzing or percussion.
-          function key(frequency,when,volume){
-            const note=ctx.createGain();
-            note.gain.setValueAtTime(.0001,when);
-            note.gain.exponentialRampToValueAtTime(volume,when+.008);
-            note.gain.exponentialRampToValueAtTime(volume*.32,when+.075);
-            note.gain.exponentialRampToValueAtTime(.0001,when+.31);
-            note.connect(master);
-            [1,2,3].forEach((harmonic,i)=>{
-              const osc=ctx.createOscillator();osc.type='sine';
-              osc.frequency.value=frequency*harmonic;
-              const partial=ctx.createGain();partial.gain.value=[.75,.18,.07][i];
-              osc.connect(partial);partial.connect(note);
-              osc.start(when);osc.stop(when+.32);
-            });
-          }
-          key(523.25,t,.33);
-          key(554.37,t+.07,.27);
-          key(392.00,t+.16,.18);
+          const t=ctx.currentTime+.012, duration=.49;
+          // Compact horror sting: clustered shrill strings, a low impact and a decaying scrape.
+          // Gentle master gain and smooth attack avoid uncomfortable digital clipping.
+          const master=ctx.createGain();
+          master.gain.setValueAtTime(.0001,t);
+          master.gain.linearRampToValueAtTime(.095,t+.014);
+          master.gain.setValueAtTime(.095,t+.09);
+          master.gain.exponentialRampToValueAtTime(.0001,t+duration);
+          master.connect(ctx.destination);
+          [622,659,740,831].forEach((frequency,i)=>{
+            const osc=ctx.createOscillator();osc.type='sawtooth';
+            osc.frequency.setValueAtTime(frequency,t);
+            osc.frequency.linearRampToValueAtTime(frequency*(.87+i*.014),t+.31);
+            const gain=ctx.createGain();gain.gain.value=.085;
+            const filter=ctx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=1850;
+            osc.connect(filter);filter.connect(gain);gain.connect(master);
+            osc.start(t);osc.stop(t+duration);
+          });
+          const low=ctx.createOscillator();low.type='triangle';
+          low.frequency.setValueAtTime(118,t);
+          low.frequency.exponentialRampToValueAtTime(51,t+.26);
+          const lowGain=ctx.createGain();lowGain.gain.value=.32;
+          low.connect(lowGain);lowGain.connect(master);
+          low.start(t);low.stop(t+.3);
+          const buffer=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*.31),ctx.sampleRate);
+          const data=buffer.getChannelData(0);
+          for(let i=0;i<data.length;i++)data[i]=Math.random()*2-1;
+          const scrape=ctx.createBufferSource();scrape.buffer=buffer;
+          const filter=ctx.createBiquadFilter();filter.type='bandpass';
+          filter.frequency.setValueAtTime(1700,t);
+          filter.frequency.exponentialRampToValueAtTime(400,t+.3);
+          filter.Q.value=.6;
+          const scrapeGain=ctx.createGain();scrapeGain.gain.value=.17;
+          scrape.connect(filter);filter.connect(scrapeGain);scrapeGain.connect(master);
+          scrape.start(t);scrape.stop(t+.31);
         };
         if(ctx.state==='running')play();
         else ctx.resume().then(play).catch(()=>{});
