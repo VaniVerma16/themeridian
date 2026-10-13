@@ -809,6 +809,24 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 #player-history .history-menu{z-index:3002}
 #level-four,#level-four .four-workspace,#level-four .four-map-col{z-index:auto}
 #four-map .leaflet-container,#four-map .leaflet-pane{z-index:auto}
+
+#level-four .four-summary{max-width:none;width:100%;padding:6px 0 25px}
+#level-four .four-summary h2{font-size:28px;margin:0 0 17px}
+.four-record-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.four-record{min-width:0;border:1px solid #4b4d49;padding:12px;background:#1b1d1c}
+.four-record>img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#30312f}
+.four-record-ref{margin-top:12px;font:11px Georgia,serif;letter-spacing:.10em;color:#ada89f}
+.four-record h3{font:21px Georgia,serif;margin:7px 0 5px;color:#ebe6dc}
+.four-record-direction{font:13px Georgia,serif;color:#c0bbb3;margin:0 0 14px}
+.four-record-note{border-top:1px solid #55564f;padding-top:11px;font:14px/1.5 Georgia,serif;color:#d0ccc2}
+.four-record-note h2{font:17px Georgia,serif!important;margin:2px 0 6px!important;color:#e7e1d6}
+.four-record-note p{font:14px/1.5 Georgia,serif;margin:0;color:#c7c3b8}
+.four-record-note .directory-kicker{font-size:10px;letter-spacing:.08em;color:#99978e;margin:0 0 5px}
+.four-summary-editor{background:#e7dcb7;color:#343027;border-left:5px solid #b7a173;box-shadow:3px 4px 0 rgba(0,0,0,.25);padding:16px 20px;margin:20px 0;max-width:660px;transform:rotate(-.3deg)}
+.four-summary-editor span{font:bold 12px Georgia,serif;letter-spacing:.1em;color:#574b34}
+.four-summary-editor p{font:15px/1.5 Georgia,serif;margin:7px 0 0;color:#35302a}
+#four-summary-items p{border-bottom:0;padding:0}
+@media(max-width:850px){.four-record-grid{grid-template-columns:1fr}.four-record>img{max-height:280px;object-fit:contain}}
   </style>
 </head>
 <body>
@@ -966,7 +984,12 @@ body{overflow-x:clip;overscroll-behavior-x:none}
               <div class="four-editor-note"><span>EDITOR'S LOG</span><p>Some of the original catalogue entries appear to have been altered since my last review. <strong>Please consult me before editing the source records again.</strong></p></div>
             </div>
           </div>
-          <div id="four-summary" class="four-summary" hidden><h2>Photographic records verified</h2><p>All three photographic locations and viewing directions have been verified against the reconstructed town survey.</p><div id="four-summary-items"></div><button id="four-finish" class="primary" type="button">Continue</button></div>
+          <div id="four-summary" class="four-summary" hidden>
+            <h2>Recovered photographic records</h2>
+            <div id="four-summary-items" class="four-record-grid"></div>
+            <div class="four-summary-editor"><span>EDITOR'S LOG</span><p>Some of the original catalogue entries appear to have been altered since my last review. <strong>Please consult me before editing the source records again.</strong></p></div>
+            <button id="four-finish" class="primary" type="button">Continue</button>
+          </div>
         </div>
       </section>
       <section id="read-five" class="reading-page" aria-label="Original case file introduction" hidden>
@@ -1391,7 +1414,16 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       }
       if(fourCurrent<2){fourCurrent++;renderFourPhoto();return;}
       const list=document.getElementById('four-summary-items');list.replaceChildren();
-      fourGuesses.forEach(guess=>{const p=document.createElement('p');p.textContent=guess.ref+' — '+guess.location+' · facing '+formatBearing(guess.bearing);list.appendChild(p)});
+      fourGuesses.forEach((guess,i)=>{
+        const item=fourPhotos[i];
+        const record=document.createElement('article');record.className='four-record';
+        const image=document.createElement('img');image.src=item.file;image.alt='Recovered photograph '+item.ref;image.loading='lazy';record.appendChild(image);
+        const ref=document.createElement('div');ref.className='four-record-ref';ref.textContent=item.ref+' · VERIFIED';record.appendChild(ref);
+        const location=document.createElement('h3');location.textContent=guess.location;record.appendChild(location);
+        const bearing=document.createElement('p');bearing.className='four-record-direction';bearing.textContent='Camera facing '+formatBearing(guess.bearing);record.appendChild(bearing);
+        const note=document.createElement('div');note.className='four-record-note';note.innerHTML=photoNotes[i];record.appendChild(note);
+        list.appendChild(record);
+      });
       document.querySelector('.four-workspace').hidden=true;
       document.getElementById('four-summary').hidden=false;
     });
