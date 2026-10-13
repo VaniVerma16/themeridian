@@ -2053,7 +2053,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     // New survey uses image pixels (1448 x 1086); Leaflet lat = 1086 - image y.
     const fourPhotos=[
       {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:565,lng:1105,bearing:270},site:'Albert Road / Meridian Secondary School'},
-      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:742,lng:1168,bearing:286},site:'Station Road / Filling Station approach'},
+      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:753,lng:1070,bearing:286},site:'Station Road / Filling Station approach'},
       {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:454,lng:1056,bearing:319},site:'Prince Arthur / Milton Street corner'}
     ];
     const fourLandmarks=[
@@ -2115,8 +2115,16 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         };
         const locationOK=fourCurrent===0
           ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:554,lng:1065},{lat:575,lng:1160})<=43
+          :fourCurrent===1
+          // The station photograph covers a stretch of Station Road, not a single pinpoint.
+          ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:766,lng:955},{lat:731,lng:1285})<=45
           :distance<=fourChecks[fourCurrent].location;
-        const directionOK=heading<=fourChecks[fourCurrent].bearing;
+        // The illustrated town map is not perspective-accurate enough to establish
+        // which end of this Station Road section the photographer faced.
+        // Accept either direction along its east–west axis for PH-02.
+        const directionOK=fourCurrent===1
+          ?Math.min(heading,Math.abs(((Number(fourBearing.value)-100+540)%360)-180))<=25
+          :heading<=fourChecks[fourCurrent].bearing;
                 if(!locationOK||!directionOK){
           const subtleHints=[
             ['Check the buildings and road junctions visible in the photograph before choosing a spot.','Compare the arrangement of nearby streets and buildings, rather than pinning the landmark itself.','The location is plausible; use the direction of the receding road and the side of the frame occupied by the landmark.'],
