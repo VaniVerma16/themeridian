@@ -1455,7 +1455,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     </div>
     <aside class="case-right" aria-label="Working notes and reconstruction">
       <section class="case-scratch"><div class="case-side-heading">NOTEPAD <span>Autosaved</span></div><textarea id="case-notepad" aria-label="Your private case notes" placeholder="Use this for taking down notes…" rows="7"></textarea></section>
-      <section id="case-guidance" class="case-guidance"><div class="case-side-heading">A FEW NOTES FROM YOURS TRULY</div><p id="case-narrator-note"></p></section>
+      <section id="case-guidance" class="case-guidance"><div class="case-side-heading">MY NOTES</div><p id="case-narrator-note"></p></section>
       <section class="case-form" id="case-form-panel">
 <div class="case-side-heading">CASE RECONSTRUCTION <span id="case-stage-count">01 / 04</span></div><p class="case-quick-guide">Open the case notebook and loose slips on the desk. Answer four questions using those records. Your findings are saved as you go.</p>
 <div class="case-progress" id="case-progress"></div>
@@ -1857,20 +1857,20 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('begin-five').addEventListener('click',()=>{if(developerPreview)enterPuzzle('five','OPENING CASE DOSSIER')});
     const caseFiles=[
   {
-    "type": "STORYTELLER'S NOTEBOOK",
+    "type": "NOTEBOOK OF [[REDACTED]]",
     "title": "The first call",
     "date": "21 FEB 1997",
     "ref": "NEWS/97-01",
     "body": [
-      "Friday, 21 February. I've started a folder, although I'm not completely sure yet what sort of story this is. A man was found dead early this morning, somewhere by the canal path. Police were called shortly after 6:40. There was an ambulance, but it was already too late.",
-      "I rang the press office. They would only say the eastern side of town, near the canal access path, and that they were still trying to identify him. They sounded tired. I probably asked the same question twice.",
-      "I keep thinking about how ordinary that path is. People take it to the station every day. That isn't useful for the article, I know, but I wanted to write it down. We should find out exactly where he was discovered.",
+      "Friday, 21 February. I've started a folder, although I'm not completely sure yet what sort of a story this is. A man was found dead early this morning, somewhere by the canal path I think? Police were called shortly after 6:40. There was an ambulance, but it was already too late.",
+      "I rang the press office. They would only say the eastern side of town, near the canal access path, and that they were still trying to identify him. They sounded tired. I probably asked the same question twice!",
+      "You know, I keep thinking about how ordinary that path is. People take it to the station every day. That isn't useful for the article, I know, but I wanted to write it down. We should find out exactly where he was discovered.",
       "Nothing about a cause yet. I'm going to keep the statements together and see what turns up."
     ],
-    "note": "This was the beginning of the story. I suppose I had no idea how many pages it would take."
+    "note": "I think this one is very initial. Can't tell a lot from it."
   },
   {
-    "type": "STORYTELLER'S NOTEBOOK",
+    "type": "NOTEBOOK OF [[REDACTED]]",
     "title": "A name, perhaps",
     "date": "24 FEB 1997",
     "ref": "NEWS/97-02",
@@ -1884,7 +1884,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "note": "I remember searching the old papers. It was surprisingly easy to get distracted by them."
   },
   {
-    "type": "STORYTELLER'S NOTEBOOK",
+    "type": "NOTEBOOK OF [[REDACTED]]",
     "title": "The person near the path",
     "date": "25 FEB 1997",
     "ref": "NEWS/97-03",
@@ -1897,7 +1897,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "note": "That witness was trying to help, even when they weren't sure. I hope I haven't made the account sound more definite than it was."
   },
   {
-    "type": "STORYTELLER'S NOTEBOOK",
+    "type": "NOTEBOOK OF [[REDACTED]]",
     "title": "What we know by April",
     "date": "APR 1997",
     "ref": "NEWS/97-04",
@@ -1912,7 +1912,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 ];
     const caseInserts=[
   {
-    "tag": "STORYTELLER / ENQUIRY PAGE",
+    "tag": "[[REDACTED]] / ENQUIRY PAGE",
     "title": "The three names",
     "text": "Monday, 24 Feb, morning. These were the names I found while trying to match the police description: Adam E. — 18 January 1970; Arthur E. — 6 May 1965; Martin Vale — 9 November 1972. I keep coming back to the first one, but that's not confirmation. I'll compare them with the update when it arrives."
   },
@@ -1922,7 +1922,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "text": "24 Feb, 2:05 p.m. Police follow-up: deceased aged 27; surname starts with E; birthday falls in January. Compare with the enquiry page. Adam E. is the only match among the three listed. Full published name still to be verified."
   },
   {
-    "tag": "STORYTELLER / MAP SCRAP",
+    "tag": "[[REDACTED]] / MAP SCRAP",
     "title": "The canal footbridge",
     "text": "Friday afternoon. I finally got a more precise place for our map: eastern canal towpath, by the old railway footbridge. That's where he was found. I walked past that bridge once, I think. Station Road is nearby; so is the pub, but neither was given as the place of discovery."
   },
@@ -1932,16 +1932,33 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "text": "April. Medical testimony places death between approximately 10 p.m. on Thursday 20 February and 2 a.m. on Friday 21 February 1997. This is an estimate; the body was discovered later that morning."
   },
   {
-    "tag": "STORYTELLER / MARGIN NOTE",
+    "tag": "[[REDACTED]] / MARGIN NOTE",
     "title": "What the doctor said",
     "text": "April. I'm writing this separately so I don't lose the wording: fatal blunt-force injury to the head. Not drowning, not alcohol poisoning, according to the evidence heard. I kept hoping the doctor would be able to say how the blow happened, but that wasn't established."
   },
   {
     "tag": "COLLEAGUE / ARCHIVE & DRAFT",
     "title": "The feature title",
-    "text": "24 Feb — Located the September 1996 engagement announcement for Adam E. and his fiancée; it mentions rebuilding after difficult years. Still useful as personal background, subject to the identity check. For the planned feature, working title: The Death of the Ordinary Man. Suggested by: [[REDACTED]]. The storyteller has the rest of the background pages. — E. Mercer"
+    "text": "24 Feb — Located the September 1996 engagement announcement for Adam E. and his fiancée; it mentions rebuilding after difficult years. Still useful as personal background, subject to the identity check. For the planned feature, working title: The Death of the Ordinary Man. Suggested by: [[REDACTED]]. [[REDACTED]] has the rest of the background pages. — E. Mercer"
   }
 ];
+    // Draw archival redactions as the same corrupted mark in every surface,
+    // including small document labels; never show the placeholder literally.
+    function showRedactedText(target,value){
+      target.replaceChildren();
+      const marker='[[REDACTED]]';
+      const fragments=String(value).split(marker);
+      fragments.forEach((fragment,index)=>{
+        if(index){
+          const seal=document.createElement('span');
+          seal.className='archive-redaction';
+          seal.textContent='██████████';
+          seal.setAttribute('aria-label','name redacted');
+          target.appendChild(seal);
+        }
+        if(fragment)target.appendChild(document.createTextNode(fragment));
+      });
+    }
     const extraHost=document.getElementById('case-extra-cards');
     // Inline critical layout so the evidence inserts retain their paper appearance
     // even if an earlier legacy stylesheet rule conflicts with this section.
@@ -1950,7 +1967,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     extraHost.style.gap='12px';
     caseInserts.forEach((item,i)=>{
       const btn=document.createElement('button');btn.type='button';btn.className='case-extra-card';
-      const k=document.createElement('small');k.textContent=item.tag;const title=document.createElement('span');title.textContent=item.title;
+      const k=document.createElement('small');showRedactedText(k,item.tag);const title=document.createElement('span');title.textContent=item.title;
       btn.append(k,title);
       btn.style.setProperty('display','flex','important');
       btn.style.setProperty('flex-direction','column','important');
@@ -1976,18 +1993,9 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       title.style.setProperty('font','17px/1.25 Georgia,serif','important');
       title.style.setProperty('color','#30291e','important');
       btn.addEventListener('click',()=>{
-        document.getElementById('case-extra-type').textContent=item.tag;
+        showRedactedText(document.getElementById('case-extra-type'),item.tag);
         document.getElementById('case-extra-title').textContent=item.title;
-        const slipText=document.getElementById('case-extra-text');
-        slipText.replaceChildren();
-        const marker='[[REDACTED]]',redactionAt=item.text.indexOf(marker);
-        if(redactionAt>=0){
-          slipText.append(document.createTextNode(item.text.slice(0,redactionAt)));
-          const seal=document.createElement('span');
-          seal.className='archive-redaction';seal.textContent='██████████';
-          seal.setAttribute('aria-label','name redacted');
-          slipText.append(seal,document.createTextNode(item.text.slice(redactionAt+marker.length)));
-        }else slipText.textContent=item.text;
+        showRedactedText(document.getElementById('case-extra-text'),item.text);
         document.getElementById('case-extra-view').hidden=false;
         extraHost.querySelectorAll('button').forEach((b,n)=>b.classList.toggle('selected',n===i));
       });extraHost.appendChild(btn);
@@ -2009,19 +2017,10 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       paper.replaceChildren();
       const heading=document.createElement('div');heading.className='case-paper-heading';
       heading.innerHTML='<span>THE MERIDIAN · NEWSROOM ARCHIVE</span><span>'+file.ref+'</span>';paper.appendChild(heading);
-      const kind=document.createElement('div');kind.className='case-paper-kind';kind.textContent=file.type;paper.appendChild(kind);
+      const kind=document.createElement('div');kind.className='case-paper-kind';showRedactedText(kind,file.type);paper.appendChild(kind);
       const h=document.createElement('h2');h.textContent=file.title;paper.appendChild(h);
       const date=document.createElement('p');date.className='case-paper-date';date.textContent='FILED '+file.date;paper.appendChild(date);
-      file.body.forEach(t=>{
-        const p=document.createElement('p');const marker='[[REDACTED]]',at=t.indexOf(marker);
-        if(at>=0){
-          p.appendChild(document.createTextNode(t.slice(0,at)));
-          const seal=document.createElement('span');seal.className='archive-redaction';
-          seal.textContent='██████████';seal.setAttribute('aria-label','name redacted');
-          p.appendChild(seal,document.createTextNode(t.slice(at+marker.length)));
-        }else p.textContent=t;
-        paper.appendChild(p);
-      });
+      file.body.forEach(t=>{const p=document.createElement('p');showRedactedText(p,t);paper.appendChild(p)});
       const foot=document.createElement('div');foot.className='case-paper-foot';foot.textContent='RETAINED NEWSROOM COPY · NOT AN OFFICIAL CASE FILE';paper.appendChild(foot);
       document.getElementById('case-page-counter').textContent='DOCUMENT 0'+(activeCaseFile+1)+' / 0'+caseFiles.length;
       document.getElementById('case-narrator-note').textContent=file.note;
