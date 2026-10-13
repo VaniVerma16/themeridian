@@ -1461,10 +1461,60 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         },90);
       },65);
     }
+    // A short, self-contained interference sound. Starts only on the player's click.
+    // No audio downloads or autoplay permissions required.
+    let glitchAudioContext=null;
+    function playInterference(){
+      try{
+        const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+        if(!AudioContextClass)return;
+        if(!glitchAudioContext)glitchAudioContext=new AudioContextClass();
+        const ctx=glitchAudioContext;
+        if(ctx.state==='suspended')ctx.resume().catch(()=>{});
+        const start=ctx.currentTime+0.012;
+        const duration=.54;
+        const level=ctx.createGain();
+        level.gain.setValueAtTime(0.0001,start);
+        level.gain.exponentialRampToValueAtTime(.12,start+.025);
+        level.gain.setValueAtTime(.075,start+.10);
+        level.gain.setValueAtTime(.11,start+.19);
+        level.gain.setValueAtTime(.045,start+.27);
+        level.gain.setValueAtTime(.09,start+.37);
+        level.gain.exponentialRampToValueAtTime(.0001,start+duration);
+        level.connect(ctx.destination);
+        const noise=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*duration),ctx.sampleRate);
+        const samples=noise.getChannelData(0);
+        for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*(.52+.48*Math.sin(i/31));
+        const source=ctx.createBufferSource();
+        source.buffer=noise;
+        const bandpass=ctx.createBiquadFilter();
+        bandpass.type='bandpass';
+        bandpass.frequency.setValueAtTime(420,start);
+        bandpass.frequency.exponentialRampToValueAtTime(3100,start+.23);
+        bandpass.frequency.exponentialRampToValueAtTime(300,start+duration);
+        bandpass.Q.value=.9;
+        source.connect(bandpass);
+        bandpass.connect(level);
+        source.start(start);
+        source.stop(start+duration);
+        const tone=ctx.createOscillator();
+        const toneLevel=ctx.createGain();
+        tone.type='sawtooth';
+        tone.frequency.setValueAtTime(170,start);
+        tone.frequency.exponentialRampToValueAtTime(62,start+duration);
+        toneLevel.gain.setValueAtTime(.018,start);
+        toneLevel.gain.exponentialRampToValueAtTime(.0001,start+duration);
+        tone.connect(toneLevel);
+        toneLevel.connect(ctx.destination);
+        tone.start(start);
+        tone.stop(start+duration);
+      }catch(error){/* The visual glitch works even if audio is unavailable. */}
+    }
     let fiveFlashPending=false;
     function flashToLevelFive(){
       if(fiveFlashPending)return;
       fiveFlashPending=true;
+      playInterference();
       const overlay=document.getElementById('five-interference');
       overlay.classList.add('active');
       window.setTimeout(()=>{
