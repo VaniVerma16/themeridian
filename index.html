@@ -2243,7 +2243,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
         outroMusic={ctx,master,sources};
       }catch(err){console.warn('Ambient audio unavailable',err);}
     }
-    function stopOutroMusic(){
+    function stopOutroMusic(closeAfterMs=430){
       if(!outroMusic)return;
       const music=outroMusic;outroMusic=null;
       try{
@@ -2253,8 +2253,63 @@ animation:outro-final-slice .14s steps(2,end) infinite}
         setTimeout(()=>{
           music.sources.forEach(source=>{try{source.stop();}catch(err){}});
           music.ctx.close().catch(()=>{});
-        },430);
+        },closeAfterMs);
       }catch(err){music.ctx.close().catch(()=>{});}
+    }
+
+    // One-shot jump-scare sting: a harsh impact followed by a dissonant,
+    // descending metallic chord and granular static. It uses the SAME audio
+    // context unlocked when the player clicked Continue, so playback does not
+    // depend on a second autoplay permission.
+    function playOutroJumpScare(){
+      if(!outroMusic||outroMusic.ctx.state!=='running')return;
+      try{
+        const ctx=outroMusic.ctx,t=ctx.currentTime+.015;
+        const limiter=ctx.createDynamicsCompressor();
+        limiter.threshold.value=-17;limiter.knee.value=4;
+        limiter.ratio.value=16;limiter.attack.value=.002;limiter.release.value=.18;
+        limiter.connect(ctx.destination);
+        const out=ctx.createGain();
+        out.gain.setValueAtTime(.0001,t);
+        out.gain.linearRampToValueAtTime(.72,t+.009);
+        out.gain.setValueAtTime(.67,t+.085);
+        out.gain.exponentialRampToValueAtTime(.0001,t+1.66);
+        out.connect(limiter);
+        // Instant distorted impact / tearing tape.
+        const n=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*1.7),ctx.sampleRate);
+        const d=n.getChannelData(0);
+        for(let i=0;i<d.length;i++){
+          const time=i/ctx.sampleRate,gate=(Math.floor(time*55)%7===0?.18:1);
+          const edge=time<.12?1:time<.32?.68:Math.exp(-(time-.32)*3.5);
+          d[i]=(Math.random()*2-1)*edge*gate;
+        }
+        const noise=ctx.createBufferSource(),hp=ctx.createBiquadFilter(),ng=ctx.createGain();
+        noise.buffer=n;hp.type='highpass';hp.frequency.value=350;
+        ng.gain.value=.40;noise.connect(hp);hp.connect(ng);ng.connect(out);
+        noise.start(t);noise.stop(t+1.69);
+        // A distorted bass drop against tritone- and semitone-spaced notes.
+        const pitches=[64,92.5,116.54,174.61,185.0];
+        pitches.forEach((freq,i)=>{
+          const o=ctx.createOscillator(),g=ctx.createGain(),low=ctx.createBiquadFilter();
+          o.type=i===0?'sine':i%2?'sawtooth':'square';
+          o.frequency.setValueAtTime(freq*(i===0?1.35:1),t);
+          o.frequency.exponentialRampToValueAtTime(freq*(i===0?.70:.83),t+1.3);
+          low.type='lowpass';low.frequency.value=i===0?420:1100;
+          g.gain.setValueAtTime(.0001,t);
+          g.gain.linearRampToValueAtTime(i===0?.32:.095,t+.012);
+          g.gain.exponentialRampToValueAtTime(.0001,t+1.65);
+          o.connect(low);low.connect(g);g.connect(out);
+          o.start(t);o.stop(t+1.68);
+        });
+        // Rapid, uneven stereo-independent pulses give the sting a glitch edge.
+        const chops=ctx.createOscillator(),chopGain=ctx.createGain();
+        chops.type='triangle';chops.frequency.value=43;
+        chopGain.gain.setValueAtTime(.0001,t);
+        chopGain.gain.linearRampToValueAtTime(.12,t+.015);
+        chopGain.gain.setValueAtTime(.12,t+.18);
+        chopGain.gain.exponentialRampToValueAtTime(.0001,t+.85);
+        chops.connect(chopGain);chopGain.connect(out);chops.start(t);chops.stop(t+.86);
+      }catch(err){console.warn('RED ACTED sting could not start',err);}
     }
     function outroTitle(year){
       const root=document.getElementById('five-outro');
@@ -2295,7 +2350,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
         ]},
       narrator:{duration:2.717,year:1986,speaker:'[REDACTED]',kind:'outro-narrator',
         cues:[{at:0,line:'Adam?'},{at:1.545,line:'Interesting.'}]},
-      unknown:{duration:5.381,cutoff:4.77,year:2027,speaker:'UNKNOWN',kind:'outro-unknown',
+      unknown:{duration:5.381,cutoff:4.695,year:2027,speaker:'UNKNOWN',kind:'outro-unknown',
         cues:[
           {at:0,line:'Wait, what?'},
           {at:1.81,line:"There's another file?"},
@@ -2311,13 +2366,18 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       document.getElementById('outro-title').hidden=true;
       document.getElementById('outro-dialogue').hidden=true;
       document.getElementById('outro-redacted-end').hidden=false;
-      stopOutroMusic();
-      outroDelay(()=>finishOutro(run),1450);
+      playOutroJumpScare();
+      // Leave the sound context alive until the full sting has rung out.
+      stopOutroMusic(2050);
+      outroDelay(()=>finishOutro(run),1750);
     }
     function playOutroVoice(key,run){
       if(!fiveOutroPending||run!==outroRun)return;
       const audio=outroMedia[key],conf=outroSpeech[key];
       let finished=false,lastCue=-1,fallback=false;
+      let hardCutTimer=null;
+      const cutoffNow=()=>{if(!finished&&key==='unknown'&&!fallback)advance();};
+      const onMediaProgress=()=>{if(conf.cutoff&&audio.currentTime>=conf.cutoff)cutoffNow();};
       const render=time=>{
         let next=0;
         conf.cues.forEach((cue,i)=>{if(time>=cue.at)next=i});
@@ -2328,7 +2388,11 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       };
       const advance=()=>{
         if(finished||run!==outroRun)return;
-        finished=true;audio.pause();audio.onended=null;audio.onerror=null;
+        finished=true;
+        if(key==='unknown')audio.muted=true; // Mute synchronously, then stop the source.
+        audio.pause();audio.onended=null;audio.onerror=null;
+        audio.removeEventListener('timeupdate',onMediaProgress);
+        if(hardCutTimer!==null){clearTimeout(hardCutTimer);hardCutTimer=null;}
         if(key==='narrator')outroGhost.pause();
         if(outroFrame)cancelAnimationFrame(outroFrame);
         if(key==='jane')outroDelay(()=>playOutroVoice('narrator',run),650);
@@ -2345,6 +2409,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
         outroDelay(advance,deadline*1000);
       };
       render(0);
+      audio.muted=false;
       audio.playbackRate=1;
       audio.volume=key==='narrator'?.86:.96;
       try{audio.currentTime=0;}catch(err){}
@@ -2359,14 +2424,20 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       const tick=()=>{
         if(finished||fallback||run!==outroRun)return;
         render(audio.currentTime||0);
-        // End on the consonants B-E-F, not the completed word 'before'.
-        if(conf.cutoff && audio.currentTime>=conf.cutoff){advance();return;}
+        // Cut decisively at B-E-F, without allowing the vowel in "before".
+        if(conf.cutoff && audio.currentTime>=conf.cutoff){cutoffNow();return;}
         outroFrame=requestAnimationFrame(tick);
       };
       try{
         const p=audio.play();
         if(p&&typeof p.then==='function')p.then(()=>{
           if(!fallback&&!finished){
+            if(key==='unknown'){
+              // Audio clocks can lag a paint frame: the timeout is an
+              // independent wall-clock stop, and timeupdate covers seeking.
+              audio.addEventListener('timeupdate',onMediaProgress);
+              hardCutTimer=setTimeout(cutoffNow,Math.round(conf.cutoff*1000));
+            }
             tick();
             if(key==='narrator')outroDelay(()=>{
               if(finished||fallback||run!==outroRun)return;
