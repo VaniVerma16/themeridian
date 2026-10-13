@@ -1039,6 +1039,10 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five .case-desk-grid:not(.desk-lit) .bulb-glow{opacity:0}
 #level-five .case-desk-grid.desk-lit .bulb-glow{opacity:1}
 @media(max-width:680px){#level-five .case-desk-grid>.case-note-wrap{right:9px;top:10px}#level-five .case-desk-grid>.case-note-wrap .case-archivist-note{width:min(300px,calc(100vw - 85px))}}
+
+/* Report paper must remain dark-ink-on-paper despite inherited level text colours. */
+#level-five .case-paper,#level-five .case-paper p,#level-five .case-paper h2,#level-five .case-paper-heading,#level-five .case-paper-kind,#level-five .case-paper-date,#level-five .case-paper-foot{color:#30291f!important;text-shadow:none!important}
+#level-five .case-paper-kind,#level-five .case-paper-date,#level-five .case-paper-foot{color:#554b3e!important}
   </style>
 </head>
 <body>
@@ -1221,7 +1225,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
   <div class="case-desk-grid" id="case-physical-desk">
     <div class="desk-grain" aria-hidden="true"></div>
     <div class="desk-lamp"><button type="button" id="desk-bulb" aria-label="Switch desk lamp on" aria-pressed="false" title="Toggle desk lamp"><span class="bulb-glow"></span><svg viewBox="0 0 170 150" width="170" height="150" aria-hidden="true"><ellipse cx="85" cy="125" rx="58" ry="18" fill="#17130f" opacity=".23"/><ellipse cx="85" cy="116" rx="47" ry="17" fill="#343a35" stroke="#1c211e" stroke-width="4"/><path d="M82 115L62 70L87 41" fill="none" stroke="#29312e" stroke-width="12" stroke-linecap="round"/><path d="M82 115L62 70L87 41" fill="none" stroke="#707871" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="70" r="10" fill="#4e5852" stroke="#232d28" stroke-width="3"/><path d="M68 22Q97 12 124 45L96 76Q68 56 68 22Z" fill="#434b45" stroke="#1d2521" stroke-width="4"/><path d="M98 71L120 45" stroke="#b6a98a" stroke-width="5"/><ellipse cx="109" cy="60" rx="7" ry="14" fill="#ceb97d" transform="rotate(44 109 60)"/></svg></button></div>
-    <div class="case-note-wrap"><button id="case-note-dismiss" class="case-folded-note" type="button" aria-expanded="false" aria-controls="case-archivist-note" aria-label="Open folded handwritten note"><span class="case-fold-corner"></span><span>handwritten note</span></button><div class="case-archivist-note" id="case-archivist-note" hidden><div class="case-tape" aria-hidden="true"></div><small>NOTE TO WHOEVER IS HANDLING THIS</small><p>I'm... pretty sure I've already reviewed these files?</p></div></div>
+    <div class="case-note-wrap"><button id="case-note-dismiss" class="case-folded-note" type="button" aria-expanded="false" aria-controls="case-archivist-note" aria-label="Open folded handwritten note"><span class="case-fold-corner"></span><span>handwritten note</span></button><div class="case-archivist-note" id="case-archivist-note" hidden><div class="case-tape" aria-hidden="true"></div><small>NOTE</small><p>I'm... pretty sure I've already reviewed these files?</p></div></div>
     <aside class="case-index" aria-label="Case file index">
       <div class="case-side-heading">LOOSE RECORDS · M/97</div>
       <div id="case-tabs" class="case-tabs" role="group" aria-label="Select a document"></div>
@@ -1622,8 +1626,8 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "body": [
       "MERIDIAN CONSTABULARY — PROPERTY AND IDENTIFICATION REGISTER. Case reference M/97/0221. Compiled by DC Ruth Bell. Items listed below were received from the attending officers and the coroner's officer; all seals were checked against the recovery schedule.",
       "Identity subsequently confirmed as Adam E., born 18 January 1970, of an address within the Meridian district. Confirmation was obtained through a photographic driving licence found in a wallet and a subsequent identification enquiry. Age at death: 27 years.",
-      "Items catalogued: (01) dark leather wallet containing a driving licence, bank card and small amount of cash; (02) ring of three keys on a plain brass fob; (03) folded printed engagement announcement dated September 1996; (04) paper shopping receipt bearing an incomplete date stamp. Items were described and retained for routine property enquiries. No item in this schedule was treated as a statement of intent.",
-      "The engagement announcement identifies Adam and his fiancée and refers to their forthcoming marriage later in 1997. The register does not establish why the cutting was being carried, whether it had been handled recently, or what significance, if any, it had to the circumstances of death.",
+      "Items catalogued: (01) dark leather wallet containing a driving licence, bank card and small amount of cash; (02) ring of three keys on a plain brass fob; (03) paper shopping receipt bearing an incomplete date stamp. Items were described and retained for routine property enquiries. No item in this schedule was treated as a statement of intent.",
+      "No correspondence or personal statement was recorded among the items recovered. The inventory is limited to articles physically logged by attending officers and does not establish the deceased's state of mind.",
       "Property schedules and identity information were forwarded to the investigating officer. Personal effects remained subject to release arrangements after completion of the coroner's enquiries."
     ],
     "note": "That announcement is a rather personal thing to find among official inventory numbers. Still, for this sheet, the identification details are what we need."
