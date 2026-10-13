@@ -828,6 +828,36 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .four-summary-editor p{font:15px/1.5 Georgia,serif;margin:7px 0 0;color:#35302a}
 #four-summary-items p{border-bottom:0;padding:0}
 @media(max-width:850px){.four-record-grid{grid-template-columns:1fr}.four-record>img{max-height:280px;object-fit:contain}}
+
+/* Level five · restrained archival dossier */
+.case-assignment{max-width:1150px;margin:auto}
+.case-eyebrow{font:11px Georgia,serif;letter-spacing:.15em;color:#a8a296;margin:0 0 8px}
+.case-lead{color:#bab8ae;font:15px/1.45 Georgia,serif;margin:3px 0 18px}
+.case-context{max-width:760px;border-left:3px solid #8d8373;padding:12px 20px;background:#222421;margin-bottom:20px}
+.case-context small,.case-form-head small,.case-document-head,.case-stamp,.case-form-head>span,.case-result>span{font:10px Georgia,serif;letter-spacing:.12em;color:#b3ad9d}
+.case-context h2{font:italic 27px Georgia,serif;color:#ede7dc;margin:8px 0}
+.case-context p{font:15px/1.6 Georgia,serif;color:#d2cbbf;margin:9px 0}
+.case-context .case-context-foot{font-size:12px;color:#969185}
+.case-documents{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:16px 0 24px}
+.case-document{padding:19px 20px;background:#ded6c4;color:#292922;border:1px solid #afa793}
+.case-document-head{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #aaa28f;padding-bottom:9px;color:#646052}
+.case-document h2{font:22px Georgia,serif;margin:14px 0 11px;color:#25251f}
+.case-document p{font:14px/1.6 Georgia,serif;margin:9px 0;color:#3f4039}
+.case-document .case-stamp{border-top:1px solid #aea693;margin-top:16px;padding-top:11px;font-size:10px;color:#655d4e}
+.case-form{border:1px solid #55564e;padding:20px;background:#202220}
+.case-form-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.case-form-head h2{font:24px Georgia,serif;margin:6px 0 15px}
+.case-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.case-fields label{display:flex;flex-direction:column;gap:7px;font:13px Georgia,serif;color:#c8c2b7}
+.case-fields select{width:100%;min-width:0;border:1px solid #77776e;background:#2c2e2b;color:#f0eade;font:14px Georgia,serif;padding:12px}
+.case-footnote{font:italic 12px/1.5 Georgia,serif;color:#aaa498;margin:17px 0 8px}
+.case-feedback{font:13px Georgia,serif;color:#d8b4a5;min-height:17px}
+.case-result{padding:18px 0 10px;max-width:690px}
+.case-result h2{font:27px Georgia,serif;margin:12px 0}
+.case-result p{font:16px/1.6 Georgia,serif;color:#d1cbc0}
+.case-result .case-result-small{font-size:13px;color:#a4a095}
+#level-five [hidden]{display:none!important}
+@media(max-width:700px){.case-documents,.case-fields{grid-template-columns:1fr}.case-document{padding:16px}.case-form{padding:15px}}
   </style>
 </head>
 <body>
@@ -1005,11 +1035,53 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         </div>
       </section>
       <section id="level-five" class="level" aria-label="Original case file" hidden>
-        <div class="assignment">
+        <div class="assignment case-assignment">
+          <p class="case-eyebrow">THE MERIDIAN · ARCHIVE ASSESSMENT 05</p>
           <h1>The Original Case File</h1>
-          <p>Four recovered police records. Four missing facts.</p>
-          <p>The case-file documents are being prepared.</p>
-          <button class="primary" id="five-finish" type="button">Continue</button>
+          <p class="case-lead">Four surviving records. One incomplete case summary. Reconstruct only what the documents can establish.</p>
+          <div class="case-context"><small>FEATURES DESK · RETAINED CUTTING · 1997</small><h2>The Death of the Ordinary Man</h2>
+            <p>Once he was a boy of remarkable promise. Then came the familiar disappointments of adulthood. And just as it seemed that he might have found his way back to an ordinary, happy life, the story ended.</p>
+            <p class="case-context-foot">A retrospective from The Meridian's features archive. The original file contains only an excerpt.</p>
+          </div>
+          <div class="case-documents" aria-label="Recovered case records">
+            <article class="case-document"><div class="case-document-head"><span>01 · INCIDENT RECORD</span><span>15 FEB 1997</span></div>
+              <h2>Initial attendance report</h2><p><strong>Reference:</strong> M/97/0215</p>
+              <p>Officers attended the eastern canal towpath, near the disused railway footbridge, following a report from a member of the public at 06:40 hours. One adult male was found unresponsive. No definitive account of his movements immediately before the incident was available.</p>
+              <p class="case-stamp">LOCATION RECORDED · EAST CANAL TOWPATH</p>
+            </article>
+            <article class="case-document"><div class="case-document-head"><span>02 · IDENTIFICATION</span><span>15 FEB 1997</span></div>
+              <h2>Personal effects and identification</h2><p>Identity established as <strong>Adam E.</strong>, date of birth <strong>18 January 1970</strong>. A wallet, keys and folded engagement announcement were catalogued among his effects.</p>
+              <p>The announcement, dated September 1996, refers to a planned marriage later in 1997. It was recorded as a personal item, without assessment of its significance.</p>
+              <p class="case-stamp">IDENTITY CONFIRMED</p>
+            </article>
+            <article class="case-document"><div class="case-document-head"><span>03 · MEDICAL EXAMINATION</span><span>17 FEB 1997</span></div>
+              <h2>Extract from pathology findings</h2><p><strong>Medical cause:</strong> Fatal blunt-force injury to the head.</p>
+              <p>The estimated interval of death is between <strong>22:00 on 14 February</strong> and <strong>02:00 on 15 February 1997</strong>. The injury alone does not establish whether the event was accidental, self-inflicted, or caused by another person.</p>
+              <p class="case-stamp">MANNER OF DEATH · NOT DETERMINED</p>
+            </article>
+            <article class="case-document"><div class="case-document-head"><span>04 · WITNESS ENQUIRY</span><span>18 FEB 1997</span></div>
+              <h2>Last-known-movements summary</h2><p>A witness recalled seeing a man resembling Adam near the canal approach late on 14 February. The witness could not provide an exact time or state whether he was accompanied.</p>
+              <p>A background enquiry noted an earlier history of alcohol-related difficulties. No contemporaneous evidence of suicidal intent was recorded in this extract.</p>
+              <p class="case-stamp">WITNESS ACCOUNT · UNCORROBORATED</p>
+            </article>
+          </div>
+          <div class="case-form">
+            <div class="case-form-head"><div><small>RECONSTRUCTION SHEET · M/97/0215</small><h2>Complete the case summary</h2></div><span>04 REQUIRED FIELDS</span></div>
+            <div class="case-fields">
+              <label>Deceased <select data-case="victim"><option value="">Select recorded identity</option><option>Adam E.</option><option>Arthur E.</option><option>Unidentified adult male</option></select></label>
+              <label>Location discovered <select data-case="location"><option value="">Select recorded location</option><option>Prince Arthur public house</option><option>East canal towpath</option><option>Market Square</option></select></label>
+              <label>Estimated time of death <select data-case="time"><option value="">Select medical estimate</option><option>14 February, 18:00–20:00</option><option>14 February 22:00 – 15 February 02:00</option><option>15 February, 06:00–08:00</option></select></label>
+              <label>Medical cause of death <select data-case="cause"><option value="">Select medical finding</option><option>Alcohol poisoning</option><option>Fatal blunt-force head injury</option><option>Drowning</option></select></label>
+            </div>
+            <p class="case-footnote">The cause of death is a medical finding. The circumstances and intent remain unresolved in the recovered record.</p>
+            <p id="five-feedback" class="case-feedback" role="status" aria-live="polite"></p>
+            <button class="primary" id="five-finish" type="button">Verify reconstructed file</button>
+          </div>
+          <div id="five-result" class="case-result" hidden><span>RECORD COMPLETE · M/97/0215</span><h2>The file is restored.</h2>
+            <p>Lovely work! You found exactly what the records say. It's funny, isn't it, how the ending almost seems to explain everything that came before?</p>
+            <p class="case-result-small">Archival finding: circumstances of death not determined. Newspaper interpretation: apparent suicide.</p>
+            <button class="primary" id="five-continue" type="button">Continue</button>
+          </div>
         </div>
       </section>
       <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
@@ -1353,7 +1425,18 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     });
     document.getElementById('begin-four').addEventListener('click',()=>show('four'));
     document.getElementById('begin-five').addEventListener('click',()=>show('five'));
-    document.getElementById('five-finish').addEventListener('click',()=>show('complete'));
+    const caseExpected=['Adam E.','East canal towpath','14 February 22:00 – 15 February 02:00','Fatal blunt-force head injury'];
+    document.getElementById('five-finish').addEventListener('click',()=>{
+      const answers=[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value);
+      const feedback=document.getElementById('five-feedback');
+      if(answers.every((x,i)=>x===caseExpected[i])){
+        document.querySelector('#level-five .case-form').hidden=true;
+        document.getElementById('five-result').hidden=false;
+      }else{
+        feedback.textContent=answers.some(x=>!x)?'A few entries are still missing. The file needs all four.':'Something does not match the recovered records. Read them once more.';
+      }
+    });
+    document.getElementById('five-continue').addEventListener('click',()=>show('complete'));
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     const fourPhotos=[
       {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:543,lng:290,bearing:110},site:'Clock Tower / High Street'},
