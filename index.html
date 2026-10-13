@@ -1409,7 +1409,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
             <p>Good job! I'm really happy seeing your progress. I really, truly am.</p>
             <p>I think we can finally start on the actual work now! It's really nice having someone help me out. Isn't it always wonderful to have good people to work with?</p>
             <p>Every year, The Meridian revisits stories from our archives for our Annual Revival Project. And this year, we've chosen a particularly fascinating case. Tragic, of course. But really quite remarkable.</p>
-            <p>We're doing this in 2027, but the story itself goes back to 1997. Thirty years! The original notes were written by the people working on it back then. I'm just here to help you sort through what's survived. There's quite a lot of it, as you might imagine!</p>
+            <p>Oh! I should probably mention one small thing before we go any further. It's 2027 now, but the case we're looking at happened in 1997. Thirty years ago! That's an awfully long time for a folder to sit around, isn't it? These are the notes left behind by the people investigating it back then. We're just trying to make sense of them now. Well, you're doing most of the work. I'm helping! I think that's fair.</p>
             <p>We'll piece together the original timeline and put the story back together for our readers. I'll tell you more as we go. I don't want to overwhelm you all at once!</p>
             <p>First, we have three photographs with incomplete catalogue details. Take a look at each one, place it on the town map, using the clues in the scene. You don't need to be exact. Just make your best guess!</p>
           </div><button class="primary" type="button" id="begin-four">Let's take a look</button>
@@ -1902,7 +1902,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('begin-five').addEventListener('click',()=>{if(developerPreview)enterPuzzle('five','OPENING CASE DOSSIER')});
     const caseFiles=[
   {
-    "type": "NOTEBOOK OF [[REDACTED]]",
+    "type": "NOTES OF [[REDACTED]]",
     "title": "The first call",
     "date": "21 FEB 1997",
     "ref": "NEWS/97-01",
@@ -1915,18 +1915,18 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "note": "I think this one is very initial. Can't tell a lot from it."
   },
   {
-    "type": "NOTEBOOK OF [[REDACTED]]",
+    "type": "NEWSROOM RESEARCH NOTES",
     "title": "A name, perhaps",
     "date": "24 FEB 1997",
     "ref": "NEWS/97-02",
     "body": [
       "Monday. We have a little more now. A police follow-up says he was twenty-seven, that his surname began with E, and that his birthday was in January. I found three possible names in our enquiry book. One looks promising, but I want to be really certain.",
       "One of the names seemed familiar. I think I remember seeing an engagement announcement last September. Something about a new beginning after a difficult few years. I've kept the cutting; we can compare it once we know the name."
-],
+    ],
     "note": "Finally, some identifying information. We can use this with the other slips to narrow down who the victim was."
   },
   {
-    "type": "NOTEBOOK OF [[REDACTED]]",
+    "type": "NEWSROOM RESEARCH NOTES",
     "title": "The person near the path",
     "date": "25 FEB 1997",
     "ref": "NEWS/97-03",
@@ -1939,7 +1939,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "note": "That witness was trying to help, even when they weren't sure. That's nice I guess."
   },
   {
-    "type": "NOTEBOOK OF [[REDACTED]]",
+    "type": "NEWSROOM RESEARCH NOTES",
     "title": "What we know by April",
     "date": "APR 1997",
     "ref": "NEWS/97-04",
@@ -1954,7 +1954,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 ];
     const caseInserts=[
   {
-    "tag": "[[REDACTED]] / ENQUIRY PAGE",
+    "tag": "ENQUIRY PAGE",
     "title": "The three names",
     "text": "Monday, 24 Feb, morning. These were the names I found while trying to match the police description: Adam E. — 18 January 1970; Arthur E. — 6 May 1965; Martin Vale — 9 November 1972. I keep coming back to the first one, but that's not confirmation. I'll compare them with the update when it arrives."
   },
@@ -1964,7 +1964,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "text": "24 Feb, 2:05 p.m. Police follow-up: deceased aged 27; surname starts with E; birthday falls in January. Compare with the enquiry page. Adam E. is the only match among the three listed. Full published name still to be verified."
   },
   {
-    "tag": "[[REDACTED]] / MAP SCRAP",
+    "tag": "MAP SCRAP · [[REDACTED]]",
     "title": "The canal footbridge",
     "text": "Friday afternoon. I finally got a more precise place for our map: eastern canal towpath, by the old railway footbridge. That's where he was found. I walked past that bridge once, I think. Station Road is nearby; so is the pub, but neither was given as the place of discovery."
   },
@@ -1974,14 +1974,14 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "text": "April. Medical testimony places death between approximately 10 p.m. on Thursday 20 February and 2 a.m. on Friday 21 February 1997. This is an estimate; the body was discovered later that morning."
   },
   {
-    "tag": "[[REDACTED]] / MARGIN NOTE",
+    "tag": "MARGIN NOTE",
     "title": "What the doctor said",
     "text": "April. I'm writing this separately so I don't lose the wording: fatal blunt-force injury to the head. Not drowning, not alcohol poisoning, according to the evidence heard. I kept hoping the doctor would be able to say how the blow happened, but that wasn't established."
   },
   {
     "tag": "MERCER / ARCHIVE & DRAFT",
     "title": "The feature title",
-    "text": "24 Feb — Located the September 1996 engagement announcement for Adam E. and his fiancée; it mentions rebuilding after difficult years. Still useful as personal background, subject to the identity check. For the planned feature, working title: The Death of the Ordinary Man. Suggested by: [[REDACTED]]. [[REDACTED]] has the rest of the background pages. — E. Mercer"
+    "text": "24 Feb — Located the September 1996 engagement announcement for Adam E. and his fiancée; it mentions rebuilding after difficult years. Still useful as personal background, subject to the identity check. For the planned feature, working title: The Death of the Ordinary Man. Suggested by: [[REDACTED]]. The remaining background pages are in the main file. — E. Mercer"
   }
 ];
     // Draw archival redactions as the same corrupted mark in every surface,
