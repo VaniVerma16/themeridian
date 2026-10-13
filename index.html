@@ -1603,8 +1603,9 @@ animation:outro-final-slice .14s steps(2,end) infinite}
     </div>
     <div id="outro-redacted-end" class="outro-redacted-end" hidden aria-hidden="true"><span data-word="REDACTED">REDACTED</span></div>
   </div>
-  <audio id="outro-jane-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/1776ddbd05374fa480e92f0297bbc67e/id=ee4c5db7-7e63-4915-a1a2-ca5a793e15a8.wav" preload="auto"></audio>
-  <audio id="outro-narrator-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/080f8e5cb3ae424989242b0efe5205e6/id=b3cb409f-2648-4fb8-93e8-ee85ad6b3739.wav" preload="auto"></audio>
+  <audio id="outro-jane-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/1776ddbd05374fa480e92f0297bbc67e/id=e1e0c562-cfce-49af-b768-b6641b5ade0e.wav" preload="auto"></audio>
+  <audio id="outro-narrator-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/1c651b8254304a298f6f35585f2e1d04/id=46170734-effb-4cb9-a271-5968f8011870.wav" preload="auto"></audio>
+  <audio id="outro-ghost-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/1c651b8254304a298f6f35585f2e1d04/id=46170734-effb-4cb9-a271-5968f8011870.wav" preload="auto"></audio>
   <audio id="outro-other-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/1803df59c37443789d2e4f71c82859a0/id=b0bd10b6-4645-4d94-8693-df2642c8f0f3.wav" preload="auto"></audio>
   <div id="directory-modal" class="directory-overlay" role="dialog" aria-modal="true" aria-label="Supplementary archival notes" hidden>
     <div class="directory-shell">
@@ -2214,6 +2215,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       if(outroFrame)cancelAnimationFrame(outroFrame);
       outroFrame=0;
     }
+    const outroGhost=document.getElementById('outro-ghost-audio');
     // Barely-audible minor-second drone under NATURAL-SPEED voices.
     // Never pitch-shift the actors: the creepiness belongs in the ambience.
     function startOutroMusic(){
@@ -2284,15 +2286,15 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       document.getElementById('outro-timestamp').textContent=String(year);
     }
     const outroSpeech={
-      jane:{duration:8.568,year:1986,speaker:'JANE',kind:'outro-jane',
+      jane:{duration:7.079,year:1986,speaker:'JANE',kind:'outro-jane',
         cues:[
-          {at:0,line:'Oh, I covered their school debate team a while back.'},
-          {at:3.14,line:'There was this boy, Adam.'},
-          {at:5.06,line:'Honestly, he was brilliant.'},
-          {at:7.02,line:"I really thought he'd go far."}
+          {at:0,line:'You know that school debate I covered last week?'},
+          {at:2.77,line:'There was a boy there, Adam.'},
+          {at:4.60,line:'Really sharp.'},
+          {at:5.70,line:"I reckon he'll go far."}
         ]},
-      narrator:{duration:3.265,year:1986,speaker:'[REDACTED]',kind:'outro-narrator',
-        cues:[{at:0,line:'Adam?'},{at:1.42,line:'Hm. Interesting.'}]},
+      narrator:{duration:2.717,year:1986,speaker:'[REDACTED]',kind:'outro-narrator',
+        cues:[{at:0,line:'Adam?'},{at:1.545,line:'Interesting.'}]},
       unknown:{duration:5.381,cutoff:4.77,year:2027,speaker:'UNKNOWN',kind:'outro-unknown',
         cues:[
           {at:0,line:'Wait, what?'},
@@ -2303,6 +2305,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
     function triggerFinalGlitch(run){
       if(!fiveOutroPending||run!==outroRun)return;
       Object.values(outroMedia).forEach(a=>a.pause());
+      outroGhost.pause();
       const root=document.getElementById('five-outro');
       root.className='five-outro outro-final-glitch';
       document.getElementById('outro-title').hidden=true;
@@ -2326,6 +2329,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       const advance=()=>{
         if(finished||run!==outroRun)return;
         finished=true;audio.pause();audio.onended=null;audio.onerror=null;
+        if(key==='narrator')outroGhost.pause();
         if(outroFrame)cancelAnimationFrame(outroFrame);
         if(key==='jane')outroDelay(()=>playOutroVoice('narrator',run),650);
         else if(key==='narrator')outroDelay(()=>{outroTitle(2027);outroDelay(()=>playOutroVoice('unknown',run),1850);},1100);
@@ -2344,6 +2348,12 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       audio.playbackRate=1;
       audio.volume=key==='narrator'?.86:.96;
       try{audio.currentTime=0;}catch(err){}
+      if(key==='narrator'){
+        outroGhost.pause();
+        try{outroGhost.currentTime=0;}catch(err){}
+        outroGhost.volume=.18;
+        outroGhost.playbackRate=1;
+      }
       audio.onerror=silentFallback;
       audio.onended=advance;
       const tick=()=>{
@@ -2356,7 +2366,15 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       try{
         const p=audio.play();
         if(p&&typeof p.then==='function')p.then(()=>{
-          if(!fallback&&!finished)tick();
+          if(!fallback&&!finished){
+            tick();
+            if(key==='narrator')outroDelay(()=>{
+              if(finished||fallback||run!==outroRun)return;
+              // A subtle delayed reflection: unsettling without pitch-shifting speech.
+              const ghostPlay=outroGhost.play();
+              if(ghostPlay&&typeof ghostPlay.catch==='function')ghostPlay.catch(()=>{});
+            },230);
+          }
         }).catch(silentFallback);
         else tick();
       }catch(err){silentFallback();}
@@ -2372,6 +2390,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       if(!fiveOutroPending||run!==outroRun)return;
       fiveOutroPending=false;clearOutroTimers();
       Object.values(outroMedia).forEach(a=>{a.pause();a.onended=null;a.onerror=null;});
+      outroGhost.pause();
       stopOutroMusic();
       const root=document.getElementById('five-outro');root.hidden=true;root.className='five-outro';
       show('complete');
