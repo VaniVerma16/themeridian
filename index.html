@@ -1961,7 +1961,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
   {
     "tag": "ENQUIRY PAGE",
     "title": "The three names",
-    "text": "Monday, 24 February, morning. Three names from the enquiry index, none confirmed. Adam E. — 18 January 1970 (birthday notice); Arthur E. — 6 January 1965 (old sports cutting); Martin Vale — 9 January 1970 (directory card). I have written down where each date came from so we can check the originals. People have been ringing in with guesses all morning. A list of names isn't an identification."
+    "text": "Monday, 24 February, morning. Three names from old newsroom entries, none independently confirmed. Adam E. — 18 January 1970 (birth notice); Arthur E. — 6 January 1965 (birth notice); Martin Vale — 9 January 1970 (birth notice). These are the names as they appear in the files. I've kept the sources beside them, in case any of the enquiries turn out to be wrong. People have been calling in guesses all morning. A list of names isn't an identification."
   },
   {
     "tag": "MERCER / PHONE NOTE",
@@ -1971,7 +1971,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
   {
     "tag": "MAP SCRAP",
     "title": "The canal footbridge",
-    "text": "Friday, 21 February, afternoon. Rough route for the photographer. From Station Road, the steps lead down to the eastern canal path. Police tape was stretched across the entrance, so people stopped there and assumed that is where everything happened. But I watched the ambulance crew bring their stretcher back from farther along the towpath, underneath the old railway bridge. The Prince Arthur is back up towards Milton Street. I ought to mark the entrance and the bridge separately."
+    "text": "Friday, 21 February, afternoon. I followed the photographer's route from Station Road. Police tape blocked the steps down to the canal, so people were pointing to the entrance and saying that must be where he was found. But the ambulance crew brought the stretcher back towards those steps from farther along the eastern towpath, beneath the old railway bridge. The Prince Arthur is up towards Milton Street, away from the water. I marked the steps and the bridge separately on the sketch. Easy to mix those places up."
   },
   {
     "tag": "MERCER / HEARING NOTE",
@@ -1986,7 +1986,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
   {
     "tag": "MERCER / ARCHIVE & DRAFT",
     "title": "The feature title",
-    "text": "24 February — Found the September 1996 engagement announcement filed under A.E. The cutting mentions a couple hoping for a new beginning after difficult years. It might be relevant background, but a clipping is not proof of identity; wait for formal confirmation before using it. Working title for a possible feature: The Death of the Ordinary Man. Suggested by: [[REDACTED]]. Editor to review before copy is set. — E. Mercer"
+    "text": "24 February — Found the September 1996 engagement announcement filed under A.E. The accompanying caption gave his age as twenty-six; the piece mentions a couple hoping for a new beginning after difficult years. Might be useful background, but a newspaper cutting isn't proof of anyone's identity. Wait for the police to confirm it before using the name in print. Working title for a possible feature: The Death of the Ordinary Man. Suggested by: [[REDACTED]]. Editor to review before copy is set. — E. Mercer"
   }
 ];
     // Draw archival redactions as the same corrupted mark in every surface,
@@ -2075,10 +2075,10 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     openCaseFile(0);
     // Four factual questions, not an evidence-label matching exam.
     const caseStages=[
-      {title:'01 — Who was the deceased?',instruction:'The newsroom has three possible names. Which one fits all the details we have?',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',clue:'Compare the notebook description with the dates in the enquiry index. All three details must fit, not just the first initial.'},
-      {title:'02 — Where was he found?',instruction:'The canal entrance was cordoned off, but that need not be where the body was recovered.',options:['Canal steps off Station Road','Eastern towpath beneath the old rail bridge','Western bank by the railway sidings'],answer:'Eastern towpath beneath the old rail bridge',clue:'Follow the ambulance crew in the photographer’s route note. The cordoned entrance and the recovery point were not necessarily the same place.'},
-      {title:'03 — When did he die?',instruction:'Work out the approximate medical interval rather than using the time of the emergency call.',options:['20 February 18:00–22:00','20 February 22:00 – 21 February 02:00','21 February 02:00–06:00'],answer:'20 February 22:00 – 21 February 02:00',clue:'Use the examination time and count back the hours in the hearing note. The interval crosses midnight.'},
-      {title:'04 — What was the medical cause?',instruction:'Choose what physically caused death, not a theory about how the incident happened.',options:['Drowning in the canal','Fatal blunt-force head injury','A fall onto the towpath'],answer:'Fatal blunt-force head injury',clue:'Separate the doctor’s description of the injuries from the unresolved question of what caused them.'}
+      {title:'01 — Who was the deceased?',instruction:'Which of the three names is the best-supported match for the unidentified man?',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',clue:'Two people fit the birth month and year, but not every surname matches the police description. Compare all three details in the notebook with the enquiry page.'},
+      {title:'02 — Where was he found?',instruction:'Choose the recovery point, not the entrance that police taped off.',options:['Canal steps off Station Road','Eastern towpath beneath the old rail bridge','Prince Arthur / Milton Street corner'],answer:'Eastern towpath beneath the old rail bridge',clue:'Trace where the ambulance crew came from. The steps marked an access point, not necessarily where the body was found.'},
+      {title:'03 — When did he die?',instruction:'Use the medical estimate, not the time the emergency call was made.',options:['20 February 18:00–22:00','20 February 22:00 – 21 February 02:00','21 February 02:00–06:00'],answer:'20 February 22:00 – 21 February 02:00',clue:'The doctor examined him at approximately 7 a.m. Count back both ends of the estimated five-to-nine-hour interval.'},
+      {title:'04 — What was the medical cause?',instruction:'Select the cause shown by the injuries, not an unproven explanation of how they occurred.',options:['Drowning in the canal','Fatal blunt-force head injury','A fall onto the towpath'],answer:'Fatal blunt-force head injury',clue:'The hearing notes describe a skull fracture and bleeding inside the head; whether it was an accident or an assault was not established.'}
     ];
     let caseStage=0,caseTheory='',casePicked=[],caseEditorial='';
     function renderCaseStage(){
