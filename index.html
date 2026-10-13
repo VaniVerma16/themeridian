@@ -1075,6 +1075,22 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five .case-extra-view p{font:15px/1.6 Georgia,serif;color:#372d22}
 #level-five .case-extra-view button{font:13px Georgia,serif;color:#4b3a2a;background:none;border:0;text-decoration:underline;padding:5px 0}
 @media(max-width:650px){#level-five .case-extra-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#level-five button.case-extra-card{min-height:105px;padding:10px!important}}
+
+#level-five .case-progress{display:flex;gap:4px;margin:14px 0}
+#level-five .case-progress span{height:5px;flex:1;background:#aa9f8b}
+#level-five .case-progress span.done{background:#667563}
+#level-five .case-progress span.current{background:#39382f}
+#level-five #case-form-panel h2{font:22px Georgia,serif;margin:15px 0 8px;color:#302a20}
+#level-five .case-stage-instruction{font:13px/1.5 Georgia,serif;color:#50483b;margin:0 0 14px}
+#level-five .case-theories{display:flex;flex-direction:column;gap:6px}
+#level-five .case-theory{padding:9px 10px;text-align:left;background:#f6efdd;color:#342d22;border:1px solid #b0a188;font:13px/1.35 Georgia,serif}
+#level-five .case-theory.selected{background:#d6ddce;outline:2px solid #465743;outline-offset:-2px}
+#level-five .case-support{margin:16px 0 8px}
+#level-five .case-support[hidden]{display:none!important}
+#level-five .case-support>small{font:10px Georgia,serif;letter-spacing:.08em;color:#5d503e}
+#level-five .case-evidence-picks{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+#level-five .case-evidence-choice{border:1px solid #a7977d;background:#e1d5bd;color:#4b4032;padding:6px 8px;text-align:left;font:11px/1.35 Georgia,serif}
+#level-five .case-evidence-choice.selected{background:#b5c0ab;border-color:#53604a;color:#24301f}
 </style>
 </head>
 <body>
@@ -1276,16 +1292,16 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     <aside class="case-right" aria-label="Working notes and reconstruction">
       <section class="case-scratch"><div class="case-side-heading">NOTEPAD <span>Autosaved</span></div><textarea id="case-notepad" aria-label="Your private case notes" placeholder="Use this for taking down notes…" rows="7"></textarea></section>
       <section id="case-guidance" class="case-guidance"><div class="case-side-heading">A FEW NOTES FROM YOURS TRULY</div><p id="case-narrator-note"></p></section>
-      <section class="case-form" id="case-form-panel"><div class="case-side-heading">RECONSTRUCTION SHEET</div>
-       <div class="case-fields">
-        <label>Who? <select data-case="victim"><option value="">Unverified</option><option>Adam E.</option><option>Arthur E.</option><option>Martin Vale</option></select></label>
-        <label>Where? <select data-case="location"><option value="">Unverified</option><option>Prince Arthur public house</option><option>East canal towpath</option><option>Market Square</option></select></label>
-        <label>When? <select data-case="time"><option value="">Unverified</option><option>20 February, 18:00–20:00</option><option>20 February 22:00 – 21 February 02:00</option><option>21 February, 06:00–08:00</option></select></label>
-        <label>Medical cause? <select data-case="cause"><option value="">Unverified</option><option>Alcohol poisoning</option><option>Fatal blunt-force head injury</option><option>Drowning</option></select></label>
-       </div>
-       <p id="five-feedback" class="case-feedback" aria-live="polite"></p><button class="primary" id="five-finish" type="button">Verify file</button>
-      </section>
-      <section id="five-result" class="case-result" hidden><small>RECORD VERIFIED</small><h2>Case summary restored.</h2><p>Lovely work! I knew you could manage it. The records do tell a story when you put them together, don't they?</p><button class="primary" id="five-continue" type="button">Continue</button></section>
+      <section class="case-form" id="case-form-panel">
+<div class="case-side-heading">INVESTIGATION BOARD <span id="case-stage-count">01 / 04</span></div>
+<div class="case-progress" id="case-progress"></div>
+<h2 id="case-stage-title">Establish the identity</h2><p id="case-stage-instruction" class="case-stage-instruction"></p>
+<div id="case-theories" class="case-theories" role="group" aria-label="Working hypotheses"></div>
+<div class="case-support"><small>SUPPORTING EVIDENCE</small><div id="case-evidence-picks" class="case-evidence-picks"></div></div>
+<p id="five-feedback" class="case-feedback" role="status" aria-live="polite"></p>
+<button class="primary" id="five-finish" type="button">Confirm deduction →</button>
+</section>
+<section id="five-result" class="case-result" hidden><small>RECORD VERIFIED</small><h2>Case summary restored.</h2><p>Lovely work! I knew you could manage it. The records do tell a story when you put them together, don't they?</p><button class="primary" id="five-continue" type="button">Continue</button></section>
     </aside>
   </div>
 </div>
@@ -1425,7 +1441,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         const puzzleThree=[...document.querySelectorAll('#answer-fields select')].map(el=>el.value);
         const gridMarks=[...document.querySelectorAll('.logic-cell')].map(el=>el.textContent);
         const draftFour=fourMarker?{lat:fourMarker.lat,lng:fourMarker.lng,bearing:Number(fourBearing.value)}:null;
-        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseFields:[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value),caseNoteOpen:!document.getElementById('case-archivist-note').hidden,caseNoteDismissed,caseVerified:!document.getElementById('five-result').hidden,caseLampOn:physicalDesk.classList.contains('desk-lit')}));
+        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseStage,caseTheory,casePicked,caseEditorial,caseNoteOpen:!document.getElementById('case-archivist-note').hidden,caseNoteDismissed,caseVerified:!document.getElementById('five-result').hidden,caseLampOn:physicalDesk.classList.contains('desk-lit')}));
       }catch(err){/* Browsers with storage disabled may still play normally. */}
     }
     function restoreSession(){
@@ -1439,7 +1455,11 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         if(Array.isArray(data.puzzleThree))document.querySelectorAll('#answer-fields select').forEach((el,i)=>{if(typeof data.puzzleThree[i]==='string')el.value=data.puzzleThree[i]});
         if(Array.isArray(data.gridMarks))document.querySelectorAll('.logic-cell').forEach((el,i)=>{const v=data.gridMarks[i];if(['','×','✓'].includes(v)){el.textContent=v;el.dataset.state=String(['','×','✓'].indexOf(v));}});
         if(typeof data.caseNotepad==='string')document.getElementById('case-notepad').value=data.caseNotepad;
-        if(Array.isArray(data.caseFields))document.querySelectorAll('#level-five [data-case]').forEach((el,i)=>{if(typeof data.caseFields[i]==='string')el.value=data.caseFields[i]});
+        if(Number.isInteger(data.caseStage))caseStage=Math.min(4,Math.max(0,data.caseStage));
+        if(typeof data.caseTheory==='string')caseTheory=data.caseTheory;
+        if(Array.isArray(data.casePicked))casePicked=data.casePicked.filter(x=>typeof x==='string').slice(0,2);
+        if(typeof data.caseEditorial==='string')caseEditorial=data.caseEditorial;
+        renderCaseStage();
         if(Number.isInteger(data.caseZoom))caseZoom=Math.min(140,Math.max(80,data.caseZoom));
         if(Number.isInteger(data.caseFile))openCaseFile(data.caseFile);
         document.getElementById('case-zoom-label').textContent=caseZoom+'%';
@@ -1812,17 +1832,60 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       safelySaveSession();
     });
     openCaseFile(0);
-    const caseExpected=['Adam E.','East canal towpath','20 February 22:00 – 21 February 02:00','Fatal blunt-force head injury'];
+    const caseStages=[
+      {title:'Who was the deceased?',instruction:'Compare the possible identities with the later identification update. Select a person and the two items that support your choice.',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',evidence:['Identity enquiry','Identification update'],clue:'Check both the birth date and the later notice.'},
+      {title:'Where was he found?',instruction:'Identify the discovery site, not a place he may have visited earlier.',options:['Prince Arthur public house','East canal towpath','Market Square'],answer:'East canal towpath',evidence:['Police press release','Location reference'],clue:'The map key distinguishes the site of recovery from other locations.'},
+      {title:'When did he die?',instruction:'The reported discovery time is not the estimated time of death. Choose the medical interval.',options:['20 February, 18:00–20:00','20 February 22:00 – 21 February 02:00','21 February, 06:00–08:00'],answer:'20 February 22:00 – 21 February 02:00',evidence:['Inquest press notes','Estimated interval'],clue:'Compare the reporter’s time slip with the first press release.'},
+      {title:'What caused his death?',instruction:'Find the medical cause, not a theory about intent or circumstances.',options:['Alcohol poisoning','Fatal blunt-force head injury','Drowning'],answer:'Fatal blunt-force head injury',evidence:['Inquest press notes','Terminology guide'],clue:'Distinguish the medical injury from a possible manner of death.'},
+      {title:'What would you publish?',instruction:'The facts are assembled. What interpretation should the newspaper put forward?',options:['An apparent suicide','An accident','A possible homicide','The evidence is inconclusive'],answer:null,evidence:[],clue:''}
+    ];
+    let caseStage=0,caseTheory='',casePicked=[],caseEditorial='';
+    const caseEvidenceLabels=['Police press release','Identity enquiry','Identification update','Location reference','Reporter interview','Inquest press notes','Estimated interval','Terminology guide','Wedding announcement'];
+    function renderCaseStage(){
+      const stage=caseStages[caseStage];
+      document.getElementById('case-stage-title').textContent=stage.title;
+      document.getElementById('case-stage-instruction').textContent=stage.instruction;
+      document.getElementById('case-stage-count').textContent=String(caseStage+1).padStart(2,'0')+' / 05';
+      const progress=document.getElementById('case-progress');progress.replaceChildren();
+      caseStages.forEach((_,i)=>{const mark=document.createElement('span');mark.className=i<caseStage?'done':i===caseStage?'current':'';progress.appendChild(mark)});
+      const theories=document.getElementById('case-theories');theories.replaceChildren();
+      stage.options.forEach(value=>{
+        const button=document.createElement('button');button.type='button';button.textContent=value;button.className='case-theory'+(value===caseTheory?' selected':'');
+        button.setAttribute('aria-pressed',String(value===caseTheory));
+        button.addEventListener('click',()=>{caseTheory=value;document.getElementById('five-feedback').textContent='';renderCaseStage();safelySaveSession()});
+        theories.appendChild(button);
+      });
+      const evidence=document.getElementById('case-evidence-picks');evidence.replaceChildren();
+      const support=evidence.parentElement;
+      support.hidden=caseStage===4;
+      if(caseStage<4)caseEvidenceLabels.forEach(label=>{
+        const button=document.createElement('button');button.type='button';button.textContent=label;button.className='case-evidence-choice'+(casePicked.includes(label)?' selected':'');
+        button.setAttribute('aria-pressed',String(casePicked.includes(label)));
+        button.addEventListener('click',()=>{
+          if(casePicked.includes(label))casePicked=casePicked.filter(x=>x!==label);
+          else if(casePicked.length<2)casePicked.push(label);
+          renderCaseStage();safelySaveSession();
+        });evidence.appendChild(button);
+      });
+      document.getElementById('five-finish').textContent=caseStage===4?'File editorial conclusion →':'Confirm deduction →';
+    }
     document.getElementById('five-finish').addEventListener('click',()=>{
-      const answers=[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value);
-      const feedback=document.getElementById('five-feedback');
-      if(answers.every((x,i)=>x===caseExpected[i])){
-        document.querySelector('#level-five .case-form').hidden=true;
-        document.getElementById('five-result').hidden=false;
+      const stage=caseStages[caseStage],feedback=document.getElementById('five-feedback');
+      if(!caseTheory){feedback.textContent='Select your conclusion first.';return}
+      if(caseStage<4){
+        if(casePicked.length!==2){feedback.textContent='Connect two supporting records before confirming.';return}
+        if(caseTheory!==stage.answer||!stage.evidence.every(x=>casePicked.includes(x))){feedback.textContent=stage.clue;return}
+        caseStage++;caseTheory='';casePicked=[];renderCaseStage();safelySaveSession();
       }else{
-        feedback.textContent=answers.some(x=>!x)?'A few entries are still missing. The file needs all four.':'Something does not match the recovered records. Read them once more.';
+        caseEditorial=caseTheory;
+        document.getElementById('case-form-panel').hidden=true;
+        const result=document.getElementById('five-result');result.hidden=false;
+        result.querySelector('h2').textContent='The file is ready.';
+        result.querySelector('p').textContent=caseEditorial==='An apparent suicide'?'There we are. You have a way of making the pieces fit together!':"Lovely work. You've been so careful with these old records. I suppose not every question has a neat answer.";
+        safelySaveSession();
       }
     });
+    renderCaseStage();
     document.getElementById('five-continue').addEventListener('click',()=>show('complete'));
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     const fourPhotos=[
