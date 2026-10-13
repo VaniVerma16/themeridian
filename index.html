@@ -2172,60 +2172,202 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     });
     renderCaseStage();
     let fiveOutroPending=false;
-    const outroSegments=[
-      {id:'outro-jane-audio',speaker:'JANE · RECOVERED RECORDING',reel:'01 / 02',line:'I covered this debate team once. There was a kid named Adam. Such great potential.',duration:5590,style:'voice-jane'},
-      {id:'outro-narrator-audio',speaker:'SECOND VOICE',reel:'01 / 02',line:'Interesting.',duration:1590,style:'voice-narrator'},
-      {id:'outro-other-audio',speaker:'UNIDENTIFIED VOICE',reel:'02 / 02',line:'WHAT? There is another file?',duration:2850,style:'voice-other'}
-    ];
-    let outroSequenceTimer=null;
-    function finishOutro(){
-      if(!fiveOutroPending)return;
+    let outroTimer=null,outroFrame=null,outroRun=0,outroMusic=null;
+    const outroMedia={
+      jane:document.getElementById('outro-jane-audio'),
+      narrator:document.getElementById('outro-narrator-audio'),
+      unknown:document.getElementById('outro-other-audio')
+    };
+    // Gentle minor-second drones, a low pulse and faded tape hiss. Instrumental
+    // only; the spoken performances remain separate audio assets.
+    function startOutroMusic(){
+      const AudioCtx=window.AudioContext||window.webkitAudioContext;
+      if(!AudioCtx)return;
+      try{
+        const ctx=new AudioCtx();
+        if(ctx.state==='suspended')ctx.resume().catch(()=>{});
+        const volume=ctx.createGain(),now=ctx.currentTime;
+        volume.gain.setValueAtTime(.0001,now);
+        volume.gain.exponentialRampToValueAtTime(.065,now+.85);
+        volume.connect(ctx.destination);
+        const oscillators=[];
+        [54.99,58.27,82.41].forEach((hz,i)=>{
+          const osc=ctx.createOscillator(),g=ctx.createGain();
+          osc.type=i===2?'triangle':'sine';
+          osc.frequency.value=hz;g.gain.value=i===2?.12:.32;
+          osc.connect(g);g.connect(volume);osc.start();oscillators.push(osc);
+        });
+        const pulse=ctx.createOscillator(),pulseGain=ctx.createGain(),pulseAmp=ctx.createGain();
+        pulse.type='sine';pulse.frequency.value=.19;
+        pulseGain.gain.value=.2;pulseAmp.gain.value=.6;
+        pulse.connect(pulseGain);pulseGain.connect(pulseAmp.gain);
+        pulseAmp.connect(volume);
+        pulse.start();oscillators.push(pulse);
+        const hiss=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);
+        const samples=hiss.getChannelData(0);
+        let brown=0;
+        for(let i=0;i<samples.length;i++){brown=(brown+.035*(Math.random()*2-1))*.997;samples[i]=Math.max(-1,Math.min(1,brown));}
+        const noise=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),ng=ctx.createGain();
+        noise.buffer=hiss;noise.loop=true;filter.type='lowpass';filter.frequency.value=740;
+        ng.gain.value=.14;noise.connect(filter);filter.connect(ng);ng.connect(volume);noise.start();
+        outroMusic={ctx,volume,sources:[...oscillators,noise]};
+      }catch(e){console.warn('Outro ambience unavailable',e);}
+    }
+    function stopOutroMusic(){
+      if(!outroMusic)return;
+      const music=outroMusic;outroMusic=null;
+      try{
+        const t=music.ctx.currentTime;
+        music.volume.gain.cancelScheduledValues(t);
+        music.volume.gain.setTargetAtTime(.0001,t,.14);
+        setTimeout(()=>{music.sources.forEach(source=>{try{source.stop()}catch(e){}});music.ctx.close().catch(()=>{});},650);
+      }catch(e){music.ctx.close().catch(()=>{});}
+    }
+    function outroDelay(next,ms){
+      clearTimeout(outroTimer);
+      outroTimer=setTimeout(next,ms);
+    }
+    function outroTitle(year){
+      const overlay=document.getElementById('five-outro');
+      overlay.className='five-outro';
+      document.getElementById('outro-reel-id').textContent=year===1986?'01 / 02':'02 / 02';
+      document.getElementById('outro-timestamp').textContent=year===1986?'1986':'2027';
+      document.getElementById('outro-signal').textContent='SOURCE · UNVERIFIED';
+      const title=document.getElementById('outro-title');
+      title.hidden=false;
+      title.replaceChildren();
+      const yr=document.createElement('span');yr.className='outro-title-year';yr.textContent=year+' —';
+      const label=document.createElement('span');
+      label.textContent=year===1986?'JANE /':'UNKNOWN';
+      title.append(yr,label);
+      if(year===1986){
+        const red=document.createElement('span');red.className='outro-title-redacted';red.textContent='REDACTED';
+        red.setAttribute('aria-label','name redacted');title.append(red);
+      }
+      document.getElementById('outro-dialogue').hidden=true;
+    }
+    function outroSubtitle(speaker,text,style='outro-jane'){
+      const overlay=document.getElementById('five-outro');
+      overlay.className='five-outro '+style;
+      document.getElementById('outro-title').hidden=true;
+      document.getElementById('outro-dialogue').hidden=false;
+      document.getElementById('outro-speaker').textContent=speaker;
+      document.getElementById('outro-caption').textContent=text;
+      document.getElementById('outro-signal').textContent=style==='outro-unknown'?'WARNING · SIGNAL CORRUPTED':'PLAYBACK · UNSTABLE';
+    }
+    function outroSpeechFallback(key,spoken,onDone){
+      // A local voice is used only if the recorded clip cannot be played.
+      // The text reel also remains readable if speech synthesis is disabled.
+      const duration=key==='jane'?5600:key==='narrator'?1750:5200;
+      if(!('speechSynthesis' in window)){outroDelay(onDone,duration);return;}
+      try{
+        const utterance=new SpeechSynthesisUtterance(spoken);
+        const voices=window.speechSynthesis.getVoices();
+        let names=key==='jane'?['Samantha','Karen','Victoria','Google UK English Female']:key==='unknown'?['Zira','Susan','Moira','Google UK English Female']:['Alex','Daniel','Google UK English Male'];
+        utterance.voice=names.map(name=>voices.find(v=>v.name.includes(name))).find(Boolean)||voices.find(v=>v.lang.startsWith('en'))||null;
+        utterance.lang='en-GB';utterance.rate=key==='unknown'?.83:key==='narrator'?.69:.86;
+        utterance.pitch=key==='narrator'?.58:key==='unknown'?.73:.83;
+        utterance.volume=.85;
+        utterance.onend=onDone;utterance.onerror=onDone;
+        window.speechSynthesis.speak(utterance);
+        outroDelay(onDone,duration+2200);
+      }catch(e){outroDelay(onDone,duration);}
+    }
+    function playOutroVoice(key,run){
+      if(!fiveOutroPending||run!==outroRun)return;
+      const media=outroMedia[key];
+      const isJane=key==='jane',isNarrator=key==='narrator';
+      const cutoff=key==='unknown'?4.71:null;
+      const lines=isJane?[
+        {at:0,text:'I covered this debate team once.'},
+        {at:2.18,text:'There was a kid named Adam.'},
+        {at:4.05,text:'Such great potential.'}
+      ]:isNarrator?[{at:0,text:'Interesting.'}]:[
+        {at:0,text:'Wait, there is another file.'},
+        {at:2.96,text:'Why did they not look at this bef—'}
+      ];
+      const speaker=isJane?'JANE':isNarrator?'[REDACTED]':'UNKNOWN';
+      const visualStyle=isJane?'outro-jane':isNarrator?'outro-narrator':'outro-unknown';
+      let completed=false,currentLine=-1;
+      const next=()=>{
+        if(completed||run!==outroRun)return;
+        completed=true;
+        cancelAnimationFrame(outroFrame);clearTimeout(outroTimer);
+        media.pause();media.onended=null;media.onerror=null;
+        if(isJane)outroDelay(()=>playOutroVoice('narrator',run),620);
+        else if(isNarrator)outroDelay(()=>{outroTitle(2027);outroDelay(()=>playOutroVoice('unknown',run),1850);},950);
+        else {
+          document.getElementById('five-outro').className='five-outro outro-blackout';
+          stopOutroMusic();
+          outroDelay(()=>finishOutro(run),850);
+        }
+      };
+      const originalDuration=isJane?5.59:isNarrator?1.59:5.46;
+      const rate=isJane?.91:isNarrator?.79:.90;
+      const duration=cutoff||originalDuration;
+      media.playbackRate=rate;media.volume=isJane?.93:isNarrator?.82:.92;
+      try{media.currentTime=0}catch(e){}
+      const started=performance.now(),currentFallback={time:0};
+      const display=t=>{
+        const i=lines.reduce((acc,ln,n)=>t>=ln.at?n:acc,0);
+        if(i!==currentLine){
+          currentLine=i;
+          outroSubtitle(speaker,lines[i].text,visualStyle);
+        }
+        document.getElementById('outro-timestamp').textContent=(key==='unknown'?'2027':'1986')+' / '+Math.floor(t).toString().padStart(2,'0')+'s';
+      };
+      display(0);
+      const watch=()=>{
+        if(completed||run!==outroRun)return;
+        const t=media.currentTime||0;
+        display(t);
+        // Interrupt the last word deliberately, before 'before' can complete.
+        if((cutoff&&t>=cutoff)||(!cutoff&&t>=duration+.17)){next();return;}
+        outroFrame=requestAnimationFrame(watch);
+      };
+      media.onended=next;
+      media.onerror=()=>fallback();
+      let fallbackActive=false;
+      function fallback(){
+        if(fallbackActive||completed)return;
+        fallbackActive=true;
+        cancelAnimationFrame(outroFrame);
+        media.pause();media.onerror=null;media.onended=null;
+        const fallbackMs=isJane?5700:isNarrator?1800:4900;
+        lines.forEach((line,i)=>{
+          const ms=Math.round(line.at/duration*fallbackMs);
+          setTimeout(()=>{if(!completed&&run===outroRun)display(line.at);},ms);
+        });
+        const text=isJane?'I covered this debate team once. There was a kid named Adam. Such great potential.':isNarrator?'Interesting.':'Wait, there is another file. Why did they not look at this bef';
+        outroSpeechFallback(key,text,next);
+      }
+      try{
+        const result=media.play();
+        if(result&&typeof result.then==='function')result.then(()=>{if(!fallbackActive)watch()}).catch(fallback);
+        else watch();
+      }catch(e){fallback();}
+      // Network stalls must not trap the user in the reel.
+      setTimeout(()=>{if(!completed&&!fallbackActive&&run===outroRun)fallback();},Math.round(duration/rate*1000)+1700);
+    }
+    function finishOutro(run){
+      if(!fiveOutroPending||run!==outroRun)return;
       fiveOutroPending=false;
-      clearTimeout(outroSequenceTimer);
-      outroSegments.forEach(segment=>{
-        const sound=document.getElementById(segment.id);
-        sound.pause();sound.onended=null;sound.onerror=null;
-      });
+      clearTimeout(outroTimer);cancelAnimationFrame(outroFrame);
+      if('speechSynthesis' in window)window.speechSynthesis.cancel();
+      Object.values(outroMedia).forEach(media=>{media.pause();media.onended=null;media.onerror=null;});
+      stopOutroMusic();
       const overlay=document.getElementById('five-outro');
       overlay.hidden=true;overlay.className='five-outro';
       show('complete');
     }
-    function playOutroSegment(index){
-      if(!fiveOutroPending)return;
-      if(index>=outroSegments.length){outroSequenceTimer=setTimeout(finishOutro,450);return;}
-      const segment=outroSegments[index];
-      const overlay=document.getElementById('five-outro');
-      overlay.className='five-outro '+segment.style;
-      document.getElementById('outro-speaker').textContent=segment.speaker;
-      document.getElementById('outro-caption').textContent=segment.line;
-      document.getElementById('outro-reel-id').textContent=segment.reel;
-      document.getElementById('outro-sequence').textContent=index===2?'INTERRUPTION':'PLAYING';
-      const sound=document.getElementById(segment.id);
-      let finished=false;
-      const proceed=()=>{
-        if(finished)return;
-        finished=true;
-        clearTimeout(outroSequenceTimer);
-        sound.pause();sound.onended=null;sound.onerror=null;
-        outroSequenceTimer=setTimeout(()=>playOutroSegment(index+1),index===0?500:index===1?600:350);
-      };
-      sound.onended=proceed;
-      sound.onerror=proceed;
-      try{sound.currentTime=0;}catch(e){}
-      const playback=sound.play();
-      if(playback&&typeof playback.catch==='function')playback.catch(()=>{
-        // Captions still advance if audio is blocked by a browser or network.
-        outroSequenceTimer=setTimeout(proceed,segment.duration);
-      });
-      // Ended is authoritative when playback succeeds; timeout prevents stalls.
-      const guard=setTimeout(proceed,segment.duration+3500);
-      sound.addEventListener('ended',()=>clearTimeout(guard),{once:true});
-    }
     function flashAfterFive(){
-      if(fiveOutroPending || (!developerPreview && document.getElementById('five-result').hidden))return;
+      if(fiveOutroPending||(!developerPreview&&document.getElementById('five-result').hidden))return;
       fiveOutroPending=true;
+      const run=++outroRun;
       document.getElementById('five-outro').hidden=false;
-      playOutroSegment(0);
+      startOutroMusic(); // Start directly inside the click gesture.
+      outroTitle(1986);
+      outroDelay(()=>playOutroVoice('jane',run),1750);
     }
     document.getElementById('five-continue').addEventListener('click',flashAfterFive);
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
