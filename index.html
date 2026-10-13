@@ -1043,6 +1043,8 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 /* Report paper must remain dark-ink-on-paper despite inherited level text colours. */
 #level-five .case-paper,#level-five .case-paper p,#level-five .case-paper h2,#level-five .case-paper-heading,#level-five .case-paper-kind,#level-five .case-paper-date,#level-five .case-paper-foot{color:#30291f!important;text-shadow:none!important}
 #level-five .case-paper-kind,#level-five .case-paper-date,#level-five .case-paper-foot{color:#554b3e!important}
+#level-five .case-folded-note.crumpled{transform:rotate(-13deg) scale(.82);background:repeating-linear-gradient(31deg,#d3c39e 0,#e6d7b4 8px,#beac88 9px,#e3d2af 17px);box-shadow:2px 3px 5px #0007;clip-path:polygon(7% 5%,29% 0,51% 7%,78% 1%,98% 18%,94% 49%,100% 72%,84% 94%,55% 90%,28% 100%,3% 81%,6% 52%,0 29%)}
+#level-five .case-folded-note.crumpled .case-fold-corner{display:none}
   </style>
 </head>
 <body>
@@ -1408,7 +1410,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         if(Number.isInteger(data.caseFile))openCaseFile(data.caseFile);
         document.getElementById('case-zoom-label').textContent=caseZoom+'%';
         if(data.caseLampOn===true)lampButton.click();
-        if(data.caseNoteDismissed){caseNoteDismissed=true;document.querySelector('.case-note-wrap').hidden=true;}else if(data.caseNoteOpen)document.getElementById('case-note-dismiss').click();
+        if(data.caseNoteDismissed){caseNoteDismissed=true;document.getElementById('case-note-dismiss').classList.add('crumpled');document.getElementById('case-note-dismiss').setAttribute('aria-label','Open crumpled note');}if(data.caseNoteOpen)document.getElementById('case-note-dismiss').click();
         if(data.caseVerified){document.getElementById('case-form-panel').hidden=true;document.getElementById('five-result').hidden=false;}
         furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
         if(Array.isArray(data.fourGuesses))data.fourGuesses.slice(0,3).forEach((guess,i)=>{fourGuesses[i]=guess});
@@ -1606,59 +1608,60 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('begin-five').addEventListener('click',()=>show('five'));
     const caseFiles=[
   {
-    "type": "INCIDENT REPORT",
-    "title": "Initial attendance",
+    "type": "POLICE PRESS RELEASE",
+    "title": "Body found by canal",
     "date": "21 FEB 1997",
-    "ref": "M/97-01",
+    "ref": "NEWS/97-01",
     "body": [
-      "MERIDIAN CONSTABULARY — OCCURRENCE RECORD M/97/0221. Reporting officer: PC Daniel Mercer, collar no. 418. Attendance commenced at 06:52 hours on Friday 21 February 1997. This is a transcription of the retained occurrence sheet; the original scene plan is held separately.",
-      "At approximately 06:40 hours the control room received a telephone report from a member of the public walking on the eastern canal towpath, close to the disused railway footbridge. The caller reported an adult male lying motionless beside the pedestrian route. An ambulance crew was requested and uniformed officers dispatched. The man showed no sign of response when officers arrived. Death was confirmed at the scene by ambulance personnel at 07:06 hours.",
-      "The immediate area was cordoned off pending examination. The towpath surface was damp following overnight rain. Officers observed no identification displayed externally and did not assign a cause or manner of death at the scene. A plan was prepared noting the body's position relative to the bridge steps and the adjoining access path. Officers commenced enquiries with local residents and businesses concerning movements during the preceding evening.",
-      "Body removed under the authority of the duty coroner's officer. Property recovered at the scene was sealed and entered on a separate register. No conclusion concerning accident, self-inflicted injury or the involvement of another person was recorded in this initial report."
+      "MERIDIAN CONSTABULARY — INFORMATION ISSUED TO LOCAL PRESS. Friday, 21 February 1997. The following statement was supplied to The Meridian's news desk. It does not constitute an investigating officer's report.",
+      "Police were called shortly after 06:40 this morning following the discovery of a man's body beside the eastern canal towpath near the former railway footbridge. Ambulance personnel attended. The man was pronounced dead at the scene.",
+      "The deceased had not been formally named when this statement was issued. The area has been examined and enquiries are continuing into the circumstances of the death. Anyone who used the canal access path on Thursday evening or during the early hours of Friday is asked to contact the local station.",
+      "A police spokesperson said: 'It would be premature to speculate about the circumstances at this stage.' No cause or manner of death was announced.",
+      "NEWSROOM ROUTING: Received by telephone and confirmed by written statement; filed for the next local edition."
     ],
-    "note": "The first officer's record is usually the best place to establish where the body was actually found. The later accounts may be less precise about that."
+    "note": "That's a useful starting point! The place of discovery is stated quite clearly, even if the rest was still uncertain when the police spoke."
   },
   {
-    "type": "PROPERTY REGISTER",
-    "title": "Personal effects",
-    "date": "21 FEB 1997",
-    "ref": "M/97-02",
-    "body": [
-      "MERIDIAN CONSTABULARY — PROPERTY AND IDENTIFICATION REGISTER. Case reference M/97/0221. Compiled by DC Ruth Bell. Items listed below were received from the attending officers and the coroner's officer; all seals were checked against the recovery schedule.",
-      "Identity subsequently confirmed as Adam E., born 18 January 1970, of an address within the Meridian district. Confirmation was obtained through a photographic driving licence found in a wallet and a subsequent identification enquiry. Age at death: 27 years.",
-      "Items catalogued: (01) dark leather wallet containing a driving licence, bank card and small amount of cash; (02) ring of three keys on a plain brass fob; (03) paper shopping receipt bearing an incomplete date stamp. Items were described and retained for routine property enquiries. No item in this schedule was treated as a statement of intent.",
-      "No correspondence or personal statement was recorded among the items recovered. The inventory is limited to articles physically logged by attending officers and does not establish the deceased's state of mind.",
-      "Property schedules and identity information were forwarded to the investigating officer. Personal effects remained subject to release arrangements after completion of the coroner's enquiries."
-    ],
-    "note": "That announcement is a rather personal thing to find among official inventory numbers. Still, for this sheet, the identification details are what we need."
-  },
-  {
-    "type": "WITNESS RECORD",
-    "title": "Last known movements",
-    "date": "25 FEB 1997",
-    "ref": "M/97-03",
-    "body": [
-      "MERIDIAN CONSTABULARY — WITNESS ENQUIRY SUMMARY. Case reference M/97/0221. Interview conducted by DS Helen Price. This extract summarises a witness account and should not be read as a verbatim signed statement.",
-      "The witness, who regularly used the route between the eastern canal and Station Road, recalled seeing a man of broadly similar age and build to the deceased during the late evening of Thursday 20 February. The witness could not identify the man positively and was uncertain whether the observation occurred before or after 23:00 hours.",
-      "The witness recalled the man walking unsteadily for part of the route but could not say whether this was due to drink, the condition of the path, or any other cause. The witness did not observe an injury, hear an argument, or see the man enter the water. The account contains no reliable identification of any companion.",
-      "Separate background enquiries recorded that Adam had previously experienced difficulties involving alcohol. No current medical history was verified by this witness. This information was retained as background only and does not establish the deceased's condition or intention on the night in question.",
-      "The sighting was entered as a possible lead. Its time and identification remained uncorroborated when this summary was prepared; officers were advised not to rely upon it as a definitive account of the deceased's final movements."
-    ],
-    "note": "There are a few qualifications in this one, aren't there? Witness memories can be difficult to pin down. We can note those uncertainties without trying to settle them just yet."
-  },
-  {
-    "type": "MEDICAL ABSTRACT",
-    "title": "Post-mortem extract",
+    "type": "NEWSROOM BACKGROUND SHEET",
+    "title": "Identity and background",
     "date": "24 FEB 1997",
-    "ref": "M/97-04",
+    "ref": "NEWS/97-02",
     "body": [
-      "OFFICE OF THE CORONER — MEDICAL EXAMINATION ABSTRACT. Reference M/97/0221. Examination conducted on 24 February 1997 by Dr P. Hargreaves, consultant forensic pathologist. This archived abstract records selected conclusions and is not the complete post-mortem report.",
-      "Identity of the deceased: Adam E., male, aged 27 years. The certified medical cause in the retained extract is a fatal blunt-force injury to the head. The findings describe the injury responsible for death but do not, by themselves, establish the circumstances in which it was sustained.",
-      "On the evidence available at examination, the probable interval of death was estimated as between 22:00 hours on Thursday 20 February and 02:00 hours on Friday 21 February 1997. This represents an estimate rather than an independently observed time of death. The body was discovered later that morning.",
-      "The examination did not establish whether the injury was sustained in an accident, resulted from a deliberate act by the deceased, or involved another person. The question of intent and the manner of death falls outside the scope of this medical abstract and remained for further investigation and consideration by the coroner.",
-      "Findings and retained material were supplied to the investigating officer. Conclusions should be read alongside the scene and witness evidence rather than treated as a complete reconstruction of events."
+      "THE MERIDIAN — REPORTER'S BACKGROUND NOTES. Prepared following confirmation of the deceased's identity. Compiled from the published police identification notice, the paper's own past editions and information volunteered to the news desk. This is not a police property inventory.",
+      "The deceased has been identified publicly as Adam E., aged 27, of the Meridian district. The police notice requested that his family be given privacy while enquiries remained ongoing. His date of birth, 18 January 1970, is entered in the paper's biographical index.",
+      "A search of The Meridian's bound volumes located a 1986 education feature on a successful regional school debate team. The clipping refers to a particularly promising young speaker; the reporter's handwritten index identifies him as Adam E. The retrospective relevance of this item has not been independently established.",
+      "Colleagues also located a September 1996 announcement in the weddings column naming Adam and his fiancée and describing their plans to marry. That cutting remained in the newspaper's own archive: it was not recovered from Adam's person.",
+      "An earlier period of difficulties with alcohol was mentioned to the news desk by an acquaintance. The account was not accompanied by medical documentation and should be treated as background information rather than a verified description of his circumstances in February 1997."
     ],
-    "note": "This helps us narrow down the time and the medical finding. The larger story may have to wait until the remaining papers have been put together."
+    "note": "It's strange how old newspaper clippings turn up again. For this file, the important thing is that the identification is confirmed."
+  },
+  {
+    "type": "REPORTER'S INTERVIEW",
+    "title": "A possible sighting",
+    "date": "25 FEB 1997",
+    "ref": "NEWS/97-03",
+    "body": [
+      "THE MERIDIAN — INTERVIEW NOTES, LOCAL NEWS DESK. Interview conducted on 24 February, written up on 25 February 1997. The interviewee agreed to speak about the canal route but did not wish to be named in print. These notes have not been endorsed by police.",
+      "The interviewee said they were returning towards Station Road late on Thursday 20 February when they noticed a man walking near the entrance to the canal path. They thought the man might have been in his twenties, but could not identify him as Adam E. from memory or from the newspaper's description.",
+      "Asked about the time, the interviewee said it was 'getting on for eleven', adding that they had not looked at a clock. They recalled the figure slowing or stumbling briefly. They could not say whether the path was uneven, whether the man had been drinking, or whether he was injured.",
+      "The interviewee did not recall hearing a disturbance. When asked if anyone else was nearby, they replied that they could not be certain because visibility along the path was poor. Their account was passed to the reporter's editor for consideration and was not printed as an established account of Adam's movements.",
+      "EDITORIAL CAUTION: The identification, exact time and condition of the man remain unconfirmed. The account is reproduced here because it may be relevant to a reconstruction of the night."
+    ],
+    "note": "A person interviewed days later can only remember so much. I'd keep the time estimate marked as approximate."
+  },
+  {
+    "type": "INQUEST PRESS NOTES",
+    "title": "Medical evidence reported",
+    "date": "APR 1997",
+    "ref": "NEWS/97-04",
+    "body": [
+      "THE MERIDIAN — NOTES FROM PUBLIC CORONER'S PROCEEDINGS. Prepared for the newspaper's court and local news desk. This is a reporter's account of evidence heard in public, not the complete post-mortem report or a confidential police file.",
+      "The deceased was identified at the proceedings as Adam E., aged 27. According to the medical evidence summarised for the hearing, death resulted from a blunt-force injury to the head. The evidence did not, on its own, establish how the injury had occurred.",
+      "The estimated time of death was described as between approximately 22:00 on Thursday 20 February and 02:00 on Friday 21 February 1997. The witness giving medical evidence cautioned that this was an estimate rather than a time confirmed by observation.",
+      "Questions surrounding Adam's movements before his death remained unresolved in the material reported by the newspaper. The notes did not record a medical conclusion as to whether the injury had resulted from an accident or another person's actions. Nor did they establish any intention on Adam's part.",
+      "REPORTER'S MARGIN NOTE: This extract covers the medical testimony only. A copy of any formal determination should be checked against the coroner's office before wording a headline or final case summary. No complete determination is attached to this newsroom folder."
+    ],
+    "note": "The medical evidence gives us the cause and a useful interval. It doesn't answer every question, of course."
   }
 ];
     let activeCaseFile=0,caseZoom=100;
@@ -1673,12 +1676,12 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       const file=caseFiles[activeCaseFile],paper=document.getElementById('case-active-document');
       paper.replaceChildren();
       const heading=document.createElement('div');heading.className='case-paper-heading';
-      heading.innerHTML='<span>MERIDIAN POLICE · RECOVERED COPY</span><span>'+file.ref+'</span>';paper.appendChild(heading);
+      heading.innerHTML='<span>THE MERIDIAN · NEWSROOM ARCHIVE</span><span>'+file.ref+'</span>';paper.appendChild(heading);
       const kind=document.createElement('div');kind.className='case-paper-kind';kind.textContent=file.type;paper.appendChild(kind);
       const h=document.createElement('h2');h.textContent=file.title;paper.appendChild(h);
       const date=document.createElement('p');date.className='case-paper-date';date.textContent='FILED '+file.date;paper.appendChild(date);
       file.body.forEach(t=>{const p=document.createElement('p');p.textContent=t;paper.appendChild(p)});
-      const foot=document.createElement('div');foot.className='case-paper-foot';foot.textContent='ARCHIVE COPY · CONTENT SUBJECT TO VERIFICATION';paper.appendChild(foot);
+      const foot=document.createElement('div');foot.className='case-paper-foot';foot.textContent='RETAINED NEWSROOM COPY · NOT AN OFFICIAL CASE FILE';paper.appendChild(foot);
       document.getElementById('case-page-counter').textContent='DOCUMENT 0'+(activeCaseFile+1)+' / 0'+caseFiles.length;
       document.getElementById('case-narrator-note').textContent=file.note;
       [...caseTabs.children].forEach((el,n)=>{el.classList.toggle('active',n===activeCaseFile);el.setAttribute('aria-pressed',String(n===activeCaseFile))});
@@ -1701,10 +1704,12 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('case-open-reconstruction').addEventListener('click',()=>document.getElementById('case-form-panel').scrollIntoView({behavior:'smooth',block:'center'}));
     let caseNoteDismissed=false;
     document.getElementById('case-note-dismiss').addEventListener('click',()=>{
-      if(caseNoteDismissed)return;
       const note=document.getElementById('case-archivist-note');
-      if(note.hidden){note.hidden=false;document.getElementById('case-note-dismiss').setAttribute('aria-expanded','true');}
-      else{note.hidden=true;caseNoteDismissed=true;document.querySelector('.case-note-wrap').hidden=true;safelySaveSession();}
+      note.hidden=!note.hidden;
+      const folded=document.getElementById('case-note-dismiss');
+      folded.setAttribute('aria-expanded',String(!note.hidden));
+      if(note.hidden){caseNoteDismissed=true;folded.classList.add('crumpled');folded.setAttribute('aria-label','Open crumpled note');}
+      safelySaveSession();
     });
     openCaseFile(0);
     const caseExpected=['Adam E.','East canal towpath','20 February 22:00 – 21 February 02:00','Fatal blunt-force head injury'];
