@@ -2052,7 +2052,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     // New survey uses image pixels (1448 x 1086); Leaflet lat = 1086 - image y.
     const fourPhotos=[
-      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:492,lng:1215,bearing:300},site:'Albert Road / Meridian Secondary School'},
+      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:572,lng:1190,bearing:300},site:'Albert Road / Meridian Secondary School'},
       {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:742,lng:1168,bearing:286},site:'Station Road / Filling Station approach'},
       {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:454,lng:1056,bearing:319},site:'Prince Arthur / Milton Street corner'}
     ];
@@ -2106,15 +2106,24 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         const expected=fourPhotos[fourCurrent].answer;
         const distance=Math.hypot(fourMarker.lat-expected.lat,fourMarker.lng-expected.lng);
         const heading=Math.abs(((Number(fourBearing.value)-expected.bearing+540)%360)-180);
-        const locationOK=distance<=fourChecks[fourCurrent].location;
+        // PH-01 depicts a stretch of Albert Road, not an exact survey point.
+        // Leaflet lat is measured upwards from the map's bottom edge.
+        const pointToSegmentDistance=(lat,lng,a,b)=>{
+          const dx=b.lng-a.lng,dy=b.lat-a.lat;
+          const t=Math.max(0,Math.min(1,((lng-a.lng)*dx+(lat-a.lat)*dy)/(dx*dx+dy*dy)));
+          return Math.hypot(lng-(a.lng+t*dx),lat-(a.lat+t*dy));
+        };
+        const locationOK=fourCurrent===0
+          ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:537,lng:1000},{lat:611,lng:1360})<=52
+          :distance<=fourChecks[fourCurrent].location;
         const directionOK=heading<=fourChecks[fourCurrent].bearing;
                 if(!locationOK||!directionOK){
-          const hints=[
-            ['Find Albert Road beside Meridian Secondary School. Look along the road toward the Prince Arthur end.','Your direction is plausible. Place the camera on Albert Road by the school.','The area is correct. Face along Albert Road toward Prince Arthur.'],
-            ['Look on Station Road near the filling station; the garage appears on the right of the photo.','Move along Station Road closer to the filling station.','Turn along Station Road, keeping the filling station on the right.'],
-            ['Find the Prince Arthur corner at Albert Road and Milton Street.','Move closer to the Prince Arthur / Milton Street corner.','Turn toward the red-brick Prince Arthur corner building.']
+          const subtleHints=[
+            ['Check the buildings and road junctions visible in the photograph before choosing a spot.','Compare the arrangement of nearby streets and buildings, rather than pinning the landmark itself.','The location is plausible; use the direction of the receding road and the side of the frame occupied by the landmark.'],
+            ['Look for distinctive roadside structures and how the road continues beyond them.','Try following the road layout and nearby junctions in the survey.','The location is plausible; check which side of the road the main landmark appears on.'],
+            ['The corner building and its adjoining streets should help narrow this down.','Compare the shape of the junction with the photograph.','The location is plausible; rotate until both streets line up with the photograph.']
           ];
-          feedback.textContent=hints[fourCurrent][!locationOK&&!directionOK?0:!locationOK?1:2];
+          feedback.textContent=subtleHints[fourCurrent][!locationOK&&!directionOK?0:!locationOK?1:2];
           feedback.classList.add('error');
           return;
         }
