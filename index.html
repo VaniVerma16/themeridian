@@ -1172,6 +1172,13 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five #desk-notebook-panel .case-paper{border:1px solid #c5b394;box-shadow:0 12px 34px #0006}
 #level-five #desk-case-panel .case-form{transform:none;box-shadow:0 10px 24px #0006}
 @media(max-width:600px){#level-five .desk-overlay{inset:5px}#level-five .desk-overlay-body{padding:15px 10px}#level-five #desk-slips-panel .desk-slip-controls{grid-template-columns:1fr 1fr;gap:9px}#level-five #desk-slip-counter{grid-column:1/-1;grid-row:1}#level-five #desk-slip-prev{grid-column:1;grid-row:2}#level-five #desk-slip-next{grid-column:2;grid-row:2}#level-five #desk-slips-panel .desk-slip-controls button{font-size:12px;padding:9px 8px}#level-five #desk-slips-panel .case-extra-view{min-height:300px}}
+
+#level-five .case-quick-guide{font:14px/1.6 Georgia,serif;color:#655746;margin:12px 0 18px;border-bottom:1px solid #baa98e;padding-bottom:14px}
+#level-five #desk-case-panel .case-theories{gap:10px}
+#level-five #desk-case-panel .case-theory{padding:15px 17px;font:16px/1.45 Georgia,serif;transition:background .15s,border-color .15s}
+#level-five #desk-case-panel .case-theory:hover{background:#e2d8c5;border-color:#67533c}
+#level-five #desk-case-panel .case-theory.selected{background:#d7dfd2;border-color:#465743}
+#level-five #desk-case-panel .case-stage-instruction{font-size:15px;line-height:1.65}
 </style>
 </head>
 <body>
@@ -1381,7 +1388,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       <div class="case-view-toolbar"><span id="case-page-counter">DOCUMENT 01 / 04</span><div><button type="button" id="case-zoom-out" aria-label="Decrease document zoom">−</button><span id="case-zoom-label">100%</span><button type="button" id="case-zoom-in" aria-label="Increase document zoom">+</button></div></div>
       <div class="case-paper-viewport"><article id="case-active-document" class="case-paper" aria-live="polite"></article></div>
       <div class="case-page-controls"><button type="button" id="case-prev">← Previous</button><button type="button" id="case-next">Next record →</button></div><div class="case-extras">
- <div class="case-side-heading">LOOSE INSERTS · SELECT TO INSPECT</div>
+ <div class="case-side-heading">ARCHIVAL INSERT</div>
  <div class="case-extra-cards" id="case-extra-cards"></div>
  <div class="case-extra-view" id="case-extra-view" hidden role="region" aria-live="polite"><small id="case-extra-type"></small><h3 id="case-extra-title"></h3><p id="case-extra-text"></p><button type="button" id="case-extra-close">Close insert ×</button></div>
  </div>
@@ -1391,7 +1398,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       <section class="case-scratch"><div class="case-side-heading">NOTEPAD <span>Autosaved</span></div><textarea id="case-notepad" aria-label="Your private case notes" placeholder="Use this for taking down notes…" rows="7"></textarea></section>
       <section id="case-guidance" class="case-guidance"><div class="case-side-heading">A FEW NOTES FROM YOURS TRULY</div><p id="case-narrator-note"></p></section>
       <section class="case-form" id="case-form-panel">
-<div class="case-side-heading">INVESTIGATION BOARD <span id="case-stage-count">01 / 04</span></div>
+<div class="case-side-heading">CASE RECONSTRUCTION <span id="case-stage-count">01 / 04</span></div><p class="case-quick-guide">Open the case notebook and loose slips on the desk. Answer four questions using those records. Your findings are saved as you go.</p>
 <div class="case-progress" id="case-progress"></div>
 <h2 id="case-stage-title">Establish the identity</h2><p id="case-stage-instruction" class="case-stage-instruction"></p>
 <div id="case-theories" class="case-theories" role="group" aria-label="Working hypotheses"></div>
@@ -1553,7 +1560,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         if(Array.isArray(data.puzzleThree))document.querySelectorAll('#answer-fields select').forEach((el,i)=>{if(typeof data.puzzleThree[i]==='string')el.value=data.puzzleThree[i]});
         if(Array.isArray(data.gridMarks))document.querySelectorAll('.logic-cell').forEach((el,i)=>{const v=data.gridMarks[i];if(['','×','✓'].includes(v)){el.textContent=v;el.dataset.state=String(['','×','✓'].indexOf(v));}});
         if(typeof data.caseNotepad==='string')document.getElementById('case-notepad').value=data.caseNotepad;
-        if(Number.isInteger(data.caseStage))caseStage=Math.min(4,Math.max(0,data.caseStage));
+        if(Number.isInteger(data.caseStage))caseStage=Math.min(3,Math.max(0,data.caseStage));
         if(typeof data.caseTheory==='string')caseTheory=data.caseTheory;
         if(Array.isArray(data.casePicked))casePicked=data.casePicked.filter(x=>typeof x==='string').slice(0,2);
         if(typeof data.caseEditorial==='string')caseEditorial=data.caseEditorial;
@@ -1932,20 +1939,19 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       safelySaveSession();
     });
     openCaseFile(0);
+    // Four factual questions, not an evidence-label matching exam.
     const caseStages=[
-      {title:'Who was the deceased?',instruction:'Compare the possible identities with the later identification update. Select a person and the two items that support your choice.',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',evidence:['Identity enquiry','Identification update'],clue:'Check both the birth date and the later notice.'},
-      {title:'Where was he found?',instruction:'Identify the discovery site, not a place he may have visited earlier.',options:['Prince Arthur public house','East canal towpath','Market Square'],answer:'East canal towpath',evidence:['Police press release','Location reference'],clue:'The map key distinguishes the site of recovery from other locations.'},
-      {title:'When did he die?',instruction:'The reported discovery time is not the estimated time of death. Choose the medical interval.',options:['20 February, 18:00–20:00','20 February 22:00 – 21 February 02:00','21 February, 06:00–08:00'],answer:'20 February 22:00 – 21 February 02:00',evidence:['Inquest press notes','Estimated interval'],clue:'Compare the reporter’s time slip with the first press release.'},
-      {title:'What caused his death?',instruction:'Find the medical cause, not a theory about intent or circumstances.',options:['Alcohol poisoning','Fatal blunt-force head injury','Drowning'],answer:'Fatal blunt-force head injury',evidence:['Inquest press notes','Terminology guide'],clue:'Distinguish the medical injury from a possible manner of death.'},
-      {title:'What would you publish?',instruction:'The facts are assembled. What interpretation should the newspaper put forward?',options:['An apparent suicide','An accident','A possible homicide','The evidence is inconclusive'],answer:null,evidence:[],clue:''}
+      {title:'01 — Who was the deceased?',instruction:'Use the enquiry names and identification update. Which person fits the age, surname and birth month?',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',clue:'Look at the Identity enquiry and Police follow-up slips. Compare all three details.'},
+      {title:'02 — Where was he found?',instruction:'We need the place his body was recovered, not where he was last seen.',options:['Prince Arthur public house','East canal towpath','Market Square'],answer:'East canal towpath',clue:'Check the Location reference slip. It distinguishes recovery from the place of injury.'},
+      {title:'03 — When did he die?',instruction:'Choose the medical estimate—not the time the body was discovered.',options:['20 February, 18:00–20:00','20 February 22:00 – 21 February 02:00','21 February, 06:00–08:00'],answer:'20 February 22:00 – 21 February 02:00',clue:'The Estimated interval slip gives the range. The 06:40 report is about discovery.'},
+      {title:'04 — What was the medical cause?',instruction:'Choose the medical cause of death. How the injury occurred is still unknown.',options:['Alcohol poisoning','Fatal blunt-force head injury','Drowning'],answer:'Fatal blunt-force head injury',clue:'The Medical notes slip explains what the witness established—and what they could not establish.'}
     ];
     let caseStage=0,caseTheory='',casePicked=[],caseEditorial='';
-    const caseEvidenceLabels=['Police press release','Identity enquiry','Identification update','Location reference','Reporter interview','Inquest press notes','Estimated interval','Terminology guide','Wedding announcement'];
     function renderCaseStage(){
       const stage=caseStages[caseStage];
       document.getElementById('case-stage-title').textContent=stage.title;
       document.getElementById('case-stage-instruction').textContent=stage.instruction;
-      document.getElementById('case-stage-count').textContent=String(caseStage+1).padStart(2,'0')+' / 05';
+      document.getElementById('case-stage-count').textContent=String(caseStage+1).padStart(2,'0')+' / 04';
       const progress=document.getElementById('case-progress');progress.replaceChildren();
       caseStages.forEach((_,i)=>{const mark=document.createElement('span');mark.className=i<caseStage?'done':i===caseStage?'current':'';progress.appendChild(mark)});
       const theories=document.getElementById('case-theories');theories.replaceChildren();
@@ -1955,33 +1961,21 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         button.addEventListener('click',()=>{caseTheory=value;document.getElementById('five-feedback').textContent='';renderCaseStage();safelySaveSession()});
         theories.appendChild(button);
       });
-      const evidence=document.getElementById('case-evidence-picks');evidence.replaceChildren();
-      const support=evidence.parentElement;
-      support.hidden=caseStage===4;
-      if(caseStage<4)caseEvidenceLabels.forEach(label=>{
-        const button=document.createElement('button');button.type='button';button.textContent=label;button.className='case-evidence-choice'+(casePicked.includes(label)?' selected':'');
-        button.setAttribute('aria-pressed',String(casePicked.includes(label)));
-        button.addEventListener('click',()=>{
-          if(casePicked.includes(label))casePicked=casePicked.filter(x=>x!==label);
-          else if(casePicked.length<2)casePicked.push(label);
-          renderCaseStage();safelySaveSession();
-        });evidence.appendChild(button);
-      });
-      document.getElementById('five-finish').textContent=caseStage===4?'File editorial conclusion →':'Confirm deduction →';
+      document.querySelector('#case-form-panel .case-support').hidden=true;
+      document.getElementById('five-finish').textContent=caseStage===3?'Finish case reconstruction →':'Save finding →';
     }
     document.getElementById('five-finish').addEventListener('click',()=>{
       const stage=caseStages[caseStage],feedback=document.getElementById('five-feedback');
-      if(!caseTheory){feedback.textContent='Select your conclusion first.';return}
-      if(caseStage<4){
-        if(casePicked.length!==2){feedback.textContent='Connect two supporting records before confirming.';return}
-        if(caseTheory!==stage.answer||!stage.evidence.every(x=>casePicked.includes(x))){feedback.textContent=stage.clue;return}
+      if(!caseTheory){feedback.textContent='Choose one answer before continuing.';return}
+      if(caseTheory!==stage.answer){feedback.textContent=stage.clue;return}
+      if(caseStage<3){
         caseStage++;caseTheory='';casePicked=[];renderCaseStage();safelySaveSession();
       }else{
-        caseEditorial=caseTheory;
+        caseEditorial='Evidence inconclusive';
         document.getElementById('case-form-panel').hidden=true;
         const result=document.getElementById('five-result');result.hidden=false;
-        result.querySelector('h2').textContent='The file is ready.';
-        result.querySelector('p').textContent=caseEditorial==='An apparent suicide'?'There we are. You have a way of making the pieces fit together!':"Lovely work. You've been so careful with these old records. I suppose not every question has a neat answer.";
+        result.querySelector('h2').textContent='Case facts reconstructed.';
+        result.querySelector('p').textContent='Adam E. was found by the eastern canal towpath. Death was estimated between 10 PM on 20 February and 2 AM on 21 February 1997. The medical cause was a fatal head injury. The records do not establish whether it was an accident, suicide, or homicide.';
         safelySaveSession();
       }
     });
@@ -2202,7 +2196,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       deskOpen=view;
       Object.entries(deskPanels).forEach(([key,el])=>el.hidden=key!==view);
       deskOverlay.hidden=false;
-      const labels={book:'CASE NOTEBOOK',slips:'LOOSE ARCHIVE SLIPS',pad:'YOUR NOTEPAD',case:'RECONSTRUCTION'};
+      const labels={book:'CASE NOTEBOOK',slips:'SUPPLEMENTARY RECORDS',pad:'YOUR NOTEPAD',case:'RECONSTRUCT THE FACTS'};
       document.getElementById('desk-overlay-title').textContent=labels[view];
       if(view==='slips')showSlip(slipIndex);
       if(view==='pad')document.getElementById('case-notepad').focus();
