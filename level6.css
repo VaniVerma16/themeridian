@@ -1,0 +1,63 @@
+/* The Meridian — the blood-dark design begins at Level 6, never in public. */
+body.blood-era{--paper:#0e0709;--ink:#e7ccc6;--muted:#a77c82;--rule:#6d2835;--green:#92263d;--red:#da3049;--blue:#bd576b;background:radial-gradient(ellipse at 80% 18%,#380c19,transparent 44%),radial-gradient(ellipse at 12% 90%,#28080e,transparent 41%),#070405!important;color:#edcbc8}
+body.blood-era .topline{background:linear-gradient(90deg,#2c0408,#8e142b,#2c0408)}
+body.blood-era header .masthead{border-color:#6f2937}
+body.blood-era header .brand,body.blood-era #mini-header .mini-title{color:#f2deda;text-shadow:2px 2px 0 #44101a}
+body.blood-era header .utility,body.blood-era header nav,body.blood-era header .tagline,body.blood-era footer{color:#aa7b83;border-color:#632b37}
+body.blood-era #dev-navigation{background:#270d16;border-color:#74283b}
+body.blood-era #player-history{background:#250f17!important;border-color:#733344!important}
+body.blood-era #player-history button,body.blood-era #player-history span{color:#f1d6d1!important}
+body.blood-era .level,body.blood-era .reading-page{background-color:transparent}
+#level-six[hidden],#sixAfter[hidden],#six-breach[hidden],#six-cry[hidden],#six-lines[hidden],#six-reset[hidden],#six-dev-open[hidden]{display:none!important}
+.six-screen{min-height:80vh;padding:20px 0 84px!important;color:#e6d3ce}
+.six-shell{width:min(1140px,100%);margin:auto;padding:24px clamp(12px,3vw,45px)}
+.six-folio{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid #642c36;border-bottom:1px solid #642c36;padding:11px 0;font:10px/1.5 monospace;letter-spacing:.12em;color:#b87d8a}
+.six-number{font:43px Georgia,serif;color:#dc4058;margin:30px 0 3px}.six-number small{font:11px monospace;letter-spacing:.12em;color:#b68c90}
+.six-shell>h1{font:clamp(35px,5vw,64px)/1.06 Georgia,serif;color:#f3ded8;letter-spacing:-.04em;margin:0 0 26px}
+.six-narrator{max-width:710px;padding:19px 23px;background:linear-gradient(90deg,#38121d,#170a0f);border-left:4px solid #8e293d;box-shadow:6px 10px 24px #0007;margin:0 0 32px;transform:rotate(-.4deg)}
+.six-narrator span{font:10px monospace;letter-spacing:.14em;color:#db8b9a}
+.six-narrator p{font:16px/1.68 Georgia,serif;color:#e5c9c3;margin:9px 0}
+.six-narrator p+p{margin-top:15px}
+.six-columns{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:24px;align-items:start}
+.six-paper{padding:clamp(22px,4vw,55px);background:linear-gradient(125deg,#f4e8d5,#e4cfb6 82%,#c7aa92);color:#362721;border:1px solid #a89781;box-shadow:4px 7px 0 #592332,18px 25px 50px #000a;transform:rotate(-.3deg)}
+.six-paperhead{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;border-top:3px double #75594f;border-bottom:1px solid #a38978;padding:10px 0;color:#65534b;font:10px monospace}
+.six-section-tag{text-align:center;font:10px monospace;letter-spacing:.13em;color:#7b5e57;margin:26px 0 10px}
+.six-paper h2{text-align:center;font:clamp(30px,4vw,51px)/1.06 Georgia,serif;letter-spacing:-.035em;color:#372622;margin:0}
+.six-subtitle{text-align:center;font:italic 17px Georgia,serif;color:#73594f;margin:10px 0 25px;padding-bottom:24px;border-bottom:1px solid #b7a18f}
+.six-placeholder-label{font:11px/1.6 monospace!important;padding:11px;color:#833f4d!important;border:1px dashed #ba848c;background:#d99f9c33}
+.six-act{margin:30px 0}.six-act h3{font:12px monospace;letter-spacing:.15em;color:#7c3643;margin:0 0 10px}
+.six-act p{font:17px/1.88 Georgia,serif;color:#3d302c!important;margin:10px 0}
+.six-act p.six-placeholder{font:italic 14px/1.55 Georgia,serif;color:#8c595d!important}
+.six-err{font:inherit;border:0;border-bottom:2px dotted #a13247;border-radius:0;color:#851a30;background:transparent;padding:0 2px;cursor:pointer}
+.six-err:hover,.six-err:focus-visible{outline:2px solid #af2e46;outline-offset:2px}
+.six-err.fixed{border-bottom:1px solid #58805e;color:#446147;cursor:default}
+.six-err.fixed::after{content:" ✓";font:11px monospace}
+.six-paperend{margin-top:43px;text-align:center;color:#987d70;font:10px monospace;letter-spacing:.15em}
+.six-sidebar{padding:21px;background:#211017;border:1px solid #773144;box-shadow:7px 10px 0 #070204;position:sticky;top:18px}
+.six-sidebar-top{display:flex;justify-content:space-between;gap:6px;border-bottom:1px solid #682a3b;padding-bottom:11px;font:10px monospace;letter-spacing:.07em;color:#d0808d}
+.six-sidebar h3{font:27px Georgia,serif;color:#f3d7d0;margin:18px 0 9px}
+.six-sidebar p{font:14px/1.65 Georgia,serif;color:#caa7a6}
+.six-total{font:31px Georgia,serif;color:#ed768b;margin:28px 0 8px}
+.six-total span{color:#b48a91}.six-meter{height:4px;background:#4f2633}.six-meter>div{height:100%;background:#d23d57;width:0;transition:width .2s}
+#six-feedback{font:12px/1.5 monospace;color:#cc9ca3;min-height:33px;margin:18px 0}
+.six-outline{background:#281017;border:1px solid #b0495b;color:#edc9d0;padding:11px 16px;font:12px monospace;cursor:pointer}.six-outline:hover{background:#5f2031}
+.six-files{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1000px;margin:30px 0}
+.six-folder{display:flex;flex-direction:column;gap:17px;min-height:165px;padding:22px;border:1px solid #69404a;background:#211015}
+.six-folder small{font:10px monospace;color:#ad7883}
+.six-folder strong{font:25px Georgia,serif;font-weight:400;color:#f2d9d4}
+.six-folder span{font:10px monospace;color:#b88590}
+.six-folder-gap{border:2px dashed #ad2b44;background:repeating-linear-gradient(-35deg,#21080e 0 9px,#300e16 9px 18px);transform:rotate(1deg)}
+.six-folder-gap strong{color:#ff5c78}
+.six-dev-note{color:#b58c92;font:12px/1.6 monospace;max-width:740px}
+#six-breach{position:fixed;inset:0;background:#010001;z-index:11000;display:grid;place-items:center;overflow:hidden;isolation:isolate}
+#six-breach::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 4px,#e33b480d 5px 6px);animation:six-scan .14s steps(2) infinite}
+.six-cry{position:relative;z-index:4;text-align:center;font:900 clamp(43px,11vw,170px)/1 monospace;letter-spacing:-.07em;color:#f9e3df;text-shadow:-8px 0 #b3132b,8px 0 #147e8e;animation:six-jerk .11s steps(2) infinite}
+.six-lines{position:absolute;inset:-65%;display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,2vh,28px);transform:rotate(-21deg) scale(1.1);animation:six-lines-glitch .13s steps(2) infinite}
+.six-lines span{white-space:nowrap;text-align:center;font:900 clamp(35px,6.2vw,103px)/1.1 monospace;letter-spacing:-.065em;color:#dc324d;text-shadow:4px 0 #6f091c,-4px 0 #44040d}
+.six-lines span:nth-child(3n){color:#f0dad9;transform:translateX(-10%)}
+.six-lines span:nth-child(4n){color:#8d1831;transform:translateX(11%)}
+@keyframes six-scan{0%{transform:translateY(0)}100%{transform:translateY(7px)}}
+@keyframes six-jerk{0%,100%{transform:translate(0)}30%{transform:translate(-12px,6px)}65%{transform:translate(11px,-7px)}}
+@keyframes six-lines-glitch{0%,100%{transform:rotate(-21deg) translate(0,0) scale(1.1)}40%{transform:rotate(-21deg) translate(-25px,12px) scale(1.1)}74%{transform:rotate(-21deg) translate(16px,-8px) scale(1.12)}}
+@media(max-width:820px){.six-columns{grid-template-columns:1fr}.six-sidebar{position:static}.six-files{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#six-breach::before,.six-cry,.six-lines{animation:none!important}}
