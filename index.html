@@ -2087,10 +2087,12 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         const expected=fourPhotos[fourCurrent].answer;
         const distance=Math.hypot(fourMarker.lat-expected.lat,fourMarker.lng-expected.lng);
         const heading=Math.abs(((Number(fourBearing.value)-expected.bearing+540)%360)-180);
-        const locationOK=distance<=58;
-        const directionOK=heading<=30;
+        const locationTolerance=fourCurrent===0?105:58;
+        const directionTolerance=fourCurrent===0?45:30;
+        const locationOK=distance<=locationTolerance;
+        const directionOK=heading<=directionTolerance;
                 if(!locationOK||!directionOK){
-          feedback.textContent=(!locationOK&&!directionOK)?'Not quite. Recheck the landmark and the direction of the road.':(!locationOK?'The direction looks plausible, but try another position.':'You found the right area. Rotate the camera to face the landmark.');
+          feedback.textContent=(!locationOK&&!directionOK)?(fourCurrent===0?'Look for the approach west of the Clock Tower, then aim the camera towards the High Street.':'Not quite. Recheck the landmark and the direction of the road.'):( !locationOK?(fourCurrent===0?'Try the street approaching the Clock Tower from the west, rather than the square itself.':'The direction looks plausible, but try another position.'):'You found the right area. Rotate the camera to face the landmark.');
           feedback.classList.add('error');
           return;
         }
