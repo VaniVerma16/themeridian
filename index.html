@@ -967,6 +967,23 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .case-desk-grid .desk-plant-left{top:23px;left:20px;transform:rotate(-20deg)}
 .case-desk-grid .desk-plant-right{top:18px;right:20px;transform:rotate(14deg)}
 @media(max-width:680px){.case-note-wrap .case-archivist-note{left:0;bottom:auto;top:79px;width:min(100%,430px)}.case-note-wrap:has(.case-archivist-note:not([hidden])){min-height:285px}.case-desk-grid .desk-plant{font-size:40px}}
+
+/* Different archival environments per assessment; desk light is its own saved toggle. */
+body:has(#level-one:not([hidden])),body:has(#read-one:not([hidden])){
+  background:radial-gradient(ellipse 95% 55% at 48% 6%,#373633 0%,transparent 78%),repeating-linear-gradient(90deg,#1a1b1b 0,#1a1b1b 3px,#1c1d1d 4px,#1a1b1b 7px);
+}
+body:has(#level-two:not([hidden])),body:has(#read-two:not([hidden])){
+  background:radial-gradient(ellipse at 50% 18%,#3d352b 0%,transparent 75%),repeating-linear-gradient(0deg,#20201d 0,#24221e 2px,#20201d 5px);
+}
+body:has(#level-three:not([hidden])),body:has(#read-three:not([hidden])){
+  background:radial-gradient(ellipse at 65% 17%,#323631 0%,transparent 72%),repeating-linear-gradient(90deg,#1d211f 0,#1c201e 2px,#1b1e1c 7px);
+}
+body:has(#level-four:not([hidden])),body:has(#read-four:not([hidden])){
+  background:radial-gradient(ellipse at 50% 7%,#3e4034 0%,transparent 66%),linear-gradient(125deg,#1a1d1b,#22231f 55%,#181b19);
+}
+body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
+  background:radial-gradient(ellipse at 49% 12%,#352b26 0%,transparent 66%),#171918;
+}
   </style>
 </head>
 <body>
@@ -1146,7 +1163,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       <section id="level-five" class="level" aria-label="Original case file" hidden>
 <div class="assignment case-assignment case-desk">
   <h1>The Original Case File</h1>
-  <div class="case-desk-grid desk-lit" id="case-physical-desk"><div class="desk-grain" aria-hidden="true"></div><div class="desk-plant desk-plant-left" aria-hidden="true">🌿</div><div class="desk-plant desk-plant-right" aria-hidden="true">🪴</div><div class="desk-lamp"><span class="desk-cord"></span><button type="button" id="desk-bulb" aria-label="Switch desk lamp off" aria-pressed="true" title="Toggle desk lamp"><span class="bulb-glow"></span><svg viewBox="0 0 48 74" width="48" height="74" aria-hidden="true" style="transform:rotate(180deg)"><path d="M14 5H34V17H14Z" fill="#68645a" stroke="#28251f" stroke-width="2"/><path d="M17 17H31V25H17Z" fill="#89847b" stroke="#28251f"/><path d="M9 43C9 30 15 24 24 24S39 30 39 43C39 54 33 57 31 61H17C15 57 9 54 9 43Z" fill="#f7dca0" stroke="#76664c" stroke-width="2"/><path d="M17 43l7 11 7-11" fill="none" stroke="#bd9055" stroke-width="2"/><path d="M18 62H30M18 66H30M20 70H28" stroke="#9b9586" stroke-width="3"/></svg></button><span class="desk-lamp-label">DESK LIGHT</span></div>
+  <div class="case-desk-grid" id="case-physical-desk"><div class="desk-grain" aria-hidden="true"></div><div class="desk-plant desk-plant-left" aria-hidden="true">🌿</div><div class="desk-plant desk-plant-right" aria-hidden="true">🪴</div><div class="desk-lamp"><span class="desk-cord"></span><button type="button" id="desk-bulb" aria-label="Switch desk lamp on" aria-pressed="false" title="Toggle desk lamp"><span class="bulb-glow"></span><svg viewBox="0 0 48 74" width="48" height="74" aria-hidden="true" style="transform:rotate(180deg)"><path d="M14 5H34V17H14Z" fill="#68645a" stroke="#28251f" stroke-width="2"/><path d="M17 17H31V25H17Z" fill="#89847b" stroke="#28251f"/><path d="M9 43C9 30 15 24 24 24S39 30 39 43C39 54 33 57 31 61H17C15 57 9 54 9 43Z" fill="#f7dca0" stroke="#76664c" stroke-width="2"/><path d="M17 43l7 11 7-11" fill="none" stroke="#bd9055" stroke-width="2"/><path d="M18 62H30M18 66H30M20 70H28" stroke="#9b9586" stroke-width="3"/></svg></button><span class="desk-lamp-label">DESK LIGHT</span></div>
     <aside class="case-index" aria-label="Case file index">
       <div class="case-side-heading">LOOSE RECORDS · M/97</div>
       <div id="case-tabs" class="case-tabs" role="group" aria-label="Select a document"></div>
@@ -1328,7 +1345,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         if(Number.isInteger(data.caseZoom))caseZoom=Math.min(140,Math.max(80,data.caseZoom));
         if(Number.isInteger(data.caseFile))openCaseFile(data.caseFile);
         document.getElementById('case-zoom-label').textContent=caseZoom+'%';
-        if(data.caseLampOn===false)lampButton.click();
+        if(data.caseLampOn===true)lampButton.click();
         if(data.caseNoteOpen)document.getElementById('case-note-dismiss').click();
         if(data.caseVerified){document.getElementById('case-form-panel').hidden=true;document.getElementById('five-result').hidden=false;}
         furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
