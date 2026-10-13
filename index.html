@@ -1179,6 +1179,11 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five #desk-case-panel .case-theory:hover{background:#e2d8c5;border-color:#67533c}
 #level-five #desk-case-panel .case-theory.selected{background:#d7dfd2;border-color:#465743}
 #level-five #desk-case-panel .case-stage-instruction{font-size:15px;line-height:1.65}
+
+#level-five .archive-redaction{display:inline-block;position:relative;color:#1d1717;background:#241c1b;padding:0 .28em;letter-spacing:-.08em;white-space:nowrap;line-height:1.1;filter:drop-shadow(1px 0 #9b2727)}
+#level-five .archive-redaction::after{content:'REDACTED';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#e7d8cc;background:#902b2b;font:700 9px/1 monospace;letter-spacing:.17em;clip-path:inset(30% 0 25% 0);animation:archive-flicker 4.9s steps(1,end) infinite}
+@keyframes archive-flicker{0%,89%,93%,100%{transform:translate(0,0);opacity:.95}90%{transform:translate(-3px,0);opacity:.7}91%{transform:translate(3px,-1px);opacity:1}92%{transform:translate(0,1px);opacity:.4}}
+@media(prefers-reduced-motion:reduce){#level-five .archive-redaction::after{animation:none}}
 </style>
 </head>
 <body>
@@ -1804,7 +1809,8 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       "Looked through the old bound issues for background. Found a 1986 schools debate piece about a promising young speaker. Might be our man, might just be a similar name. Ask the archive desk to check the reporter's index before we use it.",
       "September '96 weddings column: an engagement announcement that may connect to him. The couple wrote about rebuilding after difficult years. Pull the original announcement and verify the names. It would be good to speak to the fiancée, if she's willing, before quoting any of it.",
       "Someone who says they knew him mentioned trouble with alcohol years ago. No dates, no independent confirmation. Absolutely not a basis for suggesting he'd been drinking that night.",
-      "FOR THE EDITOR — We have fragments of a life, not a character sketch. Please don't make his past sound like an explanation for his death."
+      "FOR THE EDITOR — We have fragments of a life, not a character sketch. Please don't make his past sound like an explanation for his death.",
+      "COPY MEETING — Working title for the long piece: The Death of the Ordinary Man. Suggested by: [[REDACTED]]. Keep it provisional until the editor signs off. This is still reporting, not a finished story."
     ],
     "note": "These notes seem to mix confirmed details with leads the reporter hadn't checked yet."
   },
@@ -1838,13 +1844,37 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
   }
 ];
     const caseInserts=[
-      {tag:'IDENTITY ENQUIRY',title:'Possible matches',text:'Three names were entered in the newsroom enquiry book: Adam E. (born 18 January 1970); Arthur E. (born 6 May 1965); and Martin Vale (born 9 November 1972). At this stage these are leads, not confirmed identities.'},
-      {tag:'IDENTIFICATION UPDATE',title:'Police follow-up',text:'A later public identification notice states that the deceased was aged 27 and that his surname began with E. The newsroom noted that his next birthday would have fallen in January. Cross-check against the enquiry book.'},
-      {tag:'REPORTER’S MAP KEY',title:'Location reference',text:'The point of recovery was marked beside the eastern canal towpath, near the former railway footbridge. This records where the body was found, not necessarily where the injury occurred.'},
-      {tag:'COURT REPORTER’S SLIP',title:'Estimated interval',text:'Medical evidence: death probably occurred between approximately 22:00 on Thursday 20 February and 02:00 on Friday 21 February 1997. These times are estimates; discovery occurred later.'},
-      {tag:'MEDICAL NOTES',title:'Terminology guide',text:'The medical witness described a fatal injury caused by an impact to the head. No findings in the reported extract established fatal submersion or a lethal concentration of alcohol. The evidence did not establish how the injury happened.'},
-      {tag:'WEDDINGS COLUMN',title:'September 1996',text:'An engagement announcement names Adam E. and his fiancée. They describe rebuilding their lives after difficult years. It does not establish the circumstances of the death.'}
-    ];
+  {
+    "tag": "ENQUIRY BOOK / PHONE DESK",
+    "title": "Names to check",
+    "text": "24 FEB, 10:20 — Three names pencilled in from calls and the old directory: Adam E., born 18 Jan 1970; Arthur E., born 6 May 1965; Martin Vale, born 9 Nov 1972. These are enquiries, NOT identifications. Wait for police confirmation before anyone puts a name in copy. — J."
+  },
+  {
+    "tag": "POLICE NOTICE / COPY DESK",
+    "title": "Identification callback",
+    "text": "24 FEB, 14:05 — Police press officer rang back. Deceased: 27, surname begins E; birthday in January. Match against the morning enquiry list, then call back for full confirmation. Mark the match provisional until checked. — M."
+  },
+  {
+    "tag": "MAP DESK / PENCIL MARK",
+    "title": "Pin the recovery site",
+    "text": "21 FEB, 16:30 — For the map: police place the recovery point on the eastern canal towpath, beside the old railway footbridge. This is where the body was FOUND. Don't imply he sustained the injury there. Station Road and the pub are landmarks, not recovery sites. — P."
+  },
+  {
+    "tag": "COURT REPORTER / TIMING",
+    "title": "Time window",
+    "text": "APR 1997 — From medical witness, checked twice: probable death between about 10 p.m., Thurs 20 Feb, and 2 a.m., Fri 21 Feb. Estimate, NOT a witnessed time. The 6:40 a.m. Friday police call was later. Please retain 'between' in the draft. — Court desk"
+  },
+  {
+    "tag": "COURT REPORTER / MEDICAL",
+    "title": "Cause, not explanation",
+    "text": "APR 1997 — Doctor's evidence: fatal blunt-force injury to the head. No medical finding in today's testimony that drowning or alcohol poisoning caused death. Witness would not say whether the impact followed a fall or an assault. Cause established; circumstances not. — Court desk"
+  },
+  {
+    "tag": "ARCHIVE CUTTING / SOCIETY",
+    "title": "Old engagement notice",
+    "text": "ARCHIVE DESK, 24 FEB — September 1996 weddings-page cutting names Adam E. and his fiancée; they wrote about starting again after difficult years. Might help background after the identity check. Don't turn a happy announcement into a neat explanation of a death. — R."
+  }
+];
         const extraHost=document.getElementById('case-extra-cards');
     // Inline critical layout so the evidence inserts retain their paper appearance
     // even if an earlier legacy stylesheet rule conflicts with this section.
@@ -1906,7 +1936,16 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       const kind=document.createElement('div');kind.className='case-paper-kind';kind.textContent=file.type;paper.appendChild(kind);
       const h=document.createElement('h2');h.textContent=file.title;paper.appendChild(h);
       const date=document.createElement('p');date.className='case-paper-date';date.textContent='FILED '+file.date;paper.appendChild(date);
-      file.body.forEach(t=>{const p=document.createElement('p');p.textContent=t;paper.appendChild(p)});
+      file.body.forEach(t=>{
+        const p=document.createElement('p');const marker='[[REDACTED]]',at=t.indexOf(marker);
+        if(at>=0){
+          p.appendChild(document.createTextNode(t.slice(0,at)));
+          const seal=document.createElement('span');seal.className='archive-redaction';
+          seal.textContent='██████████';seal.setAttribute('aria-label','name redacted');
+          p.appendChild(seal,document.createTextNode(t.slice(at+marker.length)));
+        }else p.textContent=t;
+        paper.appendChild(p);
+      });
       const foot=document.createElement('div');foot.className='case-paper-foot';foot.textContent='RETAINED NEWSROOM COPY · NOT AN OFFICIAL CASE FILE';paper.appendChild(foot);
       document.getElementById('case-page-counter').textContent='DOCUMENT 0'+(activeCaseFile+1)+' / 0'+caseFiles.length;
       document.getElementById('case-narrator-note').textContent=file.note;
