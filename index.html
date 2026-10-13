@@ -1018,6 +1018,15 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-two #sort-feedback{margin:15px 0 10px}
 @media(max-width:800px){#level-two .clipping-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){#level-two .clipping-grid{grid-template-columns:1fr;padding:19px;gap:20px}#level-two .clipping-card img{height:260px}}
+
+/* Lamp sits unobtrusively in the actual top-left desk corner. */
+#level-five .case-desk-grid{padding-top:88px}
+#level-five .case-desk-grid .desk-lamp{top:-2px;left:-2px;right:auto;transform:none}
+#level-five .case-desk-grid #desk-bulb{width:70px;height:62px}
+#level-five .case-desk-grid #desk-bulb svg{width:70px;height:62px}
+#level-five .case-desk-grid .bulb-glow{left:44px;top:24px;width:230px;height:185px}
+#level-five .case-desk-grid .desk-plant{display:none!important}
+@media(max-width:680px){#level-five .case-desk-grid{padding-top:88px}#level-five .case-desk-grid .desk-lamp{top:-2px;left:-2px}}
   </style>
 </head>
 <body>
@@ -1199,9 +1208,6 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
   <h1>The Original Case File</h1>
   <div class="case-desk-grid" id="case-physical-desk">
     <div class="desk-grain" aria-hidden="true"></div>
-    <div class="desk-plant desk-plant-right" aria-hidden="true">
-      <svg viewBox="0 0 150 150" width="150" height="150"><ellipse cx="91" cy="111" rx="35" ry="17" fill="#19140f" opacity=".25"/><path d="M53 92L65 128Q85 143 108 126L119 92Z" fill="#8a7560" stroke="#40382b" stroke-width="3"/><ellipse cx="86" cy="92" rx="33" ry="12" fill="#4d4031"/><path d="M86 90Q72 62 48 36M87 92Q92 50 117 21M87 91Q82 41 80 12M85 90Q106 69 133 56" stroke="#526347" stroke-width="4" fill="none"/><g fill="#536847" stroke="#364737" stroke-width="1.5"><ellipse cx="56" cy="44" rx="12" ry="23" transform="rotate(-42 56 44)"/><ellipse cx="107" cy="38" rx="13" ry="22" transform="rotate(31 107 38)"/><ellipse cx="77" cy="27" rx="11" ry="20" transform="rotate(-12 77 27)"/><ellipse cx="125" cy="64" rx="12" ry="20" transform="rotate(55 125 64)"/><ellipse cx="69" cy="67" rx="13" ry="17" transform="rotate(-50 69 67)"/></g></svg>
-    </div>
     <div class="desk-lamp"><button type="button" id="desk-bulb" aria-label="Switch desk lamp on" aria-pressed="false" title="Toggle desk lamp"><span class="bulb-glow"></span><svg viewBox="0 0 170 150" width="170" height="150" aria-hidden="true"><ellipse cx="85" cy="125" rx="58" ry="18" fill="#17130f" opacity=".23"/><ellipse cx="85" cy="116" rx="47" ry="17" fill="#343a35" stroke="#1c211e" stroke-width="4"/><path d="M82 115L62 70L87 41" fill="none" stroke="#29312e" stroke-width="12" stroke-linecap="round"/><path d="M82 115L62 70L87 41" fill="none" stroke="#707871" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="70" r="10" fill="#4e5852" stroke="#232d28" stroke-width="3"/><path d="M68 22Q97 12 124 45L96 76Q68 56 68 22Z" fill="#434b45" stroke="#1d2521" stroke-width="4"/><path d="M98 71L120 45" stroke="#b6a98a" stroke-width="5"/><ellipse cx="109" cy="60" rx="7" ry="14" fill="#ceb97d" transform="rotate(44 109 60)"/></svg></button></div>
     <aside class="case-index" aria-label="Case file index">
       <div class="case-side-heading">LOOSE RECORDS · M/97</div>
@@ -1212,7 +1218,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       <div class="case-view-toolbar"><span id="case-page-counter">DOCUMENT 01 / 04</span><div><button type="button" id="case-zoom-out" aria-label="Decrease document zoom">−</button><span id="case-zoom-label">100%</span><button type="button" id="case-zoom-in" aria-label="Increase document zoom">+</button></div></div>
       <div class="case-paper-viewport"><article id="case-active-document" class="case-paper" aria-live="polite"></article></div>
       <div class="case-page-controls"><button type="button" id="case-prev">← Previous</button><button type="button" id="case-next">Next record →</button></div>
-      <div class="case-note-wrap"><button id="case-note-dismiss" class="case-folded-note" type="button" aria-expanded="false" aria-controls="case-archivist-note" aria-label="Open folded handwritten note"><span class="case-fold-corner"></span><span>handwritten note</span></button><div class="case-archivist-note" id="case-archivist-note" hidden><div class="case-tape" aria-hidden="true"></div><small>NOTE TO WHOEVER IS HANDLING THIS</small><p>Something is very wrong. I don't remember starting work on this section again. I was sure I'd already finished reviewing these files. Please check the summaries carefully.</p></div></div>
+      <div class="case-note-wrap"><button id="case-note-dismiss" class="case-folded-note" type="button" aria-expanded="false" aria-controls="case-archivist-note" aria-label="Open folded handwritten note"><span class="case-fold-corner"></span><span>handwritten note</span></button><div class="case-archivist-note" id="case-archivist-note" hidden><div class="case-tape" aria-hidden="true"></div><small>NOTE TO WHOEVER IS HANDLING THIS</small><p>Something is very wrong. I don't remember starting work on this section again. I was sure I'd already finished reviewing these files?</p></div></div>
     </div>
     <aside class="case-right" aria-label="Working notes and reconstruction">
       <section class="case-scratch"><div class="case-side-heading">NOTEPAD <span>Autosaved</span></div><textarea id="case-notepad" aria-label="Your private case notes" placeholder="Use this for taking down notes…" rows="7"></textarea></section>
