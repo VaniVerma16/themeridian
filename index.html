@@ -1454,7 +1454,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
           <div class="reading-copy">
             <p>You've done such lovely work so far! I think it's finally time to show you the actual case. You've been very reliable. I knew I could count on you! :P</p>
             <p>Our team recovered the original police records and final verdict, but a few details are missing. And I can't retell the story properly without them!</p>
-            <p>Could you help me reconstruct the official case file? We need to establish who died, where, when, and how.</p>
+            <p>Could you help me reconstruct the official case file? We need to establish where he was found, who he was, when he died, and how.</p>
           </div>
           <button id="begin-five" class="primary" type="button">Open the case file</button>
         </div>
@@ -1509,7 +1509,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       <section class="case-form" id="case-form-panel">
 <div class="case-side-heading">CASE RECONSTRUCTION <span id="case-stage-count">01 / 04</span></div><p class="case-quick-guide">Open the case notebook and loose slips on the desk. Answer four questions using those records. Your findings are saved as you go.</p>
 <div class="case-progress" id="case-progress"></div>
-<h2 id="case-stage-title">Establish the identity</h2><p id="case-stage-instruction" class="case-stage-instruction"></p>
+<h2 id="case-stage-title">Establish the location</h2><p id="case-stage-instruction" class="case-stage-instruction"></p>
 <div id="case-theories" class="case-theories" role="group" aria-label="Working hypotheses"></div>
 <div class="case-support"><small>SUPPORTING EVIDENCE</small><div id="case-evidence-picks" class="case-evidence-picks"></div></div>
 <p id="five-feedback" class="case-feedback" role="status" aria-live="polite"></p>
@@ -1959,6 +1959,11 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 ];
     const caseInserts=[
   {
+    "tag": "MAP SCRAP",
+    "title": "The canal footbridge",
+    "text": "Friday, 21 February, afternoon. I finally got the precise location for our photographer: the body was found on the eastern canal towpath, beneath the old railway bridge. The steps from Station Road were taped off because they were the nearest access point, not where he was discovered. I've marked the bridge and the steps separately on the sketch so nobody gets them mixed up."
+  },
+  {
     "tag": "ENQUIRY PAGE",
     "title": "The three names",
     "text": "Monday, 24 February, morning. Three names from old newsroom entries, none independently confirmed. Adam E. — 18 January 1970 (birth notice); Arthur E. — 6 January 1965 (birth notice); Martin Vale — 9 January 1970 (birth notice). These are the names as they appear in the files. I've kept the sources beside them, in case any of the enquiries turn out to be wrong. People have been calling in guesses all morning. A list of names isn't an identification."
@@ -1967,11 +1972,6 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "tag": "MERCER / PHONE NOTE",
     "title": "Police called back",
     "text": "24 February, 2:05 p.m. Press office returned the call. They will not confirm any of the names we have put forward until the family has been informed. Also checked Friday's dispatch: 6:40 a.m. is when the emergency call was logged, not a medical estimate. The steps off Station Road were closed to keep people off the path; that does not tell us where the body was picked up. — E. Mercer"
-  },
-  {
-    "tag": "MAP SCRAP",
-    "title": "The canal footbridge",
-    "text": "Friday, 21 February, afternoon. I followed the photographer's route from Station Road. Police tape blocked the steps down to the canal, so people were pointing to the entrance and saying that must be where he was found. But the ambulance crew brought the stretcher back towards those steps from farther along the eastern towpath, beneath the old railway bridge. The Prince Arthur is up towards Milton Street, away from the water. I marked the steps and the bridge separately on the sketch. Easy to mix those places up."
   },
   {
     "tag": "MERCER / HEARING NOTE",
@@ -2075,8 +2075,8 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     openCaseFile(0);
     // Four factual questions, not an evidence-label matching exam.
     const caseStages=[
-      {title:'01 — Who was the deceased?',instruction:'Which of the three names is the best-supported match for the unidentified man?',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',clue:'Two people fit the birth month and year, but not every surname matches the police description. Compare all three details in the notebook with the enquiry page.'},
-      {title:'02 — Where was he found?',instruction:'Choose the recovery point, not the entrance that police taped off.',options:['Canal steps off Station Road','Eastern towpath beneath the old rail bridge','Prince Arthur / Milton Street corner'],answer:'Eastern towpath beneath the old rail bridge',clue:'Trace where the ambulance crew came from. The steps marked an access point, not necessarily where the body was found.'},
+      {title:'01 — Where was he found?',instruction:'Find the confirmed recovery location in the loose inserts.',options:['Canal steps off Station Road','Eastern towpath beneath the old rail bridge','Prince Arthur / Milton Street corner'],answer:'Eastern towpath beneath the old rail bridge',clue:'The first loose insert records the exact location. The Station Road steps were only the way down to the canal.'},
+      {title:'02 — Who was the deceased?',instruction:'Which of the three names is the best-supported match for the unidentified man?',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',clue:'Two people fit the birth month and year, but not every surname matches the police description. Compare all three details in the notebook with the enquiry page.'},
       {title:'03 — When did he die?',instruction:'Use the medical estimate, not the time the emergency call was made.',options:['20 February 18:00–22:00','20 February 22:00 – 21 February 02:00','21 February 02:00–06:00'],answer:'20 February 22:00 – 21 February 02:00',clue:'The doctor examined him at approximately 7 a.m. Count back both ends of the estimated five-to-nine-hour interval.'},
       {title:'04 — What was the medical cause?',instruction:'Select the cause shown by the injuries, not an unproven explanation of how they occurred.',options:['Drowning in the canal','Fatal blunt-force head injury','A fall onto the towpath'],answer:'Fatal blunt-force head injury',clue:'The hearing notes describe a skull fracture and bleeding inside the head; whether it was an accident or an assault was not established.'}
     ];
