@@ -1343,13 +1343,13 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
                 <div id="four-map" role="application" aria-label="Interactive town map"></div>
               </div>
               <p class="four-location">Your marker: <strong id="four-location-name">Not placed</strong></p>
-              <div class="four-editor-note"><span>NOTE TO WHOEVER IS HANDLING THIS</span><p>The description attached to PH–03 no longer matches the original inventory. I've left the photograph in this batch pending verification. Please don't amend the catalogue references without consulting me.</p></div>
+              <div class="four-editor-note"><span>NOTE TO WHOEVER IS HANDLING THIS</span><p>I've been looking through these photographs again. It's funny how much of a place you remember from a sign or the corner of a building, and how little you remember about where you were standing. I thought the street map might help us put them back in order.</p></div>
             </div>
           </div>
           <div id="four-summary" class="four-summary" hidden>
             <h2>Recovered photographic records</h2>
             <div id="four-summary-items" class="four-record-grid"></div>
-            <div class="four-summary-editor"><span>NOTE TO WHOEVER IS HANDLING THIS</span><p>The description attached to PH–03 no longer matches the original inventory. I've left the photograph in this batch pending verification. Please don't amend the catalogue references without consulting me.</p></div>
+            <div class="four-summary-editor"><span>NOTE TO WHOEVER IS HANDLING THIS</span><p>I've been looking through these photographs again. It's funny how much of a place you remember from a sign or the corner of a building, and how little you remember about where you were standing. I thought the street map might help us put them back in order.</p></div>
             <button id="four-finish" class="primary" type="button">Continue</button>
           </div>
         </div>
@@ -2052,7 +2052,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     // New survey uses image pixels (1448 x 1086); Leaflet lat = 1086 - image y.
     const fourPhotos=[
-      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:572,lng:1190,bearing:300},site:'Albert Road / Meridian Secondary School'},
+      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:565,lng:1105,bearing:270},site:'Albert Road / Meridian Secondary School'},
       {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:742,lng:1168,bearing:286},site:'Station Road / Filling Station approach'},
       {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:454,lng:1056,bearing:319},site:'Prince Arthur / Milton Street corner'}
     ];
@@ -2066,7 +2066,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       {name:'Library',lat:462,lng:811},
       {name:'Meridian Secondary School',lat:416,lng:1260}
     ];
-    const fourChecks=[{location:42,bearing:18},{location:34,bearing:14},{location:34,bearing:16}];
+    const fourChecks=[{location:42,bearing:24},{location:34,bearing:14},{location:34,bearing:16}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null,fourVerified=false;
     const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
     function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
@@ -2114,7 +2114,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
           return Math.hypot(lng-(a.lng+t*dx),lat-(a.lat+t*dy));
         };
         const locationOK=fourCurrent===0
-          ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:537,lng:1000},{lat:611,lng:1360})<=52
+          ?pointToSegmentDistance(fourMarker.lat,fourMarker.lng,{lat:554,lng:1065},{lat:575,lng:1160})<=43
           :distance<=fourChecks[fourCurrent].location;
         const directionOK=heading<=fourChecks[fourCurrent].bearing;
                 if(!locationOK||!directionOK){
