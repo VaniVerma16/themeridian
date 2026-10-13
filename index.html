@@ -1187,6 +1187,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 @keyframes redaction-glitch{0%,14%,46%,54%,78%,84%,100%{transform:translate(0,0);opacity:.94}8%{transform:translate(-2px,1px)}10%{transform:translate(3px,-1px)}12%{transform:translate(-1px,0)}48%{transform:translate(4px,0);opacity:.72}50%{transform:translate(-3px,1px);opacity:1}52%{transform:translate(1px,-1px)}80%{transform:translate(-5px,0)}82%{transform:translate(2px,0)}}
 @keyframes redaction-noise{0%{transform:translateX(0);opacity:.35}50%{transform:translateX(1px);opacity:.5}100%{transform:translateX(-1px);opacity:.32}}
 @media(prefers-reduced-motion:reduce){#level-five .archive-redaction::before,#level-five .archive-redaction::after{animation:none}}
+#dev-navigation[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -1207,7 +1208,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       <select id="history-select" hidden aria-hidden="true" tabindex="-1"></select>
     </nav>
     <!-- TEMPORARY DEVELOPER NAVIGATION: remove for public demo -->
-    <aside id="dev-navigation" aria-label="Developer level navigation">
+    <aside id="dev-navigation" aria-label="Developer level navigation" hidden>
       <span class="dev-tag">DEV PREVIEW</span>
       <label for="dev-level">Jump to</label>
       <select id="dev-level">
@@ -1455,6 +1456,10 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
+    // Local development preview only. This flag is NOT authentication or content protection.
+    const developerPreview = new URLSearchParams(window.location.search).get("dev") === "1";
+    const devNavigation = document.getElementById("dev-navigation");
+    if (developerPreview) devNavigation.hidden = false;
 
     const archivedArticles={
       orchards:{title:"New Concerns Raised About Pesticide Use Near Orchards",section:"LOCAL NEWS",paragraphs:[
@@ -1581,7 +1586,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         if(data.caseVerified){document.getElementById('case-form-panel').hidden=true;document.getElementById('five-result').hidden=false;}
         if(Number.isInteger(data.slipIndex))slipIndex=Math.max(0,Math.min(5,data.slipIndex));
         if(['book','slips','pad','case'].includes(data.deskOpen))openDeskView(data.deskOpen);
-        furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
+        furthestSection=Math.max(0,Math.min(developerPreview?progressOrder.length-1:progressOrder.indexOf('four'),Number(data.furthestSection)||0));
         if(Array.isArray(data.fourGuesses))data.fourGuesses.slice(0,3).forEach((guess,i)=>{fourGuesses[i]=guess});
         if(Number.isInteger(data.fourCurrent)&&data.fourCurrent>=0&&data.fourCurrent<3){fourCurrent=data.fourCurrent;renderFourPhoto();}
         const section=progressOrder.includes(data.section)&&progressOrder.indexOf(data.section)<=furthestSection?data.section:'home';
@@ -1612,6 +1617,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       historyMenu.replaceChildren();
       const index=progressOrder.indexOf(current);
       progressOrder.slice(0,furthestSection+1).forEach((section,i)=>{
+        if(!developerPreview && ['readFive','five'].includes(section))return;
         if(section==='complete'||i===index)return;
         const label=historyNames[section]||section;
         const option=document.createElement('option');option.value=section;option.textContent=label;historySelect.appendChild(option);
@@ -1638,6 +1644,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       },320);
     }
     function show(section,recordProgress=true){
+      if(!developerPreview && (section==='five'||section==='readFive'))section='complete';
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
@@ -1776,9 +1783,10 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       const f=document.getElementById('three-feedback');
       if(selections.every((v,i)=>v===correct[i])){flashToLevelFour()}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
     });
-    document.getElementById('dev-level').addEventListener('change',e=>show(e.target.value,false));
+    document.getElementById('dev-level').addEventListener('change',e=>{if(developerPreview)show(e.target.value,false)});
     // DEV ONLY — bypass puzzles while preserving scripted transitions. Remove before release.
     document.getElementById('dev-pass').addEventListener('click',()=>{
+      if(!developerPreview)return;
       const current=document.getElementById('dev-level').value;
       const next={home:'readOne',readOne:'level',level:'readTwo',readTwo:'two',two:'readThree',readThree:'three',three:'flashFour',readFour:'four',four:'flashFive',readFive:'five',five:'complete'};
       const destination=next[current];
@@ -1787,7 +1795,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       else if(destination)show(destination,false);
     });
     document.getElementById('begin-four').addEventListener('click',()=>enterPuzzle('four','UNROLLING THE SURVEY'));
-    document.getElementById('begin-five').addEventListener('click',()=>enterPuzzle('five','OPENING CASE DOSSIER'));
+    document.getElementById('begin-five').addEventListener('click',()=>{if(developerPreview)enterPuzzle('five','OPENING CASE DOSSIER')});
     const caseFiles=[
   {
     "type": "STORYTELLER'S NOTEBOOK",
@@ -2028,7 +2036,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     });
     renderCaseStage();
     document.getElementById('five-continue').addEventListener('click',()=>show('complete'));
-    document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
+    document.getElementById('four-finish').addEventListener('click',()=>{if(developerPreview)flashToLevelFive();else show('complete')});
     const fourPhotos=[
       {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:543,lng:290,bearing:110},site:'Clock Tower / High Street'},
       {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:510,lng:775,bearing:90},site:'Station Road / Filling Station'},
@@ -2208,9 +2216,10 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         else ctx.resume().then(startTogether).catch(()=>{if(onScheduled)onScheduled();});
       }catch(error){console.warn('Interference audio unavailable:',error);if(onScheduled)onScheduled();}
     }
-    document.getElementById('dev-audio').addEventListener('click',playInterference);
+    document.getElementById('dev-audio').addEventListener('click',()=>{if(developerPreview)playInterference()});
     let fiveFlashPending=false;
     function flashToLevelFive(){
+      if(!developerPreview){show('complete');return;}
       if(fiveFlashPending)return;
       fiveFlashPending=true;
       playInterference(()=>{
