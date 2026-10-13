@@ -1337,6 +1337,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
 @keyframes outro-final-background{0%,100%{background:#000}45%{background:#20070b}70%{background:#010506}}
 @media(prefers-reduced-motion:reduce){#five-outro .outro-redacted-end,#five-outro .outro-redacted-end::before,#five-outro .outro-redacted-end span,#five-outro .outro-redacted-end span::after{animation:none!important}}
 </style>
+  <link rel="stylesheet" href="level6.css">
 </head>
 <body>
   <div class="topline"></div>
@@ -1363,7 +1364,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
         <option value="home">Home</option><option value="readOne">Level 1 intro</option><option value="level">Level 1 puzzle</option>
         <option value="readTwo">Level 2 intro</option><option value="two">Level 2 puzzle</option>
         <option value="readThree">Level 3 intro</option><option value="three">Level 3 puzzle</option>
-        <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="readFive">Level 5 intro</option><option value="five">Level 5 puzzle</option><option value="complete">End screen</option>
+        <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="readFive">Level 5 intro</option><option value="five">Level 5 puzzle</option><option value="complete">End screen</option><option value="six">Level 6 (developer)</option><option value="sixAfter">Level 6 aftermath (developer)</option>
       </select>
       <button id="dev-pass" type="button" title="Development only: run the next-level transition">Skip →</button>
       <button id="dev-audio" type="button" title="Development only: test glitch audio">Test sound ♪</button>
@@ -1574,6 +1575,52 @@ animation:outro-final-slice .14s steps(2,end) infinite}
   </div>
 </div>
 </section>
+
+<section id="level-six" class="level six-screen" aria-labelledby="six-title" hidden>
+ <div class="six-shell">
+  <div class="six-folio"><span>THE MERIDIAN / RESTORED ARCHIVE</span><span>APRIL 1997 · FINAL PROOF</span></div>
+  <p class="six-number">06 <small>/ THE FINAL PROOF</small></p>
+  <h1 id="six-title">A Life in Three Acts</h1>
+  <div class="six-narrator"><span>ARCHIVIST'S NOTE</span><p>Right. That was... rather strange. I don't know what happened there. Anyway, I found the final article. Well, most of it. There are a few silly errors in the proof. Could you check it? Five small corrections. Something normal, for once.</p></div>
+  <div class="six-columns">
+   <article class="six-paper">
+    <div class="six-paperhead"><span>THE MERIDIAN</span><span>RECOVERED PROOF / 1997</span></div>
+    <p class="six-section-tag">ARCHIVES · FEATURE</p>
+    <h2>A Life in Three Acts</h2>
+    <p class="six-subtitle">The Death of the Ordinary Man</p>
+    <p class="six-placeholder-label">DRAFT PLACEHOLDER — the author will provide the complete article. The short text below tests the proofreading mechanic only.</p>
+    <div id="six-article"></div>
+    <div class="six-paperend">— END OF AVAILABLE COPY —</div>
+   </article>
+   <aside class="six-sidebar"><div class="six-sidebar-top"><span>COPY DESK</span><span>97 / 06</span></div>
+    <h3>Five small mistakes.</h3>
+    <p>Read through the article and click the five words with errors. Each correction will be applied to the recovered proof.</p>
+    <div class="six-total"><strong id="six-score">0</strong> / <span id="six-goal">5</span></div>
+    <div class="six-meter"><div id="six-meter-fill"></div></div>
+    <p id="six-feedback" role="status" aria-live="polite">Five corrections remaining.</p>
+    <button id="six-reset" class="six-outline" type="button" hidden>Reset proof (developer)</button>
+   </aside>
+  </div>
+ </div>
+</section>
+<section id="sixAfter" class="level six-screen" aria-labelledby="six-after-title" hidden>
+ <div class="six-shell">
+  <div class="six-folio"><span>THE MERIDIAN / ARCHIVE INDEX</span><span>CATALOGUE WARNING · ENTRY MISSING</span></div>
+  <p class="six-number">07 <small>/ FIND THE MISSING FILE</small></p>
+  <h1 id="six-after-title">There should be a file here.</h1>
+  <div class="six-narrator"><span>ARCHIVIST'S NOTE</span>
+   <p>What—did you see that? I didn't type any of that. The screen just... I don't understand. Who's asking us to find a file?</p>
+   <p>There's a gap in the catalogue. That wasn't there before, was it? I... I need to check the original index.</p>
+  </div>
+  <div class="six-files">
+   <div class="six-folder"><small>NEWS/97-01</small><strong>The first call</strong><span>21 FEB 1997 · PRESENT</span></div>
+   <div class="six-folder"><small>NEWS/97-04</small><strong>What we know by April</strong><span>APR 1997 · PRESENT</span></div>
+   <div class="six-folder six-folder-gap"><small>UNINDEXED REFERENCE</small><strong>FILE NOT FOUND</strong><span>LOCATION UNKNOWN</span></div>
+  </div>
+  <p class="six-dev-note">Development handoff: Level 6 ends here. The missing-file investigation, 1996 manuscript and “perfect story” scribbles are reserved for Level 7.</p>
+  <button id="six-back" class="six-outline" type="button">Return to the article</button>
+ </div>
+</section>
 <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
         <div class="kicker">THE MERIDIAN · ARCHIVE</div>
         <div class="check" aria-hidden="true">⌁</div>
@@ -1582,6 +1629,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
         <p>I'll have a look. Would you mind coming back when I've sorted this out?</p>
         <p class="demo-end-label">END OF DEMO · MORE TO COME</p>
         <button id="return-home" class="primary" type="button">Return to homepage</button>
+        <button id="six-dev-open" class="primary" type="button" hidden>Developer preview: Level 6 →</button>
         <aside class="beta-corner-note" aria-label="Demo message">this is a demo, tell me what all to change. thanks for playing fam. special thanks to my beta tester kushi who believes im not normal enough to make something normal &lt;3</aside>
       </section>
     </main>
@@ -1589,6 +1637,28 @@ animation:outro-final-slice .14s steps(2,end) infinite}
   </div>
 
   <div id="transition-flash" aria-hidden="true"></div><div id="page-transition" aria-hidden="true"><div class="transition-sheet"><span id="transition-caption">OPENING FILE</span><div class="transition-mark">M.</div></div></div>
+
+<div id="six-breach" hidden role="dialog" aria-modal="true" aria-label="A distress signal has interrupted the archive">
+ <div id="six-cry" class="six-cry">STOP. HELP ME.</div>
+ <div id="six-lines" class="six-lines" hidden aria-hidden="true">
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+  <span>FIND THE MISSING FILE</span>
+ </div>
+</div>
   <div id="five-interference" aria-hidden="true"><span data-text="What... is happening?">What... is happening?</span></div>
   <div id="five-outro" class="five-outro" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Recovered recordings">
     <div class="outro-film">
@@ -1724,7 +1794,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
     let sortOrder=[...initialOrder];
     let draggedId=null;
 
-    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),readFour:document.getElementById("read-four"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),readFive:document.getElementById('read-five'),five:document.getElementById('level-five'),complete:document.getElementById('completed')};
+    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),readFour:document.getElementById("read-four"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),readFive:document.getElementById('read-five'),five:document.getElementById('level-five'),complete:document.getElementById('completed'),six:document.getElementById('level-six'),sixAfter:document.getElementById('sixAfter')};
     const sortFeedback=document.getElementById('sort-feedback');
     const modal=document.getElementById('modal');
     const modalTitle=document.getElementById('modal-title');
@@ -1767,6 +1837,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
         if(Number.isInteger(data.slipIndex))slipIndex=Math.max(0,Math.min(5,data.slipIndex));
         if(['book','slips','pad','case'].includes(data.deskOpen))openDeskView(data.deskOpen);
         furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
+        if(!developerPreview)furthestSection=Math.min(furthestSection,progressOrder.indexOf('complete'));
         // Continue old public-demo saves into the newly released fifth assessment.
         const legacyDemoEnd=data.section==='complete' && data.caseVerified!==true;
         if(legacyDemoEnd)furthestSection=Math.max(furthestSection,progressOrder.indexOf('readFive'));
@@ -1778,7 +1849,8 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       }catch(err){show('home',false);}
       finally{sessionRestoring=false;}
     }
-    const progressOrder=['home','readOne','level','readTwo','two','readThree','three','readFour','four','readFive','five','complete'];
+    const progressOrder=['home','readOne','level','readTwo','two','readThree','three','readFour','four','readFive','five','complete','six','sixAfter'];
+    let sixAwakened=false;
     let furthestSection=0;
     const historySelect=document.getElementById('history-select');
     const historyNav=document.getElementById('player-history');
@@ -1794,7 +1866,7 @@ animation:outro-final-slice .14s steps(2,end) infinite}
     document.addEventListener('click',e=>{if(!historyNav.contains(e.target))closeHistory()});
     historyNav.addEventListener('keydown',e=>{if(e.key==='Escape'){closeHistory();historyTrigger.focus()}});
 
-    const historyNames={home:'Home',readOne:'Level 1 introduction',level:'Level 1',readTwo:'Level 2 introduction',two:'Level 2',readThree:'Level 3 introduction',three:'Level 3',readFour:'Level 4 introduction',four:'Level 4',readFive:'Level 5 introduction',five:'Level 5'};
+    const historyNames={home:'Home',readOne:'Level 1 introduction',level:'Level 1',readTwo:'Level 2 introduction',two:'Level 2',readThree:'Level 3 introduction',three:'Level 3',readFour:'Level 4 introduction',four:'Level 4',readFive:'Level 5 introduction',five:'Level 5',six:'Level 6 proof (developer)',sixAfter:'Level 6 aftermath (developer)'};
     function canRevisit(section){
       const index=progressOrder.indexOf(section);
       return index>=0 && (developerPreview || index<=furthestSection);
@@ -1835,7 +1907,10 @@ animation:outro-final-slice .14s steps(2,end) infinite}
       // Untrusted navigation (history, manually changed dropdown, or restored view)
       // must not advance progress. Forward story transitions explicitly record progress.
       if(!recordProgress && !canRevisit(section))return;
+      if(!developerPreview&&(section==='six'||section==='sixAfter'))section='complete';
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
+      if(developerPreview&&(section==='six'||section==='sixAfter'))sixAwakened=true;
+      document.body.classList.toggle('blood-era',developerPreview&&sixAwakened);
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
@@ -1978,11 +2053,12 @@ animation:outro-final-slice .14s steps(2,end) infinite}
     document.getElementById('dev-pass').addEventListener('click',()=>{
       if(!developerPreview)return;
       const current=document.getElementById('dev-level').value;
-      const next={home:'readOne',readOne:'level',level:'readTwo',readTwo:'two',two:'readThree',readThree:'three',three:'flashFour',readFour:'four',four:'flashFive',readFive:'five',five:'flashOutro'};
+      const next={home:'readOne',readOne:'level',level:'readTwo',readTwo:'two',two:'readThree',readThree:'three',three:'flashFour',readFour:'four',four:'flashFive',readFive:'five',five:'flashOutro',complete:'six',six:'sixBreach',sixAfter:'six'};
       const destination=next[current];
       if(destination==='flashFour')flashToLevelFour();
       else if(destination==='flashFive')flashToLevelFive();
       else if(destination==='flashOutro')flashAfterFive();
+      else if(destination==='sixBreach'&&window.MeridianSix)window.MeridianSix.breach();
       else if(destination)show(destination,false);
     });
     document.getElementById('begin-four').addEventListener('click',()=>enterPuzzle('four','UNROLLING THE SURVEY'));
@@ -2833,5 +2909,6 @@ animation:outro-final-slice .14s steps(2,end) infinite}
     document.addEventListener("change",()=>setTimeout(safelySaveSession,0));
     document.addEventListener("input",()=>setTimeout(safelySaveSession,0));
   </script>
+  <script src="level6.js"></script>
 </body>
 </html>
