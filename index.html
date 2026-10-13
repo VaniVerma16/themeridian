@@ -2260,74 +2260,118 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     // Prepare audio on the initial gesture instead of at the moment of the flash.
     document.addEventListener('pointerdown',unlockInterferenceAudio,{once:true});
     document.addEventListener('keydown',unlockInterferenceAudio,{once:true});
-    function playInterference(onScheduled){
+    // Fast, click-triggered, deliberately corrupted analogue/digital audio sting.
+    // Schedule nodes within the same user gesture: never await AudioContext.resume().
+    // A compressor contains the transient so the distortion is intense, not dangerously loud.
+    let glitchNoiseBuffer=null;
+    function playInterference(){
       try{
         const AudioContextClass=window.AudioContext||window.webkitAudioContext;
         if(!AudioContextClass)return;
         if(!glitchAudioContext)glitchAudioContext=new AudioContextClass();
         const ctx=glitchAudioContext;
-        const play=()=>{
-          const t=ctx.currentTime+.008, end=t+INTERFERENCE_SECONDS;
-          const master=ctx.createGain();
-          master.gain.setValueAtTime(.0001,t);
-          master.gain.linearRampToValueAtTime(.20,t+.008);
-          master.gain.setValueAtTime(.16,t+.075);
-          master.gain.setValueAtTime(.11,t+.19);
-          master.gain.linearRampToValueAtTime(.14,t+.32);
-          master.gain.exponentialRampToValueAtTime(.0001,end);
-          const limiter=ctx.createDynamicsCompressor();
-          limiter.threshold.value=-19;limiter.knee.value=7;limiter.ratio.value=12;
-          limiter.attack.value=.002;limiter.release.value=.1;
-          master.connect(limiter);limiter.connect(ctx.destination);
-          // A dense, clashing brass/string stab, intentionally not a melody.
-          [330,349,466,494,698,739].forEach((frequency,i)=>{
-            const osc=ctx.createOscillator();osc.type=i%2?'sawtooth':'square';
-            osc.frequency.setValueAtTime(frequency,t);
-            osc.frequency.exponentialRampToValueAtTime(frequency*.82,end);
-            const eq=ctx.createBiquadFilter();eq.type='lowpass';eq.frequency.value=2100;
-            const layer=ctx.createGain();layer.gain.value=.085;
-            osc.connect(eq);eq.connect(layer);layer.connect(master);
-            osc.start(t);osc.stop(end);
-          });
-          // Scraping noise enters immediately; its energy dies away with the image.
-          const buffer=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*INTERFERENCE_SECONDS),ctx.sampleRate);
-          const data=buffer.getChannelData(0);
-          for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1);
-          const noise=ctx.createBufferSource();noise.buffer=buffer;
-          const band=ctx.createBiquadFilter();band.type='bandpass';
-          band.frequency.setValueAtTime(2600,t);
-          band.frequency.exponentialRampToValueAtTime(500,end);
-          band.Q.value=.7;
-          const ng=ctx.createGain();ng.gain.value=.21;
-          noise.connect(band);band.connect(ng);ng.connect(master);
-          noise.start(t);noise.stop(end);
-          // Low transient gives a physical impact, without an ear-piercing peak.
-          const bass=ctx.createOscillator();bass.type='triangle';
-          bass.frequency.setValueAtTime(95,t);
-          bass.frequency.exponentialRampToValueAtTime(48,t+.22);
-          const bg=ctx.createGain();bg.gain.setValueAtTime(.36,t);
-          bg.gain.exponentialRampToValueAtTime(.0001,t+.26);
-          bass.connect(bg);bg.connect(master);bass.start(t);bass.stop(t+.26);
-        };
-        const startTogether=()=>{play();if(onScheduled)onScheduled();};
-        if(ctx.state==='running')startTogether();
-        else ctx.resume().then(startTogether).catch(()=>{if(onScheduled)onScheduled();});
-      }catch(error){console.warn('Interference audio unavailable:',error);if(onScheduled)onScheduled();}
+        if(ctx.state==='suspended')ctx.resume().catch(()=>{});
+        const t=ctx.currentTime+.005;
+        const end=t+INTERFERENCE_SECONDS;
+
+        const limiter=ctx.createDynamicsCompressor();
+        limiter.threshold.value=-23;
+        limiter.knee.value=6;
+        limiter.ratio.value=16;
+        limiter.attack.value=.001;
+        limiter.release.value=.07;
+        limiter.connect(ctx.destination);
+
+        const master=ctx.createGain();
+        master.gain.setValueAtTime(.0001,t);
+        master.gain.linearRampToValueAtTime(.27,t+.014);
+        master.gain.setValueAtTime(.24,t+.08);
+        master.gain.setValueAtTime(.13,t+.19);
+        master.gain.setValueAtTime(.21,t+.36);
+        master.gain.setValueAtTime(.12,t+.61);
+        master.gain.linearRampToValueAtTime(.17,t+.74);
+        master.gain.exponentialRampToValueAtTime(.0001,end);
+        master.connect(limiter);
+
+        const distortion=ctx.createWaveShaper();
+        const curve=new Float32Array(1024);
+        for(let i=0;i<curve.length;i++){
+          const x=2*i/(curve.length-1)-1;
+          curve[i]=Math.tanh(7*x);
+        }
+        distortion.curve=curve;
+        distortion.oversample='2x';
+        distortion.connect(master);
+
+        // Dissonant sawtooth cluster: immediate impact followed by pitch collapse.
+        [158,171,229,339,472].forEach((frequency,i)=>{
+          const osc=ctx.createOscillator();
+          osc.type=i%2===0?'sawtooth':'square';
+          osc.frequency.setValueAtTime(frequency,t);
+          osc.frequency.exponentialRampToValueAtTime(frequency*(.48+i*.025),end);
+          const gain=ctx.createGain();
+          gain.gain.setValueAtTime(.001,t);
+          gain.gain.linearRampToValueAtTime(.075,t+.009);
+          gain.gain.setValueAtTime(.047,t+.12);
+          gain.gain.setValueAtTime(.005,t+.18);
+          gain.gain.setValueAtTime(.057,t+.33);
+          gain.gain.setValueAtTime(.012,t+.47);
+          gain.gain.setValueAtTime(.043,t+.7);
+          gain.gain.exponentialRampToValueAtTime(.0001,end);
+          osc.connect(gain);gain.connect(distortion);
+          osc.start(t);osc.stop(end);
+        });
+
+        // Stuttering broadband radio static with jagged dropouts.
+        if(!glitchNoiseBuffer || glitchNoiseBuffer.sampleRate!==ctx.sampleRate){
+          glitchNoiseBuffer=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*INTERFERENCE_SECONDS),ctx.sampleRate);
+          const samples=glitchNoiseBuffer.getChannelData(0);
+          for(let i=0;i<samples.length;i++)samples[i]=Math.random()*2-1;
+        }
+        const staticSource=ctx.createBufferSource();
+        staticSource.buffer=glitchNoiseBuffer;
+        const hiss=ctx.createBiquadFilter();
+        hiss.type='bandpass';hiss.Q.value=.56;
+        hiss.frequency.setValueAtTime(3400,t);
+        hiss.frequency.exponentialRampToValueAtTime(760,end);
+        const staticGate=ctx.createGain();
+        staticGate.gain.setValueAtTime(.02,t);
+        for(let offset=0;offset<INTERFERENCE_SECONDS-.055;offset+=.095){
+          staticGate.gain.setValueAtTime(.01,t+offset);
+          staticGate.gain.linearRampToValueAtTime(.18,t+offset+.008);
+          staticGate.gain.setValueAtTime(.18,t+offset+.038);
+          staticGate.gain.linearRampToValueAtTime(.008,t+offset+.055);
+        }
+        staticGate.gain.exponentialRampToValueAtTime(.0001,end);
+        staticSource.connect(hiss);hiss.connect(staticGate);staticGate.connect(distortion);
+        staticSource.start(t);staticSource.stop(end);
+
+        // Low impact keeps the first instant unsettling, without increasing peak volume.
+        const impact=ctx.createOscillator();
+        impact.type='triangle';
+        impact.frequency.setValueAtTime(105,t);
+        impact.frequency.exponentialRampToValueAtTime(39,t+.34);
+        const impactGain=ctx.createGain();
+        impactGain.gain.setValueAtTime(.24,t);
+        impactGain.gain.exponentialRampToValueAtTime(.0001,t+.35);
+        impact.connect(impactGain);impactGain.connect(master);
+        impact.start(t);impact.stop(t+.35);
+      }catch(error){console.warn('Interference audio unavailable:',error);}
     }
     document.getElementById('dev-audio').addEventListener('click',()=>{if(developerPreview)playInterference()});
     let fiveFlashPending=false;
     function flashToLevelFive(){
       if(fiveFlashPending)return;
       fiveFlashPending=true;
-      playInterference(()=>{
-        const overlay=document.getElementById('five-interference');
-        overlay.classList.add('active');
-        window.setTimeout(()=>{
-          overlay.classList.remove('active');
-          show(developerPreview?'readFive':'complete');
-          fiveFlashPending=false;
-        },INTERFERENCE_SECONDS*1000);
-      });
+      const overlay=document.getElementById('five-interference');
+      overlay.classList.add('active');
+      // Both audio and animation start in the original click handler.
+      playInterference();
+      window.setTimeout(()=>{
+        overlay.classList.remove('active');
+        show(developerPreview?'readFive':'complete');
+        fiveFlashPending=false;
+      },INTERFERENCE_SECONDS*1000);
     }
     // Physical desk: the objects are the navigation. Only one workspace opens at a time.
     const deskOverlay=document.getElementById('desk-overlay');
