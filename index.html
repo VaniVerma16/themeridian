@@ -692,6 +692,8 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .four-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px}
 .four-photo-frame{width:100%;aspect-ratio:1.47;background:#252727;border:1px solid #666763;display:grid;place-items:center;overflow:hidden}
 .four-photo-frame img{display:block;width:100%;height:100%;object-fit:contain}
+/* PH–01 was scanned in reverse: the school belongs on the left of the view. */
+.four-photo-frame img.photo-mirrored{transform:scaleX(-1)}
 .four-photo-placeholder{text-align:center;color:#d6d2c9;display:flex;flex-direction:column;align-items:center;gap:8px}
 .four-photo-placeholder span,.four-photo-placeholder small{font-size:11px;letter-spacing:.12em;color:#9b9c98}
 .four-photo-placeholder strong{font-size:27px;font-weight:normal}
@@ -2411,6 +2413,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 
       const pic=document.getElementById('four-photo-img');const placeholder=document.getElementById('four-photo-placeholder');
       pic.hidden=true;placeholder.hidden=false;placeholder.querySelector('span').textContent='PHOTOGRAPH '+item.label;
+      pic.classList.toggle('photo-mirrored',fourCurrent===0);
       pic.onload=()=>{pic.hidden=false;placeholder.hidden=true};pic.onerror=()=>{pic.hidden=true;placeholder.hidden=false};
       pic.src=item.file;updatePhotoNote();
       fourVerified=false;fourBearing.value='0';updateBearing();fourMarker=null;if(fourCameraMarker){fourCameraMarker.remove();fourCameraMarker=null;}
