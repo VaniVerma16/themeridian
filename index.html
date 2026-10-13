@@ -1278,7 +1278,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       <section id="case-guidance" class="case-guidance"><div class="case-side-heading">A FEW NOTES FROM YOURS TRULY</div><p id="case-narrator-note"></p></section>
       <section class="case-form" id="case-form-panel"><div class="case-side-heading">RECONSTRUCTION SHEET</div>
        <div class="case-fields">
-        <label>Who? <select data-case="victim"><option value="">Unverified</option><option>Adam E.</option><option>Arthur E.</option><option>Unidentified adult male</option></select></label>
+        <label>Who? <select data-case="victim"><option value="">Unverified</option><option>Adam E.</option><option>Arthur E.</option><option>Martin Vale</option></select></label>
         <label>Where? <select data-case="location"><option value="">Unverified</option><option>Prince Arthur public house</option><option>East canal towpath</option><option>Market Square</option></select></label>
         <label>When? <select data-case="time"><option value="">Unverified</option><option>20 February, 18:00–20:00</option><option>20 February 22:00 – 21 February 02:00</option><option>21 February, 06:00–08:00</option></select></label>
         <label>Medical cause? <select data-case="cause"><option value="">Unverified</option><option>Alcohol poisoning</option><option>Fatal blunt-force head injury</option><option>Drowning</option></select></label>
@@ -1703,7 +1703,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "ref": "NEWS/97-04",
     "body": [
       "THE MERIDIAN — NOTES FROM PUBLIC CORONER'S PROCEEDINGS. Prepared for the newspaper's court and local news desk. This is a reporter's account of evidence heard in public, not the complete post-mortem report or a confidential police file.",
-      "The deceased was identified at the proceedings by reference to the previously published identification notice. According to the medical evidence summarised for the hearing, the medical cause was recorded using the terminology in the coroner's medical summary, reproduced on a separate press terminology card. The evidence did not, on its own, establish how the injury had occurred.",
+      "The deceased was identified at the proceedings by reference to the previously published identification notice. According to the medical evidence summarised for the hearing, the medical cause was described in the accompanying medical testimony notes, which the copy desk retained separately. The evidence did not, on its own, establish how the injury had occurred.",
       "The medical witness gave an estimated interval of death, transcribed in the court reporter's handwritten timing slip. The witness cautioned that this was an estimate rather than a time confirmed by observation.",
       "Questions surrounding Adam's movements before his death remained unresolved in the material reported by the newspaper. The notes did not record a medical conclusion as to whether the injury had resulted from an accident or another person's actions. Nor did they establish any intention on Adam's part.",
       "REPORTER'S MARGIN NOTE: This extract covers the medical testimony only. A copy of any formal determination should be checked against the coroner's office before wording a headline or final case summary. No complete determination is attached to this newsroom folder."
@@ -1712,14 +1712,14 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
   }
 ];
     const caseInserts=[
-      {tag:'IDENTIFICATION SLIP',title:'Index card 12/B',text:'Local news biographical register, revised 24 February 1997: the deceased was identified as Adam E., born 18 January 1970. His name also appears in the 1986 regional debate file. The register carries a cross-reference, not a police case determination.'},
-      {tag:'REPORTER\'S MAP KEY',title:'Location reference',text:'A map-marking note attached to the police press statement places the point of recovery beside the eastern canal towpath, close to the former railway footbridge. This is the location where the body was found, not necessarily where the injury occurred.'},
-      {tag:'COURT REPORTER\'S SLIP',title:'Medical time estimate',text:'Taken during the public hearing: probable interval of death, approximately 22:00 Thursday 20 February to 02:00 Friday 21 February 1997. This is not the time at which the body was discovered.'},
-      {tag:'PRESS TERMINOLOGY CARD',title:'Medical wording',text:'Notes for copy editors: “Fatal blunt-force head injury” describes the medical cause reported in the proceedings. It does not determine whether the death was accidental, self-inflicted or caused by someone else.'},
-      {tag:'WEDDINGS COLUMN',title:'September 1996',text:'A brief engagement announcement from the newsroom archive records Adam E. and his fiancée speaking of difficult years behind them and hoping for a quieter future. No direct information about the night of death is contained in the cutting.'},
-      {tag:'TELEPHONE MEMO',title:'Unverified enquiry',text:'An anonymous caller asked whether the deceased had been seen near the Prince Arthur in the preceding months. No date, identification or reliable first-hand account was provided. This was not published.'}
+      {tag:'IDENTITY ENQUIRY',title:'Possible matches',text:'Three names were entered in the newsroom enquiry book: Adam E. (born 18 January 1970); Arthur E. (born 6 May 1965); and Martin Vale (born 9 November 1972). At this stage these are leads, not confirmed identities.'},
+      {tag:'IDENTIFICATION UPDATE',title:'Police follow-up',text:'A later public identification notice states that the deceased was aged 27 and that his surname began with E. The newsroom noted that his next birthday would have fallen in January. Cross-check against the enquiry book.'},
+      {tag:'REPORTER’S MAP KEY',title:'Location reference',text:'The point of recovery was marked beside the eastern canal towpath, near the former railway footbridge. This records where the body was found, not necessarily where the injury occurred.'},
+      {tag:'COURT REPORTER’S SLIP',title:'Estimated interval',text:'Medical evidence: death probably occurred between approximately 22:00 on Thursday 20 February and 02:00 on Friday 21 February 1997. These times are estimates; discovery occurred later.'},
+      {tag:'MEDICAL NOTES',title:'Terminology guide',text:'The medical witness described a fatal injury caused by an impact to the head. No findings in the reported extract established fatal submersion or a lethal concentration of alcohol. The evidence did not establish how the injury happened.'},
+      {tag:'WEDDINGS COLUMN',title:'September 1996',text:'An engagement announcement names Adam E. and his fiancée. They describe rebuilding their lives after difficult years. It does not establish the circumstances of the death.'}
     ];
-    const extraHost=document.getElementById('case-extra-cards');
+        const extraHost=document.getElementById('case-extra-cards');
     // Inline critical layout so the evidence inserts retain their paper appearance
     // even if an earlier legacy stylesheet rule conflicts with this section.
     extraHost.style.setProperty('display','grid','important');
