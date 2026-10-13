@@ -788,7 +788,18 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 
 #player-history[hidden]{display:none!important}
 #player-history{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:5px 0 9px;font:12px Georgia,serif;color:#bab8b1}
-#history-select{font:13px Georgia,serif;color:#e9e5dd;background:#242626;border:1px solid #555953;max-width:220px;padding:5px 7px}
+#history-select{display:none!important}
+#player-history .history-label{font-size:10px;letter-spacing:.14em;color:#a6a39b}
+.history-dropdown{position:relative}
+#history-trigger{font:13px Georgia,serif;color:#e5e1d7;background:#1d1f1e;border:1px solid #64645f;padding:8px 12px;min-width:184px;display:flex;align-items:center;justify-content:space-between;gap:18px;text-align:left}
+#history-trigger:hover,#history-trigger[aria-expanded="true"]{background:#292b29;border-color:#a6a196}
+#history-trigger span{font-size:19px;line-height:12px;color:#a8a49b}
+.history-menu[hidden]{display:none!important}
+.history-menu{position:absolute;z-index:400;top:calc(100% + 4px);right:0;width:240px;max-height:min(380px,65vh);overflow-y:auto;background:#1b1d1c;border:1px solid #686963;box-shadow:0 12px 28px #0009;padding:5px}
+.history-menu button{font:14px Georgia,serif;color:#e0ddd5;display:block;background:transparent;border:0;border-bottom:1px solid #363834;text-align:left;width:100%;padding:10px 12px;letter-spacing:.005em}
+.history-menu button:last-child{border-bottom:0}
+.history-menu button:hover,.history-menu button:focus-visible{background:#333632;color:#fff;outline:1px solid #89877d;outline-offset:-1px}
+.history-menu button.history-intro{color:#aba79e;font-style:italic}
 #level-four .four-instructions{font:15px/1.5 Georgia,serif;color:#c6c3bc;margin:7px 0 5px}
 #level-four .four-notes-lead{font:italic 14px/1.35 Georgia,serif;color:#c9c5bb;margin:10px 0 0}
   </style>
@@ -803,8 +814,12 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     </header>
     <div id="mini-header" aria-label="The Meridian"><span class="mini-mark">M.</span><span class="mini-title">THE MERIDIAN</span></div>
     <nav id="player-history" aria-label="Previously visited sections" hidden>
-      <label for="history-select">Revisit</label>
-      <select id="history-select" aria-label="Revisit a previous level or introduction"></select>
+      <span class="history-label">REVISIT</span>
+      <div class="history-dropdown">
+        <button id="history-trigger" type="button" aria-expanded="false" aria-controls="history-menu" aria-haspopup="true">Previous sections <span aria-hidden="true">⌄</span></button>
+        <div id="history-menu" class="history-menu" role="menu" hidden></div>
+      </div>
+      <select id="history-select" hidden aria-hidden="true" tabindex="-1"></select>
     </nav>
     <!-- TEMPORARY DEVELOPER NAVIGATION: remove for public demo -->
     <aside id="dev-navigation" aria-label="Developer level navigation">
@@ -1126,16 +1141,35 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     let furthestSection=0;
     const historySelect=document.getElementById('history-select');
     const historyNav=document.getElementById('player-history');
+    const historyTrigger=document.getElementById('history-trigger');
+    const historyMenu=document.getElementById('history-menu');
+    function closeHistory(){historyMenu.hidden=true;historyTrigger.setAttribute('aria-expanded','false')}
+    historyTrigger.addEventListener('click',()=>{
+      const open=historyMenu.hidden;
+      historyMenu.hidden=!open;
+      historyTrigger.setAttribute('aria-expanded',String(open));
+      if(open)historyMenu.querySelector('button')?.focus();
+    });
+    document.addEventListener('click',e=>{if(!historyNav.contains(e.target))closeHistory()});
+    historyNav.addEventListener('keydown',e=>{if(e.key==='Escape'){closeHistory();historyTrigger.focus()}});
+
     const historyNames={home:'Home',readOne:'Level 1 introduction',level:'Level 1',readTwo:'Level 2 introduction',two:'Level 2',readThree:'Level 3 introduction',three:'Level 3',readFour:'Level 4 introduction',four:'Level 4',readFive:'Level 5 introduction',five:'Level 5'};
     function refreshHistory(current){
       historySelect.replaceChildren();
+      historyMenu.replaceChildren();
       const index=progressOrder.indexOf(current);
       progressOrder.slice(0,furthestSection+1).forEach((section,i)=>{
         if(section==='complete'||i===index)return;
-        const option=document.createElement('option');option.value=section;option.textContent=historyNames[section]||section;historySelect.appendChild(option);
+        const label=historyNames[section]||section;
+        const option=document.createElement('option');option.value=section;option.textContent=label;historySelect.appendChild(option);
+        const button=document.createElement('button');button.type='button';button.setAttribute('role','menuitem');button.textContent=label;
+        if(section==='home'||section.startsWith('read'))button.classList.add('history-intro');
+        button.addEventListener('click',()=>{closeHistory();if(progressOrder.indexOf(section)<=furthestSection)show(section)});
+        historyMenu.appendChild(button);
       });
-      historyNav.hidden=furthestSection===0||historySelect.options.length===0;
+      historyNav.hidden=furthestSection===0||historyMenu.children.length===0;
       if(!historyNav.hidden)historySelect.selectedIndex=-1;
+      closeHistory();
     }
     function show(section,recordProgress=true){
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
