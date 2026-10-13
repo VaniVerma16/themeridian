@@ -1190,10 +1190,54 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 @media(prefers-reduced-motion:reduce){#level-five .archive-redaction::before,#level-five .archive-redaction::after{animation:none}}
 #dev-navigation[hidden]{display:none!important}
 #completed{position:relative}
-/* Keep the informal demo credit outside the centered completion flow. */
-#completed{position:relative;padding-bottom:180px!important;min-height:680px}
-#completed .beta-corner-note{position:absolute!important;top:auto!important;left:auto!important;right:24px!important;bottom:20px!important;width:min(290px,calc(100% - 48px))!important;max-width:290px!important;margin:0!important;padding:0!important;text-align:right!important;font:italic 13px/1.5 Georgia,serif!important;color:#aaa39a!important;opacity:.85;transform:none!important;clear:both;z-index:1}
-@media(max-width:700px){#completed{padding-bottom:26px!important;min-height:0}#completed .beta-corner-note{position:static!important;margin:52px 16px 0 auto!important;width:min(290px,calc(100% - 32px))!important;text-align:right!important;font-size:12px!important}}
+/* Open pink archival sticky note, anchored to the viewport, not to the centered ending. */
+#completed{position:relative;padding-bottom:0!important;min-height:0!important}
+#completed .beta-corner-note{
+  position:fixed!important;
+  top:auto!important;left:auto!important;
+  right:clamp(16px,2.5vw,38px)!important;
+  bottom:clamp(16px,3vh,32px)!important;
+  display:block;
+  width:min(420px,calc(100vw - 38px))!important;
+  max-width:none!important;
+  box-sizing:border-box;
+  margin:0!important;
+  padding:20px 23px 17px!important;
+  border:1px solid #b78d91;
+  border-radius:2px;
+  background:repeating-linear-gradient(0deg,transparent 0,transparent 26px,#ad808414 27px),linear-gradient(145deg,#efd1d1 0%,#e1b8bc 62%,#d4a6ae 100%);
+  color:#402f34!important;
+  text-align:left!important;
+  font:italic 14px/1.48 Georgia,serif!important;
+  letter-spacing:0!important;
+  box-shadow:3px 5px 0 #130e10a6,0 14px 30px #0006,inset 0 1px 0 #fff5;
+  opacity:1!important;
+  transform:rotate(-1.5deg)!important;
+  z-index:60;
+}
+#completed .beta-corner-note::before{
+  content:"";position:absolute;width:88px;height:23px;top:-13px;left:calc(50% - 44px);
+  background:#e8dfcfab;border:1px solid #f6efe268;box-shadow:0 1px 3px #0002;
+  transform:rotate(3deg);pointer-events:none;
+}
+#completed .beta-corner-note::after{
+  content:"";position:absolute;right:0;bottom:0;width:0;height:0;
+  border-bottom:15px solid #b98791;border-left:15px solid transparent;
+  filter:drop-shadow(-1px -1px 1px #624a5336);pointer-events:none;
+}
+@media(max-width:700px){
+  #completed .beta-corner-note{
+    right:14px!important;bottom:14px!important;
+    width:min(345px,calc(100vw - 28px))!important;
+    padding:15px 18px 13px!important;
+    font-size:12px!important;
+    line-height:1.4!important;
+    transform:rotate(-.7deg)!important;
+  }
+}
+@media(max-height:650px) and (min-width:701px){
+  #completed .beta-corner-note{width:min(365px,calc(100vw - 38px))!important;font-size:12px!important;padding:13px 18px!important}
+}
 </style>
 </head>
 <body>
