@@ -1461,9 +1461,9 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     const devNavigation = document.getElementById("dev-navigation");
     if (developerPreview) devNavigation.hidden = false;
     if (!developerPreview) {
-      document.querySelector('#completed .kicker').textContent='Preview complete';
-      document.querySelector('#completed-title').textContent='Thank you for helping us.';
-      document.querySelector('#completed p').textContent="That's all we've prepared for this preview. Your work has been very helpful!";
+      document.querySelector('#completed .kicker').textContent='thank u for playing fam';
+      document.querySelector('#completed-title').textContent='this is just a demo';
+      document.querySelector('#completed p').textContent='pls tell me what all to change. special mention to my beta tester kushi <3';
     }
 
     const archivedArticles={
@@ -2045,9 +2045,9 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     // New survey uses image pixels (1448 x 1086); Leaflet lat = 1086 - image y.
     const fourPhotos=[
-      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:713,lng:600,bearing:80},site:'High Street / Market Square approach'},
-      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:726,lng:1030,bearing:86},site:'Station Road / Filling Station approach'},
-      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:546,lng:1027,bearing:305},site:'Albert Road / Prince Arthur'}
+      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:542,lng:573,bearing:356},site:'High Street / Market Square approach'},
+      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:742,lng:1168,bearing:286},site:'Station Road / Filling Station approach'},
+      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:454,lng:1056,bearing:319},site:'Prince Arthur / Milton Street corner'}
     ];
     const fourLandmarks=[
       {name:'West Bridge',lat:735,lng:153},
@@ -2059,7 +2059,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       {name:'Library',lat:462,lng:811},
       {name:'Meridian Secondary School',lat:416,lng:1260}
     ];
-    const fourChecks=[{location:42,bearing:18},{location:38,bearing:16},{location:38,bearing:18}];
+    const fourChecks=[{location:46,bearing:20},{location:34,bearing:14},{location:34,bearing:16}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null,fourVerified=false;
     const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
     function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
