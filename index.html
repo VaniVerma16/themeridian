@@ -2043,11 +2043,11 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('five-continue').addEventListener('click',()=>show('complete'));
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     const fourPhotos=[
-      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:543,lng:290,bearing:110},site:'Clock Tower / High Street'},
-      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:510,lng:775,bearing:90},site:'Station Road / Filling Station'},
-      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:285,lng:723,bearing:340},site:'Prince Arthur / Albert Road'}
+      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:235,lng:485,bearing:0},site:'Clock Tower / High Street'},
+      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:540,lng:685,bearing:100},site:'Station Road / Filling Station'},
+      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:205,lng:807,bearing:315},site:'Prince Arthur / Albert Road'}
     ];
-    const fourLandmarks=[{name:'Clock Tower',lat:550,lng:468},{name:'Prince Arthur',lat:390,lng:657},{name:'Filling Station',lat:515,lng:840},{name:'School',lat:260,lng:865},{name:'West Bridge',lat:532,lng:90},{name:'Meridian Station',lat:635,lng:587}];
+    const fourLandmarks=[{name:'Clock Tower',lat:395,lng:485},{name:'Prince Arthur',lat:280,lng:745},{name:'Filling Station',lat:472,lng:827},{name:'Civic Hall',lat:448,lng:315},{name:'West Bridge',lat:405,lng:120},{name:'Meridian Station',lat:572,lng:760}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null,fourVerified=false;
     const fourBearing=document.getElementById('four-bearing'),fourBearingOutput=document.getElementById('four-bearing-output');
     function formatBearing(v){const deg=Number(v);return ['North','North-east','East','South-east','South','South-west','West','North-west'][Math.round(deg/45)%8]+' · '+deg+'°'}
@@ -2058,7 +2058,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     function ensureFourMap(){if(fourLeaflet){fourLeaflet.invalidateSize();return}if(!window.L){document.getElementById('four-feedback').textContent='The map could not load. Please refresh.';return}
       const canvas=[[0,0],[750,1000]];
       fourLeaflet=L.map('four-map',{crs:L.CRS.Simple,minZoom:-1.4,maxZoom:2,zoomSnap:.25,scrollWheelZoom:false,zoomControl:true,attributionControl:false,maxBounds:[[-60,-60],[810,1060]],maxBoundsViscosity:1});
-      L.imageOverlay('meridian-town-map.png?v=b1b11cdbe0d0',canvas,{interactive:false,alt:'Meridian County fictional street survey'}).addTo(fourLeaflet);
+      L.imageOverlay('meridian-survey-playable.svg?v=4de7cc9',canvas,{interactive:false,alt:'Meridian County fictional street survey'}).addTo(fourLeaflet);
       fourLeaflet.fitBounds(canvas,{padding:[8,8]});
       fourLeaflet.on('click',event=>updateFourMarker(event.latlng.lat,event.latlng.lng));
       requestAnimationFrame(()=>fourLeaflet.invalidateSize());
@@ -2087,12 +2087,12 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         const expected=fourPhotos[fourCurrent].answer;
         const distance=Math.hypot(fourMarker.lat-expected.lat,fourMarker.lng-expected.lng);
         const heading=Math.abs(((Number(fourBearing.value)-expected.bearing+540)%360)-180);
-        const locationTolerance=fourCurrent===0?105:58;
-        const directionTolerance=fourCurrent===0?45:30;
+        const locationTolerance=65;
+        const directionTolerance=35;
         const locationOK=distance<=locationTolerance;
         const directionOK=heading<=directionTolerance;
                 if(!locationOK||!directionOK){
-          feedback.textContent=(!locationOK&&!directionOK)?(fourCurrent===0?'Look for the approach west of the Clock Tower, then aim the camera towards the High Street.':'Not quite. Recheck the landmark and the direction of the road.'):( !locationOK?(fourCurrent===0?'Try the street approaching the Clock Tower from the west, rather than the square itself.':'The direction looks plausible, but try another position.'):'You found the right area. Rotate the camera to face the landmark.');
+          feedback.textContent=(!locationOK&&!directionOK)?(fourCurrent===0?'Try the street south of the Clock Tower and face north along it.':'Not quite. Recheck the landmark and the direction of the road.'):( !locationOK?(fourCurrent===0?'Try the approach from the south, rather than inside Market Square.':'The direction looks plausible, but try another position.'):'You found the right area. Rotate the camera to face the landmark.');
           feedback.classList.add('error');
           return;
         }
