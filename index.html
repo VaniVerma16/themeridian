@@ -1469,7 +1469,18 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     // Web Audio envelopes and scheduled sources keep the entire sting within the visual interruption.
     const INTERFERENCE_SECONDS=.64;
     let glitchAudioContext=null;
-    function playInterference(){
+    function unlockInterferenceAudio(){
+      try{
+        const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+        if(!AudioContextClass)return;
+        if(!glitchAudioContext)glitchAudioContext=new AudioContextClass();
+        if(glitchAudioContext.state==='suspended')glitchAudioContext.resume().catch(()=>{});
+      }catch(error){console.warn('Audio unlock unavailable:',error);}
+    }
+    // Prepare audio on the initial gesture instead of at the moment of the flash.
+    document.addEventListener('pointerdown',unlockInterferenceAudio,{once:true});
+    document.addEventListener('keydown',unlockInterferenceAudio,{once:true});
+    function playInterference(onScheduled){
       try{
         const AudioContextClass=window.AudioContext||window.webkitAudioContext;
         if(!AudioContextClass)return;
@@ -1518,23 +1529,25 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           bg.gain.exponentialRampToValueAtTime(.0001,t+.26);
           bass.connect(bg);bg.connect(master);bass.start(t);bass.stop(t+.26);
         };
-        if(ctx.state==='running')play();
-        else ctx.resume().then(play).catch(()=>{});
-      }catch(error){console.warn('Interference audio unavailable:',error);}
+        const startTogether=()=>{play();if(onScheduled)onScheduled();};
+        if(ctx.state==='running')startTogether();
+        else ctx.resume().then(startTogether).catch(()=>{if(onScheduled)onScheduled();});
+      }catch(error){console.warn('Interference audio unavailable:',error);if(onScheduled)onScheduled();}
     }
     document.getElementById('dev-audio').addEventListener('click',playInterference);
     let fiveFlashPending=false;
     function flashToLevelFive(){
       if(fiveFlashPending)return;
       fiveFlashPending=true;
-      playInterference();
-      const overlay=document.getElementById('five-interference');
-      overlay.classList.add('active');
-      window.setTimeout(()=>{
-        overlay.classList.remove('active');
-        show('readFive');
-        fiveFlashPending=false;
-      },INTERFERENCE_SECONDS*1000);
+      playInterference(()=>{
+        const overlay=document.getElementById('five-interference');
+        overlay.classList.add('active');
+        window.setTimeout(()=>{
+          overlay.classList.remove('active');
+          show('readFive');
+          fiveFlashPending=false;
+        },INTERFERENCE_SECONDS*1000);
+      });
     }
     renderLogicGrid();renderAnswers();
     renderClippings();
