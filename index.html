@@ -998,6 +998,14 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 .case-desk-grid .desk-plant-left{display:none}
 .case-desk-grid::after{background:#090c0c8a}
 @media(max-width:680px){#level-five .case-desk-grid{padding-top:134px}.case-desk-grid .desk-lamp{left:0}.case-desk-grid .desk-plant-right svg{width:110px;height:110px}}
+
+/* Keep the desk lamp out of the working area. */
+#level-five .case-desk-grid{padding-top:100px}
+#level-five .case-desk-grid .desk-lamp{top:6px;left:6px;right:auto;transform:none;pointer-events:none}
+#level-five .case-desk-grid #desk-bulb{width:105px;height:93px;pointer-events:auto}
+#level-five .case-desk-grid #desk-bulb svg{width:105px;height:93px}
+#level-five .case-desk-grid .bulb-glow{left:67px;top:39px;width:310px;height:255px}
+@media(max-width:680px){#level-five .case-desk-grid{padding-top:108px}#level-five .case-desk-grid .desk-lamp{top:5px;left:3px}}
   </style>
 </head>
 <body>
