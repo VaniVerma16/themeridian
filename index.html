@@ -858,6 +858,53 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .case-result .case-result-small{font-size:13px;color:#a4a095}
 #level-five [hidden]{display:none!important}
 @media(max-width:700px){.case-documents,.case-fields{grid-template-columns:1fr}.case-document{padding:16px}.case-form{padding:15px}}
+
+#level-five .case-desk{max-width:1450px;padding-top:6px}
+#level-five .case-desk>h1{font:34px Georgia,serif;margin:0 0 18px;letter-spacing:0}
+.case-desk-grid{display:grid;grid-template-columns:205px minmax(390px,1fr) 286px;gap:15px;align-items:start}
+.case-index,.case-right{min-width:0}.case-side-heading{font:11px Georgia,serif;letter-spacing:.08em;color:#c1bdb3;margin:0 0 11px}
+.case-side-heading span{font:italic 11px Georgia,serif;letter-spacing:0;float:right;color:#8b958a}
+.case-index{background:#222421;border:1px solid #3d403b;padding:13px}
+.case-tabs{display:flex;flex-direction:column;gap:3px}
+.case-tab,.case-index-action{width:100%;text-align:left;background:transparent;color:#d2cdc3;border:0;padding:12px 9px;font:15px Georgia,serif}
+.case-tab small{display:block;font:10px Georgia,serif;letter-spacing:.09em;color:#9b988e;margin-bottom:4px}
+.case-tab.active{background:#383a35;color:white;box-shadow:inset 3px 0 #d4c3a1}
+.case-tab:hover,.case-index-action:hover{background:#30332f}
+.case-index-action{border-top:1px solid #51544e;font-size:13px;margin-top:13px;padding-top:15px}
+.case-center{min-width:0;position:relative}
+.case-view-toolbar,.case-page-controls{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#bdb8ac;font:11px Georgia,serif;letter-spacing:.05em}
+.case-view-toolbar{padding:9px 10px;background:#252723}
+.case-view-toolbar button,.case-page-controls button{background:transparent;color:#e5e0d5;border:1px solid #64665f;padding:5px 10px;font:13px Georgia,serif}
+.case-view-toolbar #case-zoom-label{padding:0 9px}
+.case-page-controls{padding:12px 0}
+.case-page-controls button:disabled{opacity:.3;cursor:default}
+.case-paper-viewport{background:#33342f;padding:20px;min-height:480px;overflow:auto}
+.case-paper{background:#e3dac6;color:#332f27;padding:37px 42px;min-height:420px;box-shadow:0 3px 10px #0006;font-family:Georgia,serif}
+.case-paper-heading{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #a99e89;padding-bottom:12px;font-size:.68em;letter-spacing:.08em}
+.case-paper-kind{font-size:.74em;letter-spacing:.13em;color:#776c59;margin:33px 0 8px}
+.case-paper h2{font-size:2em;margin:0 0 12px;color:#28251f}
+.case-paper-date{font-size:.8em;color:#766c5c;margin:0 0 30px}
+.case-paper>p:not(.case-paper-date){font-size:1em;line-height:1.75;margin:16px 0}
+.case-paper-foot{font-size:.68em;letter-spacing:.08em;border-top:1px solid #aca28e;margin-top:45px;padding-top:15px}
+.case-right{display:flex;flex-direction:column;gap:13px}
+.case-scratch,.case-guidance,#level-five .case-form{background:#222421;border:1px solid #484a44;padding:15px;margin:0}
+#case-notepad{box-sizing:border-box;display:block;width:100%;min-height:120px;resize:vertical;background:#e5ddc9;border:1px solid #b6ad99;color:#302d26;font:14px/1.5 Georgia,serif;padding:12px}
+.case-guidance{border-left:3px solid #b2a28b}
+.case-guidance p{font:italic 14px/1.55 Georgia,serif;color:#dad4c8;margin:0}
+#level-five .case-form .case-fields{grid-template-columns:1fr;gap:11px}
+#level-five .case-fields select{padding:8px;font-size:13px}
+#level-five .case-form .primary{font-size:13px;padding:10px 13px}
+#level-five .case-result{background:#222421;border:1px solid #555;padding:15px}
+#level-five .case-result h2{font-size:21px}
+.case-archivist-note{position:relative;background:#e8dcb9;color:#393126;padding:19px 20px 15px;border:1px solid #c5b68c;transform:rotate(-1deg);margin:18px auto 10px;max-width:510px;box-shadow:3px 5px 0 #0005}
+.case-archivist-note .case-tape{position:absolute;top:-9px;left:42%;height:24px;width:88px;background:rgba(230,226,203,.6);border:1px solid rgba(255,255,255,.22);transform:rotate(3deg)}
+.case-archivist-note small{font:11px Georgia,serif;letter-spacing:.1em;color:#625640}
+.case-archivist-note p{font:15px/1.55 Georgia,serif;margin:10px 0;color:#302a20}
+.case-archivist-note button{font:12px Georgia,serif;background:transparent;border:0;padding:5px 0;color:#685944;text-decoration:underline}
+.case-archivist-note.tucked{max-width:230px;margin-left:0;padding:12px;transform:none}
+.case-archivist-note.tucked p{display:none}
+@media(max-width:1080px){.case-desk-grid{grid-template-columns:170px minmax(0,1fr)}.case-right{grid-column:2}}
+@media(max-width:650px){.case-desk-grid{grid-template-columns:1fr}.case-index,.case-right{grid-column:1}.case-tabs{display:grid;grid-template-columns:repeat(2,1fr)}.case-paper-viewport{padding:9px}.case-paper{padding:23px 19px;min-height:340px}}
   </style>
 </head>
 <body>
@@ -1035,56 +1082,38 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         </div>
       </section>
       <section id="level-five" class="level" aria-label="Original case file" hidden>
-        <div class="assignment case-assignment">
-          <p class="case-eyebrow">THE MERIDIAN · ARCHIVE ASSESSMENT 05</p>
-          <h1>The Original Case File</h1>
-          <p class="case-lead">Four surviving records. One incomplete case summary. Reconstruct only what the documents can establish.</p>
-          <div class="case-context"><small>FEATURES DESK · RETAINED CUTTING · 1997</small><h2>The Death of the Ordinary Man</h2>
-            <p>Once he was a boy of remarkable promise. Then came the familiar disappointments of adulthood. And just as it seemed that he might have found his way back to an ordinary, happy life, the story ended.</p>
-            <p class="case-context-foot">A retrospective from The Meridian's features archive. The original file contains only an excerpt.</p>
-          </div>
-          <div class="case-documents" aria-label="Recovered case records">
-            <article class="case-document"><div class="case-document-head"><span>01 · INCIDENT RECORD</span><span>15 FEB 1997</span></div>
-              <h2>Initial attendance report</h2><p><strong>Reference:</strong> M/97/0215</p>
-              <p>Officers attended the eastern canal towpath, near the disused railway footbridge, following a report from a member of the public at 06:40 hours. One adult male was found unresponsive. No definitive account of his movements immediately before the incident was available.</p>
-              <p class="case-stamp">LOCATION RECORDED · EAST CANAL TOWPATH</p>
-            </article>
-            <article class="case-document"><div class="case-document-head"><span>02 · IDENTIFICATION</span><span>15 FEB 1997</span></div>
-              <h2>Personal effects and identification</h2><p>Identity established as <strong>Adam E.</strong>, date of birth <strong>18 January 1970</strong>. A wallet, keys and folded engagement announcement were catalogued among his effects.</p>
-              <p>The announcement, dated September 1996, refers to a planned marriage later in 1997. It was recorded as a personal item, without assessment of its significance.</p>
-              <p class="case-stamp">IDENTITY CONFIRMED</p>
-            </article>
-            <article class="case-document"><div class="case-document-head"><span>03 · MEDICAL EXAMINATION</span><span>17 FEB 1997</span></div>
-              <h2>Extract from pathology findings</h2><p><strong>Medical cause:</strong> Fatal blunt-force injury to the head.</p>
-              <p>The estimated interval of death is between <strong>22:00 on 14 February</strong> and <strong>02:00 on 15 February 1997</strong>. The injury alone does not establish whether the event was accidental, self-inflicted, or caused by another person.</p>
-              <p class="case-stamp">MANNER OF DEATH · NOT DETERMINED</p>
-            </article>
-            <article class="case-document"><div class="case-document-head"><span>04 · WITNESS ENQUIRY</span><span>18 FEB 1997</span></div>
-              <h2>Last-known-movements summary</h2><p>A witness recalled seeing a man resembling Adam near the canal approach late on 14 February. The witness could not provide an exact time or state whether he was accompanied.</p>
-              <p>A background enquiry noted an earlier history of alcohol-related difficulties. No contemporaneous evidence of suicidal intent was recorded in this extract.</p>
-              <p class="case-stamp">WITNESS ACCOUNT · UNCORROBORATED</p>
-            </article>
-          </div>
-          <div class="case-form">
-            <div class="case-form-head"><div><small>RECONSTRUCTION SHEET · M/97/0215</small><h2>Complete the case summary</h2></div><span>04 REQUIRED FIELDS</span></div>
-            <div class="case-fields">
-              <label>Deceased <select data-case="victim"><option value="">Select recorded identity</option><option>Adam E.</option><option>Arthur E.</option><option>Unidentified adult male</option></select></label>
-              <label>Location discovered <select data-case="location"><option value="">Select recorded location</option><option>Prince Arthur public house</option><option>East canal towpath</option><option>Market Square</option></select></label>
-              <label>Estimated time of death <select data-case="time"><option value="">Select medical estimate</option><option>14 February, 18:00–20:00</option><option>14 February 22:00 – 15 February 02:00</option><option>15 February, 06:00–08:00</option></select></label>
-              <label>Medical cause of death <select data-case="cause"><option value="">Select medical finding</option><option>Alcohol poisoning</option><option>Fatal blunt-force head injury</option><option>Drowning</option></select></label>
-            </div>
-            <p class="case-footnote">The cause of death is a medical finding. The circumstances and intent remain unresolved in the recovered record.</p>
-            <p id="five-feedback" class="case-feedback" role="status" aria-live="polite"></p>
-            <button class="primary" id="five-finish" type="button">Verify reconstructed file</button>
-          </div>
-          <div id="five-result" class="case-result" hidden><span>RECORD COMPLETE · M/97/0215</span><h2>The file is restored.</h2>
-            <p>Lovely work! You found exactly what the records say. It's funny, isn't it, how the ending almost seems to explain everything that came before?</p>
-            <p class="case-result-small">Archival finding: circumstances of death not determined. Newspaper interpretation: apparent suicide.</p>
-            <button class="primary" id="five-continue" type="button">Continue</button>
-          </div>
-        </div>
+<div class="assignment case-assignment case-desk">
+  <h1>The Original Case File</h1>
+  <div class="case-desk-grid">
+    <aside class="case-index" aria-label="Case file index">
+      <div class="case-side-heading">FILE M/97 · INDEX</div>
+      <div id="case-tabs" class="case-tabs" role="group" aria-label="Select a document"></div>
+      <button id="case-open-reconstruction" class="case-index-action" type="button">Reconstruction sheet ↗</button>
+    </aside>
+    <div class="case-center">
+      <div class="case-view-toolbar"><span id="case-page-counter">DOCUMENT 01 / 04</span><div><button type="button" id="case-zoom-out" aria-label="Decrease document zoom">−</button><span id="case-zoom-label">100%</span><button type="button" id="case-zoom-in" aria-label="Increase document zoom">+</button></div></div>
+      <div class="case-paper-viewport"><article id="case-active-document" class="case-paper" aria-live="polite"></article></div>
+      <div class="case-page-controls"><button type="button" id="case-prev">← Previous</button><button type="button" id="case-next">Next record →</button></div>
+      <div class="case-archivist-note" id="case-archivist-note"><div class="case-tape" aria-hidden="true"></div><small>NOTE TO WHOEVER IS HANDLING THIS</small><p>Something is very wrong. I don't remember starting work on this section again. I was sure I'd already finished reviewing these files. Please check the summaries carefully.</p><button id="case-note-dismiss" type="button">Tuck note away ×</button></div>
+    </div>
+    <aside class="case-right" aria-label="Working notes and reconstruction">
+      <section class="case-scratch"><div class="case-side-heading">YOUR NOTEPAD <span>Autosaved</span></div><textarea id="case-notepad" aria-label="Your private case notes" placeholder="Names, dates, contradictions…" rows="7"></textarea></section>
+      <section id="case-guidance" class="case-guidance"><div class="case-side-heading">A FEW NOTES FROM YOURS TRULY</div><p id="case-narrator-note"></p></section>
+      <section class="case-form" id="case-form-panel"><div class="case-side-heading">RECONSTRUCTION SHEET</div>
+       <div class="case-fields">
+        <label>Who? <select data-case="victim"><option value="">Unverified</option><option>Adam E.</option><option>Arthur E.</option><option>Unidentified adult male</option></select></label>
+        <label>Where? <select data-case="location"><option value="">Unverified</option><option>Prince Arthur public house</option><option>East canal towpath</option><option>Market Square</option></select></label>
+        <label>When? <select data-case="time"><option value="">Unverified</option><option>14 February, 18:00–20:00</option><option>14 February 22:00 – 15 February 02:00</option><option>15 February, 06:00–08:00</option></select></label>
+        <label>Medical cause? <select data-case="cause"><option value="">Unverified</option><option>Alcohol poisoning</option><option>Fatal blunt-force head injury</option><option>Drowning</option></select></label>
+       </div>
+       <p id="five-feedback" class="case-feedback" aria-live="polite"></p><button class="primary" id="five-finish" type="button">Verify file</button>
       </section>
-      <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
+      <section id="five-result" class="case-result" hidden><small>RECORD VERIFIED</small><h2>Case summary restored.</h2><p>Lovely work! I knew you could manage it. The records do tell a story when you put them together, don't they?</p><button class="primary" id="five-continue" type="button">Continue</button></section>
+    </aside>
+  </div>
+</div>
+</section>
+<section id="completed" class="complete" aria-labelledby="completed-title" hidden>
         <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button>
       </section>
     </main>
@@ -1219,7 +1248,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         const puzzleThree=[...document.querySelectorAll('#answer-fields select')].map(el=>el.value);
         const gridMarks=[...document.querySelectorAll('.logic-cell')].map(el=>el.textContent);
         const draftFour=fourMarker?{lat:fourMarker.lat,lng:fourMarker.lng,bearing:Number(fourBearing.value)}:null;
-        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour}));
+        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseFields:[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value),caseNoteTucked:document.getElementById('case-archivist-note').classList.contains('tucked'),caseVerified:!document.getElementById('five-result').hidden}));
       }catch(err){/* Browsers with storage disabled may still play normally. */}
     }
     function restoreSession(){
@@ -1232,6 +1261,13 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         if(Array.isArray(data.markedTranscript)){markedTranscript.clear();data.markedTranscript.forEach(key=>markedTranscript.add(key));renderTranscript();}
         if(Array.isArray(data.puzzleThree))document.querySelectorAll('#answer-fields select').forEach((el,i)=>{if(typeof data.puzzleThree[i]==='string')el.value=data.puzzleThree[i]});
         if(Array.isArray(data.gridMarks))document.querySelectorAll('.logic-cell').forEach((el,i)=>{const v=data.gridMarks[i];if(['','×','✓'].includes(v)){el.textContent=v;el.dataset.state=String(['','×','✓'].indexOf(v));}});
+        if(typeof data.caseNotepad==='string')document.getElementById('case-notepad').value=data.caseNotepad;
+        if(Array.isArray(data.caseFields))document.querySelectorAll('#level-five [data-case]').forEach((el,i)=>{if(typeof data.caseFields[i]==='string')el.value=data.caseFields[i]});
+        if(Number.isInteger(data.caseZoom))caseZoom=Math.min(140,Math.max(80,data.caseZoom));
+        if(Number.isInteger(data.caseFile))openCaseFile(data.caseFile);
+        document.getElementById('case-zoom-label').textContent=caseZoom+'%';
+        if(data.caseNoteTucked)document.getElementById('case-note-dismiss').click();
+        if(data.caseVerified){document.getElementById('case-form-panel').hidden=true;document.getElementById('five-result').hidden=false;}
         furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
         if(Array.isArray(data.fourGuesses))data.fourGuesses.slice(0,3).forEach((guess,i)=>{fourGuesses[i]=guess});
         if(Number.isInteger(data.fourCurrent)&&data.fourCurrent>=0&&data.fourCurrent<3){fourCurrent=data.fourCurrent;renderFourPhoto();}
@@ -1425,6 +1461,44 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     });
     document.getElementById('begin-four').addEventListener('click',()=>show('four'));
     document.getElementById('begin-five').addEventListener('click',()=>show('five'));
+    const caseFiles=[
+      {type:'INCIDENT REPORT',title:'Initial attendance',date:'15 FEB 1997',ref:'M/97-01',body:['[PLACEHOLDER — police attendance details will be written later.]','A body was reported near the east canal towpath early in the morning. A formal location sketch and accompanying statements are listed in the original file.','[PLACEHOLDER — discovery time, attending officer and scene observations.]'],note:"There's usually a lot of unnecessary detail in these first reports! Just make sure you get the location right."},
+      {type:'PROPERTY REGISTER',title:'Personal effects',date:'15 FEB 1997',ref:'M/97-02',body:['[PLACEHOLDER — complete identification and recovered belongings.]','Recovered identification attributes the file to Adam E. The property inventory includes ordinary belongings and a folded announcement.','[PLACEHOLDER — item descriptions and catalogue numbers.]'],note:"Oh, all these little possessions. It really makes you think about the life someone leaves behind, doesn't it?"},
+      {type:'WITNESS RECORD',title:'Last known movements',date:'18 FEB 1997',ref:'M/97-03',body:['[PLACEHOLDER — witness interview and inconsistencies.]','An initial account refers to a possible sighting near the canal approach. The time and identity have not been independently confirmed.','[PLACEHOLDER — signed witness extract.]'],note:"Witness statements can be terribly unreliable. I'd focus on the broader picture instead of getting caught up in the little discrepancies!"},
+      {type:'MEDICAL ABSTRACT',title:'Pathology extract',date:'17 FEB 1997',ref:'M/97-04',body:['[PLACEHOLDER — medical evidence pending story approval.]','Provisional reconstruction fields: estimated death interval between 22:00 on 14 February and 02:00 on 15 February; fatal blunt-force injury. The manner of death is not established by these findings alone.','[PLACEHOLDER — clinical observations and final medical wording.]'],note:"There we go. It's sad, of course. But once we understand the difficulties he faced, perhaps the ending doesn't seem quite so unexpected."}
+    ];
+    let activeCaseFile=0,caseZoom=100;
+    const caseTabs=document.getElementById('case-tabs');
+    caseFiles.forEach((file,i)=>{
+      const button=document.createElement('button');button.type='button';button.className='case-tab';
+      button.innerHTML='<small>RECORD 0'+(i+1)+'</small><span>'+file.title+'</span>';
+      button.addEventListener('click',()=>openCaseFile(i));caseTabs.appendChild(button);
+    });
+    function openCaseFile(i){
+      activeCaseFile=Math.max(0,Math.min(caseFiles.length-1,i));
+      const file=caseFiles[activeCaseFile],paper=document.getElementById('case-active-document');
+      paper.replaceChildren();
+      const heading=document.createElement('div');heading.className='case-paper-heading';
+      heading.innerHTML='<span>MERIDIAN POLICE · RECOVERED COPY</span><span>'+file.ref+'</span>';paper.appendChild(heading);
+      const kind=document.createElement('div');kind.className='case-paper-kind';kind.textContent=file.type;paper.appendChild(kind);
+      const h=document.createElement('h2');h.textContent=file.title;paper.appendChild(h);
+      const date=document.createElement('p');date.className='case-paper-date';date.textContent='FILED '+file.date;paper.appendChild(date);
+      file.body.forEach(t=>{const p=document.createElement('p');p.textContent=t;paper.appendChild(p)});
+      const foot=document.createElement('div');foot.className='case-paper-foot';foot.textContent='ARCHIVE COPY · CONTENT SUBJECT TO VERIFICATION';paper.appendChild(foot);
+      document.getElementById('case-page-counter').textContent='DOCUMENT 0'+(activeCaseFile+1)+' / 0'+caseFiles.length;
+      document.getElementById('case-narrator-note').textContent=file.note;
+      [...caseTabs.children].forEach((el,n)=>{el.classList.toggle('active',n===activeCaseFile);el.setAttribute('aria-pressed',String(n===activeCaseFile))});
+      document.getElementById('case-prev').disabled=activeCaseFile===0;
+      document.getElementById('case-next').disabled=activeCaseFile===caseFiles.length-1;
+      paper.style.fontSize=caseZoom+'%';
+    }
+    document.getElementById('case-prev').addEventListener('click',()=>openCaseFile(activeCaseFile-1));
+    document.getElementById('case-next').addEventListener('click',()=>openCaseFile(activeCaseFile+1));
+    document.getElementById('case-zoom-in').addEventListener('click',()=>{caseZoom=Math.min(140,caseZoom+10);openCaseFile(activeCaseFile);document.getElementById('case-zoom-label').textContent=caseZoom+'%'});
+    document.getElementById('case-zoom-out').addEventListener('click',()=>{caseZoom=Math.max(80,caseZoom-10);openCaseFile(activeCaseFile);document.getElementById('case-zoom-label').textContent=caseZoom+'%'});
+    document.getElementById('case-open-reconstruction').addEventListener('click',()=>document.getElementById('case-form-panel').scrollIntoView({behavior:'smooth',block:'center'}));
+    document.getElementById('case-note-dismiss').addEventListener('click',()=>{document.getElementById('case-archivist-note').classList.toggle('tucked');document.getElementById('case-note-dismiss').textContent=document.getElementById('case-archivist-note').classList.contains('tucked')?'Open note ↗':'Tuck note away ×';});
+    openCaseFile(0);
     const caseExpected=['Adam E.','East canal towpath','14 February 22:00 – 15 February 02:00','Fatal blunt-force head injury'];
     document.getElementById('five-finish').addEventListener('click',()=>{
       const answers=[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value);
