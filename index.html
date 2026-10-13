@@ -1188,6 +1188,9 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 @keyframes redaction-noise{0%{transform:translateX(0);opacity:.35}50%{transform:translateX(1px);opacity:.5}100%{transform:translateX(-1px);opacity:.32}}
 @media(prefers-reduced-motion:reduce){#level-five .archive-redaction::before,#level-five .archive-redaction::after{animation:none}}
 #dev-navigation[hidden]{display:none!important}
+#completed{position:relative}
+#completed .beta-corner-note{position:absolute;right:clamp(14px,4vw,56px);bottom:18px;max-width:300px;text-align:right;font:italic 13px/1.55 Georgia,serif;color:#b5afa5;opacity:.88}
+@media(max-width:700px){#completed .beta-corner-note{position:static;margin:35px 16px 0 auto;max-width:290px;font-size:12px}}
 </style>
 </head>
 <body>
@@ -1421,7 +1424,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 </div>
 </section>
 <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
-        <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button>
+        <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button><aside class="beta-corner-note" aria-label="Demo message">this is a demo, tell me what all to change. thanks for playing fam. special thanks to my beta tester kushi who believes im not normal enough to make something normal &lt;3</aside>
       </section>
     </main>
     <footer><span>© The Meridian · Independent Publishing</span><span>Established 1972</span></footer>
@@ -1460,11 +1463,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     const developerPreview = new URLSearchParams(window.location.search).get("dev") === "1";
     const devNavigation = document.getElementById("dev-navigation");
     if (developerPreview) devNavigation.hidden = false;
-    if (!developerPreview) {
-      document.querySelector('#completed .kicker').textContent='thank u for playing fam';
-      document.querySelector('#completed-title').textContent='this is just a demo';
-      document.querySelector('#completed p').textContent='pls tell me what all to change. special mention to my beta tester kushi <3';
-    }
+    // The original completion narration is preserved for public and developer views.
 
     const archivedArticles={
       orchards:{title:"New Concerns Raised About Pesticide Use Near Orchards",section:"LOCAL NEWS",paragraphs:[
