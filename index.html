@@ -802,6 +802,13 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .history-menu button.history-intro{color:#aba79e;font-style:italic}
 #level-four .four-instructions{font:15px/1.5 Georgia,serif;color:#c6c3bc;margin:7px 0 5px}
 #level-four .four-notes-lead{font:italic 14px/1.35 Georgia,serif;color:#c9c5bb;margin:10px 0 0}
+
+/* Keep the player navigation above Leaflet tiles and markers. */
+#player-history{position:relative;z-index:3000;overflow:visible!important}
+#player-history .history-dropdown{position:relative;z-index:3001}
+#player-history .history-menu{z-index:3002}
+#level-four,#level-four .four-workspace,#level-four .four-map-col{z-index:auto}
+#four-map .leaflet-container,#four-map .leaflet-pane{z-index:auto}
   </style>
 </head>
 <body>
@@ -1324,9 +1331,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     document.getElementById('five-finish').addEventListener('click',()=>show('complete'));
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     const fourPhotos=[
-      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:442,lng:405,bearing:20},site:'Clock Tower / High Street'},
-      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:500,lng:785,bearing:90},site:'Station Road / Filling Station'},
-      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:385,lng:660,bearing:315},site:'Prince Arthur / Albert Road'}
+      {label:'A',file:'towncentre.jpg',ref:'PH–01',answer:{lat:543,lng:290,bearing:110},site:'Clock Tower / High Street'},
+      {label:'B',file:'station-road2.jpg',ref:'PH–02',answer:{lat:510,lng:775,bearing:90},site:'Station Road / Filling Station'},
+      {label:'C',file:'pub.jpg',ref:'PH–03',answer:{lat:285,lng:723,bearing:340},site:'Prince Arthur / Albert Road'}
     ];
     const fourLandmarks=[{name:'Clock Tower',lat:550,lng:468},{name:'Prince Arthur',lat:390,lng:657},{name:'Filling Station',lat:515,lng:840},{name:'School',lat:260,lng:865},{name:'West Bridge',lat:532,lng:90},{name:'Meridian Station',lat:635,lng:587}];
     const fourGuesses=[];let fourCurrent=0,fourMarker=null,fourLeaflet=null,fourCameraMarker=null,fourVerified=false;
@@ -1368,9 +1375,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         const expected=fourPhotos[fourCurrent].answer;
         const distance=Math.hypot(fourMarker.lat-expected.lat,fourMarker.lng-expected.lng);
         const heading=Math.abs(((Number(fourBearing.value)-expected.bearing+540)%360)-180);
-        const locationOK=fourCurrent===0?(fourMarker.lng>=210&&fourMarker.lng<=445&&fourMarker.lat>=385&&fourMarker.lat<=585):distance<=190;
-        const directionOK=fourCurrent===0?(Number(fourBearing.value)<=125||Number(fourBearing.value)>=345):heading<=100;
-        if(!locationOK||!directionOK){
+        const locationOK=distance<=58;
+        const directionOK=heading<=30;
+                if(!locationOK||!directionOK){
           feedback.textContent=(!locationOK&&!directionOK)?'Not quite. Recheck the landmark and the direction of the road.':(!locationOK?'The direction looks plausible, but try another position.':'You found the right area. Rotate the camera to face the landmark.');
           feedback.classList.add('error');
           return;
@@ -1391,9 +1398,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     const directoryModal=document.getElementById('directory-modal');
     let directoryReturnFocus=null;
     const photoNotes=[
-      '<p class="directory-kicker">FIELD NOTE · PH–01</p><h2>The shopping street</h2><p>The photographer seems to have stood along the shopping street, facing the clock tower at the far end. Look for the approach to Market Square.</p>',
-      '<p class="directory-kicker">FIELD NOTE · PH–02</p><h2>Commercial frontage</h2><p>The taller modern building faced an older row of shops and houses. A filling station stood further along Station Road, past the commercial frontage.</p>',
-      '<p class="directory-kicker">FIELD NOTE · PH–03</p><h2>A small distraction</h2><p>Someone from the team apparently got a little distracted by the Prince Arthur while photographing the area. I suppose everyone deserves a break! The building stood at the corner of Albert Road.</p>'
+      '<p class="directory-kicker">FIELD NOTE · PH–01</p><h2>The shopping street</h2><p>The clock tower dominates the skyline in this view, but the photograph was not taken from the square itself. The nearby rooftops may help identify the approach.</p>',
+      '<p class="directory-kicker">FIELD NOTE · PH–02</p><h2>Commercial frontage</h2><p>The modern frontage is on one side of the street, older premises on the other. One business sign is visible farther down the road; check which way the street runs.</p>',
+      '<p class="directory-kicker">FIELD NOTE · PH–03</p><h2>A small distraction</h2><p>Someone on the team apparently stopped for a break while documenting the area. I suppose everyone needs one! The corner frontage and the direction of the side street may help with this photograph.</p>'
     ];
     function updatePhotoNote(){document.getElementById('directory-content').innerHTML=photoNotes[fourCurrent];}
     updatePhotoNote();
