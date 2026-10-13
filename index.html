@@ -1045,6 +1045,15 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five .case-paper-kind,#level-five .case-paper-date,#level-five .case-paper-foot{color:#554b3e!important}
 #level-five .case-folded-note.crumpled{transform:rotate(-13deg) scale(.82);background:repeating-linear-gradient(31deg,#d3c39e 0,#e6d7b4 8px,#beac88 9px,#e3d2af 17px);box-shadow:2px 3px 5px #0007;clip-path:polygon(7% 5%,29% 0,51% 7%,78% 1%,98% 18%,94% 49%,100% 72%,84% 94%,55% 90%,28% 100%,3% 81%,6% 52%,0 29%)}
 #level-five .case-folded-note.crumpled .case-fold-corner{display:none}
+
+/* Quiet, tactile page changes distinct from the intrusive horror flashes. */
+#page-transition{position:fixed;inset:0;z-index:9700;display:grid;place-items:center;background:#171917;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .16s ease,visibility .16s}
+#page-transition.open{visibility:visible;opacity:1}
+#page-transition .transition-sheet{width:min(390px,78vw);height:185px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:17px;background:#e5dac3;color:#4d463a;box-shadow:10px 12px 0 #08090799;transform:translateY(23px) rotate(-2deg) scale(.96);opacity:0;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s}
+#page-transition.open .transition-sheet{transform:translateY(0) rotate(-.5deg) scale(1);opacity:1}
+#transition-caption{font:11px Georgia,serif;letter-spacing:.2em}
+.transition-mark{font:bold 52px Georgia,serif;color:#88806e}
+@media(prefers-reduced-motion:reduce){#page-transition,#page-transition .transition-sheet{transition:none!important}}
   </style>
 </head>
 <body>
@@ -1263,7 +1272,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     <footer><span>© The Meridian · Independent Publishing</span><span>Established 1972</span></footer>
   </div>
 
-  <div id="transition-flash" aria-hidden="true"></div>
+  <div id="transition-flash" aria-hidden="true"></div><div id="page-transition" aria-hidden="true"><div class="transition-sheet"><span id="transition-caption">OPENING FILE</span><div class="transition-mark">M.</div></div></div>
   <div id="five-interference" aria-hidden="true"><span data-text="What... is happening?">What... is happening?</span></div>
   <div id="directory-modal" class="directory-overlay" role="dialog" aria-modal="true" aria-label="Supplementary archival notes" hidden>
     <div class="directory-shell">
@@ -1455,6 +1464,19 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       if(!historyNav.hidden)historySelect.selectedIndex=-1;
       closeHistory();
     }
+    let pageTransitionBusy=false;
+    function enterPuzzle(section,caption){
+      if(pageTransitionBusy)return;
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){show(section);return;}
+      pageTransitionBusy=true;
+      const screen=document.getElementById('page-transition');
+      document.getElementById('transition-caption').textContent=caption;
+      screen.classList.add('open');
+      window.setTimeout(()=>{
+        show(section);
+        window.setTimeout(()=>{screen.classList.remove('open');pageTransitionBusy=false;},210);
+      },320);
+    }
     function show(section,recordProgress=true){
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
       document.body.classList.toggle('game-active',section!=='home');
@@ -1520,8 +1542,8 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     }
 
     document.getElementById('get-started').addEventListener('click',()=>{reset();show('readOne')});
-    document.getElementById('begin-one').addEventListener('click',()=>show('level'));
-    document.getElementById('begin-two').addEventListener('click',()=>show('two'));
+    document.getElementById('begin-one').addEventListener('click',()=>enterPuzzle('level','UNFOLDING TRANSCRIPT'));
+    document.getElementById('begin-two').addEventListener('click',()=>enterPuzzle('two','PINNING THE CLIPPINGS'));
     document.getElementById('reset').addEventListener('click',reset);
     verify.addEventListener('click',()=>{if(markedTranscript.size===4 && [...markedTranscript].every(key=>transcriptionErrors.has(key))){show('readTwo')}else{feedback.classList.add('error');feedback.textContent='Not quite. Check the original clipping again and reconsider your four marks.'}});
     document.getElementById('return-home').addEventListener('click',()=>{reset();sortOrder=[...initialOrder];renderClippings();show('home')});
@@ -1586,7 +1608,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       });
     }
     const intro=document.getElementById('narrator-intro'),workspace=document.getElementById('deduction-workspace');
-    document.getElementById('begin-three').addEventListener('click',()=>show('three'));
+    document.getElementById('begin-three').addEventListener('click',()=>enterPuzzle('three','OPENING EDITORIAL FILE'));
     document.getElementById('read-guide').addEventListener('click',()=>show('readThree'));
     document.getElementById('check-three').addEventListener('click',()=>{
       const selections=[...document.querySelectorAll('#answer-fields select')].map(x=>x.value);
@@ -1604,8 +1626,8 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       else if(destination==='flashFive')flashToLevelFive();
       else if(destination)show(destination,false);
     });
-    document.getElementById('begin-four').addEventListener('click',()=>show('four'));
-    document.getElementById('begin-five').addEventListener('click',()=>show('five'));
+    document.getElementById('begin-four').addEventListener('click',()=>enterPuzzle('four','UNROLLING THE SURVEY'));
+    document.getElementById('begin-five').addEventListener('click',()=>enterPuzzle('five','OPENING CASE DOSSIER'));
     const caseFiles=[
   {
     "type": "POLICE PRESS RELEASE",
