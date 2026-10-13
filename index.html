@@ -1274,7 +1274,24 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     <div class="desk-grain" aria-hidden="true"></div>
     <div class="desk-lamp"><button type="button" id="desk-bulb" aria-label="Switch desk lamp on" aria-pressed="false" title="Toggle desk lamp"><span class="bulb-glow"></span><svg viewBox="0 0 170 150" width="170" height="150" aria-hidden="true"><ellipse cx="85" cy="125" rx="58" ry="18" fill="#17130f" opacity=".23"/><ellipse cx="85" cy="116" rx="47" ry="17" fill="#343a35" stroke="#1c211e" stroke-width="4"/><path d="M82 115L62 70L87 41" fill="none" stroke="#29312e" stroke-width="12" stroke-linecap="round"/><path d="M82 115L62 70L87 41" fill="none" stroke="#707871" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="70" r="10" fill="#4e5852" stroke="#232d28" stroke-width="3"/><path d="M68 22Q97 12 124 45L96 76Q68 56 68 22Z" fill="#434b45" stroke="#1d2521" stroke-width="4"/><path d="M98 71L120 45" stroke="#b6a98a" stroke-width="5"/><ellipse cx="109" cy="60" rx="7" ry="14" fill="#ceb97d" transform="rotate(44 109 60)"/></svg></button></div>
     <div class="case-note-wrap"><button id="case-note-dismiss" class="case-folded-note" type="button" aria-expanded="false" aria-controls="case-archivist-note" aria-label="Open folded handwritten note"><span class="case-fold-corner"></span><span>handwritten note</span></button><div class="case-archivist-note" id="case-archivist-note" hidden><div class="case-tape" aria-hidden="true"></div><small>NOTE</small><p>I'm... pretty sure I've already reviewed these files?</p></div></div>
-    <aside class="case-index" aria-label="Case file index">
+    <div class="desk-objects">
+      <button id="desk-open-book" class="desk-object desk-book-object" type="button"><span class="desk-book-spine"></span><small>THE MERIDIAN · 1997</small><strong>Original Case File</strong><em>Four recovered records</em></button>
+      <button id="desk-open-slips" class="desk-object desk-slip-object" type="button"><span class="desk-box-tabs" aria-hidden="true"></span><small>THE MERIDIAN · RESEARCH</small><strong>Loose Inserts</strong><em>Six archival slips</em></button>
+      <button id="desk-open-pad" class="desk-object desk-pad-object" type="button"><span class="desk-pad-binding" aria-hidden="true"></span><small>PERSONAL NOTES</small><strong>Notepad</strong><em>Use this for taking down notes</em></button>
+      <button id="desk-open-case" class="desk-object desk-summary-object" type="button"><small>CASE M/97</small><strong>Reconstruct the Case</strong><em>Open working deductions →</em></button>
+    </div>
+    <div id="desk-overlay" class="desk-overlay" hidden role="dialog" aria-modal="true" aria-label="Desk workspace">
+      <div class="desk-overlay-bar"><span id="desk-overlay-title"></span><button type="button" id="desk-close-overlay">Close ×</button></div>
+      <div class="desk-overlay-body">
+        <div id="desk-notebook-panel" class="desk-panel" hidden></div>
+        <div id="desk-slips-panel" class="desk-panel" hidden>
+          <div class="desk-slip-controls"><button id="desk-slip-prev" type="button">← Previous slip</button><span id="desk-slip-counter"></span><button id="desk-slip-next" type="button">Next slip →</button></div>
+        </div>
+        <div id="desk-pad-panel" class="desk-panel" hidden></div>
+        <div id="desk-case-panel" class="desk-panel" hidden></div>
+      </div>
+    </div>
+        <aside class="case-index" aria-label="Case file index">
       <div class="case-side-heading">LOOSE RECORDS · M/97</div>
       <div id="case-tabs" class="case-tabs" role="group" aria-label="Select a document"></div>
       <button id="case-open-reconstruction" class="case-index-action" type="button">Reconstruction sheet ↗</button>
@@ -1441,7 +1458,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         const puzzleThree=[...document.querySelectorAll('#answer-fields select')].map(el=>el.value);
         const gridMarks=[...document.querySelectorAll('.logic-cell')].map(el=>el.textContent);
         const draftFour=fourMarker?{lat:fourMarker.lat,lng:fourMarker.lng,bearing:Number(fourBearing.value)}:null;
-        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseStage,caseTheory,casePicked,caseEditorial,caseNoteOpen:!document.getElementById('case-archivist-note').hidden,caseNoteDismissed,caseVerified:!document.getElementById('five-result').hidden,caseLampOn:physicalDesk.classList.contains('desk-lit')}));
+        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseStage,caseTheory,casePicked,caseEditorial,deskOpen,slipIndex,caseNoteOpen:!document.getElementById('case-archivist-note').hidden,caseNoteDismissed,caseVerified:!document.getElementById('five-result').hidden,caseLampOn:physicalDesk.classList.contains('desk-lit')}));
       }catch(err){/* Browsers with storage disabled may still play normally. */}
     }
     function restoreSession(){
@@ -1466,6 +1483,8 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         if(data.caseLampOn===true)lampButton.click();
         if(data.caseNoteDismissed){caseNoteDismissed=true;document.getElementById('case-note-dismiss').classList.add('crumpled');document.getElementById('case-note-dismiss').setAttribute('aria-label','Open crumpled note');}if(data.caseNoteOpen)document.getElementById('case-note-dismiss').click();
         if(data.caseVerified){document.getElementById('case-form-panel').hidden=true;document.getElementById('five-result').hidden=false;}
+        if(Number.isInteger(data.slipIndex))slipIndex=Math.max(0,Math.min(5,data.slipIndex));
+        if(['book','slips','pad','case'].includes(data.deskOpen))openDeskView(data.deskOpen);
         furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
         if(Array.isArray(data.fourGuesses))data.fourGuesses.slice(0,3).forEach((guess,i)=>{fourGuesses[i]=guess});
         if(Number.isInteger(data.fourCurrent)&&data.fourCurrent>=0&&data.fourCurrent<3){fourCurrent=data.fourCurrent;renderFourPhoto();}
@@ -2082,6 +2101,40 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         },INTERFERENCE_SECONDS*1000);
       });
     }
+    // Physical desk: the objects are the navigation. Only one workspace opens at a time.
+    const deskOverlay=document.getElementById('desk-overlay');
+    const deskPanels={book:document.getElementById('desk-notebook-panel'),slips:document.getElementById('desk-slips-panel'),pad:document.getElementById('desk-pad-panel'),case:document.getElementById('desk-case-panel')};
+    deskPanels.book.append(document.querySelector('#level-five .case-center'));
+    deskPanels.pad.append(document.querySelector('#level-five .case-scratch'));
+    deskPanels.case.append(document.getElementById('case-form-panel'),document.getElementById('five-result'));
+    deskPanels.book.append(document.getElementById('case-guidance'));
+    deskPanels.slips.append(document.querySelector('#level-five .case-extras'));
+    let deskOpen='';
+    const slipButtons=[...document.querySelectorAll('#case-extra-cards .case-extra-card')];
+    let slipIndex=0;
+    function showSlip(index){
+      slipIndex=(index+slipButtons.length)%slipButtons.length;
+      slipButtons[slipIndex].click();
+      document.getElementById('desk-slip-counter').textContent='SLIP '+(slipIndex+1)+' / '+slipButtons.length;
+    }
+    function openDeskView(view){
+      deskOpen=view;
+      Object.entries(deskPanels).forEach(([key,el])=>el.hidden=key!==view);
+      deskOverlay.hidden=false;
+      const labels={book:'CASE NOTEBOOK',slips:'LOOSE ARCHIVE SLIPS',pad:'YOUR NOTEPAD',case:'RECONSTRUCTION'};
+      document.getElementById('desk-overlay-title').textContent=labels[view];
+      if(view==='slips')showSlip(slipIndex);
+      if(view==='pad')document.getElementById('case-notepad').focus();
+      safelySaveSession();
+    }
+    function closeDeskView(){deskOpen='';deskOverlay.hidden=true;safelySaveSession();}
+    ['book','slips','pad','case'].forEach(view=>document.getElementById('desk-open-'+view).addEventListener('click',()=>openDeskView(view)));
+    document.getElementById('desk-close-overlay').addEventListener('click',closeDeskView);
+    document.getElementById('desk-slip-prev').addEventListener('click',()=>showSlip(slipIndex-1));
+    document.getElementById('desk-slip-next').addEventListener('click',()=>showSlip(slipIndex+1));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!deskOverlay.hidden)closeDeskView()});
+    document.getElementById('case-open-reconstruction').addEventListener('click',()=>openDeskView('case'));
+    document.getElementById('five-finish').addEventListener('click',()=>{if(!document.getElementById('five-result').hidden)openDeskView('case')});
     renderLogicGrid();renderAnswers();
     renderClippings();
     renderTranscript();
