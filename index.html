@@ -1282,6 +1282,25 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five .desk-book-object::after{content:none!important}
 #level-five .desk-book-object strong{max-width:100%;font-size:clamp(26px,3.2vw,44px);line-height:1.18}
 #level-five .desk-slip-object strong{font-size:clamp(21px,2.5vw,30px);line-height:1.15}
+
+/* A slower, quieter archival disturbance after the fifth assessment. */
+#five-outro[hidden]{display:none!important}
+#five-outro{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;overflow:auto;padding:clamp(20px,5vw,65px);box-sizing:border-box;background:#151615;animation:outro-screen 3.4s steps(1,end) both}
+#five-outro .five-outro-sheet{position:relative;width:min(650px,100%);box-sizing:border-box;padding:clamp(27px,5vw,55px);background:#e9deca;border:1px solid #b8a78e;box-shadow:0 20px 70px #0009;transform:rotate(-.5deg);color:#342d24;font-family:Georgia,serif;animation:outro-paper 3.4s steps(1,end) both}
+#five-outro .five-outro-eyebrow{font:11px/1.4 Georgia,serif;letter-spacing:.16em;color:#746954}
+#five-outro .five-outro-rule{height:1px;background:#b1a48e;margin:17px 0 31px}
+#five-outro .five-outro-status{font:11px/1.5 Georgia,serif;letter-spacing:.13em;color:#756956;margin:0 0 36px}
+#five-outro .five-outro-attachment{border:1px solid #bbaa91;padding:20px 23px;background:#eee5d3;box-shadow:3px 4px 0 #3e302222;opacity:0;animation:outro-reveal 3.4s steps(1,end) both}
+#five-outro .five-outro-attachment span{display:block;font:10px/1.5 Georgia,serif;letter-spacing:.15em;color:#675d50}
+#five-outro .five-outro-attachment strong{display:block;font:normal clamp(24px,4vw,35px)/1.18 Georgia,serif;margin:17px 0;color:#302720}
+#five-outro .five-outro-attachment em{font:11px/1.5 Georgia,serif;letter-spacing:.1em;font-style:normal;color:#735a50}
+#five-outro .five-outro-interruption{font:italic clamp(19px,3vw,26px)/1.35 Georgia,serif;color:#4a2529;margin:24px 0 0;text-align:right;opacity:0;animation:outro-voice 3.4s steps(1,end) both}
+@keyframes outro-screen{0%,90%{background:#151615}91%,93%{background:#ebe2d1}94%,100%{background:#080909}}
+@keyframes outro-paper{0%,89%{opacity:1;transform:rotate(-.5deg)}90%,92%{opacity:.8;transform:translate(-5px,3px) rotate(.3deg)}93%,100%{opacity:0}}
+@keyframes outro-reveal{0%,23%{opacity:0}24%,100%{opacity:1}}
+@keyframes outro-voice{0%,62%{opacity:0}63%,87%{opacity:1}88%,100%{opacity:0}}
+#completed .demo-end-label{font:10px/1.5 Georgia,serif;letter-spacing:.18em;color:#aaa39a;margin:40px auto 0}
+@media(prefers-reduced-motion:reduce){#five-outro,#five-outro .five-outro-sheet,#five-outro .five-outro-attachment,#five-outro .five-outro-interruption{animation:none!important}#five-outro .five-outro-attachment,#five-outro .five-outro-interruption{opacity:1!important}}
 </style>
 </head>
 <body>
@@ -1521,7 +1540,14 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 </div>
 </section>
 <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
-        <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button><aside class="beta-corner-note" aria-label="Demo message">this is a demo, tell me what all to change. thanks for playing fam. special thanks to my beta tester kushi who believes im not normal enough to make something normal &lt;3</aside>
+        <div class="kicker">THE MERIDIAN · ARCHIVE</div>
+        <div class="check" aria-hidden="true">⌁</div>
+        <h1 id="completed-title">There seems to be another file.</h1>
+        <p>Oh! That's... well, I thought we'd accounted for everything.</p>
+        <p>I'll have a look. Would you mind coming back when I've sorted this out?</p>
+        <p class="demo-end-label">END OF DEMO · MORE TO COME</p>
+        <button id="return-home" class="primary" type="button">Return to homepage</button>
+        <aside class="beta-corner-note" aria-label="Demo message">this is a demo, tell me what all to change. thanks for playing fam. special thanks to my beta tester kushi who believes im not normal enough to make something normal &lt;3</aside>
       </section>
     </main>
     <footer><span>© The Meridian · Independent Publishing</span><span>Established 1972</span></footer>
@@ -1529,6 +1555,19 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 
   <div id="transition-flash" aria-hidden="true"></div><div id="page-transition" aria-hidden="true"><div class="transition-sheet"><span id="transition-caption">OPENING FILE</span><div class="transition-mark">M.</div></div></div>
   <div id="five-interference" aria-hidden="true"><span data-text="What... is happening?">What... is happening?</span></div>
+  <div id="five-outro" class="five-outro" hidden aria-hidden="true">
+    <div class="five-outro-sheet">
+      <div class="five-outro-eyebrow">THE MERIDIAN · CASE M/97</div>
+      <div class="five-outro-rule"></div>
+      <p class="five-outro-status">CASE FACTS RECONSTRUCTED</p>
+      <div class="five-outro-attachment">
+        <span>ARCHIVE INDEX · ADDITIONAL ITEM</span>
+        <strong>The Death of the Ordinary Man</strong>
+        <em>EARLIER DRAFT · UNCATALOGUED</em>
+      </div>
+      <p class="five-outro-interruption">Wait. That's not—</p>
+    </div>
+  </div>
   <div id="directory-modal" class="directory-overlay" role="dialog" aria-modal="true" aria-label="Supplementary archival notes" hidden>
     <div class="directory-shell">
       <div class="directory-toolbar"><span>FIELD NOTES · RECOVERED MATERIAL</span><button id="directory-close" type="button">Close ×</button></div>
@@ -1900,10 +1939,11 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('dev-pass').addEventListener('click',()=>{
       if(!developerPreview)return;
       const current=document.getElementById('dev-level').value;
-      const next={home:'readOne',readOne:'level',level:'readTwo',readTwo:'two',two:'readThree',readThree:'three',three:'flashFour',readFour:'four',four:'flashFive',readFive:'five',five:'complete'};
+      const next={home:'readOne',readOne:'level',level:'readTwo',readTwo:'two',two:'readThree',readThree:'three',three:'flashFour',readFour:'four',four:'flashFive',readFive:'five',five:'flashOutro'};
       const destination=next[current];
       if(destination==='flashFour')flashToLevelFour();
       else if(destination==='flashFive')flashToLevelFive();
+      else if(destination==='flashOutro')flashAfterFive();
       else if(destination)show(destination,false);
     });
     document.getElementById('begin-four').addEventListener('click',()=>enterPuzzle('four','UNROLLING THE SURVEY'));
@@ -2117,7 +2157,20 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       }
     });
     renderCaseStage();
-    document.getElementById('five-continue').addEventListener('click',()=>show('complete'));
+    let fiveOutroPending=false;
+    function flashAfterFive(){
+      if(fiveOutroPending || (!developerPreview && document.getElementById('five-result').hidden))return;
+      fiveOutroPending=true;
+      const overlay=document.getElementById('five-outro');
+      overlay.hidden=false;
+      // A slow reveal of the uncatalogued earlier draft, not a second jumpscare.
+      window.setTimeout(()=>{
+        overlay.hidden=true;
+        show('complete');
+        fiveOutroPending=false;
+      },3400);
+    }
+    document.getElementById('five-continue').addEventListener('click',flashAfterFive);
     document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
     // New survey uses image pixels (1448 x 1086); Leaflet lat = 1086 - image y.
     const fourPhotos=[
