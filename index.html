@@ -1283,27 +1283,36 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five .desk-book-object strong{max-width:100%;font-size:clamp(26px,3.2vw,44px);line-height:1.18}
 #level-five .desk-slip-object strong{font-size:clamp(21px,2.5vw,30px);line-height:1.15}
 
-/* Audio-first reel after Level 5: captions, static and three actual distinct voices. */
-#five-outro[hidden]{display:none!important}
-#five-outro{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;box-sizing:border-box;overflow:auto;padding:clamp(15px,5vw,65px);background:radial-gradient(ellipse at 50% 40%,#25231e,#090b0d 75%);color:#ebe3d3}
-#five-outro::before{content:"";pointer-events:none;position:absolute;inset:0;opacity:.36;background:repeating-linear-gradient(0deg,#ffffff08 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,#13050608 0 3px,transparent 3px 6px);animation:outro-static .27s steps(3,end) infinite}
-#five-outro .five-outro-reel{position:relative;width:min(840px,100%);min-height:350px;box-sizing:border-box;padding:clamp(28px,5vw,56px);border-top:1px solid #6d685f;border-bottom:1px solid #403e3b;display:flex;flex-direction:column;justify-content:center;isolation:isolate}
-#five-outro .five-outro-head,#five-outro .five-outro-reel-foot{display:flex;justify-content:space-between;gap:15px;letter-spacing:.14em;font:10px/1.5 monospace;color:#b1a89a}
-#five-outro .five-outro-signal{display:flex;align-items:center;gap:13px;margin:30px 0 38px;font:11px/1 monospace;letter-spacing:.11em;color:#b9aca3}
-#five-outro .five-outro-pulse{height:8px;width:8px;background:#a14a4e;border-radius:50%;box-shadow:0 0 11px #9b3636;animation:outro-beat .7s steps(1,end) infinite}
-#five-outro .five-outro-wave{margin-left:auto;color:#736c6b;letter-spacing:.23em;white-space:nowrap;overflow:hidden}
-#five-outro .five-outro-speaker{font:11px/1.5 monospace;letter-spacing:.15em;color:#a89e8f;margin:0 0 14px}
-#five-outro .five-outro-caption{font:clamp(28px,4.6vw,52px)/1.33 Georgia,serif;letter-spacing:-.018em;color:#f1e7d4;margin:0;min-height:150px;text-wrap:balance;animation:outro-caption-flicker 2.6s steps(1,end) infinite}
-#five-outro.voice-narrator .five-outro-caption{color:#c18487;font-style:italic}
-#five-outro.voice-other .five-outro-caption{color:#d8a4a2;font-family:monospace;font-weight:600;letter-spacing:.025em;animation:outro-caption-glitch .45s steps(1,end) infinite}
-#five-outro .five-outro-reel-foot{padding-top:20px;border-top:1px solid #49413b;margin-top:16px}
-@keyframes outro-static{0%,100%{transform:translate(0,0)}50%{transform:translate(2px,-1px)}}
-@keyframes outro-beat{0%,58%,100%{opacity:1}59%,82%{opacity:.25}}
-@keyframes outro-caption-flicker{0%,93%,100%{opacity:1}94%,96%{opacity:.52}}
-@keyframes outro-caption-glitch{0%,49%,100%{transform:translate(0,0);text-shadow:0 0 0 transparent}50%{transform:translate(-2px,1px);text-shadow:2px 0 #b91d29,-2px 0 #14748e}52%{transform:translate(1px,0)}}
+/* 1986 and 2027: audio-led recovered-film interludes. The surround is pure black. */
+#five-outro[hidden],#five-outro #outro-dialogue[hidden],#five-outro #outro-title[hidden]{display:none!important}
+#five-outro{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;box-sizing:border-box;overflow:hidden;padding:clamp(16px,5vw,64px);background:#000!important;color:#fff}
+#five-outro::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0 3px,#ffffff08 4px 5px),linear-gradient(90deg,#000 0,#ffffff03 48%,#000 100%);opacity:.28;animation:outro-scanlines .37s steps(3,end) infinite}
+#five-outro .outro-film{position:relative;isolation:isolate;z-index:2;width:min(930px,100%);min-height:min(530px,82vh);box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(25px,4.4vw,54px);border-top:1px solid #393939;border-bottom:1px solid #242424}
+#five-outro .outro-film-top,#five-outro .outro-film-bottom{display:flex;gap:12px;justify-content:space-between;align-items:center;font:10px/1.5 monospace;letter-spacing:.17em;color:#8b8b8b}
+#five-outro .outro-film-top{min-height:22px}
+#five-outro .outro-film-bottom{min-height:22px}
+#five-outro .outro-film-title{text-align:center;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.24em;font:clamp(33px,5.2vw,66px)/1.18 Georgia,serif;color:#f5f5f5;text-shadow:0 0 3px #ffffff20;min-height:190px;letter-spacing:-.025em}
+#five-outro .outro-title-year{color:#bebebe;letter-spacing:-.045em}
+#five-outro .outro-title-redacted{font:700 .57em/1.3 monospace;letter-spacing:.095em;color:#eee;background:#160608;padding:.15em .35em;box-shadow:-3px 0 #c92f44,3px 0 #23718a;text-shadow:2px 0 #ad2136,-2px 0 #2a8eaf;animation:outro-redaction .63s steps(2,end) infinite}
+#five-outro .outro-film-dialogue{min-height:215px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:12px 0}
+#five-outro .outro-film-speaker{font:11px/1.5 monospace;letter-spacing:.2em;color:#aaa}
+#five-outro .outro-film-caption{font:clamp(30px,4.8vw,59px)/1.3 Georgia,serif;letter-spacing:-.018em;color:#fff;margin:0;text-wrap:balance;overflow-wrap:break-word;min-height:1.35em}
+#five-outro .outro-cursor{font:25px monospace;color:#a8a8a8;animation:outro-cursor-blink .65s steps(1,end) infinite}
+#five-outro.outro-narrator .outro-film-caption{font-family:monospace;font-weight:600;letter-spacing:.065em;color:#d5ced0;text-shadow:-3px 0 #1b8fa4,3px 0 #ae1c32;animation:outro-redaction .23s steps(2,end) infinite}
+#five-outro.outro-narrator .outro-film-speaker{color:#b95666}
+#five-outro.outro-unknown .outro-film-caption{font-family:monospace;font-weight:800;color:#e72637;letter-spacing:.015em;text-shadow:0 1px 10px #9f00009c,-3px 0 #680000,3px 0 #8c0d16;animation:outro-blood-glitch .24s steps(2,end) infinite}
+#five-outro.outro-unknown .outro-film-speaker{color:#cb4853}
+#five-outro.outro-unknown .outro-film-dialogue{position:relative}
+#five-outro.outro-unknown .outro-film-dialogue::before,#five-outro.outro-unknown .outro-film-dialogue::after{content:"";position:absolute;z-index:-1;pointer-events:none;opacity:.8;background:radial-gradient(ellipse at 12% 22%,#95030d 0 4px,transparent 5px),radial-gradient(ellipse at 80% 41%,#870b14 0 2px,transparent 4px),radial-gradient(ellipse at 31% 79%,#6c0007 0 5px,transparent 7px),radial-gradient(ellipse at 67% 12%,#95000e 0 3px,transparent 4px),radial-gradient(ellipse at 88% 86%,#93040c 0 6px,transparent 9px),radial-gradient(ellipse at 51% 53%,#5a0008aa 0 12px,transparent 24px);inset:-15px -30px;transform:rotate(-7deg)}
+#five-outro.outro-unknown .outro-film-dialogue::after{transform:scaleX(-1) rotate(9deg);opacity:.36;filter:blur(3px)}
+#five-outro.outro-blackout .outro-film{opacity:0}
+@keyframes outro-scanlines{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+@keyframes outro-redaction{0%,66%,100%{transform:translate(0,0) skewX(-2deg)}68%{transform:translate(-4px,1px) skewX(4deg)}75%{transform:translate(3px,-1px)}80%{transform:translate(0,0)}}
+@keyframes outro-blood-glitch{0%,68%,100%{transform:translate(0,0)}72%{transform:translate(-2px,2px)}78%{transform:translate(3px,-1px)}}
+@keyframes outro-cursor-blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 #completed .demo-end-label{font:10px/1.5 Georgia,serif;letter-spacing:.18em;color:#aaa39a;margin:40px auto 0}
-@media(max-width:650px){#five-outro .five-outro-reel{min-height:350px}#five-outro .five-outro-signal{margin:22px 0 32px}#five-outro .five-outro-caption{min-height:180px}#five-outro .five-outro-wave{max-width:104px}}
-@media(prefers-reduced-motion:reduce){#five-outro::before,#five-outro .five-outro-pulse,#five-outro .five-outro-caption{animation:none!important}}
+@media(max-width:700px){#five-outro .outro-film{min-height:420px;padding:24px 12px}#five-outro .outro-film-dialogue{min-height:225px}#five-outro .outro-film-title{min-height:180px}#five-outro .outro-film-top,#five-outro .outro-film-bottom{font-size:9px;letter-spacing:.07em}}
+@media(prefers-reduced-motion:reduce){#five-outro::before,#five-outro .outro-title-redacted,#five-outro .outro-film-caption,#five-outro .outro-cursor{animation:none!important}}
 </style>
 </head>
 <body>
@@ -1558,18 +1567,21 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 
   <div id="transition-flash" aria-hidden="true"></div><div id="page-transition" aria-hidden="true"><div class="transition-sheet"><span id="transition-caption">OPENING FILE</span><div class="transition-mark">M.</div></div></div>
   <div id="five-interference" aria-hidden="true"><span data-text="What... is happening?">What... is happening?</span></div>
-  <div id="five-outro" class="five-outro" hidden aria-hidden="true">
-    <div class="five-outro-reel" role="presentation">
-      <div class="five-outro-head">THE MERIDIAN · RECOVERED AUDIO <span id="outro-reel-id">01 / 02</span></div>
-      <div class="five-outro-signal"><span class="five-outro-pulse"></span> TAPE PLAYBACK <span class="five-outro-wave" aria-hidden="true">▂▃▇▅▁▃▆▂▅▃▇▁▅▂▃</span></div>
-      <p id="outro-speaker" class="five-outro-speaker">ARCHIVAL VOICE</p>
-      <p id="outro-caption" class="five-outro-caption"></p>
-      <div class="five-outro-reel-foot"><span>1997 / SIGNAL UNSTABLE</span><span id="outro-sequence">PLAYING</span></div>
+  <div id="five-outro" class="five-outro" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Recovered recordings">
+    <div class="outro-film">
+      <div class="outro-film-top"><span>THE MERIDIAN · RECOVERED RECORDING</span><span id="outro-reel-id">01 / 02</span></div>
+      <div id="outro-title" class="outro-film-title"></div>
+      <div id="outro-dialogue" class="outro-film-dialogue" hidden>
+        <span id="outro-speaker" class="outro-film-speaker"></span>
+        <p id="outro-caption" class="outro-film-caption" aria-live="off"></p>
+        <span class="outro-cursor" aria-hidden="true">▌</span>
+      </div>
+      <div class="outro-film-bottom"><span id="outro-signal">SIGNAL · UNSTABLE</span><span id="outro-timestamp">00:00</span></div>
     </div>
   </div>
   <audio id="outro-jane-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/1776ddbd05374fa480e92f0297bbc67e/id=021e9c5f-3e3b-4376-b4f9-147c7f62af36.wav" preload="auto"></audio>
   <audio id="outro-narrator-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/080f8e5cb3ae424989242b0efe5205e6/id=752a02a2-65d1-48c3-b73c-58e5b4e44139.wav" preload="auto"></audio>
-  <audio id="outro-other-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/a50b2b18a4bf49109caf46a3a6c6a08a/id=83d9d4cb-3374-440f-b205-1f7c51739a94.wav" preload="auto"></audio>
+  <audio id="outro-other-audio" src="https://resource2.heygen.ai/text_to_speech/ed2c7c2989ea4e6db5e644b969d4fa14/1803df59c37443789d2e4f71c82859a0/id=461e7c3c-5501-4482-a06f-c7c0e28d3843.wav" preload="auto"></audio>
   <div id="directory-modal" class="directory-overlay" role="dialog" aria-modal="true" aria-label="Supplementary archival notes" hidden>
     <div class="directory-shell">
       <div class="directory-toolbar"><span>FIELD NOTES · RECOVERED MATERIAL</span><button id="directory-close" type="button">Close ×</button></div>
