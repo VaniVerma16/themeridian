@@ -1908,7 +1908,16 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       btn.addEventListener('click',()=>{
         document.getElementById('case-extra-type').textContent=item.tag;
         document.getElementById('case-extra-title').textContent=item.title;
-        document.getElementById('case-extra-text').textContent=item.text;
+        const slipText=document.getElementById('case-extra-text');
+        slipText.replaceChildren();
+        const marker='[[REDACTED]]',redactionAt=item.text.indexOf(marker);
+        if(redactionAt>=0){
+          slipText.append(document.createTextNode(item.text.slice(0,redactionAt)));
+          const seal=document.createElement('span');
+          seal.className='archive-redaction';seal.textContent='██████████';
+          seal.setAttribute('aria-label','name redacted');
+          slipText.append(seal,document.createTextNode(item.text.slice(redactionAt+marker.length)));
+        }else slipText.textContent=item.text;
         document.getElementById('case-extra-view').hidden=false;
         extraHost.querySelectorAll('button').forEach((b,n)=>b.classList.toggle('selected',n===i));
       });extraHost.appendChild(btn);
