@@ -1249,7 +1249,11 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     <div class="case-center">
       <div class="case-view-toolbar"><span id="case-page-counter">DOCUMENT 01 / 04</span><div><button type="button" id="case-zoom-out" aria-label="Decrease document zoom">−</button><span id="case-zoom-label">100%</span><button type="button" id="case-zoom-in" aria-label="Increase document zoom">+</button></div></div>
       <div class="case-paper-viewport"><article id="case-active-document" class="case-paper" aria-live="polite"></article></div>
-      <div class="case-page-controls"><button type="button" id="case-prev">← Previous</button><button type="button" id="case-next">Next record →</button></div>
+      <div class="case-page-controls"><button type="button" id="case-prev">← Previous</button><button type="button" id="case-next">Next record →</button></div><div class="case-extras">
+ <div class="case-side-heading">LOOSE INSERTS · SELECT TO INSPECT</div>
+ <div class="case-extra-cards" id="case-extra-cards"></div>
+ <div class="case-extra-view" id="case-extra-view" hidden role="region" aria-live="polite"><small id="case-extra-type"></small><h3 id="case-extra-title"></h3><p id="case-extra-text"></p><button type="button" id="case-extra-close">Close insert ×</button></div>
+ </div>
       
     </div>
     <aside class="case-right" aria-label="Working notes and reconstruction">
@@ -1640,7 +1644,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "ref": "NEWS/97-01",
     "body": [
       "MERIDIAN CONSTABULARY — INFORMATION ISSUED TO LOCAL PRESS. Friday, 21 February 1997. The following statement was supplied to The Meridian's news desk. It does not constitute an investigating officer's report.",
-      "Police were called shortly after 06:40 this morning following the discovery of a man's body beside the eastern canal towpath near the former railway footbridge. Ambulance personnel attended. The man was pronounced dead at the scene.",
+      "Police were called shortly after 06:40 this morning following the discovery of a man's body on a pedestrian route in the eastern part of the district. The precise site was logged separately for the local news map. Ambulance personnel attended. The man was pronounced dead at the scene.",
       "The deceased had not been formally named when this statement was issued. The area has been examined and enquiries are continuing into the circumstances of the death. Anyone who used the canal access path on Thursday evening or during the early hours of Friday is asked to contact the local station.",
       "A police spokesperson said: 'It would be premature to speculate about the circumstances at this stage.' No cause or manner of death was announced.",
       "NEWSROOM ROUTING: Received by telephone and confirmed by written statement; filed for the next local edition."
@@ -1654,9 +1658,9 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "ref": "NEWS/97-02",
     "body": [
       "THE MERIDIAN — REPORTER'S BACKGROUND NOTES. Prepared following confirmation of the deceased's identity. Compiled from the published police identification notice, the paper's own past editions and information volunteered to the news desk. This is not a police property inventory.",
-      "The deceased has been identified publicly as Adam E., aged 27, of the Meridian district. The police notice requested that his family be given privacy while enquiries remained ongoing. His date of birth, 18 January 1970, is entered in the paper's biographical index.",
+      "The police issued a subsequent identification notice referring to a 27-year-old local man. The newsroom recorded the full identification in a separate indexing slip rather than in these general background notes.",
       "A search of The Meridian's bound volumes located a 1986 education feature on a successful regional school debate team. The clipping refers to a particularly promising young speaker; the reporter's handwritten index identifies him as Adam E. The retrospective relevance of this item has not been independently established.",
-      "Colleagues also located a September 1996 announcement in the weddings column naming Adam and his fiancée and describing their plans to marry. That cutting remained in the newspaper's own archive: it was not recovered from Adam's person.",
+      "Colleagues also located a September 1996 announcement in the weddings column naming Adam and his fiancée and describing their plans to marry.",
       "An earlier period of difficulties with alcohol was mentioned to the news desk by an acquaintance. The account was not accompanied by medical documentation and should be treated as background information rather than a verified description of his circumstances in February 1997."
     ],
     "note": "It's strange how old newspaper clippings turn up again. For this file, the important thing is that the identification is confirmed."
@@ -1682,14 +1686,38 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "ref": "NEWS/97-04",
     "body": [
       "THE MERIDIAN — NOTES FROM PUBLIC CORONER'S PROCEEDINGS. Prepared for the newspaper's court and local news desk. This is a reporter's account of evidence heard in public, not the complete post-mortem report or a confidential police file.",
-      "The deceased was identified at the proceedings as Adam E., aged 27. According to the medical evidence summarised for the hearing, death resulted from a blunt-force injury to the head. The evidence did not, on its own, establish how the injury had occurred.",
-      "The estimated time of death was described as between approximately 22:00 on Thursday 20 February and 02:00 on Friday 21 February 1997. The witness giving medical evidence cautioned that this was an estimate rather than a time confirmed by observation.",
+      "The deceased was identified at the proceedings by reference to the previously published identification notice. According to the medical evidence summarised for the hearing, the medical cause was recorded using the terminology in the coroner's medical summary, reproduced on a separate press terminology card. The evidence did not, on its own, establish how the injury had occurred.",
+      "The medical witness gave an estimated interval of death, transcribed in the court reporter's handwritten timing slip. The witness cautioned that this was an estimate rather than a time confirmed by observation.",
       "Questions surrounding Adam's movements before his death remained unresolved in the material reported by the newspaper. The notes did not record a medical conclusion as to whether the injury had resulted from an accident or another person's actions. Nor did they establish any intention on Adam's part.",
       "REPORTER'S MARGIN NOTE: This extract covers the medical testimony only. A copy of any formal determination should be checked against the coroner's office before wording a headline or final case summary. No complete determination is attached to this newsroom folder."
     ],
     "note": "The medical evidence gives us the cause and a useful interval. It doesn't answer every question, of course."
   }
 ];
+    const caseInserts=[
+      {tag:'IDENTIFICATION SLIP',title:'Index card 12/B',text:'Local news biographical register, revised 24 February 1997: the deceased was identified as Adam E., born 18 January 1970. His name also appears in the 1986 regional debate file. The register carries a cross-reference, not a police case determination.'},
+      {tag:'REPORTER\'S MAP KEY',title:'Location reference',text:'A map-marking note attached to the police press statement places the point of recovery beside the eastern canal towpath, close to the former railway footbridge. This is the location where the body was found, not necessarily where the injury occurred.'},
+      {tag:'COURT REPORTER\'S SLIP',title:'Medical time estimate',text:'Taken during the public hearing: probable interval of death, approximately 22:00 Thursday 20 February to 02:00 Friday 21 February 1997. This is not the time at which the body was discovered.'},
+      {tag:'PRESS TERMINOLOGY CARD',title:'Medical wording',text:'Notes for copy editors: “Fatal blunt-force head injury” describes the medical cause reported in the proceedings. It does not determine whether the death was accidental, self-inflicted or caused by someone else.'},
+      {tag:'WEDDINGS COLUMN',title:'September 1996',text:'A brief engagement announcement from the newsroom archive records Adam E. and his fiancée speaking of difficult years behind them and hoping for a quieter future. No direct information about the night of death is contained in the cutting.'},
+      {tag:'TELEPHONE MEMO',title:'Unverified enquiry',text:'An anonymous caller asked whether the deceased had been seen near the Prince Arthur in the preceding months. No date, identification or reliable first-hand account was provided. This was not published.'}
+    ];
+    const extraHost=document.getElementById('case-extra-cards');
+    caseInserts.forEach((item,i)=>{
+      const btn=document.createElement('button');btn.type='button';btn.className='case-extra-card';
+      const k=document.createElement('small');k.textContent=item.tag;const title=document.createElement('span');title.textContent=item.title;
+      btn.append(k,title);btn.addEventListener('click',()=>{
+        document.getElementById('case-extra-type').textContent=item.tag;
+        document.getElementById('case-extra-title').textContent=item.title;
+        document.getElementById('case-extra-text').textContent=item.text;
+        document.getElementById('case-extra-view').hidden=false;
+        extraHost.querySelectorAll('button').forEach((b,n)=>b.classList.toggle('selected',n===i));
+      });extraHost.appendChild(btn);
+    });
+    document.getElementById('case-extra-close').addEventListener('click',()=>{
+      document.getElementById('case-extra-view').hidden=true;
+      extraHost.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+    });
     let activeCaseFile=0,caseZoom=100;
     const caseTabs=document.getElementById('case-tabs');
     caseFiles.forEach((file,i)=>{
