@@ -1006,6 +1006,30 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five .case-desk-grid #desk-bulb svg{width:105px;height:93px}
 #level-five .case-desk-grid .bulb-glow{left:67px;top:39px;width:310px;height:255px}
 @media(max-width:680px){#level-five .case-desk-grid{padding-top:108px}#level-five .case-desk-grid .desk-lamp{top:5px;left:3px}}
+
+/* Level 2 corkboard: tangible clippings, pins and working-order positions. */
+#level-two{max-width:1080px}
+#level-two .assignment{max-width:none}
+#level-two .task-line{font-size:15px;line-height:1.45;margin:4px 0 16px}
+#level-two .corkboard-frame{background:linear-gradient(90deg,#6e4b31,#97683d 2%,#9b6a3f 98%,#68472f);padding:14px;border:1px solid #392619;box-shadow:0 6px 23px #0008,inset 0 0 7px #0008}
+#level-two .corkboard-label,#level-two .corkboard-bottom{font:10px Georgia,serif;letter-spacing:.12em;text-align:center;color:#f4d8aa;text-shadow:0 1px 2px #3d2618}
+#level-two .corkboard-label{padding:3px 0 11px}
+#level-two .corkboard-bottom{padding:11px 0 1px}
+#level-two .clipping-grid{margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;gap:17px;padding:26px 20px;background-color:#9d7950;background-image:radial-gradient(#6e4c2b78 .8px,transparent 1px),radial-gradient(#c59a6980 .8px,transparent 1px),linear-gradient(35deg,#a98257,#97704c);background-size:7px 7px,11px 11px,100%;border:3px solid #64472f;box-shadow:inset 0 0 25px #51351e55}
+#level-two .clipping-card{position:relative;display:flex;flex-direction:column;background:#e9dfca;color:#332e24;padding:17px 9px 12px;border:1px solid #b4a58c;box-shadow:3px 5px 5px #3927156b;transform:rotate(-1.5deg);transition:transform .16s,box-shadow .16s;min-width:0}
+#level-two .clipping-card:nth-child(2){transform:rotate(1.3deg)}
+#level-two .clipping-card:nth-child(3){transform:rotate(-.9deg)}
+#level-two .clipping-card:nth-child(4){transform:rotate(1.6deg)}
+#level-two .clipping-card:hover,#level-two .clipping-card.chosen{transform:translateY(-5px) rotate(0deg);z-index:3;box-shadow:5px 10px 13px #3b241b80}
+#level-two .clipping-card.dragging{opacity:.5;transform:rotate(4deg) scale(.98)}
+#level-two .clipping-card.drag-over{outline:3px dashed #f7e8c6;outline-offset:5px}
+#level-two .clipping-card img{width:100%;height:220px;object-fit:contain;object-position:center;background:#ded1b7;border:0;pointer-events:none}
+#level-two .cork-pin{position:absolute;top:4px;left:50%;width:12px;height:12px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 34% 27%,#e9a89b 0,#a44f3e 53%,#622d29 85%);box-shadow:1px 2px 2px #0009;z-index:2}
+#level-two .clipping-caption{color:#514330;font:12px/1.4 Georgia,serif;margin-top:10px;min-height:35px}
+#level-two .zoom-button{color:#5e4b39;border-color:#a89b86;margin-top:auto;align-self:start}
+#level-two #sort-feedback{margin:15px 0 10px}
+@media(max-width:800px){#level-two .clipping-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){#level-two .clipping-grid{grid-template-columns:1fr;padding:19px;gap:20px}#level-two .clipping-card img{height:260px}}
   </style>
 </head>
 <body>
@@ -1076,7 +1100,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 
         <div class="assignment">
           <p class="task-line">Drag the clippings into order, <strong>oldest to newest</strong>. Click “Enlarge” to inspect a clipping.</p>
-          <div class="clipping-grid" id="clipping-grid" aria-label="The Meridian newspaper clippings"></div>
+          <div class="corkboard-frame"><div class="corkboard-label">THE MERIDIAN · CLIPPINGS BOARD</div><div class="clipping-grid" id="clipping-grid" aria-label="The Meridian newspaper clippings"></div><div class="corkboard-bottom">DRAG OR SELECT TWO CLIPPINGS TO REARRANGE THEM</div></div>
           <p class="feedback" id="sort-feedback" role="status" aria-live="polite">Drag the clippings into chronological order.</p>
           <div class="actions"><button class="secondary" type="button" id="sort-reset">Reset order</button><button class="primary" type="button" id="sort-verify">Submit order</button></div>
         </div>
@@ -1453,6 +1477,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         const article=getArticle(id);
         const card=document.createElement('article');
         card.className='clipping-card';card.dataset.id=id;card.draggable=true;
+        const pin=document.createElement('span');pin.className='cork-pin';pin.setAttribute('aria-hidden','true');card.appendChild(pin);
         card.setAttribute('aria-label',`Position ${index+1}: ${article.title}. Drag to rearrange`);
         card.tabIndex=0;
         card.addEventListener('dragstart',e=>{draggedId=id;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',id)});
