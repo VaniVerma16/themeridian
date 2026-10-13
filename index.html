@@ -819,6 +819,8 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .four-record-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
 .four-record{min-width:0;border:1px solid #4b4d49;padding:12px;background:#1b1d1c}
 .four-record>img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#30312f}
+/* Mirror PH–01 consistently in the recovered-record cards and the puzzle. */
+.four-record>img.photo-mirrored{transform:scaleX(-1)}
 .four-record-ref{margin-top:12px;font:11px Georgia,serif;letter-spacing:.10em;color:#ada89f}
 .four-record h3{font:21px Georgia,serif;margin:7px 0 5px;color:#ebe6dc}
 .four-record-direction{font:13px Georgia,serif;color:#c0bbb3;margin:0 0 14px}
@@ -2478,7 +2480,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       fourGuesses.forEach((guess,i)=>{
         const item=fourPhotos[i];
         const record=document.createElement('article');record.className='four-record';
-        const image=document.createElement('img');image.src=item.file;image.alt='Recovered photograph '+item.ref;image.loading='lazy';record.appendChild(image);
+        const image=document.createElement('img');image.src=item.file;image.alt='Recovered photograph '+item.ref;image.loading='lazy';image.classList.toggle('photo-mirrored',i===0);record.appendChild(image);
         const ref=document.createElement('div');ref.className='four-record-ref';ref.textContent=item.ref+' · VERIFIED';record.appendChild(ref);
         const location=document.createElement('h3');location.textContent=guess.location;record.appendChild(location);
         const bearing=document.createElement('p');bearing.className='four-record-direction';bearing.textContent='Camera facing '+formatBearing(guess.bearing);record.appendChild(bearing);
