@@ -1027,6 +1027,18 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five .case-desk-grid .bulb-glow{left:44px;top:24px;width:230px;height:185px}
 #level-five .case-desk-grid .desk-plant{display:none!important}
 @media(max-width:680px){#level-five .case-desk-grid{padding-top:88px}#level-five .case-desk-grid .desk-lamp{top:-2px;left:-2px}}
+
+/* Desk corner note: one-time discovery, stays gone after being put down. */
+#level-five .case-desk-grid>.case-note-wrap{position:absolute;top:12px;right:145px;z-index:15;margin:0;min-height:0}
+#level-five .case-desk-grid>.case-note-wrap[hidden]{display:none!important}
+#level-five .case-folded-note{width:77px;height:51px;font-size:9px;padding:14px 5px 3px;transform:rotate(8deg)}
+#level-five .case-folded-note span:last-child{max-width:58px}
+#level-five .case-desk-grid>.case-note-wrap .case-archivist-note{position:absolute;left:auto;right:0;bottom:auto;top:62px;width:320px;padding:17px}
+#level-five .case-desk-grid>.case-note-wrap .case-archivist-note p{font-size:15px}
+#level-five .case-desk-grid .bulb-glow{left:44px;top:25px;width:210px;height:210px;transform:translate(-50%,-50%);background:radial-gradient(circle at center,#ffdd975e 0%,#f2c47624 29%,transparent 69%)}
+#level-five .case-desk-grid:not(.desk-lit) .bulb-glow{opacity:0}
+#level-five .case-desk-grid.desk-lit .bulb-glow{opacity:1}
+@media(max-width:680px){#level-five .case-desk-grid>.case-note-wrap{right:9px;top:10px}#level-five .case-desk-grid>.case-note-wrap .case-archivist-note{width:min(300px,calc(100vw - 85px))}}
   </style>
 </head>
 <body>
@@ -1209,6 +1221,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
   <div class="case-desk-grid" id="case-physical-desk">
     <div class="desk-grain" aria-hidden="true"></div>
     <div class="desk-lamp"><button type="button" id="desk-bulb" aria-label="Switch desk lamp on" aria-pressed="false" title="Toggle desk lamp"><span class="bulb-glow"></span><svg viewBox="0 0 170 150" width="170" height="150" aria-hidden="true"><ellipse cx="85" cy="125" rx="58" ry="18" fill="#17130f" opacity=".23"/><ellipse cx="85" cy="116" rx="47" ry="17" fill="#343a35" stroke="#1c211e" stroke-width="4"/><path d="M82 115L62 70L87 41" fill="none" stroke="#29312e" stroke-width="12" stroke-linecap="round"/><path d="M82 115L62 70L87 41" fill="none" stroke="#707871" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="70" r="10" fill="#4e5852" stroke="#232d28" stroke-width="3"/><path d="M68 22Q97 12 124 45L96 76Q68 56 68 22Z" fill="#434b45" stroke="#1d2521" stroke-width="4"/><path d="M98 71L120 45" stroke="#b6a98a" stroke-width="5"/><ellipse cx="109" cy="60" rx="7" ry="14" fill="#ceb97d" transform="rotate(44 109 60)"/></svg></button></div>
+    <div class="case-note-wrap"><button id="case-note-dismiss" class="case-folded-note" type="button" aria-expanded="false" aria-controls="case-archivist-note" aria-label="Open folded handwritten note"><span class="case-fold-corner"></span><span>handwritten note</span></button><div class="case-archivist-note" id="case-archivist-note" hidden><div class="case-tape" aria-hidden="true"></div><small>NOTE TO WHOEVER IS HANDLING THIS</small><p>I'm... pretty sure I've already reviewed these files?</p></div></div>
     <aside class="case-index" aria-label="Case file index">
       <div class="case-side-heading">LOOSE RECORDS · M/97</div>
       <div id="case-tabs" class="case-tabs" role="group" aria-label="Select a document"></div>
@@ -1218,7 +1231,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       <div class="case-view-toolbar"><span id="case-page-counter">DOCUMENT 01 / 04</span><div><button type="button" id="case-zoom-out" aria-label="Decrease document zoom">−</button><span id="case-zoom-label">100%</span><button type="button" id="case-zoom-in" aria-label="Increase document zoom">+</button></div></div>
       <div class="case-paper-viewport"><article id="case-active-document" class="case-paper" aria-live="polite"></article></div>
       <div class="case-page-controls"><button type="button" id="case-prev">← Previous</button><button type="button" id="case-next">Next record →</button></div>
-      <div class="case-note-wrap"><button id="case-note-dismiss" class="case-folded-note" type="button" aria-expanded="false" aria-controls="case-archivist-note" aria-label="Open folded handwritten note"><span class="case-fold-corner"></span><span>handwritten note</span></button><div class="case-archivist-note" id="case-archivist-note" hidden><div class="case-tape" aria-hidden="true"></div><small>NOTE TO WHOEVER IS HANDLING THIS</small><p>Something is very wrong. I don't remember starting work on this section again. I was sure I'd already finished reviewing these files?</p></div></div>
+      
     </div>
     <aside class="case-right" aria-label="Working notes and reconstruction">
       <section class="case-scratch"><div class="case-side-heading">NOTEPAD <span>Autosaved</span></div><textarea id="case-notepad" aria-label="Your private case notes" placeholder="Use this for taking down notes…" rows="7"></textarea></section>
@@ -1372,7 +1385,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         const puzzleThree=[...document.querySelectorAll('#answer-fields select')].map(el=>el.value);
         const gridMarks=[...document.querySelectorAll('.logic-cell')].map(el=>el.textContent);
         const draftFour=fourMarker?{lat:fourMarker.lat,lng:fourMarker.lng,bearing:Number(fourBearing.value)}:null;
-        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseFields:[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value),caseNoteOpen:!document.getElementById('case-archivist-note').hidden,caseVerified:!document.getElementById('five-result').hidden,caseLampOn:physicalDesk.classList.contains('desk-lit')}));
+        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseFields:[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value),caseNoteOpen:!document.getElementById('case-archivist-note').hidden,caseNoteDismissed,caseVerified:!document.getElementById('five-result').hidden,caseLampOn:physicalDesk.classList.contains('desk-lit')}));
       }catch(err){/* Browsers with storage disabled may still play normally. */}
     }
     function restoreSession(){
@@ -1391,7 +1404,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         if(Number.isInteger(data.caseFile))openCaseFile(data.caseFile);
         document.getElementById('case-zoom-label').textContent=caseZoom+'%';
         if(data.caseLampOn===true)lampButton.click();
-        if(data.caseNoteOpen)document.getElementById('case-note-dismiss').click();
+        if(data.caseNoteDismissed){caseNoteDismissed=true;document.querySelector('.case-note-wrap').hidden=true;}else if(data.caseNoteOpen)document.getElementById('case-note-dismiss').click();
         if(data.caseVerified){document.getElementById('case-form-panel').hidden=true;document.getElementById('five-result').hidden=false;}
         furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
         if(Array.isArray(data.fourGuesses))data.fourGuesses.slice(0,3).forEach((guess,i)=>{fourGuesses[i]=guess});
@@ -1682,7 +1695,13 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.getElementById('case-zoom-in').addEventListener('click',()=>{caseZoom=Math.min(140,caseZoom+10);openCaseFile(activeCaseFile);document.getElementById('case-zoom-label').textContent=caseZoom+'%'});
     document.getElementById('case-zoom-out').addEventListener('click',()=>{caseZoom=Math.max(80,caseZoom-10);openCaseFile(activeCaseFile);document.getElementById('case-zoom-label').textContent=caseZoom+'%'});
     document.getElementById('case-open-reconstruction').addEventListener('click',()=>document.getElementById('case-form-panel').scrollIntoView({behavior:'smooth',block:'center'}));
-    document.getElementById('case-note-dismiss').addEventListener('click',()=>{const note=document.getElementById('case-archivist-note');note.hidden=!note.hidden;document.getElementById('case-note-dismiss').setAttribute('aria-expanded',String(!note.hidden));});
+    let caseNoteDismissed=false;
+    document.getElementById('case-note-dismiss').addEventListener('click',()=>{
+      if(caseNoteDismissed)return;
+      const note=document.getElementById('case-archivist-note');
+      if(note.hidden){note.hidden=false;document.getElementById('case-note-dismiss').setAttribute('aria-expanded','true');}
+      else{note.hidden=true;caseNoteDismissed=true;document.querySelector('.case-note-wrap').hidden=true;safelySaveSession();}
+    });
     openCaseFile(0);
     const caseExpected=['Adam E.','East canal towpath','20 February 22:00 – 21 February 02:00','Fatal blunt-force head injury'];
     document.getElementById('five-finish').addEventListener('click',()=>{
