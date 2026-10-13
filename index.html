@@ -834,9 +834,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
   <div class="topline"></div>
   <div class="wrapper">
     <header id="full-header">
-      <div class="utility"><span>An independent publishing platform</span><span>Established 1985</span></div>
+      <div class="utility"><span>An independent publishing platform</span><span>Established 1972</span></div>
       <div class="masthead"><div class="brand">The Meridian</div><div class="tagline">Stories worth preserving</div></div>
-      <nav aria-label="Site navigation"><span>Research &amp; Preservation</span><span>Independent since 1985</span></nav>
+      <nav aria-label="Site navigation"><span>Research &amp; Preservation</span><span>Independent since 1972</span></nav>
     </header>
     <div id="mini-header" aria-label="The Meridian"><span class="mini-mark">M.</span><span class="mini-title">THE MERIDIAN</span></div>
     <nav id="player-history" aria-label="Previously visited sections" hidden>
@@ -866,7 +866,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         <h1 id="home-title">Help us bring a forgotten story back to life.</h1>
         <div class="small-rule"></div>
         <p class="lead">Hi! Thanks for visiting our website.</p>
-        <p class="copy">We are an independent publishing platform established in 1985 by U.N. Tor.</p>
+        <p class="copy">We are an independent publishing platform established in 1972 by U.N. Tor.</p>
         <p class="copy">We recently retrieved research documents compiled by our storytelling team while covering a sensational case from the 1990s. The case spanned multiple years and produced hundreds of documents, which we are currently sorting through.</p>
         <p class="copy">We need your help to make this revival project a success. More details will be shared as they become available.</p>
         <button id="get-started" class="primary" type="button">Get started</button>
@@ -929,7 +929,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
           </div>
           <div class="archive-key">
             <div class="archive-key-group"><span class="key-title">REPORTERS</span><div class="key-values"><span>Harriet</span><span>Jane</span><span>Elliot</span></div></div>
-            <div class="archive-key-group"><span class="key-title">PUBLICATION YEARS</span><div class="key-values"><span>1991</span><span>1994</span><span>1998</span></div></div>
+            <div class="archive-key-group"><span class="key-title">PUBLICATION YEARS</span><div class="key-values"><span>1986</span><span>1991</span><span>1998</span></div></div>
           </div>
           
           <div class="level-three-workbench"><div class="evidence-column">
@@ -939,10 +939,10 @@ body{overflow-x:clip;overscroll-behavior-x:none}
             <p>Found these in the old local-news box. I can remember some of the stories, at least.</p>
             <p>Jane wouldn't let us crop the photograph of the students holding their debate trophy. She'd spent all afternoon with their coach.</p>
             <p>I'm fairly sure the pesticide story went to press while we were still in our old office. We'd moved out by the beginning of 1992.</p>
-            <p>Harriet had left before the debate team story came in. She would have liked that one, I think.</p>
+            <p>Harriet only joined the paper after the debate team story was published. She would have liked that assignment, I think.</p>
             <p>Elliot came back from an assignment complaining that the bookshelves still smelled of fresh paint.</p>
             <p>The library feature ran two years before the new millennium. Hard to believe that was so long ago.</p>
-            <p>We pulled out the pesticide cutting again when we were preparing the school story; it was already an old clipping by then.</p>
+            <p>We pulled out the school debate cutting again while preparing the pesticide story; it had been in the archive for years by then.</p>
             <p class="memo-signoff">Hope that helps sort the records out.</p>
           </div>
           </div><div class="deduction-column">
@@ -1016,7 +1016,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         <div class="kicker">Assessment · 03</div><div class="check" aria-hidden="true">✓</div><h1 id="completed-title">Assessment complete.</h1><p>Perfect! See, I knew you'd get it. You're making my job a lot easier already.</p><p>That's all for now. We'll have more for you soon.</p><button id="return-home" class="primary" type="button">Return to homepage</button>
       </section>
     </main>
-    <footer><span>© The Meridian · Independent Publishing</span><span>Established 1985</span></footer>
+    <footer><span>© The Meridian · Independent Publishing</span><span>Established 1972</span></footer>
   </div>
 
   <div id="transition-flash" aria-hidden="true"></div>
@@ -1293,9 +1293,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     renderClippings();
     const sampleArticles=['Pesticides','School Debate Victory','Library Renovation'];
     const sampleReporters=['Harriet','Jane','Elliot'];
-    const sampleSections=['1991','1994','1998'];
+    const sampleSections=['1986','1991','1998'];
     const gridReporterOrder=['Jane','Elliot','Harriet'];
-    const gridYearOrder=['1998','1991','1994'];
+    const gridYearOrder=['1998','1986','1991'];
     const pairs=[['Stories × Reporters',sampleArticles,gridReporterOrder],['Stories × Years',sampleArticles,gridYearOrder],['Reporters × Years',gridReporterOrder,gridYearOrder]];
     function renderLogicGrid(){
       const host=document.getElementById('logic-grids');host.replaceChildren();
@@ -1337,7 +1337,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     document.getElementById('read-guide').addEventListener('click',()=>show('readThree'));
     document.getElementById('check-three').addEventListener('click',()=>{
       const selections=[...document.querySelectorAll('#answer-fields select')].map(x=>x.value);
-      const correct=['Harriet','1991','Jane','1994','Elliot','1998'];
+      const correct=['Harriet','1991','Jane','1986','Elliot','1998'];
       const f=document.getElementById('three-feedback');
       if(selections.every((v,i)=>v===correct[i])){flashToLevelFour()}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
     });
