@@ -1472,43 +1472,32 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         if(!AudioContextClass)return;
         if(!glitchAudioContext)glitchAudioContext=new AudioContextClass();
         const ctx=glitchAudioContext;
-        const schedule=()=>{
-          const start=ctx.currentTime+.015;
-          const duration=.60;
-          const compressor=ctx.createDynamicsCompressor();
-          compressor.threshold.value=-18;
-          compressor.knee.value=7;
-          compressor.ratio.value=5;
-          compressor.attack.value=.003;
-          compressor.release.value=.13;
-          compressor.connect(ctx.destination);
+        const play=()=>{
+          const start=ctx.currentTime+.01;
+          const duration=.36;
           const master=ctx.createGain();
-          master.gain.setValueAtTime(.0001,start);
-          master.gain.linearRampToValueAtTime(.6,start+.014);
-          master.gain.setValueAtTime(.6,start+.16);
-          master.gain.setValueAtTime(.15,start+.19);
-          master.gain.setValueAtTime(.58,start+.25);
-          master.gain.setValueAtTime(.12,start+.38);
-          master.gain.setValueAtTime(.5,start+.43);
-          master.gain.exponentialRampToValueAtTime(.0001,start+duration);
-          master.connect(compressor);
-          const noise=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*duration),ctx.sampleRate);
-          const samples=noise.getChannelData(0);
-          for(let i=0;i<samples.length;i++)samples[i]=Math.random()*2-1;
-          const source=ctx.createBufferSource();source.buffer=noise;
-          const highpass=ctx.createBiquadFilter();highpass.type='highpass';highpass.frequency.value=650;
-          const noiseGain=ctx.createGain();noiseGain.gain.value=.34;
-          source.connect(highpass);highpass.connect(noiseGain);noiseGain.connect(master);
-          source.start(start);source.stop(start+duration);
-          const tone=ctx.createOscillator();tone.type='sawtooth';
-          tone.frequency.setValueAtTime(340,start);
-          tone.frequency.exponentialRampToValueAtTime(95,start+duration);
-          const toneGain=ctx.createGain();toneGain.gain.value=.22;
-          tone.connect(toneGain);toneGain.connect(master);
-          tone.start(start);tone.stop(start+duration);
+          master.gain.setValueAtTime(0,start);
+          master.gain.linearRampToValueAtTime(.045,start+.012);
+          master.gain.setValueAtTime(.025,start+.07);
+          master.gain.setValueAtTime(.038,start+.13);
+          master.gain.setValueAtTime(.008,start+.18);
+          master.gain.setValueAtTime(.03,start+.24);
+          master.gain.linearRampToValueAtTime(0,start+duration);
+          master.connect(ctx.destination);
+          const buffer=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*duration),ctx.sampleRate);
+          const samples=buffer.getChannelData(0);
+          for(let i=0;i<samples.length;i++){
+            const t=i/ctx.sampleRate;
+            const pulse=(t<.045||(t>.112&&t<.15)||(t>.225&&t<.27))?1:.16;
+            samples[i]=(Math.random()*2-1)*pulse;
+          }
+          const noise=ctx.createBufferSource();noise.buffer=buffer;
+          const filter=ctx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=1450;
+          noise.connect(filter);filter.connect(master);
+          noise.start(start);noise.stop(start+duration);
         };
-        if(ctx.state==='running')schedule();
-        else ctx.resume().then(schedule).catch(()=>{});
+        if(ctx.state==='running')play();
+        else ctx.resume().then(play).catch(()=>{});
       }catch(error){console.warn('Glitch audio unavailable:',error);}
     }
     document.getElementById('dev-audio').addEventListener('click',playInterference);
