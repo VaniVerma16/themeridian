@@ -1180,10 +1180,13 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 #level-five #desk-case-panel .case-theory.selected{background:#d7dfd2;border-color:#465743}
 #level-five #desk-case-panel .case-stage-instruction{font-size:15px;line-height:1.65}
 
-#level-five .archive-redaction{display:inline-block;position:relative;color:#1d1717;background:#241c1b;padding:0 .28em;letter-spacing:-.08em;white-space:nowrap;line-height:1.1;filter:drop-shadow(1px 0 #9b2727)}
-#level-five .archive-redaction::after{content:'REDACTED';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#e7d8cc;background:#902b2b;font:700 9px/1 monospace;letter-spacing:.17em;clip-path:inset(30% 0 25% 0);animation:archive-flicker 4.9s steps(1,end) infinite}
-@keyframes archive-flicker{0%,89%,93%,100%{transform:translate(0,0);opacity:.95}90%{transform:translate(-3px,0);opacity:.7}91%{transform:translate(3px,-1px);opacity:1}92%{transform:translate(0,1px);opacity:.4}}
-@media(prefers-reduced-motion:reduce){#level-five .archive-redaction::after{animation:none}}
+/* Corrupted identity: intentionally out of place in the paper archive. */
+#level-five .archive-redaction{display:inline-block;position:relative;vertical-align:baseline;padding:.08em .42em .02em;margin:0 .08em;background:linear-gradient(180deg,#120d0d,#241515 45%,#0f0a0a);color:#0a0606;border:1px solid #611818;box-shadow:0 0 0 1px #160d0d inset,0 0 12px rgba(160,30,30,.35),2px 2px 0 rgba(0,0,0,.35);letter-spacing:-.08em;white-space:nowrap;line-height:1.05;overflow:hidden;isolation:isolate;transform:skewX(-3deg)}
+#level-five .archive-redaction::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.06) 0 1px,transparent 1px 3px),linear-gradient(90deg,rgba(255,0,0,.18),rgba(255,255,255,.04) 50%,rgba(0,170,255,.14));mix-blend-mode:screen;opacity:.45;animation:redaction-noise .18s steps(2,end) infinite;pointer-events:none;z-index:1}
+#level-five .archive-redaction::after{content:"REDACTED";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 9px/1 monospace;letter-spacing:.22em;color:#f0d9d9;text-shadow:-2px 0 rgba(255,0,0,.75),2px 0 rgba(0,200,255,.55),0 0 6px rgba(255,70,70,.35);background:rgba(128,18,18,.72);clip-path:polygon(0 8%,100% 0,100% 86%,0 100%);animation:redaction-glitch 1.2s infinite steps(2,end);pointer-events:none;z-index:2}
+@keyframes redaction-glitch{0%,14%,46%,54%,78%,84%,100%{transform:translate(0,0);opacity:.94}8%{transform:translate(-2px,1px)}10%{transform:translate(3px,-1px)}12%{transform:translate(-1px,0)}48%{transform:translate(4px,0);opacity:.72}50%{transform:translate(-3px,1px);opacity:1}52%{transform:translate(1px,-1px)}80%{transform:translate(-5px,0)}82%{transform:translate(2px,0)}}
+@keyframes redaction-noise{0%{transform:translateX(0);opacity:.35}50%{transform:translateX(1px);opacity:.5}100%{transform:translateX(-1px);opacity:.32}}
+@media(prefers-reduced-motion:reduce){#level-five .archive-redaction::before,#level-five .archive-redaction::after{animation:none}}
 </style>
 </head>
 <body>
