@@ -1058,6 +1058,23 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
 /* Dark borders around the four pinned newspaper clippings. */
 #level-two .clipping-card{border:2px solid #171512!important}
 #level-two .clipping-card img{border:1px solid #171512!important}
+
+/* Supplementary case inserts: actual loose paper cards, not default browser buttons. */
+#level-five .case-extras{padding:15px 0 4px;min-width:0}
+#level-five .case-extras>.case-side-heading{font:10px Georgia,serif;letter-spacing:.10em;color:#f0dfc8;margin-bottom:12px}
+#level-five .case-extra-cards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
+#level-five button.case-extra-card{box-sizing:border-box;display:flex!important;flex-direction:column;align-items:flex-start;justify-content:space-between;white-space:normal;min-width:0;min-height:111px;padding:13px 12px!important;background:#e5d8bb!important;border:1px solid #8e795c!important;color:#302920!important;text-align:left!important;box-shadow:2px 4px 7px #21140880!important;transform:rotate(-1deg);font-family:Georgia,serif!important}
+#level-five button.case-extra-card:nth-child(even){transform:rotate(1.2deg);background:#ded4bc!important}
+#level-five button.case-extra-card:hover,#level-five button.case-extra-card.selected{transform:translateY(-3px) rotate(0);outline:2px solid #f3e9d3}
+#level-five button.case-extra-card small{display:block;font:10px/1.3 Georgia,serif!important;letter-spacing:.07em;color:#6a5845!important;margin-bottom:10px}
+#level-five button.case-extra-card span{display:block;font:17px/1.3 Georgia,serif!important;color:#332a20!important;overflow-wrap:anywhere}
+#level-five .case-extra-view{background:#efe5cf;color:#342b21;border:1px solid #ac9678;padding:18px;margin-top:14px;box-shadow:3px 5px 9px #0006}
+#level-five .case-extra-view[hidden]{display:none!important}
+#level-five .case-extra-view small{font:10px Georgia,serif;letter-spacing:.1em;color:#675941}
+#level-five .case-extra-view h3{font:24px Georgia,serif;color:#30281e;margin:8px 0}
+#level-five .case-extra-view p{font:15px/1.6 Georgia,serif;color:#372d22}
+#level-five .case-extra-view button{font:13px Georgia,serif;color:#4b3a2a;background:none;border:0;text-decoration:underline;padding:5px 0}
+@media(max-width:650px){#level-five .case-extra-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#level-five button.case-extra-card{min-height:105px;padding:10px!important}}
 </style>
 </head>
 <body>
@@ -1672,7 +1689,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     "ref": "NEWS/97-03",
     "body": [
       "THE MERIDIAN — INTERVIEW NOTES, LOCAL NEWS DESK. Interview conducted on 24 February, written up on 25 February 1997. The interviewee agreed to speak about the canal route but did not wish to be named in print. These notes have not been endorsed by police.",
-      "The interviewee said they were returning towards Station Road late on Thursday 20 February when they noticed a man walking near the entrance to the canal path. They thought the man might have been in his twenties, but could not identify him as Adam E. from memory or from the newspaper's description.",
+      "The interviewee said they were returning towards Station Road late on Thursday 20 February when they noticed a man walking near the entrance to the canal path. They estimated that the man was in his twenties or early thirties. They did not recognise him and could not give any identifying details.",
       "Asked about the time, the interviewee said it was 'getting on for eleven', adding that they had not looked at a clock. They recalled the figure slowing or stumbling briefly. They could not say whether the path was uneven, whether the man had been drinking, or whether he was injured.",
       "The interviewee did not recall hearing a disturbance. When asked if anyone else was nearby, they replied that they could not be certain because visibility along the path was poor. Their account was passed to the reporter's editor for consideration and was not printed as an established account of Adam's movements.",
       "EDITORIAL CAUTION: The identification, exact time and condition of the man remain unconfirmed. The account is reproduced here because it may be relevant to a reconstruction of the night."
