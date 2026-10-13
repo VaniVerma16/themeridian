@@ -905,6 +905,54 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 .case-archivist-note.tucked p{display:none}
 @media(max-width:1080px){.case-desk-grid{grid-template-columns:170px minmax(0,1fr)}.case-right{grid-column:2}}
 @media(max-width:650px){.case-desk-grid{grid-template-columns:1fr}.case-index,.case-right{grid-column:1}.case-tabs{display:grid;grid-template-columns:repeat(2,1fr)}.case-paper-viewport{padding:9px}.case-paper{padding:23px 19px;min-height:340px}}
+
+/* Level 5: physical desktop layout */
+#level-five .case-desk{max-width:1560px;width:100%;box-sizing:border-box}
+#level-five .case-desk>h1{font-size:30px;margin:0 0 11px}
+#level-five .case-desk-grid{position:relative;isolation:isolate;display:grid;grid-template-columns:190px minmax(360px,1fr) 275px;gap:18px;align-items:start;overflow:visible;min-height:765px;padding:102px 23px 30px;background:repeating-linear-gradient(2deg,transparent 0,rgba(0,0,0,.028) 2px,transparent 4px,transparent 17px),linear-gradient(110deg,#71513c,#52392b 46%,#63432f);border:7px solid #382921;box-shadow:0 10px 28px #0008,inset 0 0 60px #21160f80}
+.case-desk-grid .desk-grain{position:absolute;inset:0;pointer-events:none;z-index:0;background:repeating-linear-gradient(0deg,transparent 0,transparent 11px,#23170f17 12px,transparent 14px)}
+.case-desk-grid::after{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;background:#080b0bca;transition:background .25s}
+.case-desk-grid.desk-lit::after{background:transparent}
+.case-desk-grid>.case-index,.case-desk-grid>.case-center,.case-desk-grid>.case-right{position:relative;z-index:2}
+.desk-lamp{position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;align-items:center;flex-direction:column;z-index:12;gap:0}
+.desk-cord{display:block;background:#1e1b16;width:3px;height:22px}
+#desk-bulb{position:relative;border:0;background:none;padding:0;line-height:0;cursor:pointer;filter:drop-shadow(0 2px 4px #0008)}
+#desk-bulb svg{position:relative;z-index:2}
+.bulb-glow{position:absolute;pointer-events:none;left:50%;top:57%;transform:translate(-50%,-50%);width:300px;height:260px;background:radial-gradient(ellipse,#ffdb8a7a 0,#ffc96d3b 29%,transparent 70%);transition:opacity .2s}
+.desk-lit #desk-bulb .bulb-glow{opacity:1}
+#desk-bulb .bulb-glow{opacity:0}
+.desk-lamp-label{font:9px Georgia,serif;letter-spacing:.12em;color:#e7d8ba;text-shadow:0 1px 3px #000;margin-top:5px}
+.case-desk-grid .case-index{background:#cfc0a0;border:0;box-shadow:3px 5px 10px #0006;transform:rotate(-3deg);padding:17px 12px 18px;margin-top:24px}
+.case-desk-grid .case-index .case-side-heading{color:#514637;font-size:10px}
+.case-desk-grid .case-tabs{display:flex;flex-direction:column;gap:7px}
+.case-desk-grid .case-tab{position:relative;background:#eee5cf;color:#302a23;border:1px solid #b0a18a;box-shadow:1px 2px 2px #0002;transform:rotate(1deg);padding:13px 9px;text-align:left}
+.case-desk-grid .case-tab:nth-child(even){transform:rotate(-2deg)}
+.case-desk-grid .case-tab small{color:#75634f}
+.case-desk-grid .case-tab.active{background:#fff5dc;color:#191914;border-color:#614c38;box-shadow:2px 3px 0 #59402b}
+.case-desk-grid .case-tab:hover{background:#fff8e6}
+.case-desk-grid .case-index-action{color:#493625;border-color:#9c8b72}
+.case-desk-grid .case-center{margin-top:11px;min-width:0}
+.case-desk-grid .case-paper-viewport{background:transparent;padding:12px;min-height:440px;overflow:auto}
+.case-desk-grid .case-paper{background:linear-gradient(145deg,#f4ebd8,#e1d6be);min-height:485px;box-shadow:2px 7px 15px #130e0a88;transform:rotate(.7deg);padding:37px 34px}
+.case-desk-grid .case-view-toolbar{background:#32251eab;padding:10px;color:#f4dfbb}
+.case-desk-grid .case-view-toolbar button,.case-desk-grid .case-page-controls button{background:#e7dbc3;color:#352b22;border:1px solid #8e775c}
+.case-desk-grid .case-page-controls{padding:12px;color:#f4dfbb}
+.case-desk-grid .case-right{gap:17px;margin-top:20px}
+.case-desk-grid .case-scratch{background:#f1e4bf;border:0;box-shadow:3px 5px 12px #0006;transform:rotate(2deg);padding:16px 13px 18px}
+.case-desk-grid .case-scratch .case-side-heading{color:#4c3b2c}
+.case-desk-grid .case-scratch .case-side-heading span{color:#766a58}
+.case-desk-grid #case-notepad{background:repeating-linear-gradient(to bottom,transparent 0,transparent 28px,#a9b2ac8a 29px,#a9b2ac8a 30px);border:0;border-left:2px solid #c69e8e;min-height:240px;line-height:30px;padding:0 9px;margin-top:7px;box-shadow:none;outline-offset:2px}
+.case-desk-grid .case-guidance{background:#e1d4bc;border:0;border-left:4px solid #9c8066;box-shadow:2px 4px 8px #0006;transform:rotate(-1.5deg);padding:15px}
+.case-desk-grid .case-guidance .case-side-heading{color:#625344}
+.case-desk-grid .case-guidance p{color:#44392e}
+.case-desk-grid #case-form-panel,.case-desk-grid #five-result{background:#e9e0cc;color:#29251e;border:0;box-shadow:3px 6px 13px #0007;transform:rotate(1deg);padding:17px}
+.case-desk-grid #case-form-panel .case-side-heading,.case-desk-grid #five-result small{color:#534a3e}
+.case-desk-grid .case-fields label{color:#504638}
+.case-desk-grid .case-fields select{background:#fff8e8;color:#29251e;border:1px solid #ac9d83}
+.case-desk-grid .case-feedback{color:#743a2e}
+.case-desk-grid .case-archivist-note{background:#ede0b9;box-shadow:3px 5px 12px #0007;transform:rotate(-2deg);margin-top:18px}
+@media(max-width:1120px){#level-five .case-desk-grid{grid-template-columns:155px minmax(0,1fr);padding:100px 16px 24px}.case-desk-grid .case-right{grid-column:2}}
+@media(max-width:680px){#level-five .case-desk-grid{grid-template-columns:1fr;gap:15px;padding:100px 12px 22px}.case-desk-grid .case-index,.case-desk-grid .case-center,.case-desk-grid .case-right{grid-column:1;transform:none;margin-top:0}.case-desk-grid .case-tabs{display:grid;grid-template-columns:repeat(2,1fr)}.case-desk-grid .case-paper{padding:22px 18px;transform:none}.case-desk-grid .case-scratch,.case-desk-grid .case-guidance,.case-desk-grid #case-form-panel{transform:none}}
   </style>
 </head>
 <body>
@@ -1084,9 +1132,9 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       <section id="level-five" class="level" aria-label="Original case file" hidden>
 <div class="assignment case-assignment case-desk">
   <h1>The Original Case File</h1>
-  <div class="case-desk-grid">
+  <div class="case-desk-grid desk-lit" id="case-physical-desk"><div class="desk-grain" aria-hidden="true"></div><div class="desk-lamp"><span class="desk-cord"></span><button type="button" id="desk-bulb" aria-label="Switch desk lamp off" aria-pressed="true" title="Toggle desk lamp"><span class="bulb-glow"></span><svg viewBox="0 0 48 74" width="48" height="74" aria-hidden="true"><path d="M14 5H34V17H14Z" fill="#68645a" stroke="#28251f" stroke-width="2"/><path d="M17 17H31V25H17Z" fill="#89847b" stroke="#28251f"/><path d="M9 43C9 30 15 24 24 24S39 30 39 43C39 54 33 57 31 61H17C15 57 9 54 9 43Z" fill="#f7dca0" stroke="#76664c" stroke-width="2"/><path d="M17 43l7 11 7-11" fill="none" stroke="#bd9055" stroke-width="2"/><path d="M18 62H30M18 66H30M20 70H28" stroke="#9b9586" stroke-width="3"/></svg></button><span class="desk-lamp-label">DESK LIGHT</span></div>
     <aside class="case-index" aria-label="Case file index">
-      <div class="case-side-heading">FILE M/97 · INDEX</div>
+      <div class="case-side-heading">LOOSE RECORDS · M/97</div>
       <div id="case-tabs" class="case-tabs" role="group" aria-label="Select a document"></div>
       <button id="case-open-reconstruction" class="case-index-action" type="button">Reconstruction sheet ↗</button>
     </aside>
@@ -1097,7 +1145,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       <div class="case-archivist-note" id="case-archivist-note"><div class="case-tape" aria-hidden="true"></div><small>NOTE TO WHOEVER IS HANDLING THIS</small><p>Something is very wrong. I don't remember starting work on this section again. I was sure I'd already finished reviewing these files. Please check the summaries carefully.</p><button id="case-note-dismiss" type="button">Tuck note away ×</button></div>
     </div>
     <aside class="case-right" aria-label="Working notes and reconstruction">
-      <section class="case-scratch"><div class="case-side-heading">YOUR NOTEPAD <span>Autosaved</span></div><textarea id="case-notepad" aria-label="Your private case notes" placeholder="Names, dates, contradictions…" rows="7"></textarea></section>
+      <section class="case-scratch"><div class="case-side-heading">NOTEPAD <span>Autosaved</span></div><textarea id="case-notepad" aria-label="Your private case notes" placeholder="Names, dates, contradictions…" rows="7"></textarea></section>
       <section id="case-guidance" class="case-guidance"><div class="case-side-heading">A FEW NOTES FROM YOURS TRULY</div><p id="case-narrator-note"></p></section>
       <section class="case-form" id="case-form-panel"><div class="case-side-heading">RECONSTRUCTION SHEET</div>
        <div class="case-fields">
@@ -1248,7 +1296,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         const puzzleThree=[...document.querySelectorAll('#answer-fields select')].map(el=>el.value);
         const gridMarks=[...document.querySelectorAll('.logic-cell')].map(el=>el.textContent);
         const draftFour=fourMarker?{lat:fourMarker.lat,lng:fourMarker.lng,bearing:Number(fourBearing.value)}:null;
-        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseFields:[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value),caseNoteTucked:document.getElementById('case-archivist-note').classList.contains('tucked'),caseVerified:!document.getElementById('five-result').hidden}));
+        localStorage.setItem(SESSION_KEY,JSON.stringify({version:1,section,furthestSection,sortOrder:[...sortOrder],markedTranscript:[...markedTranscript],puzzleThree,gridMarks,fourCurrent,fourGuesses,fourVerified,draftFour,caseFile:activeCaseFile,caseZoom,caseNotepad:document.getElementById('case-notepad').value,caseFields:[...document.querySelectorAll('#level-five [data-case]')].map(x=>x.value),caseNoteTucked:document.getElementById('case-archivist-note').classList.contains('tucked'),caseVerified:!document.getElementById('five-result').hidden,caseLampOn:physicalDesk.classList.contains('desk-lit')}));
       }catch(err){/* Browsers with storage disabled may still play normally. */}
     }
     function restoreSession(){
@@ -1266,6 +1314,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         if(Number.isInteger(data.caseZoom))caseZoom=Math.min(140,Math.max(80,data.caseZoom));
         if(Number.isInteger(data.caseFile))openCaseFile(data.caseFile);
         document.getElementById('case-zoom-label').textContent=caseZoom+'%';
+        if(data.caseLampOn===false)lampButton.click();
         if(data.caseNoteTucked)document.getElementById('case-note-dismiss').click();
         if(data.caseVerified){document.getElementById('case-form-panel').hidden=true;document.getElementById('five-result').hidden=false;}
         furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
@@ -1492,6 +1541,14 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       document.getElementById('case-next').disabled=activeCaseFile===caseFiles.length-1;
       paper.style.fontSize=caseZoom+'%';
     }
+    const physicalDesk=document.getElementById('case-physical-desk');
+    const lampButton=document.getElementById('desk-bulb');
+    lampButton.addEventListener('click',()=>{
+      const lit=physicalDesk.classList.toggle('desk-lit');
+      lampButton.setAttribute('aria-pressed',String(lit));
+      lampButton.setAttribute('aria-label',lit?'Switch desk lamp off':'Switch desk lamp on');
+      safelySaveSession();
+    });
     document.getElementById('case-prev').addEventListener('click',()=>openCaseFile(activeCaseFile-1));
     document.getElementById('case-next').addEventListener('click',()=>openCaseFile(activeCaseFile+1));
     document.getElementById('case-zoom-in').addEventListener('click',()=>{caseZoom=Math.min(140,caseZoom+10);openCaseFile(activeCaseFile);document.getElementById('case-zoom-label').textContent=caseZoom+'%'});
