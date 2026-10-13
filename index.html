@@ -1720,10 +1720,39 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       {tag:'TELEPHONE MEMO',title:'Unverified enquiry',text:'An anonymous caller asked whether the deceased had been seen near the Prince Arthur in the preceding months. No date, identification or reliable first-hand account was provided. This was not published.'}
     ];
     const extraHost=document.getElementById('case-extra-cards');
+    // Inline critical layout so the evidence inserts retain their paper appearance
+    // even if an earlier legacy stylesheet rule conflicts with this section.
+    extraHost.style.setProperty('display','grid','important');
+    extraHost.style.gridTemplateColumns='repeat(2,minmax(0,1fr))';
+    extraHost.style.gap='12px';
     caseInserts.forEach((item,i)=>{
       const btn=document.createElement('button');btn.type='button';btn.className='case-extra-card';
       const k=document.createElement('small');k.textContent=item.tag;const title=document.createElement('span');title.textContent=item.title;
-      btn.append(k,title);btn.addEventListener('click',()=>{
+      btn.append(k,title);
+      btn.style.setProperty('display','flex','important');
+      btn.style.setProperty('flex-direction','column','important');
+      btn.style.setProperty('justify-content','space-between','important');
+      btn.style.setProperty('background','#e8dec8','important');
+      btn.style.setProperty('color','#30291e','important');
+      btn.style.setProperty('border','1px solid #8d7b60','important');
+      btn.style.setProperty('padding','15px 14px','important');
+      btn.style.setProperty('width','100%','important');
+      btn.style.setProperty('min-height','112px','important');
+      btn.style.setProperty('text-align','left','important');
+      btn.style.setProperty('white-space','normal','important');
+      btn.style.setProperty('box-shadow','2px 4px 8px #1e140b77','important');
+      btn.style.setProperty('box-sizing','border-box','important');
+      btn.style.setProperty('font-family','Georgia,serif','important');
+      btn.style.setProperty('transform',i%2?'rotate(1deg)':'rotate(-1deg)','important');
+      k.style.setProperty('display','block','important');
+      k.style.setProperty('font','10px/1.3 Georgia,serif','important');
+      k.style.setProperty('letter-spacing','.07em','important');
+      k.style.setProperty('color','#6d604e','important');
+      k.style.setProperty('margin-bottom','12px','important');
+      title.style.setProperty('display','block','important');
+      title.style.setProperty('font','17px/1.25 Georgia,serif','important');
+      title.style.setProperty('color','#30291e','important');
+      btn.addEventListener('click',()=>{
         document.getElementById('case-extra-type').textContent=item.tag;
         document.getElementById('case-extra-title').textContent=item.title;
         document.getElementById('case-extra-text').textContent=item.text;
