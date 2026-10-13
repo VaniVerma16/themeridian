@@ -2261,17 +2261,27 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     document.addEventListener('pointerdown',unlockInterferenceAudio,{once:true});
     document.addEventListener('keydown',unlockInterferenceAudio,{once:true});
     // Fast, click-triggered, deliberately corrupted analogue/digital audio sting.
-    // Schedule nodes within the same user gesture: never await AudioContext.resume().
-    // A compressor contains the transient so the distortion is intense, not dangerously loud.
+    // Schedule the video glitch against the audio output clock, not the click clock.
+    // This prevents iOS/mobile audio startup latency from causing a silent flash.
     let glitchNoiseBuffer=null;
-    function playInterference(){
+    function playInterference(onAudibleStart){
       try{
         const AudioContextClass=window.AudioContext||window.webkitAudioContext;
-        if(!AudioContextClass)return;
+        if(!AudioContextClass){if(onAudibleStart)onAudibleStart();return;}
         if(!glitchAudioContext)glitchAudioContext=new AudioContextClass();
         const ctx=glitchAudioContext;
-        if(ctx.state==='suspended')ctx.resume().catch(()=>{});
-        const t=ctx.currentTime+.005;
+        // An AudioContext may be suspended after backgrounding the app. Wait for
+        // its actual resumed state before scheduling BOTH sides of the effect.
+        if(ctx.state!=='running'){
+          ctx.resume().then(()=>{
+            if(ctx.state==='running')playInterference(onAudibleStart);
+            else if(onAudibleStart)onAudibleStart();
+          }).catch(()=>{if(onAudibleStart)onAudibleStart()});
+          return;
+        }
+        // A short shared scheduling lead gives the audio hardware time to queue
+        // the harsh onset before the CSS frame is painted.
+        const t=ctx.currentTime+.075;
         const end=t+INTERFERENCE_SECONDS;
 
         const limiter=ctx.createDynamicsCompressor();
@@ -2356,7 +2366,23 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         impactGain.gain.exponentialRampToValueAtTime(.0001,t+.35);
         impact.connect(impactGain);impactGain.connect(master);
         impact.start(t);impact.stop(t+.35);
-      }catch(error){console.warn('Interference audio unavailable:',error);}
+
+        if(onAudibleStart){
+          // getOutputTimestamp relates AudioContext's clock to real output time.
+          // When unavailable (notably on some iOS versions), use base/output
+          // latency as a conservative fallback for the same audible onset.
+          const stamp=typeof ctx.getOutputTimestamp==='function'?ctx.getOutputTimestamp():null;
+          const audioLead=(t-ctx.currentTime)*1000;
+          let visualDelay=audioLead+((ctx.baseLatency||0)+(ctx.outputLatency||0))*1000;
+          if(stamp && stamp.performanceTime>0 && Number.isFinite(stamp.contextTime)){
+            visualDelay=stamp.performanceTime+(t-stamp.contextTime)*1000-performance.now();
+          }
+          window.setTimeout(onAudibleStart,Math.max(0,Math.min(350,visualDelay)));
+        }
+      }catch(error){
+        console.warn('Interference audio unavailable:',error);
+        if(onAudibleStart)onAudibleStart();
+      }
     }
     document.getElementById('dev-audio').addEventListener('click',()=>{if(developerPreview)playInterference()});
     let fiveFlashPending=false;
@@ -2364,14 +2390,19 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       if(fiveFlashPending)return;
       fiveFlashPending=true;
       const overlay=document.getElementById('five-interference');
-      overlay.classList.add('active');
-      // Both audio and animation start in the original click handler.
-      playInterference();
-      window.setTimeout(()=>{
+      // Audio is unlocked during earlier gestures; if the browser suspended it,
+      // wait for resume and schedule both against the same hardware clock.
+      playInterference(()=>{
         overlay.classList.remove('active');
-        show(developerPreview?'readFive':'complete');
-        fiveFlashPending=false;
-      },INTERFERENCE_SECONDS*1000);
+        // Restart the CSS animation on every replay, without altering its length.
+        void overlay.offsetWidth;
+        overlay.classList.add('active');
+        window.setTimeout(()=>{
+          overlay.classList.remove('active');
+          show(developerPreview?'readFive':'complete');
+          fiveFlashPending=false;
+        },INTERFERENCE_SECONDS*1000);
+      });
     }
     // Physical desk: the objects are the navigation. Only one workspace opens at a time.
     const deskOverlay=document.getElementById('desk-overlay');
