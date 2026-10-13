@@ -1688,10 +1688,13 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         if(data.caseVerified){document.getElementById('case-form-panel').hidden=true;document.getElementById('five-result').hidden=false;}
         if(Number.isInteger(data.slipIndex))slipIndex=Math.max(0,Math.min(5,data.slipIndex));
         if(['book','slips','pad','case'].includes(data.deskOpen))openDeskView(data.deskOpen);
-        furthestSection=Math.max(0,Math.min(developerPreview?progressOrder.length-1:progressOrder.indexOf('four'),Number(data.furthestSection)||0));
+        furthestSection=Math.max(0,Math.min(progressOrder.length-1,Number(data.furthestSection)||0));
+        // Continue old public-demo saves into the newly released fifth assessment.
+        const legacyDemoEnd=data.section==='complete' && data.caseVerified!==true;
+        if(legacyDemoEnd)furthestSection=Math.max(furthestSection,progressOrder.indexOf('readFive'));
         if(data.mapVersion===LEVEL_FOUR_MAP_VERSION&&Array.isArray(data.fourGuesses))data.fourGuesses.slice(0,3).forEach((guess,i)=>{fourGuesses[i]=guess});
         if(data.mapVersion===LEVEL_FOUR_MAP_VERSION&&Number.isInteger(data.fourCurrent)&&data.fourCurrent>=0&&data.fourCurrent<3){fourCurrent=data.fourCurrent;renderFourPhoto();}
-        const section=progressOrder.includes(data.section)&&progressOrder.indexOf(data.section)<=furthestSection?data.section:'home';
+        const section=legacyDemoEnd?'readFive':progressOrder.includes(data.section)&&progressOrder.indexOf(data.section)<=furthestSection?data.section:'home';
         show(section,false);
         if(data.mapVersion===LEVEL_FOUR_MAP_VERSION&&data.draftFour&&section==='four'&&window.L)requestAnimationFrame(()=>{if(!fourLeaflet)ensureFourMap();if(fourLeaflet){updateFourMarker(data.draftFour.lat,data.draftFour.lng);fourBearing.value=String(data.draftFour.bearing||0);updateBearing();if(data.fourVerified){fourVerified=true;document.getElementById('four-next').textContent=fourCurrent===2?'Review reconstructed records':'Next photograph';}}});
       }catch(err){show('home',false);}
@@ -1716,7 +1719,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
     const historyNames={home:'Home',readOne:'Level 1 introduction',level:'Level 1',readTwo:'Level 2 introduction',two:'Level 2',readThree:'Level 3 introduction',three:'Level 3',readFour:'Level 4 introduction',four:'Level 4',readFive:'Level 5 introduction',five:'Level 5'};
     function canRevisit(section){
       const index=progressOrder.indexOf(section);
-      return index>=0 && (developerPreview || (index<=furthestSection && section!=='readFive' && section!=='five'));
+      return index>=0 && (developerPreview || index<=furthestSection);
     }
     function refreshHistory(current){
       historySelect.replaceChildren();
@@ -1750,7 +1753,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       },320);
     }
     function show(section,recordProgress=true){
-      if(!developerPreview && (section==='five'||section==='readFive'))section='complete';
+      // All five assessments are publicly playable; the progress guard below still applies.
       // Untrusted navigation (history, manually changed dropdown, or restored view)
       // must not advance progress. Forward story transitions explicitly record progress.
       if(!recordProgress && !canRevisit(section))return;
@@ -1904,7 +1907,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
       else if(destination)show(destination,false);
     });
     document.getElementById('begin-four').addEventListener('click',()=>enterPuzzle('four','UNROLLING THE SURVEY'));
-    document.getElementById('begin-five').addEventListener('click',()=>{if(developerPreview)enterPuzzle('five','OPENING CASE DOSSIER')});
+    document.getElementById('begin-five').addEventListener('click',()=>enterPuzzle('five','OPENING CASE DOSSIER'));
     const caseFiles=[
   {
     "type": "NEWSROOM RESEARCH NOTES",
@@ -2419,7 +2422,7 @@ body:has(#level-five:not([hidden])),body:has(#read-five:not([hidden])){
         overlay.classList.add('active');
         window.setTimeout(()=>{
           overlay.classList.remove('active');
-          show(developerPreview?'readFive':'complete');
+          show('readFive');
           fiveFlashPending=false;
         },INTERFERENCE_SECONDS*1000);
       });
