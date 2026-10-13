@@ -779,6 +779,12 @@ body{overflow-x:clip;overscroll-behavior-x:none}
 @keyframes five-words{0%,14%,30%,48%,69%,90%{color:#b42b32}8%,23%,39%,59%,82%,96%{color:#f4f0e9}}
 @media(prefers-reduced-motion:reduce){#five-interference.active span{animation:none;color:#f4f0e9}}
 #dev-pass{font:12px Georgia,serif;padding:5px 9px;border:1px solid #777;background:transparent;color:inherit;white-space:nowrap}
+
+#player-history[hidden]{display:none!important}
+#player-history{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:5px 0 9px;font:12px Georgia,serif;color:#bab8b1}
+#history-select{font:13px Georgia,serif;color:#e9e5dd;background:#242626;border:1px solid #555953;max-width:220px;padding:5px 7px}
+#level-four .four-instructions{font:15px/1.5 Georgia,serif;color:#c6c3bc;margin:7px 0 5px}
+#level-four .four-notes-lead{font:italic 14px/1.35 Georgia,serif;color:#c9c5bb;margin:10px 0 0}
   </style>
 </head>
 <body>
@@ -790,6 +796,10 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       <nav aria-label="Site navigation"><span>Research &amp; Preservation</span><span>Independent since 1985</span></nav>
     </header>
     <div id="mini-header" aria-label="The Meridian"><span class="mini-mark">M.</span><span class="mini-title">THE MERIDIAN</span></div>
+    <nav id="player-history" aria-label="Previously visited sections" hidden>
+      <label for="history-select">Revisit</label>
+      <select id="history-select" aria-label="Revisit a previous level or introduction"></select>
+    </nav>
     <!-- TEMPORARY DEVELOPER NAVIGATION: remove for public demo -->
     <aside id="dev-navigation" aria-label="Developer level navigation">
       <span class="dev-tag">DEV PREVIEW</span>
@@ -909,14 +919,14 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       </section>
       <section id="level-four" class="level" aria-label="Photographic archive" hidden>
         <div class="assignment four-assignment">
-          <div class="four-topline"><div><h1>A Life in Three Acts</h1></div></div>
+          <div class="four-topline"><div><h1>A Life in Three Acts</h1><p class="four-instructions">Examine each photograph. Place the camera on the town survey map and rotate its arrow to show which direction the photographer faced. Check your position before moving on.</p></div></div>
           <div class="four-workspace">
             <div class="four-photograph-col">
               <div class="four-photo-frame" id="four-photo-frame">
                 <img id="four-photo-img" alt="Recovered archive photograph" hidden>
                 <div id="four-photo-placeholder" class="four-photo-placeholder"><span>PHOTOGRAPH A</span><strong>Image pending</strong><small>Awaiting original photographic scan</small></div>
               </div>
-              <button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Open supplementary notes</span><span aria-hidden="true">↗</span></button>
+              <p class="four-notes-lead">Here are some extra notes for you, hope they help!</p><button id="directory-open" class="directory-trigger" type="button" aria-haspopup="dialog" aria-controls="directory-modal"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Open supplementary notes</span><span aria-hidden="true">↗</span></button>
               <div class="four-bearing"><div><label for="four-bearing">Camera direction</label><output id="four-bearing-output">North · 0°</output></div><input type="range" id="four-bearing" min="0" max="350" step="10" value="0"><div class="four-bearing-ends"><span>N</span><span>E</span><span>S</span><span>W</span><span>N</span></div></div><div class="four-controls"><p id="four-feedback" role="status" aria-live="polite">Select a point on the map to record your estimate.</p><button class="primary" type="button" id="four-next" disabled>Save estimate</button></div>
             </div>
             <div class="four-map-col">
@@ -1075,14 +1085,32 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     const modal=document.getElementById('modal');
     const modalTitle=document.getElementById('modal-title');
     const modalImage=document.getElementById('modal-image');
-    function show(section){
+    const progressOrder=['home','readOne','level','readTwo','two','readThree','three','readFour','four','readFive','five','complete'];
+    let furthestSection=0;
+    const historySelect=document.getElementById('history-select');
+    const historyNav=document.getElementById('player-history');
+    const historyNames={home:'Home',readOne:'Level 1 introduction',level:'Level 1',readTwo:'Level 2 introduction',two:'Level 2',readThree:'Level 3 introduction',three:'Level 3',readFour:'Level 4 introduction',four:'Level 4',readFive:'Level 5 introduction',five:'Level 5'};
+    function refreshHistory(current){
+      historySelect.replaceChildren();
+      const index=progressOrder.indexOf(current);
+      progressOrder.slice(0,furthestSection+1).forEach((section,i)=>{
+        if(section==='complete'||i===index)return;
+        const option=document.createElement('option');option.value=section;option.textContent=historyNames[section]||section;historySelect.appendChild(option);
+      });
+      historyNav.hidden=furthestSection===0||historySelect.options.length===0;
+      if(!historyNav.hidden)historySelect.selectedIndex=-1;
+    }
+    function show(section,recordProgress=true){
+      if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
+      refreshHistory(section);
       window.scrollTo({top:0,left:0,behavior:'instant'});
       if(section==='four')requestAnimationFrame(()=>ensureFourMap());
     }
-
+    historySelect.addEventListener('change',e=>{if(progressOrder.indexOf(e.target.value)<=furthestSection)show(e.target.value)});
+    
     function getArticle(id){return articles.find(a=>a.id===id)}
 
     function openModal(article){
@@ -1196,7 +1224,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       sampleArticles.forEach((article,i)=>{
         const row=document.createElement('div');row.className='answer-row';
         const title=document.createElement('strong');title.textContent=article;row.append(title);
-        [sampleReporters,sampleSections].forEach((options,j)=>{const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose year':'Choose reporter';select.appendChild(empty);options.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
+        [sampleReporters,sampleSections].forEach((options,j)=>{const select=document.createElement('select');select.dataset.article=String(i);select.dataset.kind=String(j);const empty=document.createElement('option');empty.value='';empty.textContent=j?'Choose year':'Choose reporter';select.appendChild(empty);[...options].sort(()=>Math.random()-.5).forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});row.appendChild(select)});
         host.appendChild(row);
       });
     }
@@ -1209,7 +1237,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       const f=document.getElementById('three-feedback');
       if(selections.every((v,i)=>v===correct[i])){flashToLevelFour()}else{f.textContent='Not quite! Have another look at the editorial notes. I know you can work it out.';f.classList.add('error')}
     });
-    document.getElementById('dev-level').addEventListener('change',e=>show(e.target.value));
+    document.getElementById('dev-level').addEventListener('change',e=>show(e.target.value,false));
     // DEV ONLY — bypass puzzles while preserving scripted transitions. Remove before release.
     document.getElementById('dev-pass').addEventListener('click',()=>{
       const current=document.getElementById('dev-level').value;
@@ -1217,7 +1245,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       const destination=next[current];
       if(destination==='flashFour')flashToLevelFour();
       else if(destination==='flashFive')flashToLevelFive();
-      else if(destination)show(destination);
+      else if(destination)show(destination,false);
     });
     document.getElementById('begin-four').addEventListener('click',()=>show('four'));
     document.getElementById('begin-five').addEventListener('click',()=>show('five'));
@@ -1252,7 +1280,7 @@ body{overflow-x:clip;overscroll-behavior-x:none}
       const pic=document.getElementById('four-photo-img');const placeholder=document.getElementById('four-photo-placeholder');
       pic.hidden=true;placeholder.hidden=false;placeholder.querySelector('span').textContent='PHOTOGRAPH '+item.label;
       pic.onload=()=>{pic.hidden=false;placeholder.hidden=true};pic.onerror=()=>{pic.hidden=true;placeholder.hidden=false};
-      pic.src=item.file;
+      pic.src=item.file;updatePhotoNote();
       fourVerified=false;fourBearing.value='0';updateBearing();fourMarker=null;if(fourCameraMarker){fourCameraMarker.remove();fourCameraMarker=null;}
       document.getElementById('four-location-name').textContent='Not placed';
       document.getElementById('four-feedback').textContent='Place the camera on the street plan.';
@@ -1268,7 +1296,8 @@ body{overflow-x:clip;overscroll-behavior-x:none}
         const expected=fourPhotos[fourCurrent].answer;
         const distance=Math.hypot(fourMarker.lat-expected.lat,fourMarker.lng-expected.lng);
         const heading=Math.abs(((Number(fourBearing.value)-expected.bearing+540)%360)-180);
-        const locationOK=distance<=190, directionOK=heading<=100;
+        const locationOK=fourCurrent===0?(fourMarker.lng>=210&&fourMarker.lng<=445&&fourMarker.lat>=385&&fourMarker.lat<=585):distance<=190;
+        const directionOK=fourCurrent===0?(Number(fourBearing.value)<=125||Number(fourBearing.value)>=345):heading<=100;
         if(!locationOK||!directionOK){
           feedback.textContent=(!locationOK&&!directionOK)?'Not quite. Recheck the landmark and the direction of the road.':(!locationOK?'The direction looks plausible, but try another position.':'You found the right area. Rotate the camera to face the landmark.');
           feedback.classList.add('error');
@@ -1289,16 +1318,13 @@ body{overflow-x:clip;overscroll-behavior-x:none}
     });
     const directoryModal=document.getElementById('directory-modal');
     let directoryReturnFocus=null;
-    document.getElementById('directory-content').innerHTML=[
-      '<p class="directory-kicker">THE MERIDIAN · SUPPLEMENTARY FIELD NOTES</p>',
-      '<h2>Recovered notes</h2>',
-      '<p>These loose observations were found with the photographic survey. They were never entered into the main catalogue.</p>',
-      '<div class="directory-rule"></div>',
-      '<p><strong>01 / The shopping street.</strong> The photographer seems to have stood looking towards the clock tower. It is visible at the far end of the street, beyond a row of shops.</p>',
-      '<p><strong>02 / Commercial frontage.</strong> The tall modern block stood opposite older houses and small shops. A filling station appears farther along the same road.</p>',
-      '<p><strong>03 / Corner building.</strong> Apparently someone on the team got a bit distracted by the Prince Arthur while documenting the area. I suppose everyone deserves a break! The photograph was kept with the street survey anyway.</p>',
-      '<p><em>Locations should be checked against the town survey before the files are catalogued.</em></p>'
-    ].join('');
+    const photoNotes=[
+      '<p class="directory-kicker">FIELD NOTE · PH–01</p><h2>The shopping street</h2><p>The photographer seems to have stood along the shopping street, facing the clock tower at the far end. Look for the approach to Market Square.</p>',
+      '<p class="directory-kicker">FIELD NOTE · PH–02</p><h2>Commercial frontage</h2><p>The taller modern building faced an older row of shops and houses. A filling station stood further along Station Road, past the commercial frontage.</p>',
+      '<p class="directory-kicker">FIELD NOTE · PH–03</p><h2>A small distraction</h2><p>Someone from the team apparently got a little distracted by the Prince Arthur while photographing the area. I suppose everyone deserves a break! The building stood at the corner of Albert Road.</p>'
+    ];
+    function updatePhotoNote(){document.getElementById('directory-content').innerHTML=photoNotes[fourCurrent];}
+    updatePhotoNote();
     document.getElementById('directory-folio').textContent='01';
     function closeDirectory(){directoryModal.hidden=true;if(directoryReturnFocus&&directoryReturnFocus.focus)directoryReturnFocus.focus()}
     document.getElementById('directory-open').addEventListener('click',()=>{directoryReturnFocus=document.activeElement;directoryModal.hidden=false;document.getElementById('directory-close').focus()});
