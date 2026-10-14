@@ -1,0 +1,227 @@
+/* THE MERIDIAN — DEVELOPMENT-ONLY EDITORIAL REDESIGN
+   Scoped to body.dev-newsprint, applied exclusively when ?dev=1.
+   Newspaper first, digital interface second. Does not change public demo. */
+body.dev-newsprint{
+  --paper:#e9dfc8;--ink:#241d17;--muted:#6b5b4c;--rule:#a99b82;
+  --card:#e9dec5;--green:#48594d;--red:#883f40;--blue:#6a7075;
+  background:#c9b99d!important;color:#29231d;
+  font-family:Georgia,'Times New Roman',serif;
+  background-image:repeating-linear-gradient(0deg,#3e261009 0 1px,transparent 1px 4px),
+    radial-gradient(ellipse at 18% 9%,#d6c8ac 0,transparent 50%),
+    radial-gradient(ellipse at 90% 88%,#ae9976 0,transparent 60%)!important;
+}
+body.dev-newsprint .topline{height:5px;background:#332920}
+body.dev-newsprint .wrapper{
+  max-width:1280px;margin:24px auto 34px;padding:0 clamp(19px,4.4vw,75px) 30px;
+  background:#eee4d0;
+  background-image:radial-gradient(#543e2511 .45px,transparent .5px),
+    linear-gradient(92deg,#fff9eb55,transparent 24%,#66503509 100%);
+  background-size:6px 6px,100% 100%;
+  box-shadow:0 2px 1px #fff9e16a inset,0 1px 2px #28190d62,0 15px 55px #34271955;
+  border:1px solid #b5a58b;position:relative;
+}
+body.dev-newsprint .wrapper::before{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid #9b8c7329;z-index:0}
+body.dev-newsprint .wrapper>*{position:relative}
+body.dev-newsprint #full-header{padding-top:19px;display:block}
+body.dev-newsprint #full-header .utility{
+  border-top:1px solid #42362c;border-bottom:1px solid #42362c;
+  padding:8px 1px;color:#534a3b;font:700 10px/1.2 Georgia,serif;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+body.dev-newsprint #full-header .masthead{
+  padding:18px 0 19px;margin:0;border-bottom:5px double #352c23;position:relative;
+}
+body.dev-newsprint #full-header .masthead::before{
+  content:"EST. 1972  •  INDEPENDENT";position:absolute;left:0;top:52%;transform:translateY(-50%);
+  font:700 10px/1.5 Georgia,serif;letter-spacing:.06em;color:#665546;
+  border-top:1px solid #877762;border-bottom:1px solid #877762;padding:8px 3px;max-width:105px;text-align:center;
+}
+body.dev-newsprint #full-header .masthead::after{
+  content:"ARCHIVE ISSUE  •  2027";position:absolute;right:0;top:52%;transform:translateY(-50%);
+  font:700 10px/1.5 Georgia,serif;letter-spacing:.06em;color:#665546;
+  border-top:1px solid #877762;border-bottom:1px solid #877762;padding:8px 3px;max-width:105px;text-align:center;
+}
+body.dev-newsprint #full-header .brand{
+  font:900 clamp(55px,8.2vw,116px)/.88 'Times New Roman',Georgia,serif;
+  letter-spacing:-.095em;text-transform:uppercase;font-variant:small-caps;
+  color:#251e18;text-shadow:1px 1px #f9f1dd,2px 2px #88765d22;
+}
+body.dev-newsprint #full-header .tagline{
+  margin-top:10px;color:#605444;font:italic 14px Georgia,serif;
+  text-transform:none;letter-spacing:.04em;
+}
+body.dev-newsprint #full-header nav{
+  padding:11px 3px 12px;border-bottom:1px solid #45392c;
+  font:700 10px Georgia,serif;letter-spacing:.14em;color:#483b2f;
+}
+body.dev-newsprint #full-header nav span:last-child{color:#5a4e3e}
+body.dev-newsprint #mini-header{background:#e9dfc8!important;color:#29221b!important;border-color:#8b7e65!important}
+body.dev-newsprint #mini-header .mini-title,body.dev-newsprint #mini-header .mini-mark{font-family:Georgia,serif;color:#30271e!important}
+body.dev-newsprint #player-history{
+  background:#e5d8bc!important;border:1px solid #95866f!important;box-shadow:none!important;
+  font:10px Georgia,serif!important;letter-spacing:.05em;
+}
+body.dev-newsprint #player-history *{color:#352c24!important}
+body.dev-newsprint #player-history .history-menu{background:#f1e5ce!important;border-color:#8a785f!important}
+body.dev-newsprint #home.hero{
+  text-align:left;max-width:none;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(230px,.72fr);
+  column-gap:40px;row-gap:0;margin:32px 0 52px;padding:25px 0 42px;
+  border-bottom:5px double #514538;position:relative;
+}
+body.dev-newsprint #home.hero[hidden]{display:none!important}
+body.dev-newsprint #home.hero::before{
+  content:"ARCHIVE PROJECT  /  PUBLIC INVITATION";
+  display:block;grid-column:1/-1;border-bottom:1px solid #998b76;padding-bottom:11px;
+  font:700 10px Georgia,serif;letter-spacing:.14em;color:#5a4a3a;margin-bottom:22px;
+}
+body.dev-newsprint #home .kicker{grid-column:1/-1;letter-spacing:.1em;font:700 12px Georgia,serif;color:#7c493e;text-transform:uppercase}
+body.dev-newsprint #home h1{grid-column:1;grid-row:3 / span 5;align-self:start;
+  font:700 clamp(46px,5.9vw,80px)/.97 'Times New Roman',Georgia,serif;
+  letter-spacing:-.065em;color:#241d18;margin:14px 0 0;
+  border-right:1px solid #ad9c80;padding-right:29px;max-width:780px;
+}
+body.dev-newsprint #home .small-rule{display:none}
+body.dev-newsprint #home .lead{
+  grid-column:2;grid-row:3;font:italic 20px/1.4 Georgia,serif;
+  border-top:3px solid #3b3126;margin:15px 0 16px;padding-top:14px;color:#4e3f33;
+}
+body.dev-newsprint #home .copy{grid-column:2;max-width:none;margin:0 0 17px;
+  font:15px/1.62 Georgia,serif;color:#42372a;text-align:left}
+body.dev-newsprint #home #get-started{grid-column:2;justify-self:start;align-self:end;min-width:0;margin:3px 0 0}
+body.dev-newsprint .primary{
+  background:#30271e;color:#f2e7d3;border:1px solid #30271e;border-radius:0;
+  box-shadow:3px 3px 0 #a89b83;padding:13px 21px;
+  font:700 11px Georgia,serif;letter-spacing:.115em;text-transform:uppercase;
+}
+body.dev-newsprint .primary:hover{background:#673e35;color:#fff4e5;transform:translateY(-1px)}
+body.dev-newsprint .primary:focus-visible,body.dev-newsprint button:focus-visible{outline:2px solid #9d503f;outline-offset:3px}
+body.dev-newsprint .secondary,body.dev-newsprint .zoom-button{font-family:Georgia,serif;color:#584638}
+body.dev-newsprint .reading-page{
+  max-width:980px;min-height:60vh;margin:0 auto;padding:44px 0 85px;
+  background:transparent!important;
+}
+body.dev-newsprint .reading-inner{max-width:850px!important;
+  background:transparent!important;border-top:5px double #493b2c;padding:24px clamp(0px,3vw,38px)!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint .reading-inner::before{content:"EDITORIAL CIRCULAR  /  OFFICE OF THE MERIDIAN";
+  display:block;color:#895345;font:700 10px Georgia,serif;letter-spacing:.16em;
+  border-bottom:1px solid #968771;padding-bottom:12px;margin-bottom:24px}
+body.dev-newsprint .reading-page h1{
+  font:700 clamp(40px,5vw,67px)/1.01 'Times New Roman',Georgia,serif;
+  letter-spacing:-.045em;color:#2e251c;text-align:left;margin:15px 0 28px;
+}
+body.dev-newsprint .reading-page .reading-copy p,body.dev-newsprint .reading-page .narrator-letter p{
+  font:17px/1.82 Georgia,serif;color:#3d3227;text-align:left;
+}
+body.dev-newsprint .reading-page .reading-copy{max-width:690px;margin:0;column-rule:1px solid #ac9c83}
+body.dev-newsprint .level:not(.six-screen){
+  max-width:1150px;margin:40px auto 68px;min-height:60vh;
+}
+body.dev-newsprint .level:not(.six-screen) .assignment{
+  max-width:1100px;
+}
+body.dev-newsprint .level:not(.six-screen) .assignment-title{
+  border-top:4px double #423529;border-bottom:1px solid #786956;
+  padding:12px 0;color:#3a2d24;
+}
+body.dev-newsprint .level:not(.six-screen) .assignment-title h2{
+  font:700 25px/1.15 'Times New Roman',Georgia,serif;letter-spacing:-.035em;
+}
+body.dev-newsprint .level-header{border-bottom:5px double #4c3e30}
+body.dev-newsprint .level h1{font-family:'Times New Roman',Georgia,serif;font-weight:700;letter-spacing:-.055em}
+body.dev-newsprint .level-intro,body.dev-newsprint .assignment p{font-family:Georgia,serif}
+body.dev-newsprint .instruction-box{
+  border:1px solid #a39478;border-left:4px solid #654638;
+  background:#e3d6bd;color:#45382b;box-shadow:none;font-family:Georgia,serif;
+}
+body.dev-newsprint .clipping-card,body.dev-newsprint .sort-card{
+  border-radius:0;background:#e9ddc4;border:1px solid #9e8e77;
+  box-shadow:3px 5px 0 #76634d22;transform:rotate(-.35deg);
+}
+body.dev-newsprint .clipping-card:nth-child(2n){transform:rotate(.45deg)}
+body.dev-newsprint .clipping-card:hover,body.dev-newsprint .sort-card:hover{
+  transform:rotate(0deg) translateY(-2px);box-shadow:4px 7px 0 #76634d2f
+}
+body.dev-newsprint .clipping-caption,body.dev-newsprint .sort-text p{color:#4f4031;font-family:Georgia,serif}
+body.dev-newsprint .sort-text h3{font:700 22px/1.12 Georgia,serif;color:#33281f}
+body.dev-newsprint .modal-panel{background:#eee1c7;color:#33271f;border:3px double #544637;border-radius:0}
+body.dev-newsprint .close-modal{background:#ded0b5;border:1px solid #87755f;color:#30261c}
+body.dev-newsprint footer{
+  border-top:5px double #4e4032;border-bottom:1px solid #665741;
+  margin-bottom:12px;color:#665544;font:700 10px Georgia,serif;
+}
+body.dev-newsprint #completed{background:transparent;color:#35281f}
+body.dev-newsprint #completed h1{font:700 clamp(38px,5vw,66px)/1.05 'Times New Roman',serif}
+body.dev-newsprint #completed p{color:#594739}
+body.dev-newsprint #dev-navigation{
+  position:fixed;background:#2b241e!important;border:1px solid #ab9980!important;
+  color:#e8dcc7;box-shadow:5px 7px 24px #0005;border-radius:0;font-family:Georgia,serif;
+}
+body.dev-newsprint #dev-level{background:#1b1713;color:#eee1cc;border:1px solid #a48b69;border-radius:0}
+/* Keep hands-on puzzles usable: retain visual affordances and the deliberately
+   distinct case-desk, survey-map and corrupted-original styles. */
+body.dev-newsprint #level-one .assignment{max-width:750px}
+body.dev-newsprint #level-one .grid{background:#b8ab95;border:1px solid #8c7c69}
+body.dev-newsprint #level-one .target{background:#dfd2b8;color:#352c21;border:1px solid #8c806e;border-radius:0}
+body.dev-newsprint #level-two .clipping-grid{margin-top:30px}
+body.dev-newsprint #level-three .level-header{color:#30241e}
+body.dev-newsprint #level-four .assignment{max-width:1300px}
+body.dev-newsprint #level-five .case-desk>h1{font:700 49px/1 Georgia,serif;color:#37261c;
+  padding-bottom:17px;border-bottom:4px double #76614b}
+body.dev-newsprint #level-five .case-assignment .case-desk-grid{font-family:Georgia,serif}
+body.dev-newsprint #level-five .case-desk-grid{max-width:100%}
+/* Horror era: the newspaper remains underneath, but its identity deteriorates
+   into ink-dark charred sheets and red editorial marks. */
+body.dev-newsprint.blood-era{--paper:#170e10;--ink:#eddbd3;--rule:#7b3946;--muted:#b28a8e;
+  background:#15080c!important;
+  background-image:repeating-linear-gradient(0deg,#0007 0 1px,transparent 1px 5px),
+    radial-gradient(ellipse at 90% 20%,#4f111e,transparent 56%)!important}
+body.dev-newsprint.blood-era .wrapper{
+  background:#1c1113;background-image:radial-gradient(#b4838910 .5px,transparent .6px),
+    radial-gradient(ellipse at 93% 10%,#4d1627,transparent 59%);
+  border-color:#58313a;box-shadow:0 16px 70px #000b;
+}
+body.dev-newsprint.blood-era #full-header .utility,
+body.dev-newsprint.blood-era #full-header nav{color:#ac8a8d;border-color:#793d49}
+body.dev-newsprint.blood-era #full-header .masthead{border-color:#8f4654}
+body.dev-newsprint.blood-era #full-header .brand{color:#edd3ce;text-shadow:3px 3px #601528}
+body.dev-newsprint.blood-era #full-header .tagline,
+body.dev-newsprint.blood-era #full-header .masthead::before,
+body.dev-newsprint.blood-era #full-header .masthead::after{color:#b7888e;border-color:#804452}
+body.dev-newsprint.blood-era footer{color:#bc9398;border-color:#7b3c4b}
+body.dev-newsprint.blood-era #home h1,body.dev-newsprint.blood-era #home .lead,
+body.dev-newsprint.blood-era #home .copy,body.dev-newsprint.blood-era .kicker,
+body.dev-newsprint.blood-era #home::before{color:#edcecb;border-color:#854350}
+body.dev-newsprint.blood-era .reading-inner{border-color:#964759}
+body.dev-newsprint.blood-era .reading-inner::before{color:#de96a0;border-color:#8a4250}
+body.dev-newsprint.blood-era .reading-page h1,
+body.dev-newsprint.blood-era .reading-page .reading-copy p{color:#e8d3cd}
+body.dev-newsprint.blood-era #completed h1{color:#f2dbd9}
+body.dev-newsprint.blood-era #completed p{color:#caa6ac}
+body.dev-newsprint.blood-era #player-history{background:#251216!important;border-color:#874457!important}
+body.dev-newsprint.blood-era #player-history *{color:#e5c9cd!important}
+body.dev-newsprint.blood-era .six-screen{color:#e8d5d1}
+body.dev-newsprint.blood-era .six-paper{background:linear-gradient(120deg,#e3d0b1,#c4a993);color:#36231f}
+body.dev-newsprint.blood-era #dev-navigation{background:#251019!important;border-color:#984259!important}
+@media(max-width:950px){
+ body.dev-newsprint #full-header .masthead::before,body.dev-newsprint #full-header .masthead::after{display:none}
+ body.dev-newsprint #home.hero{grid-template-columns:1fr;gap:12px}
+ body.dev-newsprint #home.hero::before,body.dev-newsprint #home .kicker,body.dev-newsprint #home h1,
+ body.dev-newsprint #home .lead,body.dev-newsprint #home .copy,body.dev-newsprint #home #get-started{grid-column:1;grid-row:auto}
+ body.dev-newsprint #home h1{border-right:0;border-bottom:1px solid #a99980;padding:0 0 23px}
+ body.dev-newsprint #home .lead{border-top:0}
+}
+@media(max-width:600px){
+ body.dev-newsprint .wrapper{margin:0;padding:0 16px 20px}
+ body.dev-newsprint #full-header .masthead{padding:21px 0 17px}
+ body.dev-newsprint #full-header .brand{font-size:clamp(45px,12vw,70px)}
+ body.dev-newsprint #full-header .utility{font-size:8px;letter-spacing:.08em}
+ body.dev-newsprint #full-header nav{font-size:8px;letter-spacing:.02em}
+ body.dev-newsprint #home.hero{margin:20px 0 50px;padding:9px 0 30px}
+ body.dev-newsprint #home h1{font-size:clamp(42px,10vw,65px)}
+ body.dev-newsprint .reading-page{padding:25px 0 65px}
+ body.dev-newsprint .reading-inner{padding:18px 1px!important}
+ body.dev-newsprint .reading-page h1{font-size:42px}
+ body.dev-newsprint #level-five .case-desk>h1{font-size:35px}
+}
