@@ -36,6 +36,7 @@
      else button.removeAttribute('aria-current');
    });
    setPage('six');
+   window.MeridianDesktop?.beginNavigation('six');
  }
  document.querySelectorAll('#level-six [data-retro-tab]').forEach(function(button){
    button.addEventListener('click',function(){openTab(button.getAttribute('data-retro-tab'))});
