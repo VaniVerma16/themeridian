@@ -232,7 +232,20 @@
     }
     // Let dev-only website navigation reach the same trusted route that
     // the original game buttons use, preserving progress and save state.
-    if(developerPreview)window.MeridianGame={show};
+    if(developerPreview)window.MeridianGame={
+      show,
+      // Authoritative callbacks for the two real Continue buttons.
+      // Exposing the existing flow prevents a duplicate/stale handler from
+      // leaving the player stuck inside a modal or results page.
+      continueFromFour:()=>flashToLevelFive(),
+      continueFromFive:()=>flashAfterFive(),
+      dismissSixWarning:()=>{
+        const dialog=document.getElementById('six-warning');
+        dialog.hidden=true;
+        document.body.classList.remove('six-intro-lock');
+        document.getElementById('six-title').focus({preventScroll:true});
+      }
+    };
     document.getElementById('six-warning-continue').addEventListener('click',()=>{
       const dialog=document.getElementById('six-warning');
       dialog.hidden=true;
