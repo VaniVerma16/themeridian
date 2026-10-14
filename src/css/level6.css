@@ -1013,3 +1013,48 @@ body.blood-era #six-warning-continue:hover{
  #level-six.six-flicker .six-paper,
  #level-six.six-flicker .six-sidebar{animation:none!important}
 }
+
+
+/* The corrupted edition is allowed to swallow the newspaper's ordinary
+   framing, but ONLY while the unreleased developer Level 6 is visible. */
+body.blood-era:has(#level-six:not([hidden])),
+body.blood-era:has(#sixAfter:not([hidden])){
+  background:#0b080b!important;color:#e7d5d1!important;
+}
+body.blood-era:has(#level-six:not([hidden])) .topline,
+body.blood-era:has(#sixAfter:not([hidden])) .topline{
+  background:repeating-linear-gradient(90deg,#38050c 0 36px,#781426 39px 43px,#230308 46px 78px)!important;
+}
+body.blood-era:has(#level-six:not([hidden])) header,
+body.blood-era:has(#sixAfter:not([hidden])) header{
+  background:#130f11!important;border-color:#6b2632!important;color:#e3cecb!important;
+}
+body.blood-era:has(#level-six:not([hidden])) header .masthead,
+body.blood-era:has(#sixAfter:not([hidden])) header .masthead{
+  border-color:#75303b!important;
+}
+body.blood-era:has(#level-six:not([hidden])) header .brand,
+body.blood-era:has(#sixAfter:not([hidden])) header .brand{
+  color:#f3e3de!important;text-shadow:3px 2px 0 #68202d!important;
+}
+body.blood-era:has(#level-six:not([hidden])) header :is(.utility,.tagline,nav),
+body.blood-era:has(#sixAfter:not([hidden])) header :is(.utility,.tagline,nav){
+  color:#bfa5a8!important;border-color:#57242f!important;
+}
+body.blood-era:has(#level-six:not([hidden])) footer,
+body.blood-era:has(#sixAfter:not([hidden])) footer{
+  background:#110d10!important;color:#9d888a!important;border-color:#542631!important;
+}
+#level-six[data-horror="6"] .six-folio,
+#level-six[data-horror="7"] .six-folio{
+  animation:six-masthead-waver 3.5s steps(2) infinite;
+}
+@keyframes six-masthead-waver{
+  0%,94%,100%{filter:none;transform:none}
+  95%{filter:invert(.9);transform:translateX(-3px)}
+  97%{filter:contrast(2);transform:translateX(3px)}
+}
+@media(prefers-reduced-motion:reduce){
+ #level-six[data-horror="6"] .six-folio,
+ #level-six[data-horror="7"] .six-folio{animation:none!important}
+}
