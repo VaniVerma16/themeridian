@@ -1,0 +1,669 @@
+/* THE MERIDIAN ONLINE — 1997 archive look for Files 01 and 04.
+   Developer preview only. Layout and controls are restyled; game logic and
+   historical evidence remain untouched. */
+body.dev-newsprint #level-one,
+body.dev-newsprint #level-four {
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  color:#151515!important;
+}
+body.dev-newsprint #level-one[hidden],
+body.dev-newsprint #level-four[hidden] {
+  display:none!important;
+}
+body.dev-newsprint #level-one .transcription-assignment,
+body.dev-newsprint #level-four .four-assignment {
+  max-width:none!important;
+  width:100%!important;
+  background:#fff!important;
+  color:#151515!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+body.dev-newsprint :is(#level-one,#level-four) .task-line,
+body.dev-newsprint :is(#level-one,#level-four) .assignment>p,
+body.dev-newsprint :is(#level-one,#level-four) .feedback{
+  color:#181818!important;
+  text-shadow:none!important;
+  font:15px/1.55 "Times New Roman",Times,serif!important;
+}
+
+/* FILE 01 — Newpaper and transcription displayed as a 1997 proofreading form. */
+body.dev-newsprint #level-one .transcription-layout{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:10px!important;
+  margin:13px 0!important;
+}
+body.dev-newsprint #level-one :is(.transcription-source,.transcription-review){
+  min-width:0!important;
+  padding:0 12px 13px!important;
+  border:1px solid #999!important;
+  background:#f5f5f5!important;
+  color:#111!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint #level-one .transcription-label{
+  display:block!important;
+  margin:0 -12px 11px!important;
+  padding:7px 10px!important;
+  background:#000080!important;
+  border-bottom:2px ridge #858585!important;
+  color:#fff!important;
+  text-transform:uppercase!important;
+  letter-spacing:0!important;
+  font:bold 11px/1.4 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-one .transcription-source{
+  background:#e8e8e8!important;
+  align-self:start!important;
+}
+body.dev-newsprint #level-one .transcription-clipping-image{
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0 auto!important;
+  border:2px inset #bababa!important;
+  padding:7px!important;
+  background:#fffdfa!important;
+  object-fit:contain!important;
+  filter:none!important;
+  box-shadow:none!important;
+  cursor:zoom-in;
+}
+body.dev-newsprint #level-one .transcription-source::after{
+  content:"Source material: retained newspaper scan — verify against the original.";
+  display:block!important;
+  margin:10px 0 0!important;
+  border-top:1px dotted #999!important;
+  padding-top:7px!important;
+  color:#5c5c5c!important;
+  font:10px/1.4 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-one .transcription-review{
+  background:#fffefa!important;
+  align-self:stretch!important;
+}
+body.dev-newsprint #level-one .transcription-review h2{
+  color:#000080!important;
+  font:bold 22px/1.3 "Times New Roman",Times,serif!important;
+  margin:4px 0 13px!important;
+  padding-bottom:9px!important;
+  border-bottom:3px double #919191!important;
+  text-shadow:none!important;
+  text-align:left!important;
+  letter-spacing:0!important;
+}
+body.dev-newsprint #level-one #transcription-text{
+  padding:8px 10px!important;
+  border:1px solid #aaa!important;
+  background:white!important;
+  color:#171717!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint #level-one #transcription-text p{
+  color:#151515!important;
+  font:16px/1.85 "Times New Roman",Times,serif!important;
+  margin:3px 0 17px!important;
+  text-shadow:none!important;
+}
+body.dev-newsprint #level-one .transcript-word{
+  display:inline!important;
+  padding:2px 1px!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  color:#151515!important;
+  font:inherit!important;
+  line-height:inherit!important;
+  text-decoration:none!important;
+  text-shadow:none!important;
+  box-shadow:none!important;
+  transform:none!important;
+  transition:none!important;
+  animation:none!important;
+  cursor:pointer!important;
+}
+body.dev-newsprint #level-one .transcript-word:not(:disabled):hover{
+  background:#fff1bf!important;
+  color:#111!important;
+  box-shadow:none!important;
+  transform:none!important;
+  text-decoration:none!important;
+}
+body.dev-newsprint #level-one .transcript-word.marked,
+body.dev-newsprint #level-one .transcript-word.marked:hover{
+  background:#ffe28f!important;
+  color:#6f160c!important;
+  border-bottom:2px solid #970c0c!important;
+  font-weight:700!important;
+}
+body.dev-newsprint #level-one .transcript-word:focus-visible{
+  outline:1px dotted #000080!important;
+  outline-offset:1px!important;
+}
+body.dev-newsprint #level-one #feedback{
+  background:#ffffe2!important;
+  color:#222!important;
+  border:1px solid #a49b70!important;
+  margin:12px 0 10px!important;
+  padding:10px 12px!important;
+  font:12px/1.5 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-one #feedback.error{
+  color:#8e0000!important;
+  border-color:#980000!important;
+}
+body.dev-newsprint #level-one .actions{
+  padding-top:5px!important;
+  border-top:1px solid #bbb!important;
+}
+body.dev-newsprint #level-one #verify,
+body.dev-newsprint #level-one #reset{
+  color:#111!important;
+  background:#c0c0c0!important;
+  border:2px solid!important;
+  border-color:#fff #555 #555 #fff!important;
+  padding:7px 14px!important;
+  min-width:0!important;
+  margin:0!important;
+  box-shadow:inset 1px 1px #eee!important;
+  text-decoration:none!important;
+  text-transform:none!important;
+  font:bold 12px Tahoma,Verdana,Arial,sans-serif!important;
+  letter-spacing:0!important;
+  transform:none!important;
+  transition:none!important;
+}
+body.dev-newsprint #level-one :is(#verify,#reset):not(:disabled):hover{
+  background:#d4d4d4!important;
+  transform:none!important;
+  box-shadow:inset 1px 1px #eee!important;
+}
+body.dev-newsprint #level-one :is(#verify,#reset):active{
+  border-color:#555 #fff #fff #555!important;
+  box-shadow:none!important;
+}
+
+/* FILE 04 — Photographic catalogue and survey map, arranged as one old web page. */
+body.dev-newsprint #level-four .four-topline{
+  display:block!important;
+  padding:2px 0 12px!important;
+  margin:0 0 13px!important;
+  border:0!important;
+  border-bottom:3px double #003887!important;
+  color:#111!important;
+}
+body.dev-newsprint #level-four .four-topline h1{
+  color:#000080!important;
+  font:bold 26px/1.16 "Times New Roman",Times,serif!important;
+  margin:3px 0 9px!important;
+  text-shadow:none!important;
+  letter-spacing:0!important;
+}
+body.dev-newsprint #level-four .four-instructions{
+  color:#262626!important;
+  font:15px/1.6 "Times New Roman",Times,serif!important;
+  margin:0!important;
+}
+body.dev-newsprint #level-four .four-workspace{
+  display:grid!important;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important;
+  gap:10px!important;
+  align-items:start!important;
+  background:transparent!important;
+  border:0!important;
+  padding:0!important;
+}
+body.dev-newsprint #level-four :is(.four-photograph-col,.four-map-col){
+  min-width:0!important;
+  margin:0!important;
+  padding:0 12px 13px!important;
+  background:#f5f5f5!important;
+  border:1px solid #999!important;
+  color:#151515!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint #level-four .four-photograph-col::before,
+body.dev-newsprint #level-four .four-map-col::before{
+  display:block!important;
+  padding:7px 10px!important;
+  margin:0 -12px 12px!important;
+  background:#000080!important;
+  color:#fff!important;
+  border-bottom:2px ridge #999!important;
+  font:bold 11px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-four .four-photograph-col::before{
+  content:"PHOTOGRAPHIC RECORD / SCANNED PRINT";
+}
+body.dev-newsprint #level-four .four-map-col::before{
+  content:"GEOGRAPHIC REFERENCE / TOWN SURVEY";
+}
+body.dev-newsprint #level-four #four-photo-frame{
+  width:100%!important;
+  aspect-ratio:1.47!important;
+  min-height:210px!important;
+  margin:0!important;
+  padding:6px!important;
+  background:#fffefa!important;
+  border:2px inset #a3a3a3!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint #level-four #four-photo-img{
+  width:100%!important;
+  height:100%!important;
+  max-height:360px!important;
+  display:block!important;
+  object-fit:contain!important;
+  background:#fffefa!important;
+  filter:none!important;
+}
+body.dev-newsprint #level-four #four-photo-img[hidden],
+body.dev-newsprint #level-four #four-photo-placeholder[hidden]{
+  display:none!important;
+}
+body.dev-newsprint #level-four #four-photo-placeholder{
+  color:#414141!important;
+  font:12px/1.4 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-four #four-photo-placeholder *{color:#444!important}
+body.dev-newsprint #level-four .four-notes-lead{
+  color:#2b2b2b!important;
+  font:italic 14px/1.5 "Times New Roman",serif!important;
+  margin:12px 0 3px!important;
+}
+body.dev-newsprint #level-four #directory-open{
+  display:inline-block!important;
+  width:auto!important;
+  padding:3px 0!important;
+  margin:3px 0 10px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+  transition:none!important;
+  color:#0000ee!important;
+  text-decoration:underline!important;
+  font:15px/1.4 "Times New Roman",serif!important;
+}
+body.dev-newsprint #level-four #directory-open svg{
+  display:none!important;
+}
+body.dev-newsprint #level-four #directory-open:hover{
+  color:#0000ee!important;
+  background:transparent!important;
+  text-decoration:underline!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint #level-four #directory-open:focus-visible{
+  outline:1px dotted #000080!important;
+  outline-offset:2px!important;
+}
+body.dev-newsprint #level-four .four-bearing{
+  display:block!important;
+  margin:12px 0 0!important;
+  padding:11px!important;
+  background:#fff!important;
+  border:1px solid #aaa!important;
+  color:#1b1b1b!important;
+}
+body.dev-newsprint #level-four .four-bearing>div:first-child{
+  color:#1b1b1b!important;
+  font:12px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-four :is(.four-bearing label,#four-bearing-output){
+  color:#1b1b1b!important;
+  font:12px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-four #four-bearing{
+  width:100%!important;
+  margin:12px 0 5px!important;
+  accent-color:#000080!important;
+}
+body.dev-newsprint #level-four .four-bearing-ends{
+  color:#3e3e3e!important;
+  font:10px "Courier New",monospace!important;
+}
+body.dev-newsprint #level-four #four-feedback{
+  flex:1!important;
+  margin:0!important;
+  color:#262626!important;
+  font:12px/1.5 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-four #four-feedback.error{
+  color:#8d0505!important;
+}
+body.dev-newsprint #level-four .four-controls{
+  display:flex!important;
+  gap:12px!important;
+  margin-top:13px!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+}
+body.dev-newsprint #level-four :is(#four-next,#four-finish){
+  min-width:0!important;
+  margin:5px 0!important;
+  padding:7px 12px!important;
+  border:2px solid!important;
+  border-color:#fff #555 #555 #fff!important;
+  color:#111!important;
+  background:#c0c0c0!important;
+  box-shadow:inset 1px 1px #eee!important;
+  text-decoration:none!important;
+  text-transform:none!important;
+  letter-spacing:0!important;
+  transform:none!important;
+  transition:none!important;
+  font:bold 12px Tahoma,Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-four #four-next:disabled{
+  opacity:.6!important;
+  cursor:not-allowed!important;
+  background:#bfbfbf!important;
+}
+body.dev-newsprint #level-four :is(#four-next,#four-finish):not(:disabled):hover{
+  color:#111!important;
+  background:#d0d0d0!important;
+  transform:none!important;
+  box-shadow:inset 1px 1px #eee!important;
+}
+body.dev-newsprint #level-four .four-map-head{
+  display:flex!important;
+  padding:7px 9px!important;
+  margin:0 0 8px!important;
+  background:#e4e4e4!important;
+  border:1px solid #aaa!important;
+}
+body.dev-newsprint #level-four .four-map-head strong{
+  color:#000080!important;
+  font:bold 13px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-four .four-map-viewport{
+  overflow:hidden!important;
+  background:#fffefa!important;
+  border:2px inset #aaa!important;
+  padding:3px!important;
+}
+body.dev-newsprint #level-four #four-map{
+  width:100%!important;
+  height:clamp(320px,47vh,470px)!important;
+  min-height:320px!important;
+  background:#e7e2d7!important;
+  cursor:crosshair!important;
+}
+body.dev-newsprint #level-four .four-location{
+  color:#151515!important;
+  font:12px/1.5 Verdana,Arial,sans-serif!important;
+  padding:9px 1px!important;
+  margin:4px 0!important;
+}
+body.dev-newsprint #level-four #four-location-name{color:#000080!important}
+body.dev-newsprint #level-four .four-editor-note{
+  max-width:none!important;
+  border:1px dashed #c7ae68!important;
+  background:#fffce9!important;
+  padding:10px 12px!important;
+  margin:10px 0 0!important;
+  color:#242424!important;
+}
+body.dev-newsprint #level-four .four-editor-note>span{
+  color:#000080!important;
+  font:bold 10px Verdana,Arial,sans-serif!important;
+  letter-spacing:0!important;
+}
+body.dev-newsprint #level-four .four-editor-note p{
+  color:#252525!important;
+  font:14px/1.55 "Times New Roman",serif!important;
+  margin:5px 0!important;
+}
+/* Recovered record results look like a paper catalogue, not dark cards. */
+body.dev-newsprint #level-four #four-summary{
+  padding:3px 0 16px!important;
+  max-width:none!important;
+  width:100%!important;
+  background:#fff!important;
+  color:#111!important;
+}
+body.dev-newsprint #level-four #four-summary[hidden]{display:none!important}
+body.dev-newsprint #level-four #four-summary h2{
+  color:#000080!important;
+  font:bold 25px/1.25 "Times New Roman",serif!important;
+  margin:6px 0 15px!important;
+}
+body.dev-newsprint #level-four .four-record-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:1px!important;
+  padding:1px!important;
+  background:#999!important;
+  border:1px solid #aaa!important;
+}
+body.dev-newsprint #level-four .four-record{
+  min-width:0!important;
+  background:#f9f9f9!important;
+  border:0!important;
+  padding:10px!important;
+  color:#171717!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint #level-four .four-record>img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:190px!important;
+  aspect-ratio:4/3!important;
+  object-fit:contain!important;
+  border:1px solid #999!important;
+  background:#fffefa!important;
+}
+body.dev-newsprint #level-four .four-record :is(h3,.four-record-ref,.four-record-direction,.four-record-note,.four-record-note h2,.four-record-note p){
+  color:#171717!important;
+  text-shadow:none!important;
+}
+body.dev-newsprint #level-four .four-record h3{
+  color:#000080!important;
+  font:bold 18px "Times New Roman",serif!important;
+}
+body.dev-newsprint #level-four .four-record .four-record-ref{
+  color:#555!important;
+  font:10px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-four .four-record .four-record-note{
+  border-top:1px dotted #999!important;
+  font:14px/1.5 "Times New Roman",serif!important;
+}
+body.dev-newsprint #level-four .four-summary-editor{
+  display:block!important;
+  background:#fffce9!important;
+  color:#1d1d1d!important;
+  border:1px dashed #b6a16c!important;
+  box-shadow:none!important;
+  transform:none!important;
+  padding:13px!important;
+  max-width:none!important;
+}
+body.dev-newsprint #level-four .four-summary-editor :is(span,p){
+  color:#222!important;
+  font:14px/1.5 "Times New Roman",serif!important;
+}
+
+/* Supplementary photographic notes open as a native-looking child window. */
+body.dev-newsprint #directory-modal{
+  background:rgba(0,15,30,.38)!important;
+  z-index:9502!important;
+  padding:20px!important;
+}
+body.dev-newsprint #directory-modal[hidden]{display:none!important}
+body.dev-newsprint #directory-modal .directory-shell{
+  width:min(735px,100%)!important;
+  max-height:calc(100dvh - 70px)!important;
+  gap:0!important;
+  box-sizing:border-box!important;
+  padding:3px!important;
+  background:#c0c0c0!important;
+  border:2px solid!important;
+  border-color:#fff #4d4d4d #4d4d4d #fff!important;
+  box-shadow:4px 5px 0 #101d21a0!important;
+}
+body.dev-newsprint #directory-modal .directory-toolbar{
+  display:flex!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  padding:5px 7px!important;
+  background:linear-gradient(90deg,#000080,#367ab2)!important;
+  color:#fff!important;
+  font:bold 12px Verdana,Arial,sans-serif!important;
+  letter-spacing:0!important;
+}
+body.dev-newsprint #directory-modal #directory-close{
+  background:#c0c0c0!important;
+  color:#111!important;
+  border:2px solid!important;
+  border-color:#fff #555 #555 #fff!important;
+  padding:4px 10px!important;
+  font:12px Tahoma,Arial,sans-serif!important;
+  box-shadow:none!important;
+  transform:none!important;
+  transition:none!important;
+}
+body.dev-newsprint #directory-modal .directory-book{
+  min-height:0!important;
+  background:#fff!important;
+  border:2px inset #777!important;
+  box-shadow:none!important;
+  margin-top:3px!important;
+}
+body.dev-newsprint #directory-modal .directory-page{
+  min-height:300px!important;
+  max-height:calc(100dvh - 160px)!important;
+  overflow:auto!important;
+  padding:24px 28px 62px!important;
+  background:#fffef5!important;
+  border:0!important;
+  color:#171717!important;
+}
+body.dev-newsprint #directory-modal .directory-page::before{display:none!important}
+body.dev-newsprint #directory-modal .directory-page-content{
+  color:#181818!important;
+  font:16px/1.6 "Times New Roman",serif!important;
+}
+body.dev-newsprint #directory-modal .directory-page-content :is(h2,h3){
+  color:#000080!important;
+  font:bold 25px/1.2 "Times New Roman",serif!important;
+}
+body.dev-newsprint #directory-modal .directory-page-content :is(p,dt,dd,em){
+  color:#1e1e1e!important;
+}
+body.dev-newsprint #directory-modal .directory-page-content .directory-kicker{
+  color:#555!important;
+  font:11px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #directory-modal .directory-page-bottom{
+  color:#4d4d4d!important;
+  font:10px Verdana,Arial,sans-serif!important;
+  left:20px!important;
+  right:20px!important;
+}
+
+/* Introduction pages match the rest of the 1997 website and remain routed.
+   Explicitly keep [hidden] stronger than all display overrides. */
+body.dev-newsprint :is(#read-one,#read-four).reading-page{
+  display:block!important;
+  min-height:0!important;
+  max-width:none!important;
+  width:100%!important;
+  padding:0!important;
+  margin:0!important;
+  background:#fff!important;
+  color:#111!important;
+}
+body.dev-newsprint :is(#read-one,#read-four) .reading-inner{
+  display:block!important;
+  max-width:none!important;
+  width:100%!important;
+  min-height:0!important;
+  padding:3px 0 18px!important;
+  margin:0!important;
+  background:#fff!important;
+  color:#111!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint :is(#read-one,#read-four) .reading-inner::before{
+  content:none!important;
+  display:none!important;
+}
+body.dev-newsprint :is(#read-one,#read-four) .reading-inner h1{
+  color:#000080!important;
+  font:bold 27px/1.25 "Times New Roman",serif!important;
+  letter-spacing:0!important;
+  margin:4px 0 13px!important;
+  text-shadow:none!important;
+}
+body.dev-newsprint :is(#read-one,#read-four) .reading-inner :is(p,.reading-copy p){
+  max-width:790px!important;
+  color:#181818!important;
+  font:16px/1.55 "Times New Roman",serif!important;
+  margin:7px 0 15px!important;
+  text-shadow:none!important;
+}
+body.dev-newsprint :is(#read-one,#read-four) :is(#begin-one,#begin-four){
+  width:auto!important;
+  min-width:0!important;
+  padding:0!important;
+  margin:9px 0!important;
+  background:transparent!important;
+  color:#0000ee!important;
+  border:0!important;
+  text-decoration:underline!important;
+  font:16px "Times New Roman",serif!important;
+  transform:none!important;
+  box-shadow:none!important;
+  transition:none!important;
+}
+body.dev-newsprint :is(#read-one,#read-four) :is(#begin-one,#begin-four):hover{
+  color:#0000ee!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+body.dev-newsprint :is(#read-one,#read-four):is([hidden]),
+body.dev-newsprint :is(#level-one,#level-four):is([hidden]){
+  display:none!important;
+}
+
+/* Smaller screens: responsive site table and layouts; no page-wide scrolling. */
+@media(max-width:1050px){
+  body.dev-newsprint #level-one .transcription-layout{grid-template-columns:1fr!important}
+  body.dev-newsprint #level-four .four-workspace{grid-template-columns:1fr!important}
+}
+@media(max-width:800px){
+  body.dev-newsprint #level-four .four-record-grid{grid-template-columns:1fr!important}
+  body.dev-newsprint #level-four #four-map{height:365px!important}
+  body.dev-newsprint #level-one #transcription-text p{font-size:15px!important}
+}
+@media(max-width:600px){
+  body.dev-newsprint #level-one :is(.transcription-source,.transcription-review){
+    padding:0 8px 10px!important;
+  }
+  body.dev-newsprint #level-one .transcription-label{margin:0 -8px 10px!important}
+  body.dev-newsprint #level-four :is(.four-photograph-col,.four-map-col){padding:0 8px 10px!important}
+  body.dev-newsprint #level-four .four-photograph-col::before,
+  body.dev-newsprint #level-four .four-map-col::before{margin:0 -8px 9px!important}
+  body.dev-newsprint #directory-modal .directory-page{padding:15px 15px 60px!important}
+}
