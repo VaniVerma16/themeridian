@@ -93,11 +93,15 @@ function scareSound(){
 function breach(){
  if(!developerPreview||running)return;
  running=true;
- if(window.MeridianDesktop){
+ if(window.MeridianCrash){
+  // The Archivist briefly breaks through while the OS itself fails.
+  // Preserve the exact distress text without replacing her dialogue.
   scareSound();
-  show('sixAfter');
-  window.MeridianDesktop.fault('breach');
-  setTimeout(()=>{running=false},1600);
+  const started=window.MeridianCrash.play({
+   kind:'archivist',
+   onComplete:()=>{show('sixAfter');running=false;}
+  });
+  if(!started){show('sixAfter');running=false;}
   return;
  }
  const root=document.getElementById('six-breach'),cry=document.getElementById('six-cry'),lines=document.getElementById('six-lines');
