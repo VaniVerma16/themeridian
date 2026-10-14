@@ -131,10 +131,12 @@
     function flashToLevelFour(){
       if(flashPending)return;
       flashPending=true;
-      if(developerPreview&&window.MeridianDesktop){
-        show('readFour');
-        window.MeridianDesktop.fault('soft');
-        flashPending=false;
+      if(developerPreview&&window.MeridianCrash){
+        const started=window.MeridianCrash.play({
+          kind:'editorial',
+          onComplete:()=>{show('readFour');flashPending=false;}
+        });
+        if(!started)flashPending=false;
         return;
       }
       const overlay=document.getElementById('transition-flash');
@@ -297,12 +299,15 @@
     function flashToLevelFive(){
       if(fiveFlashPending)return;
       fiveFlashPending=true;
-      if(developerPreview&&window.MeridianDesktop){
-        playInterference(()=>{
-          show('readFive');
-          window.MeridianDesktop.fault('cascade');
-          fiveFlashPending=false;
+      if(developerPreview&&window.MeridianCrash){
+        // Start the authored interference sound during the player gesture.
+        // The video system then crashes into the BIOS recovery screen.
+        playInterference();
+        const started=window.MeridianCrash.play({
+          kind:'survey',
+          onComplete:()=>{show('readFive');fiveFlashPending=false;}
         });
+        if(!started)fiveFlashPending=false;
         return;
       }
       const overlay=document.getElementById('five-interference');
