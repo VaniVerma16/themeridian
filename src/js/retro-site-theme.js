@@ -120,6 +120,16 @@
    shell.append(head,ticker,table,footer);
    section.append(shell);
  });
+ // In the 1997 site, the handwritten editorial marginalia belongs in the
+ // archive index beside the other document entries. The original physical
+ // desk positioned it above the records, leaving a 58px-wide torn-paper label.
+ // Moving the existing node preserves the original click listener, note,
+ // opened/crumpled state and session persistence without duplicating controls.
+ const retainedDocuments=document.querySelector('#level-five .desk-objects');
+ const marginalia=document.querySelector('#level-five .case-note-wrap');
+ if(retainedDocuments && marginalia && marginalia.parentElement!==retainedDocuments){
+   retainedDocuments.appendChild(marginalia);
+ }
  // The original HTML source of Level 6 is intentionally left untouched.
 
  // At the end of the already-written recordings, an analogue cassette changes
