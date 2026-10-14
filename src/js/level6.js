@@ -435,11 +435,13 @@
  });
  resetButton.addEventListener('click',restart);
  document.getElementById('six-retry').addEventListener('click',()=>{
-  restart();show('six',false);
+  restart();
+  window.MeridianLevel6Pager?.reset?.();
+  show('readSix',false);
  });
  document.getElementById('six-back').addEventListener('click',()=>{render();show('six',false);});
  document.getElementById('six-dev-open').hidden=false;
- document.getElementById('six-dev-open').addEventListener('click',()=>show('six'));
+ document.getElementById('six-dev-open').addEventListener('click',()=>show('readSix'));
  readSaved();
  render();
  // Dev skip remains meaningful: it previews the Archivist ending even before
