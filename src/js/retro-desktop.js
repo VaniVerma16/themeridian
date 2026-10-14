@@ -58,6 +58,8 @@
  });
 
  const nav=$('dev-navigation');
+ // A Windows taskbar belongs to the desktop, not the scrolled website.
+ if(page.contains(nav))document.body.appendChild(nav);
  const start=document.createElement('button');
  start.id='retro-start';start.className='retro-start';start.type='button';start.textContent='▦ Start';
  const task=document.createElement('button');
@@ -180,7 +182,6 @@
      const icon=document.createElement('span');icon.className='retro-desktop-icon';icon.setAttribute('aria-hidden','true');
      const caption=document.createElement('span');caption.textContent=label;
      button.append(icon,caption);shortcuts.append(button);
-     button.addEventListener('dblclick',()=>activateDesktop(action));
      button.addEventListener('click',()=>activateDesktop(action));
    });
  }
@@ -244,18 +245,24 @@
    readyTimer=window.setTimeout(()=>{load.classList.add('ready');if(status)status.textContent='Receiving data...';},160);
    loadingTimer=window.setTimeout(()=>finishNavigation(),590);
  }
- function imageDiagnostic(){
-   document.querySelectorAll('img').forEach(img=>{
-     img.addEventListener('error',()=>{
-       if(img.classList.contains('retro-missing-asset'))return;
-       img.classList.add('retro-missing-asset');
-       // Report an actual failed asset rather than silently showing a broken icon.
-       img.title='Archive image failed to load: '+(img.getAttribute('src')||'unknown file');
-       if(status)status.textContent='Image could not be loaded';
-     });
-   });
- }
- imageDiagnostic();
+ // Recover stale/incorrect relative paths once, including dynamically created scans.
+ // Genuine missing assets remain clearly marked instead of being silently cropped.
+ document.addEventListener('error',event=>{
+   const img=event.target;
+   if(!(img instanceof HTMLImageElement))return;
+   const supplied=img.getAttribute('src')||'';
+   if(!img.dataset.meridianRetry && !/^(?:data:|https?:|blob:)/i.test(supplied)){
+     const file=supplied.split('?')[0].split('/').pop();
+     if(file && /\.(?:png|jpe?g|gif|webp|svg)$/i.test(file)){
+       img.dataset.meridianRetry='1';
+       img.src='/'+encodeURIComponent(file)+'?archive-image-retry=1';
+       return;
+     }
+   }
+   img.classList.add('retro-missing-asset');
+   img.title='Archive image unavailable: '+supplied;
+   if(status)status.textContent='Image could not be loaded';
+ },true);
  document.addEventListener('keydown',event=>{
    if(event.key==='Escape'){
      if(!startMenu.hidden){startMenu.hidden=true;return;}
