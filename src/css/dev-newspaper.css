@@ -225,3 +225,187 @@ body.dev-newsprint.blood-era #dev-navigation{background:#251019!important;border
  body.dev-newsprint .reading-page h1{font-size:42px}
  body.dev-newsprint #level-five .case-desk>h1{font-size:35px}
 }
+
+
+/* ==============================================================
+   SECOND PASS — THE MERIDIAN / NEWSPAPER MORGUE, c. 1997
+   The application is the dark archive viewing room; light lives
+   on the scanned evidence, NOT on the surrounding browser page.
+   All rules are strictly dev-only and do not touch public mode.
+   ============================================================== */
+body.dev-newsprint{
+  --archive-black:#141716;--archive-metal:#343934;--archive-accent:#8f4542;
+  --paper:#c7bea8;--ink:#2d2c29;--muted:#928878;--rule:#655c4e;
+  color:#dad4c6;
+  background-color:#151817!important;
+  background-image:radial-gradient(ellipse at 50% -15%,#444942 0%,#282e2b 37%,#141716 77%),
+    repeating-linear-gradient(0deg,#ffffff04 0 1px,transparent 1px 5px)!important;
+}
+body.dev-newsprint .topline{height:4px;background:#5b4d42}
+body.dev-newsprint .wrapper{
+  max-width:1330px;margin:24px auto 42px;
+  border:1px solid #5f6359;
+  background:#272c29;
+  background-image:radial-gradient(ellipse at 48% -8%,#343c37,transparent 67%),
+    repeating-linear-gradient(90deg,#ffffff02 0 1px,transparent 1px 6px);
+  box-shadow:0 0 0 7px #111513,0 2px 0 8px #575c51,0 35px 95px #000a,inset 0 1px #8b90804f;
+  padding:0 clamp(16px,3.7vw,52px) 26px;
+}
+body.dev-newsprint .wrapper::before{border-color:#c1be9b10}
+body.dev-newsprint #full-header{background:transparent;padding-top:28px}
+body.dev-newsprint #full-header .utility{
+  border-color:#666a5e;color:#b8b3a2;letter-spacing:.22em;font:700 10px/1.4 'Courier New',monospace;
+}
+body.dev-newsprint #full-header .masthead{
+  border-bottom:4px double #878373;
+  padding:20px 0 25px;
+}
+body.dev-newsprint #full-header .brand{
+  color:#e4ddc7;font:900 clamp(55px,9vw,128px)/.86 'Times New Roman',Georgia,serif;
+  letter-spacing:-.093em;font-variant:small-caps;
+  text-shadow:0 2px 1px #0009,2px 3px #7c776a3d;
+}
+body.dev-newsprint #full-header .tagline{
+  font:italic 15px/1.3 Georgia,serif;color:#a9a18e;margin-top:15px;
+}
+body.dev-newsprint #full-header .masthead::before,
+body.dev-newsprint #full-header .masthead::after{color:#aaa695;border-color:#66685e}
+body.dev-newsprint #full-header nav{
+  color:#beb8a5;border-color:#7e7b6c;padding:12px 4px;
+  font:700 11px 'Courier New',monospace;letter-spacing:.14em;
+}
+body.dev-newsprint #full-header nav span:last-child{color:#958f80}
+body.dev-newsprint #mini-header{background:#242926!important;border-bottom:2px solid #8d8577!important}
+body.dev-newsprint #mini-header .mini-title,body.dev-newsprint #mini-header .mini-mark{color:#e2d9c9!important}
+body.dev-newsprint #player-history{background:#333936!important;border-color:#78786a!important}
+body.dev-newsprint #player-history *{color:#e0d7c3!important}
+body.dev-newsprint #player-history .history-menu{background:#353a33!important;border-color:#8e8777!important}
+body.dev-newsprint #home.hero{
+  margin:35px 0 60px;padding:25px 36px 38px;background:#cfc3a9;
+  background-image:radial-gradient(#6e533b12 .5px,transparent .75px),linear-gradient(110deg,#eee3cc7d,transparent 53%,#77614c19);
+  background-size:5px 5px,100% 100%;
+  border:1px solid #968970;box-shadow:8px 10px 0 #161b17,0 18px 36px #0006;
+}
+body.dev-newsprint #home.hero::before{color:#51463c;border-color:#98866b}
+body.dev-newsprint #home .kicker{color:#803f3d}
+body.dev-newsprint #home h1{color:#252520;border-color:#a7967e}
+body.dev-newsprint #home .lead{color:#463d32}
+body.dev-newsprint #home .copy{color:#3c342c}
+body.dev-newsprint .primary{background:#30362f;color:#efe7d3;border-color:#242b25;box-shadow:3px 3px 0 #6f6756}
+body.dev-newsprint .reading-page{
+  background:transparent!important;max-width:1020px;
+  margin:auto;padding:45px 0 80px;
+}
+body.dev-newsprint .reading-inner{
+  padding:clamp(24px,4vw,55px)!important;max-width:930px!important;
+  background:#d1c6ae!important;
+  background-image:repeating-linear-gradient(0deg,#9d80670a 0 1px,transparent 1px 4px)!important;
+  border:1px solid #998b74;border-top:5px double #5a4a3c;
+  box-shadow:8px 12px 0 #141917,0 15px 43px #0006!important;
+}
+body.dev-newsprint .reading-inner::before{color:#713e3c;border-color:#94836e}
+body.dev-newsprint .reading-page h1,body.dev-newsprint .reading-page .reading-copy p{color:#302b25}
+body.dev-newsprint .reading-page .reading-copy{color:#302b25}
+body.dev-newsprint .level:not(.six-screen){
+  background:transparent!important;
+  border-top:1px solid #818276;padding-top:18px;
+}
+body.dev-newsprint .level:not(.six-screen)::before{
+  display:block;max-width:1130px;margin:0 auto 10px;padding:10px 14px;
+  border-bottom:1px solid #666b60;
+  color:#ada99a;font:700 10px/1.3 'Courier New',monospace;letter-spacing:.19em;
+}
+body.dev-newsprint #level-one::before{content:"PROOF DESK / TYPESETTING DEPARTMENT   —   WORK ORDER 001"}
+body.dev-newsprint #level-two::before{content:"THE MORGUE / RETAINED CLIPPINGS   —   FILE 002"}
+body.dev-newsprint #level-three::before{content:"INDEX ROOM / CROSS-REFERENCE LEDGER   —   FILE 003"}
+body.dev-newsprint #level-four::before{content:"PHOTO DESK / FIELD SURVEY   —   FILE 004"}
+body.dev-newsprint #level-five::before{content:"CITY DESK / INVESTIGATION FILE   —   FEBRUARY 1997"}
+body.dev-newsprint #level-one .assignment,
+body.dev-newsprint #level-two .assignment,
+body.dev-newsprint #level-three .assignment{
+  background:#cdc1a8!important;
+  background-image:radial-gradient(#5445310d .6px,transparent .75px)!important;
+  background-size:5px 5px!important;
+  border:1px solid #968873;padding:clamp(18px,3vw,32px);
+  box-shadow:6px 8px 0 #171a17,0 15px 38px #0005;
+  color:#2c2b25;
+}
+body.dev-newsprint #level-one .task-line,
+body.dev-newsprint #level-two .task-line,
+body.dev-newsprint #level-three .task-line{color:#36332a}
+body.dev-newsprint #level-one .assignment-title h2,
+body.dev-newsprint #level-two .assignment-title h2,
+body.dev-newsprint #level-three .assignment-title h2{color:#302d26}
+body.dev-newsprint #level-one .transcription-layout{color:#322e25}
+body.dev-newsprint #level-one .transcription-source,
+body.dev-newsprint #level-one .transcription-target{border-color:#998971}
+body.dev-newsprint #level-one .grid{background:#afa592}
+body.dev-newsprint #level-two .corkboard-frame{
+  background:#423c31!important;border:9px solid #6b5944!important;
+  box-shadow:inset 0 1px 24px #120e0988,4px 8px 0 #44372a50;
+}
+body.dev-newsprint #level-two .corkboard-label{color:#e0d0b2}
+body.dev-newsprint #level-two .clipping-grid{padding:10px}
+body.dev-newsprint #level-two .clipping-card{
+  background:#e5d8be!important;box-shadow:3px 7px 15px #0b080783;
+}
+body.dev-newsprint #level-three .archive-roster,
+body.dev-newsprint #level-three .level-three-workbench{color:#312b23}
+body.dev-newsprint #level-three .roster-card,
+body.dev-newsprint #level-three .editorial-memo{background:#e8dbc2!important;color:#342b23!important;border-color:#9e8e72!important}
+body.dev-newsprint #level-three .logic-grid,
+body.dev-newsprint #level-three .logic-table{border-color:#776b5b}
+body.dev-newsprint #level-four .four-assignment{
+  padding:22px;background:#252b29!important;border:1px solid #71746b;
+  box-shadow:8px 10px 0 #111512,0 17px 44px #0008;
+}
+body.dev-newsprint #level-four .four-topline h1{font-family:'Times New Roman',Georgia,serif}
+body.dev-newsprint #level-four .four-topline{border-bottom:1px solid #77776d;padding-bottom:12px;margin-bottom:18px}
+body.dev-newsprint #level-five .case-desk{
+  background:#2a2e2c!important;border:1px solid #777468;padding:22px!important;
+  box-shadow:8px 10px 0 #121613,0 22px 55px #0008;
+}
+body.dev-newsprint #level-five .case-desk>h1{
+  color:#e9dfc8;font:700 45px/1 'Times New Roman',serif;border-bottom:4px double #777266;
+}
+body.dev-newsprint #level-five .case-desk-grid{color:#e2d5c2}
+body.dev-newsprint footer{border-color:#66695d;color:#979b90}
+/* The climax does not turn into beige newsprint. It reveals a corrupted
+   counterpart of the original archive system, with high-contrast voids. */
+body.dev-newsprint.blood-era{background:#080809!important}
+body.dev-newsprint.blood-era .wrapper{
+  background:#150f12!important;background-image:repeating-linear-gradient(90deg,#e8bdc805 0 1px,transparent 1px 9px)!important;
+  border-color:#663441;
+}
+body.dev-newsprint.blood-era #full-header .brand{color:#e4c9c9;text-shadow:2px 3px #69162c}
+body.dev-newsprint.blood-era #full-header .utility,
+body.dev-newsprint.blood-era #full-header nav{color:#c29da2;border-color:#763b48}
+body.dev-newsprint.blood-era #full-header nav span:last-child{color:#bc8f9c}
+body.dev-newsprint.blood-era #mini-header{background:#160e12!important}
+body.dev-newsprint.blood-era .reading-inner{background:#22181b!important;border-color:#91434f;box-shadow:8px 12px 0 #060304!important}
+body.dev-newsprint.blood-era .reading-page h1,
+body.dev-newsprint.blood-era .reading-page .reading-copy p{color:#e6ced0}
+body.dev-newsprint.blood-era #home.hero{background:#332024!important;border-color:#9d495e}
+body.dev-newsprint.blood-era #home h1,body.dev-newsprint.blood-era #home .copy,
+body.dev-newsprint.blood-era #home .lead{color:#f0dadc}
+body.dev-newsprint.blood-era .level:not(.six-screen)::before{color:#c58b97;border-color:#6c303d}
+body.dev-newsprint.blood-era .six-screen{border-top:1px solid #6f3945}
+body.dev-newsprint.blood-era .six-paper{background:linear-gradient(115deg,#e4d6bc,#d0b89c 75%,#aa9180)}
+/* Modal dialogs and horror footage are intentionally NOT recolored:
+   their stark whites, blacks and reds must stay visually violent. */
+@media(max-width:850px){
+ body.dev-newsprint #home.hero{padding:22px}
+ body.dev-newsprint .wrapper{margin:8px auto 25px}
+ body.dev-newsprint #level-four .four-assignment,body.dev-newsprint #level-five .case-desk{padding:12px!important}
+ body.dev-newsprint #level-one .assignment,body.dev-newsprint #level-two .assignment,
+ body.dev-newsprint #level-three .assignment{padding:17px}
+}
+@media(max-width:600px){
+ body.dev-newsprint .wrapper{margin:0;padding:0 13px 25px;border-left:0;border-right:0}
+ body.dev-newsprint #full-header .brand{font-size:clamp(47px,12vw,73px)}
+ body.dev-newsprint #home.hero{margin-top:17px;padding:16px}
+ body.dev-newsprint #home h1{font-size:clamp(40px,10.5vw,64px)}
+ body.dev-newsprint #level-one .assignment,body.dev-newsprint #level-two .assignment,
+ body.dev-newsprint #level-three .assignment{padding:13px}
+ body.dev-newsprint #level-five .case-desk>h1{font-size:34px}
+}
