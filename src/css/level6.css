@@ -1058,3 +1058,221 @@ body.blood-era:has(#sixAfter:not([hidden])) footer{
  #level-six[data-horror="6"] .six-folio,
  #level-six[data-horror="7"] .six-folio{animation:none!important}
 }
+
+
+/* DARK THEME RESTORATION — October 2026
+   The canonical Meridian colors are charcoal and warm grey. Recovered pages
+   can look aged, but must not turn the entire game into a light interface.
+   Scoped to Level 6 so the existing dark Levels 1–5 are unchanged. */
+body.blood-era{
+  color-scheme:dark;
+  --paper:#17191b;--ink:#eeeae3;--muted:#b1ada6;--rule:#414244;
+  --card:#212326;--green:#697d69;--red:#a96b61;--blue:#70869a;
+  background:#111013!important;color:#eeeae3!important;
+}
+body.blood-era .topline{background:#220b12!important}
+body.blood-era header .brand,
+body.blood-era #mini-header .mini-title{color:#eeeae3!important}
+body.blood-era header .utility,
+body.blood-era header nav,
+body.blood-era header .tagline,
+body.blood-era footer{color:#bbb0ad!important;border-color:#5a383f!important}
+body.blood-era #player-history{
+  background:#222024!important;border-color:#5a4448!important;
+}
+body.blood-era #player-history :is(button,span){color:#e9e1df!important}
+
+#level-six .six-editor-intro{
+  background:#2a2226!important;color:#e7d8d2!important;
+  border-top-color:#a5243e!important;
+  box-shadow:0 0 0 6px #1c1418,0 22px 50px #000b,9px 12px 0 #461521!important;
+}
+#level-six .six-editor-intro span{color:#dd9da6!important}
+#level-six .six-editor-intro p{
+  color:#e9ddd7!important;
+}
+#level-six .six-editor-intro .six-intro-last{
+  color:#f4bdc5!important;
+  border-top-color:#76545b!important;
+  text-shadow:none!important;
+}
+#level-six .six-editor-intro .six-opening-button{
+  background:#8c2537!important;border-color:#b64c5f!important;
+  color:#fff5f1!important;
+}
+#level-six .six-editor-intro .six-opening-button:hover{
+  background:#ae344c!important;
+}
+#level-six .six-paper{
+  background:#282328!important;
+  color:#f0e4de!important;
+  outline-color:#6e5058!important;
+  box-shadow:0 0 0 7px #171114,9px 12px 0 #49141d,0 28px 68px #000c!important;
+}
+#level-six .six-paper::before{
+  background:
+    radial-gradient(ellipse at 98% 2%,#c01128 0 8%,#8c17295e 17%,transparent 35%),
+    radial-gradient(ellipse at -6% 61%,#c01830 0 8%,#9a213775 16%,transparent 34%),
+    radial-gradient(circle at 70% 17%,#c42a40 0 9px,transparent 11px),
+    radial-gradient(circle at 72% 22%,#962338 0 4px,transparent 7px),
+    radial-gradient(circle at 34% 98%,#a82139 0 3px,transparent 6px),
+    radial-gradient(ellipse at 10% 105%,#840f2685 0 10%,transparent 30%),
+    repeating-linear-gradient(0deg,transparent 0 21px,#987e6c0b 22px 23px)!important;
+}
+#level-six .six-paperhead{
+  color:#c4aaa2!important;border-color:#6c5252!important;
+}
+#level-six .six-paper .six-section-tag{
+  color:#e8a5ad!important;
+}
+#level-six .six-paper h2{color:#f4e8df!important}
+#level-six .six-paper .six-subtitle{
+  color:#d9b5ac!important;border-color:#70545b!important;
+}
+#level-six .six-paper .six-article-intro{
+  color:#d5c3ba!important;border-color:#69535a!important;
+}
+#level-six .six-paperend{color:#b4a3a0!important}
+#level-six .six-editor-page>h3{
+  color:#efa9b2!important;border-color:#985260!important;
+}
+#level-six .six-editor-page>p,
+#level-six .six-act>p{
+  color:#e5d8d0!important;
+}
+#level-six .six-act-lead,
+#level-six .six-act-close{color:#d4bcb7!important}
+#level-six .six-decision{
+  background:#31292d!important;
+  border-color:#6a4c54!important;
+  box-shadow:5px 6px 0 #0e080b!important;
+}
+#level-six .six-decision-head{
+  background:#211b20!important;
+  border-bottom-color:#9b3b50!important;
+  color:#eddbd7!important;
+}
+#level-six .six-decision-body h4{color:#f0e2da!important}
+#level-six .six-decision-body>p{color:#d6c9c4!important}
+#level-six .six-source{
+  background:#3e3035!important;border-color:#81505b!important;
+  border-left-color:#ae4355!important;
+}
+#level-six .six-source b{color:#e7aab1!important}
+#level-six .six-source p{color:#e1cbc4!important}
+#level-six .six-option{
+  color:#eae1de!important;
+  background:#252125!important;border-color:#564149!important;
+  box-shadow:2px 2px 0 #07050835!important;
+}
+#level-six .six-option:hover{
+  background:#382d32!important;border-color:#b05b6b!important;
+}
+#level-six .six-option:has(input:checked){
+  background:#472e37!important;
+  border-color:#d26678!important;
+  box-shadow:inset 5px 0 #d34863,3px 3px 0 #18080f!important;
+}
+#level-six .six-option strong{color:#f5e9e2!important}
+#level-six .six-option em{color:#c2b0ad!important}
+#level-six .six-option input{accent-color:#cc506a}
+#level-six .six-decision-commit{
+  background:#843144!important;border-color:#b4586b!important;color:#fff!important;
+}
+#level-six .six-result-edit{
+  background:#443037!important;border-left-color:#e07384!important;
+}
+#level-six .six-result-edit small{color:#e6abb1!important}
+#level-six .six-result-edit p{color:#f0e1db!important}
+#level-six .six-ethical-query{
+  color:#dcb5b5!important;border-color:#75555d!important;
+}
+#level-six .six-commit-feedback{color:#b7d1be!important}
+#level-six .six-option:focus-within{
+  outline:2px solid #d4687c;outline-offset:2px;
+}
+#sixAfter .six-ending-result{
+  background:#30262c!important;
+  border-color:#79545f!important;
+  box-shadow:10px 13px 0 #4b1421,0 22px 65px #000c!important;
+}
+#sixAfter .six-ending-result::before{
+  background:
+    radial-gradient(circle at 96% 10%,#ad213a 0 10px,transparent 13px),
+    radial-gradient(circle at 92% 22%,#a91b33 0 4px,transparent 6px),
+    radial-gradient(ellipse at 100% 0,#88162cbb 0 15%,transparent 46%),
+    radial-gradient(ellipse at -8% 94%,#63091880 0 13%,transparent 34%);
+}
+#sixAfter .six-ending-kicker{color:#e9acb7!important}
+#sixAfter .six-ending-result h1{color:#f4e4df!important}
+#sixAfter #six-ending-summary{color:#ecddd8!important}
+#sixAfter .six-ending-echo{
+  background:#433139!important;color:#f1dbd5!important;
+  border-left-color:#d14f67!important;
+}
+#sixAfter .six-ending-stat{
+  border-color:#75515b!important;
+}
+#sixAfter .six-ending-stat span{color:#dac1bd!important}
+#sixAfter .six-ending-stat strong{color:#ef9daa!important}
+#sixAfter #six-ending-question{color:#f1c4cb!important}
+#sixAfter .six-ending-actions .six-outline{
+  background:#362830!important;
+  color:#f4dfdf!important;border-color:#9c5264!important;
+}
+#sixAfter .six-ending-actions .six-outline:hover{background:#59303d!important}
+
+/* Transitional screens are part of the dark universe too. */
+body.blood-era #six-warning{
+  background:#100e11!important;color:#ece1da!important;
+}
+body.blood-era #six-warning::before{
+  background:
+    radial-gradient(ellipse at 12% 3%,#6b0b1b 0 10%,#7713282e 20%,transparent 44%),
+    radial-gradient(ellipse at 100% 100%,#4f0718 0 13%,#84152b45 25%,transparent 44%),
+    radial-gradient(circle at 72% 9%,#a32c43 0 3px,transparent 6px),
+    radial-gradient(circle at 75% 11%,#711a31 0 7px,transparent 9px)!important;
+}
+body.blood-era #six-warning .six-warning-paper{
+  background:#292125!important;
+  color:#f3e5df!important;border-color:#775660!important;
+  border-left-color:#be3d55!important;
+  box-shadow:8px 12px 0 #12090d,15px 19px 36px #0009!important;
+}
+body.blood-era #six-warning .six-warning-ref{color:#efb7bf!important}
+body.blood-era #six-warning .six-warning-dash{background:#785461!important}
+body.blood-era #six-warning .six-warning-paper h2{color:#f9e9e3!important}
+body.blood-era #six-warning .six-warning-paper p{color:#eb9da9!important}
+body.blood-era #six-warning #six-warning-continue{
+  background:#922940!important;border-color:#b85366!important;color:#fff!important;
+}
+#six-signal{
+  background:
+    radial-gradient(ellipse at 4% 18%,#64091c 0%,transparent 45%),
+    radial-gradient(ellipse at 93% 76%,#640b1d 0%,transparent 51%),
+    #160e13!important;
+}
+#six-signal>span{
+  background:#251c22!important;color:#f9e0e5!important;
+  border-color:#9b263f!important;
+  text-shadow:3px 0 #941e38,-2px 0 #4c1527!important;
+}
+#six-signal[data-intensity="severe"]{
+  background:
+    radial-gradient(ellipse at 50% 105%,#210309 0 23%,transparent 70%),
+    repeating-linear-gradient(93deg,#3c0611 0 20px,#790d22 24px 46px,#190408 50px 71px)!important;
+}
+#six-signal[data-intensity="severe"]>span{
+  background:#34232c!important;
+}
+#six-act-interrupt{
+  background:
+    radial-gradient(ellipse at 11% 8%,#590818 0 10%,transparent 40%),
+    radial-gradient(ellipse at 100% 100%,#6a0b21 0 17%,transparent 55%),
+    #130e12!important;
+}
+#six-act-interrupt>span{color:#eeb1be!important;text-shadow:none!important}
+#six-act-interrupt>p{color:#f5dfe2!important;text-shadow:4px 4px 0 #8c1d37!important}
+#six-blood-curtain{background:#160e14!important}
+#six-breach{background:#0f0b0e!important}
+#six-breach .six-lines span{color:#ed9aa9!important;text-shadow:3px 2px #410515,-3px 0 #86223a!important}
