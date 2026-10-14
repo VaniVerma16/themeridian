@@ -42,7 +42,7 @@
   recording:{
    duration:4750,
    code:'RECOVERY 05 → 06 / MEDIA SOURCE',
-   lines:['PLAYBACK INTERRUPTED.','There was another file?','Why didn’t anyone look at this before?','ARCHIVE SOURCE: 1997 / ORIGINAL INDEX FOUND']
+   lines:['PLAYBACK INTERRUPTED.','Wait, what?',"There's another file?","Why didn't anyone look at this bef—",'ARCHIVE SOURCE: 1997 / ORIGINAL INDEX FOUND']
   },
   archivist:{
    duration:5150,
