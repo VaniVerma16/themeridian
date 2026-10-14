@@ -8,7 +8,7 @@
  const root=document.getElementById('level-six');
  const host=document.getElementById('six-article');
  const workspace=document.getElementById('six-workspace');
- const intro=root?.querySelector('.six-editor-intro');
+ const intro=document.querySelector('#read-six .six-editor-intro');
  const start=document.getElementById('six-start');
  const prev=document.getElementById('six-prev');
  const next=document.getElementById('six-next');
@@ -80,11 +80,12 @@
    actTimer=setTimeout(()=>{actScreen.hidden=true;actTimer=null;},1450);
  }
  function sync(){
-   intro.hidden=started;
+   // The intro is a separate navigable section, not a panel inside Level 6.
+   // Do not hide its content when a saved playthrough is resumed.
    workspace.hidden=!started;
    const scene=snapshot();
    const now=pages[active];
-   if(started&&!now){started=false;workspace.hidden=true;intro.hidden=false;}
+   if(started&&!now){started=false;workspace.hidden=true;}
    pages.forEach((page,i)=>{
      page.hidden=!started||i!==active;
      page.setAttribute('aria-hidden',String(!started||i!==active));
@@ -166,7 +167,9 @@
    sync();
  }
  start.addEventListener('click',()=>{
-   started=true;persist();sync();scrollArticle();
+   started=true;persist();sync();
+   show('six');
+   scrollArticle();
    indicate('minor',0);
  });
  prev.addEventListener('click',()=>navigate(active-1));
@@ -185,8 +188,10 @@
    });
  });
  document.getElementById('six-reset').addEventListener('click',clearPager);
- document.getElementById('six-retry').addEventListener('click',clearPager);
+ // The ending Retry action is owned by level6.js so it can also navigate
+ // to the dedicated introduction after resetting the editorial draft.
  window.MeridianLevel6Pager={onRender,goTo:navigate,reset:clearPager,
+   ensureStarted:()=>{if(started)return;started=true;persist();sync();},
    status:()=>({active,started,pages:pages.length})};
  onRender();
 })();
