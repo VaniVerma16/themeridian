@@ -1,0 +1,504 @@
+/* THE MERIDIAN ONLINE — ARCHIVE EDITION, developer preview only.
+   Levels 2, 3 and 5 belong to the same hand-authored 1997 website as Level 6.
+   The story, article scans, validation, autosave and puzzle state remain unchanged. */
+body.dev-newsprint .meridian-era-site{
+ width:min(1150px,100%)!important;box-sizing:border-box;margin:6px auto 22px!important;
+ background:white!important;color:#161616!important;border:2px solid #858585!important;
+ font:15px/1.45 "Times New Roman",Times,serif!important;box-shadow:none!important;
+}
+body.dev-newsprint .meridian-era-site .era-top{
+ text-align:center;padding:12px 12px 8px!important;background:#fff!important;
+ border-bottom:4px double #003887!important;
+}
+body.dev-newsprint .meridian-era-site .era-logo{
+ color:#002c82!important;font:bold clamp(31px,4vw,52px)/1 "Times New Roman",serif!important;
+ letter-spacing:-.06em!important;text-shadow:2px 2px #c4c9e0;
+}
+body.dev-newsprint .meridian-era-site .era-logo em{
+ color:#a91b39!important;font-size:.63em;font-style:italic!important;letter-spacing:-.02em!important;
+}
+body.dev-newsprint .meridian-era-site .era-tagline{
+ display:block;margin:5px 0!important;color:#342574!important;
+ letter-spacing:0!important;font:bold 11px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint .meridian-era-site .era-dateline{
+ margin:5px 0 0!important;color:#555!important;letter-spacing:0!important;
+ font:10px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint .meridian-era-site .era-ticker{
+ padding:6px 11px!important;background:#000080!important;color:#ffffa5!important;
+ text-align:center;font:bold 11px/1.4 Verdana,Arial,sans-serif!important;
+ border-bottom:2px solid #008080!important;
+}
+body.dev-newsprint .meridian-era-site .era-table{
+ width:100%;border:0;border-spacing:0;table-layout:fixed;border-collapse:collapse;
+}
+body.dev-newsprint .meridian-era-site .era-table>tbody>tr>td{vertical-align:top}
+body.dev-newsprint .meridian-era-site .era-sidebar{
+ width:166px;padding:10px 8px!important;background:#ededed!important;
+ border-right:2px ridge #aaa;color:#111!important;box-sizing:border-box;
+}
+body.dev-newsprint .meridian-era-site .era-sidehead{
+ display:block;background:#000080!important;color:#fff!important;
+ padding:6px 7px!important;margin:2px 0 9px!important;
+ font:bold 11px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint .meridian-era-site .era-side-label{
+ margin:12px 3px 5px!important;color:#666!important;
+ font:10px/1.4 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint .meridian-era-site .era-link{
+ display:block;width:100%;box-sizing:border-box;padding:6px 4px!important;
+ background:transparent!important;border:0!important;text-align:left!important;
+ color:#0000ee!important;text-decoration:underline!important;text-underline-offset:auto!important;
+ transform:none!important;box-shadow:none!important;transition:none!important;
+ font:14px/1.4 "Times New Roman",serif!important;cursor:pointer;
+}
+body.dev-newsprint .meridian-era-site .era-link:hover,
+body.dev-newsprint .meridian-era-site .era-link:focus-visible{
+ background:transparent!important;color:#0000ee!important;
+ transform:none!important;box-shadow:none!important;filter:none!important;
+ text-decoration:underline!important;
+}
+body.dev-newsprint .meridian-era-site .era-link:active{color:#ee0000!important}
+body.dev-newsprint .meridian-era-site .era-link:focus-visible{outline:1px dotted #111!important}
+body.dev-newsprint .meridian-era-site .era-counter{
+ margin:15px 0 12px;padding:8px 5px;background:#f7f7f7!important;
+ border:2px inset #b6b6b6;text-align:center;color:#444!important;font:10px/1.6 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint .meridian-era-site .era-counter strong{
+ display:block;color:#000080!important;font:bold 20px/1.3 "Courier New",monospace!important;
+}
+body.dev-newsprint .meridian-era-site .era-sidefoot{
+ margin-top:14px;padding:9px 3px;border:1px dashed #aaa;
+ color:#555!important;text-align:center;font:10px/1.5 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint .meridian-era-site .era-body{
+ min-width:0!important;padding:17px 20px 24px!important;background:#fff!important;
+ color:#111!important;overflow-wrap:break-word;
+}
+body.dev-newsprint .meridian-era-site .era-breadcrumb{
+ color:#555!important;padding:0 0 8px!important;margin:0 0 13px!important;
+ border-bottom:1px dotted #aaa;font:10px/1.5 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint .meridian-era-site .era-title{
+ color:#000080!important;font:bold 29px/1.12 "Times New Roman",serif!important;
+ margin:0 0 5px!important;letter-spacing:0!important;text-shadow:none!important;
+}
+body.dev-newsprint .meridian-era-site .era-subtitle{
+ color:#444!important;font:12px/1.5 Verdana,Arial,sans-serif!important;margin:0 0 17px!important;
+}
+body.dev-newsprint .meridian-era-site .era-end{
+ padding:9px 12px!important;border-top:2px ridge #aaa;background:#e7e7e7!important;
+ color:#454545!important;text-align:center;font:10px/1.5 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint .meridian-era-site .assignment{
+ width:100%!important;max-width:none!important;min-height:0!important;
+ padding:0!important;margin:0!important;background:#fff!important;color:#111!important;
+ border:0!important;box-shadow:none!important;transform:none!important;
+}
+body.dev-newsprint .meridian-era-site .assignment>p.task-line,
+body.dev-newsprint .meridian-era-site .assignment>.feedback{
+ color:#222!important;font:15px/1.5 "Times New Roman",serif!important;
+}
+body.dev-newsprint .meridian-era-site .assignment .feedback.error{color:#a00000!important}
+body.dev-newsprint .meridian-era-site .assignment .actions{
+ display:flex;justify-content:flex-start;flex-wrap:wrap;gap:10px;margin-top:12px!important;
+}
+body.dev-newsprint .meridian-era-site .assignment .actions>.primary,
+body.dev-newsprint .meridian-era-site .assignment .actions>.secondary,
+body.dev-newsprint #sort-verify,body.dev-newsprint #sort-reset,
+body.dev-newsprint #check-three,body.dev-newsprint #five-finish{
+ color:#111!important;background:#c0c0c0!important;
+ border:2px solid!important;border-color:#fff #555 #555 #fff!important;
+ font:bold 12px Tahoma,Verdana,Arial,sans-serif!important;
+ padding:7px 14px!important;margin:0!important;min-width:0!important;
+ border-radius:0!important;box-shadow:inset 1px 1px #eee!important;
+ transform:none!important;transition:none!important;text-decoration:none!important;
+ text-transform:none!important;letter-spacing:0!important;
+}
+body.dev-newsprint .meridian-era-site .assignment .actions>button:hover,
+body.dev-newsprint #five-finish:hover{
+ transform:none!important;background:#d3d3d3!important;
+ box-shadow:inset 1px 1px #eee!important;
+}
+body.dev-newsprint .meridian-era-site .assignment .actions>button:active,
+body.dev-newsprint #five-finish:active{
+ border-color:#555 #fff #fff #555!important;box-shadow:none!important;
+}
+
+/* LEVEL TWO — newsroom chronological clippings directory, not corkboard. */
+body.dev-newsprint #level-two{max-width:none!important;border:0!important;padding:0!important;margin:0!important}
+body.dev-newsprint #level-two .corkboard-frame{
+ background:#f4f4f4!important;border:2px ridge #a9a9a9!important;
+ padding:0!important;margin:13px 0 8px!important;box-shadow:none!important;
+}
+body.dev-newsprint #level-two .corkboard-label{
+ background:#003a79!important;color:white!important;font:bold 12px Verdana,Arial,sans-serif!important;
+ padding:8px 10px!important;text-align:left!important;letter-spacing:0!important;text-shadow:none!important;
+}
+body.dev-newsprint #level-two .corkboard-bottom{
+ background:#eee!important;color:#454545!important;
+ padding:8px!important;font:10px Verdana,Arial,sans-serif!important;letter-spacing:0!important;
+ text-align:left!important;text-shadow:none!important;border-top:1px solid #aaa!important;
+}
+body.dev-newsprint #level-two .clipping-grid{
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:1px!important;padding:1px!important;background:#979797!important;
+ border:0!important;box-shadow:none!important;margin:0!important;
+}
+body.dev-newsprint #level-two .clipping-card,
+body.dev-newsprint #level-two .clipping-card:nth-child(n){
+ display:flex!important;flex-direction:column!important;position:relative!important;
+ min-width:0!important;height:auto!important;padding:8px!important;gap:7px!important;
+ background:#fff!important;border:1px solid #c7c7c7!important;
+ color:#111!important;box-shadow:none!important;transform:none!important;transition:none!important;
+}
+body.dev-newsprint #level-two .clipping-card.chosen{
+ outline:2px dotted #000080!important;outline-offset:-3px!important;background:#fffedb!important;
+}
+body.dev-newsprint #level-two .clipping-card.drag-over{
+ background:#e9f2ff!important;outline:2px dotted #000080!important;outline-offset:-3px!important;
+}
+body.dev-newsprint #level-two .cork-pin{display:none!important}
+body.dev-newsprint #level-two .clipping-card::before{
+ content:"DOCUMENT " attr(data-id);display:block;
+ color:#000080!important;font:700 10px/1.3 Verdana,Arial,sans-serif!important;text-transform:uppercase;
+ border-bottom:1px solid #aaa!important;padding-bottom:6px!important;
+}
+body.dev-newsprint #level-two .clipping-card img{
+ width:100%!important;height:185px!important;min-height:0!important;
+ display:block!important;object-fit:contain!important;object-position:center!important;
+ background:#f6f5f0!important;border:1px solid #999!important;padding:2px!important;
+ box-sizing:border-box!important;pointer-events:none!important;
+}
+body.dev-newsprint #level-two .clipping-caption{
+ color:#222!important;font:13px/1.36 "Times New Roman",serif!important;
+ margin:0!important;min-height:44px!important;
+}
+body.dev-newsprint #level-two .zoom-button{
+ display:inline!important;width:auto!important;align-self:flex-start!important;
+ background:transparent!important;border:0!important;color:#0000ee!important;
+ padding:0!important;margin-top:auto!important;box-shadow:none!important;
+ text-decoration:underline!important;font:14px "Times New Roman",serif!important;
+ transform:none!important;transition:none!important;
+}
+body.dev-newsprint #level-two .zoom-button:hover{
+ color:#0000ee!important;background:transparent!important;box-shadow:none!important;
+ transform:none!important;text-decoration:underline!important;
+}
+body.dev-newsprint #level-two #sort-feedback{margin:12px 0!important}
+body.dev-newsprint #level-two .clipping-card.dragging{opacity:.55!important}
+
+/* LEVEL THREE — 1997 editorial work sheet and three real table matrices. */
+body.dev-newsprint #level-three{max-width:none!important;border:0!important;padding:0!important;margin:0!important}
+body.dev-newsprint #level-three #deduction-workspace>.task-line{color:#111!important}
+body.dev-newsprint #level-three #read-guide{
+ margin:0 0 10px!important;color:#0000ee!important;font:14px "Times New Roman",serif!important;
+ border:0!important;background:transparent!important;box-shadow:none!important;
+ text-decoration:underline!important;padding:0!important;
+}
+body.dev-newsprint #level-three .archive-roster{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1px!important;
+ margin:13px 0!important;background:#aaa!important;border:1px solid #999!important;
+}
+body.dev-newsprint #level-three .roster-card{
+ display:flex!important;flex-direction:column!important;justify-content:space-between!important;
+ align-items:stretch!important;gap:6px!important;
+ background:#f7f7f7!important;border:0!important;padding:9px!important;
+ color:#222!important;min-width:0!important;min-height:0!important;box-shadow:none!important;
+}
+body.dev-newsprint #level-three .roster-card small{
+ color:#000080!important;font:bold 10px Verdana,Arial,sans-serif!important;
+ text-align:left!important;letter-spacing:0!important;
+}
+body.dev-newsprint #level-three .archive-open{
+ display:flex!important;flex-direction:column!important;align-items:center!important;gap:6px!important;
+ width:100%!important;padding:0!important;margin:0!important;
+ border:0!important;background:transparent!important;transform:none!important;box-shadow:none!important;
+}
+body.dev-newsprint #level-three .archive-heading-image{
+ width:100%!important;height:105px!important;max-height:none!important;
+ background:#fff!important;object-fit:contain!important;border:1px solid #aaa!important;
+}
+body.dev-newsprint #level-three .archive-open span{
+ display:block!important;align-self:flex-start!important;padding:0!important;
+ color:#0000ee!important;text-align:left!important;
+ font:13px "Times New Roman",serif!important;text-decoration:underline!important;
+}
+body.dev-newsprint #level-three .archive-key{
+ display:flex!important;flex-wrap:wrap!important;gap:20px!important;padding:9px!important;
+ border:1px solid #bbb!important;background:#f4f4f4!important;margin-bottom:14px!important;
+}
+body.dev-newsprint #level-three .key-title{
+ color:#111!important;font:bold 10px Verdana,Arial,sans-serif!important;letter-spacing:0!important;
+}
+body.dev-newsprint #level-three .key-values span{
+ background:#fff!important;color:#111!important;border:1px solid #bbb!important;
+ padding:3px 8px!important;min-width:0!important;font:13px "Times New Roman",serif!important;
+}
+body.dev-newsprint #level-three .level-three-workbench{
+ display:grid!important;grid-template-columns:1fr!important;gap:16px!important;
+ margin:9px 0!important;padding:0!important;background:#fff!important;border:0!important;
+}
+body.dev-newsprint #level-three .assignment-title{
+ display:flex!important;justify-content:space-between!important;align-items:center!important;
+ gap:12px!important;border:0!important;border-bottom:2px solid #002c82!important;
+ margin:12px 0 8px!important;padding:4px 0 7px!important;background:#fff!important;
+}
+body.dev-newsprint #level-three .assignment-title h2{
+ color:#000080!important;font:bold 21px/1.25 "Times New Roman",serif!important;margin:0!important;
+}
+body.dev-newsprint #level-three .assignment-title span{
+ color:#555!important;font:10px Verdana,Arial,sans-serif!important;letter-spacing:0!important;
+}
+body.dev-newsprint #level-three .editorial-memo{
+ background:#fffef0!important;border:1px solid #a59e7f!important;box-shadow:none!important;
+ padding:13px 17px!important;margin:0!important;color:#111!important;
+}
+body.dev-newsprint #level-three .editorial-memo p{
+ color:#111!important;font:15px/1.6 "Times New Roman",serif!important;
+ margin:0 0 11px!important;
+}
+body.dev-newsprint #level-three .editorial-memo .memo-signoff{
+ color:#555!important;font-style:italic!important;
+}
+body.dev-newsprint #level-three .logic-board-scroll{overflow-x:auto!important;background:#fff!important}
+body.dev-newsprint #level-three .logic-grids{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-template-rows:auto!important;gap:10px!important;min-width:580px!important;
+ max-width:none!important;margin:0!important;
+}
+body.dev-newsprint #level-three .logic-panel{
+ display:block!important;grid-column:auto!important;grid-row:auto!important;
+ background:#f4f4f4!important;border:1px solid #888!important;padding:7px!important;
+ color:#111!important;box-shadow:none!important;
+}
+body.dev-newsprint #level-three .logic-panel h3{
+ background:#000080!important;color:#fff!important;
+ padding:6px!important;margin:-7px -7px 8px!important;text-align:left!important;
+ font:bold 11px Verdana,Arial,sans-serif!important;letter-spacing:0!important;
+}
+body.dev-newsprint #level-three .logic-table th{
+ color:#111!important;background:#e5e5e5!important;padding:6px 4px!important;
+ border:1px solid #999!important;
+ font:10px Verdana,Arial,sans-serif!important;vertical-align:middle!important;
+}
+body.dev-newsprint #level-three .logic-table td{
+ border:1px solid #999!important;padding:0!important;background:#fff!important;
+}
+body.dev-newsprint #level-three .logic-cell{
+ display:grid!important;place-items:center!important;width:100%!important;min-height:34px!important;
+ padding:2px!important;background:#fff!important;color:#111!important;
+ border:0!important;box-shadow:none!important;transform:none!important;
+ font:bold 22px Georgia,serif!important;
+}
+body.dev-newsprint #level-three .logic-cell[data-state="1"]{background:#f1e3e3!important;color:#891717!important}
+body.dev-newsprint #level-three .logic-cell[data-state="2"]{background:#dcebdc!important;color:#135b2f!important}
+body.dev-newsprint #level-three .board-stamp{
+ min-height:120px!important;display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;
+ border:1px solid #aaa!important;background:#f1f1f1!important;color:#000080!important;
+}
+body.dev-newsprint #level-three .board-stamp>span{color:#000080!important}
+body.dev-newsprint #level-three .final-heading{
+ margin-top:17px!important;border-top:0!important;border-bottom:2px solid #002c82!important;
+}
+body.dev-newsprint #level-three .answer-fields{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:1px!important;background:#aaa!important;border:1px solid #999!important;
+ margin:12px 0!important;
+}
+body.dev-newsprint #level-three .answer-row{
+ background:#f6f6f6!important;border:0!important;padding:11px!important;
+ color:#111!important;min-width:0!important;gap:5px!important;
+}
+body.dev-newsprint #level-three .answer-row strong{color:#000080!important}
+body.dev-newsprint #level-three .answer-row select{
+ background:#fff!important;color:#111!important;border:2px inset #bbb!important;
+ font:12px Verdana,Arial,sans-serif!important;padding:7px!important;
+}
+
+/* LEVEL FIVE — retained police records rendered as an old web directory. */
+body.dev-newsprint #level-five{max-width:none!important;border:0!important;padding:0!important;margin:0!important}
+body.dev-newsprint #level-five .case-desk{width:100%!important;max-width:none!important}
+body.dev-newsprint #level-five .case-desk>h1{
+ display:block!important;color:#000080!important;font:bold 24px "Times New Roman",serif!important;
+ margin:0 0 13px!important;letter-spacing:0!important;
+}
+body.dev-newsprint #level-five #case-physical-desk{
+ display:block!important;position:relative!important;min-height:360px!important;
+ padding:0!important;margin:0!important;border:1px solid #999!important;
+ background:#fff!important;box-shadow:none!important;overflow:visible!important;isolation:auto!important;
+}
+body.dev-newsprint #level-five #case-physical-desk::before,
+body.dev-newsprint #level-five #case-physical-desk::after,
+body.dev-newsprint #level-five #case-physical-desk .desk-grain{display:none!important}
+body.dev-newsprint #level-five .desk-lamp{display:none!important}
+body.dev-newsprint #level-five .desk-objects{
+ display:grid!important;position:relative!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ min-height:0!important;max-width:none!important;width:100%!important;
+ gap:1px!important;padding:1px!important;margin:0!important;
+ background:#aaa!important;box-sizing:border-box!important;
+}
+body.dev-newsprint #level-five .desk-object,
+body.dev-newsprint #level-five :is(.desk-book-object,.desk-slip-object,.desk-pad-object,.desk-summary-object){
+ display:flex!important;position:relative!important;inset:auto!important;
+ width:100%!important;height:auto!important;min-height:120px!important;
+ padding:15px 14px!important;margin:0!important;
+ justify-content:flex-start!important;align-items:flex-start!important;
+ flex-direction:column!important;gap:10px!important;
+ background:#fff!important;color:#111!important;border:0!important;
+ transform:none!important;filter:none!important;
+ box-shadow:none!important;text-align:left!important;
+}
+body.dev-newsprint #level-five .desk-object:hover,
+body.dev-newsprint #level-five .desk-object:focus-visible{
+ background:#f5f6ff!important;transform:none!important;
+ box-shadow:none!important;outline:1px dotted #000080!important;outline-offset:-3px!important;
+}
+body.dev-newsprint #level-five .desk-object::before{
+ content:"▤";display:inline-block;color:#000080!important;
+ background:#e6e7fa;border:1px solid #000080;
+ padding:1px 7px;font:21px "Times New Roman",serif!important;
+}
+body.dev-newsprint #level-five .desk-object strong,
+body.dev-newsprint #level-five .desk-object em{
+ color:#0000ee!important;text-decoration:underline!important;
+ font:17px/1.3 "Times New Roman",serif!important;
+}
+body.dev-newsprint #level-five .desk-object small{
+ margin:0!important;color:#555!important;
+ font:10px Verdana,Arial,sans-serif!important;opacity:1!important;
+}
+body.dev-newsprint #level-five .desk-object em{
+ font:12px Verdana,Arial,sans-serif!important;color:#444!important;
+ text-decoration:none!important;margin:0!important;
+}
+body.dev-newsprint #level-five .desk-object::after,
+body.dev-newsprint #level-five .desk-book-spine,
+body.dev-newsprint #level-five .desk-box-tabs,
+body.dev-newsprint #level-five .desk-pad-binding{display:none!important}
+body.dev-newsprint #level-five .case-desk-grid>.case-note-wrap{
+ position:relative!important;inset:auto!important;display:block!important;min-height:0!important;
+ background:#fffef1!important;border-top:1px dotted #aaa!important;
+ padding:10px!important;margin:0!important;z-index:2!important;
+}
+body.dev-newsprint #level-five .case-folded-note{
+ display:inline-block!important;width:auto!important;height:auto!important;padding:3px 7px!important;
+ margin:0!important;transform:none!important;
+ background:#fff4c8!important;border:1px solid #8c805e!important;
+ font:11px Verdana,Arial,sans-serif!important;color:#111!important;
+ box-shadow:none!important;clip-path:none!important;
+}
+body.dev-newsprint #level-five .case-folded-note::before,
+body.dev-newsprint #level-five .case-folded-note::after,
+body.dev-newsprint #level-five .case-fold-corner{display:none!important}
+body.dev-newsprint #level-five .case-archivist-note{
+ position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+ width:auto!important;max-width:none!important;background:#fff8dc!important;
+ color:#111!important;border:1px dashed #8b7c54!important;
+ box-shadow:none!important;transform:none!important;margin:7px 0!important;
+ padding:9px 12px!important;
+}
+body.dev-newsprint #level-five .case-archivist-note p{color:#222!important}
+body.dev-newsprint #level-five .case-desk-grid>.case-index,
+body.dev-newsprint #level-five .case-desk-grid>.case-right{display:none!important}
+body.dev-newsprint #level-five .desk-overlay{
+ position:relative!important;inset:auto!important;z-index:4!important;
+ display:flex!important;flex-direction:column!important;
+ min-height:560px!important;width:100%!important;
+ background:#eee!important;color:#111!important;
+ border:2px inset #999!important;box-shadow:none!important;
+ backdrop-filter:none!important;margin:0!important;padding:0!important;overflow:hidden!important;
+}
+body.dev-newsprint #level-five .desk-overlay[hidden]{display:none!important}
+body.dev-newsprint #level-five .desk-overlay-bar{
+ flex:0 0 auto!important;background:#000080!important;color:#fff!important;
+ border-bottom:2px solid #777!important;padding:6px 9px!important;
+ font:bold 12px Verdana,Arial,sans-serif!important;letter-spacing:0!important;
+}
+body.dev-newsprint #level-five .desk-overlay-bar button{
+ color:#111!important;background:#c0c0c0!important;border:2px outset #fff!important;
+ font:11px Tahoma,Arial,sans-serif!important;padding:3px 9px!important;
+}
+body.dev-newsprint #level-five .desk-overlay-body{
+ background:#eee!important;flex:1!important;min-height:0!important;
+ max-height:67vh!important;overflow:auto!important;padding:17px!important;
+}
+body.dev-newsprint #level-five .desk-panel{width:100%!important;max-width:930px!important;color:#111!important}
+body.dev-newsprint #level-five #desk-notebook-panel .case-paper-viewport{
+ background:#ddd!important;border:2px inset #999!important;
+}
+body.dev-newsprint #level-five #desk-notebook-panel .case-paper{
+ background:#fffdf6!important;color:#1a1a1a!important;
+ border:1px solid #999!important;box-shadow:none!important;transform:none!important;
+}
+body.dev-newsprint #level-five #desk-pad-panel{
+ background:#fffef2!important;border:1px solid #aaa!important;color:#111!important;
+}
+body.dev-newsprint #level-five #desk-pad-panel #case-notepad{
+ background:#fff!important;color:#111!important;border:2px inset #bbb!important;
+ font:14px "Courier New",monospace!important;
+}
+body.dev-newsprint #level-five #desk-slips-panel .case-extra-view{
+ background:#fffdf4!important;color:#111!important;border:1px solid #aaa!important;box-shadow:none!important;
+}
+body.dev-newsprint #level-five .desk-slip-controls,
+body.dev-newsprint #level-five .case-page-controls,
+body.dev-newsprint #level-five .case-view-toolbar{
+ color:#222!important;
+}
+body.dev-newsprint #level-five .desk-slip-controls button,
+body.dev-newsprint #level-five .case-page-controls button,
+body.dev-newsprint #level-five .case-view-toolbar button{
+ border:2px outset #e3e3e3!important;color:#111!important;background:#c0c0c0!important;
+ font:12px Tahoma,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-five #desk-case-panel .case-form,
+body.dev-newsprint #level-five #desk-case-panel .case-result{
+ background:#fffef3!important;color:#111!important;border:1px solid #999!important;
+ box-shadow:none!important;
+}
+body.dev-newsprint #level-five #desk-case-panel :is(h2,p,small,.case-stage-instruction,.case-quick-guide){
+ color:#181818!important;
+}
+body.dev-newsprint #level-five #desk-case-panel .case-theory{
+ background:#f8f8f8!important;color:#111!important;border:1px solid #888!important;
+}
+body.dev-newsprint #level-five #desk-case-panel .case-theory.selected{
+ background:#e5f2e3!important;outline:2px solid #255b32!important;
+}
+body.dev-newsprint #level-five #desk-case-panel .case-evidence-choice{
+ background:#f4f4f4!important;color:#111!important;
+}
+body.dev-newsprint #level-five #desk-case-panel .case-evidence-choice.selected{
+ background:#dcebdc!important;color:#135b2f!important;
+}
+
+/* Readability: on white paper use black; white is reserved for blue bars.
+   This corrects the inherited pale-on-white headings shown in the screenshot. */
+body.dev-newsprint .meridian-era-site .era-body :is(.assignment-title h2,.final-heading h2,.task-line,.feedback,.case-quick-guide){
+ text-shadow:none!important;
+}
+body.dev-newsprint .meridian-era-site :is(.era-ticker,.era-sidehead,.logic-panel h3,.desk-overlay-bar) {
+ color:#fff!important;
+}
+/* Optical scale and responsive 800x600-era viewport. */
+@media(max-width:1100px){
+ body.dev-newsprint .meridian-era-site .era-sidebar{width:137px!important;padding:7px 5px!important}
+ body.dev-newsprint .meridian-era-site .era-body{padding:12px!important}
+ body.dev-newsprint #level-two .clipping-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.dev-newsprint #level-three .answer-fields{grid-template-columns:1fr!important}
+}
+@media(max-width:700px){
+ body.dev-newsprint .meridian-era-site .era-table,.meridian-era-site .era-table>tbody,
+ body.dev-newsprint .meridian-era-site .era-table>tbody>tr{display:block!important}
+ body.dev-newsprint .meridian-era-site .era-sidebar{display:none!important}
+ body.dev-newsprint .meridian-era-site .era-body{display:block!important;width:100%!important;padding:10px!important}
+ body.dev-newsprint #level-three .archive-roster{grid-template-columns:1fr!important}
+ body.dev-newsprint #level-three .logic-grids{grid-template-columns:1fr!important;min-width:340px!important}
+ body.dev-newsprint #level-five .desk-objects{grid-template-columns:1fr!important}
+ body.dev-newsprint #level-five .desk-object{min-height:96px!important}
+ body.dev-newsprint #level-five .desk-overlay-body{padding:8px!important}
+}
