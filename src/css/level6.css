@@ -523,3 +523,16 @@ body.blood-era #six-warning-continue:hover{
 @media(prefers-reduced-motion:reduce){
   #six-breach .six-blood-hand{animation:none!important}
 }
+
+
+/* Level 06: Storyteller intro. Keep the familiar recovered note surface.
+   The final phrase sits alone, just slightly too pleased with itself. */
+#level-six .six-editor-intro p{max-width:850px}
+#level-six .six-editor-intro em{font-style:italic}
+#level-six .six-editor-intro .six-intro-last{
+ margin:15px 0 1px!important;
+ padding-top:11px;
+ border-top:1px dotted #b8a99c;
+ font:italic 16px/1.6 Georgia,serif!important;
+ color:#693238!important;
+}
