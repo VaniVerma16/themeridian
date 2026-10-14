@@ -565,6 +565,10 @@
       startOutroMusic();
       outroTitle(1986);
       outroDelay(()=>playOutroVoice('jane',run),1700);
+      // A media play promise or external voice download must never strand the
+      // player on the recording screen. The normal ending takes ~25 seconds;
+      // this is a last-resort completion guard, not a skipped scene.
+      outroDelay(()=>{if(fiveOutroPending&&run===outroRun)finishOutro(run);},45000);
     }
-    document.getElementById('five-continue').addEventListener('click',flashAfterFive);
-    document.getElementById('four-finish').addEventListener('click',flashToLevelFive);
+    // The Continue listeners are registered centrally in core.js so a
+    // problem initializing the physical desk cannot leave them unbound.
