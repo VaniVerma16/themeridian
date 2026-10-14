@@ -34,7 +34,7 @@
         <option value="home">Home</option><option value="readOne">Level 1 intro</option><option value="level">Level 1 puzzle</option>
         <option value="readTwo">Level 2 intro</option><option value="two">Level 2 puzzle</option>
         <option value="readThree">Level 3 intro</option><option value="three">Level 3 puzzle</option>
-        <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="readFive">Level 5 intro</option><option value="five">Level 5 puzzle</option><option value="complete">End screen</option><option value="six">Level 6 (developer)</option><option value="sixAfter">Level 6 aftermath (developer)</option>
+        <option value="readFour">Level 4 intro</option><option value="four">Level 4 puzzle</option><option value="readFive">Level 5 intro</option><option value="five">Level 5 puzzle</option><option value="complete">End screen</option><option value="readSix">Level 6 intro (developer)</option><option value="six">Level 6 proof (developer)</option><option value="sixAfter">Level 6 aftermath (developer)</option>
       </select>
       <button id="dev-pass" type="button" title="Development only: run the next-level transition">Skip →</button>
       <button id="dev-audio" type="button" title="Development only: test glitch audio">Test sound ♪</button>
@@ -246,20 +246,29 @@
 </div>
 </section>
 
+<section id="read-six" class="reading-page six-intro-screen" aria-labelledby="six-intro-title" hidden>
+ <div class="six-intro-alone">
+  <div class="six-intro-folio"><span>THE MERIDIAN / EDITORIAL CORRESPONDENCE</span><span>FILE 06 · MESSAGE RECOVERED</span></div>
+  <div class="six-intro-content">
+   <p class="six-intro-overline">A NOTE FROM YOUR EDITOR</p>
+   <h1 id="six-intro-title" tabindex="-1">Before we begin.</h1>
+   <div class="six-editor-intro">
+    <p>I think something's happening. I'm so confused. I don't know what all this is about a missing file?!</p>
+    <p>I'd ignore it for now. Genuinely. Let's just focus on our next task.</p>
+    <p>Now we finally get to have a look at the brilliant piece we're reviving. An article called <em>A Life in Three Acts</em>. We'll have to decide which parts of the original article to keep, and which to discard.</p>
+    <p>Some of these choices might be tough. I'd say pick whichever gives you the best score. After all, winning is always the most important objective, right?</p>
+    <p class="six-intro-last">Makes for such a perfect story.</p>
+   </div>
+   <button id="six-start" class="six-opening-button" type="button">OPEN ORIGINAL PROOF <span aria-hidden="true">→</span></button>
+  </div>
+  <div class="six-intro-bottom"><span>THE MERIDIAN · INTERNAL CIRCULATION</span><span>06 / 07</span></div>
+ </div>
+</section>
 <section id="level-six" class="level six-screen" aria-labelledby="six-title" hidden>
  <div class="six-shell">
   <div class="six-folio"><span>THE MERIDIAN / RECOVERED ORIGINAL PROOF</span><span>APRIL 1997 · FILE 06 · EDITORIAL REVIEW</span></div>
   <p class="six-number">06 <small>/ THE RESTORATION</small></p>
   <h1 id="six-title" tabindex="-1">A Life in Three Acts</h1>
-  <div class="six-narrator six-editor-intro">
-   <span>A NOTE FROM YOUR EDITOR</span>
-   <p>I think something's happening. I'm so confused. I don't know what all this is about a missing file?!</p>
-   <p>I'd ignore it for now. Genuinely. Let's just focus on our next task.</p>
-   <p>Now we finally get to have a look at the brilliant piece we're reviving. An article called <em>A Life in Three Acts</em>. We'll have to decide which parts of the original article to keep, and which to discard.</p>
-   <p>Some of these choices might be tough. I'd say pick whichever gives you the best score. After all, winning is always the most important objective, right?</p>
-   <p class="six-intro-last">Makes for such a perfect story.</p>
-   <button id="six-start" class="six-opening-button" type="button">OPEN ORIGINAL PROOF <span aria-hidden="true">→</span></button>
-  </div>
   <div id="six-workspace" class="six-workspace" hidden>
    <nav class="six-chapter-nav" aria-label="Three acts of Adam's life">
     <span data-six-act="1">ACT I <small>THE PROMISE</small></span>
