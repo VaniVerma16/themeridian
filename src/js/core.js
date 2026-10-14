@@ -1,7 +1,11 @@
     // Local development preview only. This flag is NOT authentication or content protection.
     const developerPreview = new URLSearchParams(window.location.search).get("dev") === "1";
     const devNavigation = document.getElementById("dev-navigation");
-    if (developerPreview) devNavigation.hidden = false;
+    if (developerPreview) {
+      document.body.classList.add('dev-newsprint');
+      devNavigation.hidden = false;
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content','#e9dfc8');
+    }
     // The original completion narration is preserved for public and developer views.
 
     const archivedArticles={
