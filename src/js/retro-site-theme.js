@@ -29,10 +29,22 @@
      ['Personal Notepad','desk-open-pad'],
      ['Reconstruction Form','desk-open-case']]}
  ];
- const escape=(s)=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ // Introduction letters use the same site chrome so entering a puzzle
+ // never changes the website's design language.
+ siteSpecs.push(
+   {id:'read-two',serial:'02',title:'Newspaper Date Review',subtitle:'Editorial assignment notice',
+    ticker:'THE MERIDIAN · NEWSROOM CLIPPINGS · CHRONOLOGICAL REVIEW',
+    links:[['Open Date Review','#begin-two']]},
+   {id:'read-three',serial:'03',title:'The Missing Editions',subtitle:'Editorial assignment notice',
+    ticker:'THE MERIDIAN · REPORTER RECORDS · MISSING EDITIONS',
+    links:[['Begin Attribution','#begin-three']]},
+   {id:'read-five',serial:'05',title:'Original Case File',subtitle:'Editorial assignment notice',
+    ticker:'THE MERIDIAN · ORIGINAL CASE RECORDS · INTERNAL ARCHIVE',
+    links:[['Open Case File','#begin-five']]}
+ );
  siteSpecs.forEach(spec=>{
    const section=document.getElementById(spec.id);
-   const assignment=section?.querySelector(':scope > .assignment');
+   const assignment=section?.querySelector(':scope > .assignment, :scope > .reading-inner');
    if(!section||!assignment||section.querySelector('.meridian-era-site'))return;
    const shell=document.createElement('div');
    shell.className='meridian-era-site';shell.dataset.archivePage=spec.serial;
@@ -61,9 +73,9 @@
      link.addEventListener('click',()=>{
        const targetEl=target.startsWith('#')?section.querySelector(target):target.startsWith('.')?section.querySelector(target):document.getElementById(target);
        if(!targetEl)return;
-       if(target.startsWith('desk-')){
+       if(target.startsWith('desk-') || targetEl.matches('button[id^="begin-"]')){
          targetEl.click();
-         document.getElementById('desk-overlay')?.scrollIntoView({block:'nearest',behavior:'instant'});
+         if(target.startsWith('desk-'))document.getElementById('desk-overlay')?.scrollIntoView({block:'nearest',behavior:'instant'});
        }else{
          targetEl.scrollIntoView({block:'start',behavior:'instant'});
          if(targetEl.matches('button'))targetEl.focus({preventScroll:true});
