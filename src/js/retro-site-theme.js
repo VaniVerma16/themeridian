@@ -63,10 +63,30 @@
     ticker:'THE MERIDIAN · ORIGINAL CASE RECORDS · INTERNAL ARCHIVE',
     links:[['Open Case File','#begin-five']]}
  );
+
+ // The released demo ending is an ordinary Meridian Online archive page.
+ siteSpecs.push({
+   id:'completed',serial:'END',title:'Archive Status — Additional File',
+   subtitle:'Research & Preservation · status of the retained case records',
+   ticker:'ARCHIVE STATUS · ADDITIONAL RECORD LOCATED · FURTHER REVIEW PENDING',
+   links:[
+     ['Archive Notice','#completed-title'],
+     ['Personal Message','.beta-corner-note'],
+     ['Return to Front Page','#return-home']
+   ]
+ });
  siteSpecs.forEach(spec=>{
    const section=document.getElementById(spec.id);
-   const assignment=section?.querySelector(':scope > .assignment, :scope > .reading-inner');
-   if(!section||!assignment||section.querySelector('.meridian-era-site'))return;
+   if(!section || section.querySelector('.meridian-era-site'))return;
+   let assignment=section.querySelector(':scope > .assignment, :scope > .reading-inner');
+   if(spec.id==='completed' && !assignment){
+     // Move existing nodes; their IDs and click handlers stay unchanged.
+     assignment=document.createElement('div');
+     assignment.className='assignment archive-completion';
+     while(section.firstChild)assignment.appendChild(section.firstChild);
+     section.appendChild(assignment);
+   }
+   if(!assignment)return;
    const shell=document.createElement('div');
    shell.className='meridian-era-site';shell.dataset.archivePage=spec.serial;
    const head=document.createElement('div');head.className='era-top';
