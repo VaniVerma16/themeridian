@@ -131,14 +131,6 @@
     function flashToLevelFour(){
       if(flashPending)return;
       flashPending=true;
-      if(window.MeridianCrash){
-        const started=window.MeridianCrash.play({
-          kind:'editorial',
-          onComplete:()=>{show('readFour');flashPending=false;}
-        });
-        if(!started)flashPending=false;
-        return;
-      }
       const overlay=document.getElementById('transition-flash');
       overlay.classList.add('visible');
       window.setTimeout(()=>{
@@ -299,17 +291,6 @@
     function flashToLevelFive(){
       if(fiveFlashPending)return;
       fiveFlashPending=true;
-      if(window.MeridianCrash){
-        // Start the authored interference sound during the player gesture.
-        // The video system then crashes into the BIOS recovery screen.
-        playInterference();
-        const started=window.MeridianCrash.play({
-          kind:'survey',
-          onComplete:()=>{show('readFive');fiveFlashPending=false;}
-        });
-        if(!started)fiveFlashPending=false;
-        return;
-      }
       const overlay=document.getElementById('five-interference');
       // Audio is unlocked during earlier gestures; if the browser suspended it,
       // wait for resume and schedule both against the same hardware clock.

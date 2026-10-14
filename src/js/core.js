@@ -1,12 +1,7 @@
     // Local development preview only. This flag is NOT authentication or content protection.
     const developerPreview = new URLSearchParams(window.location.search).get("dev") === "1";
     const devNavigation = document.getElementById("dev-navigation");
-    // The 1997 desktop is now the canonical public site presentation.
-    // ?dev=1 still controls developer-only navigation and unreleased Level 6.
-    document.body.classList.add('dev-newsprint');
-    document.body.classList.toggle('public-retro',!developerPreview);
-    if(developerPreview)devNavigation.hidden=false;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content','#007b7b');
+    if (developerPreview) devNavigation.hidden = false;
     // The original completion narration is preserved for public and developer views.
 
     const archivedArticles={
@@ -192,7 +187,6 @@
     let pageTransitionBusy=false;
     function enterPuzzle(section,caption){
       if(pageTransitionBusy)return;
-      if(window.MeridianDesktop){show(section);return;}
       if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){show(section);return;}
       pageTransitionBusy=true;
       const screen=document.getElementById('page-transition');
@@ -210,14 +204,11 @@
       if(!recordProgress && !canRevisit(section))return;
       if(!developerPreview&&(section==='six'||section==='sixAfter'))section='complete';
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
-      window.MeridianDesktop?.beginNavigation(section);
-      // The site remains a restrained archive interface. Horror belongs to
-      // momentary interruptions, not a permanent red theme after Level 6.
-      document.body.classList.remove('blood-era');
+      if(developerPreview&&(section==='six'||section==='sixAfter'))sixAwakened=true;
+      document.body.classList.toggle('blood-era',developerPreview&&sixAwakened);
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
-      window.MeridianRetro?.setPage(section);
       refreshHistory(section);
       window.scrollTo({top:0,left:0,behavior:'instant'});
       if(section==='four')requestAnimationFrame(()=>ensureFourMap());
@@ -229,26 +220,7 @@
         requestAnimationFrame(()=>document.getElementById('six-warning-continue').focus());
       }
       if(recordProgress)safelySaveSession();
-      window.MeridianDesktop?.pageChanged(section);
     }
-    // Public browser buttons can revisit only unlocked pages.
-    window.MeridianNavigate=(section)=>show(section,false);
-    // Let dev-only website navigation reach the same trusted route that
-    // the original game buttons use, preserving progress and save state.
-    if(developerPreview)window.MeridianGame={
-      show,
-      // Authoritative callbacks for the two real Continue buttons.
-      // Exposing the existing flow prevents a duplicate/stale handler from
-      // leaving the player stuck inside a modal or results page.
-      continueFromFour:()=>flashToLevelFive(),
-      continueFromFive:()=>flashAfterFive(),
-      dismissSixWarning:()=>{
-        const dialog=document.getElementById('six-warning');
-        dialog.hidden=true;
-        document.body.classList.remove('six-intro-lock');
-        document.getElementById('six-title').focus({preventScroll:true});
-      }
-    };
     document.getElementById('six-warning-continue').addEventListener('click',()=>{
       const dialog=document.getElementById('six-warning');
       dialog.hidden=true;

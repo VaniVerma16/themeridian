@@ -453,20 +453,6 @@
       Object.values(outroMedia).forEach(a=>a.pause());
       outroGhost.pause();
       const root=document.getElementById('five-outro');
-      if(window.MeridianCrash){
-        // The actors' complete recorded dialogue remains unchanged.
-        // The damaged media now takes down the desktop itself; recovery
-        // continues into the already authored analogue tape handoff.
-        root.hidden=true;
-        playOutroJumpScare();
-        stopOutroMusic(2050);
-        const started=window.MeridianCrash.play({
-          kind:'recording',
-          onComplete:()=>finishOutro(run)
-        });
-        if(!started)outroDelay(()=>finishOutro(run),1750);
-        return;
-      }
       root.className='five-outro outro-final-glitch';
       document.getElementById('outro-title').hidden=true;
       document.getElementById('outro-dialogue').hidden=true;
@@ -569,13 +555,7 @@
       outroGhost.pause();
       stopOutroMusic();
       const root=document.getElementById('five-outro');root.hidden=true;root.className='five-outro';
-      // Public release ends at Level 5. The unreleased original archive
-      // remains accessible only through ?dev=1, never via the public tape.
-      if(window.MeridianTape){
-        window.MeridianTape.play(()=>show(developerPreview?'six':'complete'));
-      }else{
-        show('complete');
-      }
+      show('complete');
     }
     function flashAfterFive(){
       if(fiveOutroPending||(!developerPreview&&document.getElementById('five-result').hidden))return;

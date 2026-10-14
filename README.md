@@ -8,14 +8,12 @@ index.html              Page structure, archive UI and Level 6 developer-preview
 src/
   css/
     site.css            Site-wide styles, Levels 1–5, and evidence pinning
-    level6.css          Horror interruption and Level 6 warning overlay
-    retro-dev.css       1990s desktop/browser layout, old-web styles (dev only)
+    level6.css          Blood-dark presentation and the Level 6 interruption
   js/
     core.js             Story navigation, Levels 1–3, save/restore, developer preview
     level4.js           Map/photo reconstruction and final page initialization
     level5.js           1997 case desk, evidence pinning, final audiovisual cutscene
     level6.js           Developer-only editorial proof placeholder and interruption
-    retro-dev.js        Working links and location display in old-web preview
 *.jpg, *.png, *.svg     Archival images, scans, and survey map
 ```
 
@@ -25,7 +23,6 @@ Scripts are currently **separate classic browser scripts**, loaded in order with
 
 - Public: [themeridian-zeta.vercel.app](https://themeridian-zeta.vercel.app) — Levels 1–5 and the demo ending.
 - Development preview: [themeridian-zeta.vercel.app/?dev=1](https://themeridian-zeta.vercel.app/?dev=1) — additional Level 6 and its aftermath, reachable from the DEV PREVIEW navigation.
-- Developer preview now uses a late-1990s Windows-style browser frame throughout. Level 6 has a separate table-based original archive website, with Front Page, Editorial Proof, Archive Index, and Information pages. This layout is scoped to `?dev=1` only.
 - Level 6 prose is intentionally placeholder content pending the author’s **A Life in Three Acts** article. The 1996 manuscript investigation remains for a later level.
 
 **Security note:** `?dev=1` is not authorization. Any browser can download public JavaScript/CSS and inspect puzzle rules, regardless of how the repository is organized. To keep future unpublished content or scoring secrets truly private, protect a separate preview deployment and move answer checking and branch evaluation to a server-side endpoint. Do not place passwords, API keys or spoilers intended to be secret in client bundles.
