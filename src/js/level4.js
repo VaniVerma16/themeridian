@@ -131,7 +131,7 @@
     function flashToLevelFour(){
       if(flashPending)return;
       flashPending=true;
-      if(developerPreview&&window.MeridianCrash){
+      if(window.MeridianCrash){
         const started=window.MeridianCrash.play({
           kind:'editorial',
           onComplete:()=>{show('readFour');flashPending=false;}
@@ -299,7 +299,7 @@
     function flashToLevelFive(){
       if(fiveFlashPending)return;
       fiveFlashPending=true;
-      if(developerPreview&&window.MeridianCrash){
+      if(window.MeridianCrash){
         // Start the authored interference sound during the player gesture.
         // The video system then crashes into the BIOS recovery screen.
         playInterference();
