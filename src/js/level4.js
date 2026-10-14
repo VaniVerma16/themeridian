@@ -131,6 +131,12 @@
     function flashToLevelFour(){
       if(flashPending)return;
       flashPending=true;
+      if(developerPreview&&window.MeridianDesktop){
+        show('readFour');
+        window.MeridianDesktop.fault('soft');
+        flashPending=false;
+        return;
+      }
       const overlay=document.getElementById('transition-flash');
       overlay.classList.add('visible');
       window.setTimeout(()=>{
@@ -291,6 +297,14 @@
     function flashToLevelFive(){
       if(fiveFlashPending)return;
       fiveFlashPending=true;
+      if(developerPreview&&window.MeridianDesktop){
+        playInterference(()=>{
+          show('readFive');
+          window.MeridianDesktop.fault('cascade');
+          fiveFlashPending=false;
+        });
+        return;
+      }
       const overlay=document.getElementById('five-interference');
       // Audio is unlocked during earlier gestures; if the browser suspended it,
       // wait for resume and schedule both against the same hardware clock.
