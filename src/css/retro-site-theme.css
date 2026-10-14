@@ -691,3 +691,33 @@ body.dev-newsprint .wrapper.retro-under-attack .retro-address-value{
  animation:none!important;transition:none!important;
  }
 }
+
+
+/* Introductory letters: same 1997 website instead of switching skins. */
+body.dev-newsprint :is(#read-two,#read-three,#read-five).reading-page{
+ display:block!important;min-height:0!important;width:100%!important;max-width:none!important;
+ padding:0!important;margin:0!important;background:#fff!important;color:#111!important;
+}
+body.dev-newsprint :is(#read-two,#read-three,#read-five) .meridian-era-site{
+ margin:8px auto 24px!important;
+}
+body.dev-newsprint :is(#read-two,#read-three,#read-five) .reading-inner{
+ display:block!important;width:100%!important;max-width:none!important;min-height:0!important;
+ background:#fff!important;color:#111!important;padding:4px 0 20px!important;
+ border:0!important;box-shadow:none!important;
+}
+body.dev-newsprint :is(#read-two,#read-three,#read-five) .reading-inner::before{
+ content:none!important;display:none!important;
+}
+body.dev-newsprint :is(#read-two,#read-three,#read-five) .reading-inner h1{
+ color:#000080!important;font:bold 28px/1.2 "Times New Roman",serif!important;
+ margin:6px 0 14px!important;text-shadow:none!important;letter-spacing:0!important;
+}
+body.dev-newsprint :is(#read-two,#read-three,#read-five) .reading-inner :is(p,.reading-copy p,.narrator-letter p){
+ color:#111!important;font:16px/1.55 "Times New Roman",serif!important;
+ max-width:760px!important;margin:9px 0 13px!important;text-shadow:none!important;
+}
+body.dev-newsprint :is(#read-two,#read-three,#read-five) .narrator-letter{
+ background:#fff!important;color:#111!important;border:0!important;box-shadow:none!important;
+ padding:0!important;margin:0!important;max-width:none!important;
+}
