@@ -453,7 +453,7 @@
       Object.values(outroMedia).forEach(a=>a.pause());
       outroGhost.pause();
       const root=document.getElementById('five-outro');
-      if(developerPreview&&window.MeridianCrash){
+      if(window.MeridianCrash){
         // The actors' complete recorded dialogue remains unchanged.
         // The damaged media now takes down the desktop itself; recovery
         // continues into the already authored analogue tape handoff.
@@ -569,10 +569,10 @@
       outroGhost.pause();
       stopOutroMusic();
       const root=document.getElementById('five-outro');root.hidden=true;root.className='five-outro';
-      if(developerPreview && window.MeridianTape){
-        // Keep the entire authored recording, but replace the modern demo
-        // interstitial with a period-correct tape handoff to the original site.
-        window.MeridianTape.play(()=>show('six'));
+      // Public release ends at Level 5. The unreleased original archive
+      // remains accessible only through ?dev=1, never via the public tape.
+      if(window.MeridianTape){
+        window.MeridianTape.play(()=>show(developerPreview?'six':'complete'));
       }else{
         show('complete');
       }
