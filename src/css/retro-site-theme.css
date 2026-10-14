@@ -735,3 +735,204 @@ body.dev-newsprint .retro-browser-page > main > .reading-page[hidden],
 body.dev-newsprint .retro-browser-page > main > .level[hidden] {
  display:none!important;
 }
+
+
+/* FILE 05 LAYOUT FIX — the old desk's absolute sticky-note dimensions
+   must never leak into the 1997 archive document directory. */
+body.dev-newsprint #level-five .desk-objects{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-flow:row!important;
+  align-items:stretch!important;
+  gap:1px!important;
+  padding:1px!important;
+  background:#999!important;
+  width:100%!important;
+  min-height:0!important;
+}
+body.dev-newsprint #level-five .desk-objects > .desk-object{
+  display:grid!important;
+  position:relative!important;
+  grid-template-columns:36px minmax(0,1fr)!important;
+  grid-auto-rows:min-content!important;
+  column-gap:12px!important;
+  row-gap:5px!important;
+  align-content:center!important;
+  align-items:center!important;
+  justify-content:stretch!important;
+  min-height:112px!important;
+  padding:17px 20px!important;
+  margin:0!important;
+  background:#fff!important;
+  color:#111!important;
+  box-sizing:border-box!important;
+}
+body.dev-newsprint #level-five .desk-objects > .desk-object::before{
+  content:"▤"!important;
+  grid-column:1!important;
+  grid-row:1 / span 4!important;
+  align-self:center!important;
+  justify-self:start!important;
+  width:28px!important;
+  height:33px!important;
+  padding:0!important;
+  margin:0!important;
+  display:grid!important;
+  place-items:center!important;
+  background:#f0f2fb!important;
+  color:#000080!important;
+  border:1px solid #000080!important;
+  box-sizing:border-box!important;
+  font:19px/1 "Times New Roman",serif!important;
+}
+body.dev-newsprint #level-five .desk-objects > .desk-object > :is(small,strong,em){
+  grid-column:2!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  text-align:left!important;
+  align-self:center!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  letter-spacing:normal!important;
+}
+body.dev-newsprint #level-five .desk-objects > .desk-object > strong{
+  color:#0000ee!important;
+  font:17px/1.3 "Times New Roman",serif!important;
+  text-decoration:underline!important;
+}
+body.dev-newsprint #level-five .desk-objects > .desk-object > small{
+  color:#555!important;
+  font:10px/1.4 Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-five .desk-objects > .desk-object > em{
+  color:#555!important;
+  font:12px/1.4 Verdana,Arial,sans-serif!important;
+  text-decoration:none!important;
+  font-style:normal!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap{
+  display:block!important;
+  position:relative!important;
+  inset:auto!important;
+  z-index:auto!important;
+  grid-column:1 / -1!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:15px 20px!important;
+  box-sizing:border-box!important;
+  background:#fffef6!important;
+  border:0!important;
+  border-top:1px solid #999!important;
+  box-shadow:none!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap #case-note-dismiss{
+  display:inline-flex!important;
+  position:relative!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  width:auto!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-height:35px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  outline-offset:3px!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+  filter:none!important;
+  transform:none!important;
+  transition:none!important;
+  color:#0000ee!important;
+  cursor:pointer!important;
+  text-align:left!important;
+  font:17px/1.35 "Times New Roman",serif!important;
+  font-style:normal!important;
+  text-decoration:underline!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap #case-note-dismiss::before{
+  content:"▤"!important;
+  display:grid!important;
+  place-items:center!important;
+  flex:0 0 28px!important;
+  width:28px!important;
+  height:33px!important;
+  padding:0!important;
+  margin:0 20px 0 0!important;
+  background:#fbf0cb!important;
+  border:1px solid #998452!important;
+  color:#80652b!important;
+  box-sizing:border-box!important;
+  font:19px/1 "Times New Roman",serif!important;
+  text-decoration:none!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap #case-note-dismiss::after,
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap .case-fold-corner{
+  display:none!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap #case-note-dismiss > span:last-child{
+  display:inline!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:max-content!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  color:#0000ee!important;
+  font:17px/1.35 "Times New Roman",serif!important;
+  text-transform:capitalize!important;
+  text-decoration:underline!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap #case-note-dismiss:hover{
+  background:transparent!important;
+  transform:none!important;
+  text-decoration:underline!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap #case-note-dismiss:focus-visible{
+  outline:1px dotted #000080!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap .case-archivist-note{
+  display:block;
+  position:static!important;
+  inset:auto!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  margin:11px 0 0!important;
+  padding:13px 15px!important;
+  box-sizing:border-box!important;
+  background:#fffae8!important;
+  border:1px solid #d4c49a!important;
+  border-left:3px solid #a18c5c!important;
+  color:#1c1c1c!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+  transform:none!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap .case-archivist-note[hidden]{
+  display:none!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap .case-archivist-note .case-tape{
+  display:none!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap .case-archivist-note small{
+  display:block!important;
+  color:#6e613f!important;
+  font:bold 10px Verdana,Arial,sans-serif!important;
+}
+body.dev-newsprint #level-five .desk-objects > .case-note-wrap .case-archivist-note p{
+  color:#252525!important;
+  font:italic 16px/1.55 "Times New Roman",serif!important;
+  margin:7px 0 0!important;
+}
+@media(max-width:700px){
+  body.dev-newsprint #level-five .desk-objects{grid-template-columns:1fr!important}
+  body.dev-newsprint #level-five .desk-objects > .desk-object{min-height:94px!important;padding:13px 12px!important}
+  body.dev-newsprint #level-five .desk-objects > .case-note-wrap{padding:12px!important}
+  body.dev-newsprint #level-five .desk-objects > .case-note-wrap #case-note-dismiss::before{margin-right:14px!important}
+}
