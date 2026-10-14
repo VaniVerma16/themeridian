@@ -137,3 +137,126 @@ body.dev-newsprint .meridian-crash.phase-restore .crash-desktop{display:none}
  animation:none!important;transition:none!important;
  }
 }
+
+
+/* FILE 06 ENTRY — same 1997 computer/BIOS environment as the transitions.
+   The first appearance of the Archivist's original file must feel like part
+   of The Meridian OS, not a modern cinematic horror intertitle. */
+body.dev-newsprint #six-warning{
+ display:grid!important;
+ place-items:center!important;
+ position:fixed!important;
+ inset:0!important;
+ z-index:12000!important;
+ padding:clamp(12px,3vw,40px)!important;
+ box-sizing:border-box!important;
+ background:#06070a!important;
+ background-image:repeating-linear-gradient(0deg,transparent 0 3px,#99add006 3px 4px)!important;
+ color:#e5e5e5!important;
+ font-family:"Courier New",Courier,monospace!important;
+ overflow-y:auto!important;
+}
+body.dev-newsprint #six-warning[hidden]{display:none!important}
+body.dev-newsprint #six-warning::before{
+ content:"THE MERIDIAN SYSTEM BIOS     FILE RECOVERY SERVICE / 1997";
+ position:absolute;left:clamp(18px,4vw,70px);right:18px;top:clamp(16px,3vh,37px);
+ color:#a9b3c5!important;font:bold clamp(10px,1.15vw,14px)/1.4 "Courier New",monospace!important;
+ letter-spacing:0!important;
+}
+body.dev-newsprint #six-warning::after{
+ content:"";pointer-events:none!important;position:absolute;inset:0;
+ background:repeating-linear-gradient(0deg,transparent 0 2px,#ffffff08 3px 4px)!important;
+ opacity:.25!important;animation:none!important;
+}
+body.dev-newsprint #six-warning .six-warning-paper{
+ position:relative!important;z-index:1!important;
+ box-sizing:border-box!important;
+ width:min(850px,100%)!important;
+ max-width:850px!important;
+ padding:clamp(22px,4vw,52px)!important;
+ text-align:left!important;
+ border:2px solid #8c98ab!important;
+ outline:1px solid #303b4a!important;
+ background:#000080!important;
+ background-image:none!important;
+ box-shadow:5px 6px 0 #000a,inset 0 0 0 5px #000080,inset 0 0 0 6px #8c98ab!important;
+ color:#e8edf8!important;
+}
+body.dev-newsprint #six-warning .six-warning-paper::before{
+ content:"ARCHIVE VERIFICATION REQUIRED";
+ display:block;margin-bottom:clamp(24px,4vh,40px);
+ padding:0 0 10px;
+ border-bottom:1px dashed #a7b5d3;
+ color:#c7d7ff;
+ font:700 12px/1.4 "Courier New",monospace;
+ letter-spacing:0!important;
+}
+body.dev-newsprint #six-warning .six-warning-ref{
+ display:block!important;
+ color:#c1cfeb!important;
+ font:bold clamp(11px,1.15vw,14px)/1.5 "Courier New",Courier,monospace!important;
+ letter-spacing:.035em!important;
+}
+body.dev-newsprint #six-warning .six-warning-dash{
+ display:block!important;
+ width:100%!important;height:1px!important;
+ margin:15px 0 23px!important;
+ background:#8597b7!important;
+}
+body.dev-newsprint #six-warning .six-warning-paper h2{
+ max-width:100%!important;
+ margin:0 0 14px!important;
+ color:#fff!important;
+ font:700 clamp(21px,3.7vw,39px)/1.25 "Courier New",Courier,monospace!important;
+ letter-spacing:0!important;
+ text-shadow:none!important;
+ text-transform:uppercase!important;
+ overflow-wrap:normal!important;
+}
+body.dev-newsprint #six-warning .six-warning-paper p{
+ margin:0 0 29px!important;
+ color:#ffffb2!important;
+ font:700 clamp(15px,2vw,22px)/1.4 "Courier New",Courier,monospace!important;
+ letter-spacing:.04em!important;
+}
+body.dev-newsprint #six-warning #six-warning-continue{
+ display:inline-flex!important;align-items:center!important;
+ justify-content:center!important;min-height:42px!important;
+ width:auto!important;
+ margin:0!important;padding:9px 17px!important;
+ border:2px solid!important;
+ border-color:#fff #4e4e4e #4e4e4e #fff!important;
+ border-radius:0!important;
+ background:#c0c0c0!important;color:#101010!important;
+ box-shadow:inset 1px 1px #f0f0f0!important;
+ font:700 12px/1.4 Tahoma,Verdana,Arial,sans-serif!important;
+ letter-spacing:0!important;text-decoration:none!important;
+ transform:none!important;transition:none!important;
+ cursor:pointer!important;
+}
+body.dev-newsprint #six-warning #six-warning-continue:hover{
+ background:#dfdfdf!important;color:#111!important;
+ border-color:#fff #4e4e4e #4e4e4e #fff!important;
+ box-shadow:inset 1px 1px #fff!important;
+}
+body.dev-newsprint #six-warning #six-warning-continue:active{
+ border-color:#4e4e4e #fff #fff #4e4e4e!important;
+ box-shadow:none!important;
+}
+body.dev-newsprint #six-warning #six-warning-continue:focus-visible{
+ outline:2px dotted #ffffb2!important;outline-offset:5px!important;
+}
+body.dev-newsprint #six-warning #six-warning-continue span{margin-left:8px!important}
+body.dev-newsprint #six-warning .six-warning-paper::after{
+ content:"C:\\MERIDIAN\\ARCHIVE\\1997> READ /ORIGINAL";
+ display:block!important;
+ margin-top:35px!important;padding-top:10px!important;
+ color:#d4dcf3!important;
+ border-top:1px dashed #8496b0!important;
+ font:11px/1.4 "Courier New",monospace!important;
+ letter-spacing:0!important;
+}
+@media(prefers-reduced-motion:reduce){
+ body.dev-newsprint #six-warning,
+ body.dev-newsprint #six-warning *{animation:none!important}
+}
