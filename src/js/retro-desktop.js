@@ -189,10 +189,10 @@
        const w=openAlert({
          title:'Windows Explorer — File Conflict',
          body:'Two originals were found in the same directory.\nBoth files report the same timestamp.',
-         code:'C:\MERIDIAN\ARCHIVE\ORIGINAL.HTM',
+         code:'C:\\MERIDIAN\\ARCHIVE\\ORIGINAL.HTM',
          kind:'severe',autoClose:7900
        });
-       corruptError(w,{title:'C:\MERIDIAN\ARCHIVE\DO_NOT_REPLACE.HTM',button:'CANCEL',at:1150});
+       corruptError(w,{title:'C:\\MERIDIAN\\ARCHIVE\\DO_NOT_REPLACE.HTM',button:'CANCEL',at:1150});
      },340);
      queueError(()=>{
        const w=openAlert({
@@ -220,7 +220,7 @@
        const w=openAlert({
          title:'Explorer — Duplicate File',
          body:'The original site was found in two different locations.\nOne of these files does not belong here.',
-         code:'C:\MERIDIAN\OLD_SITE\INDEX.HTM',kind:'severe',autoClose:10000
+         code:'C:\\MERIDIAN\\OLD_SITE\\INDEX.HTM',kind:'severe',autoClose:10000
        });
        corruptError(w,{message:'One of these files does not belong here.\nWhy does it keep returning?',at:1280});
      },260);
