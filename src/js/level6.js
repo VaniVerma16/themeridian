@@ -300,6 +300,9 @@
    sourcePane.append(section);
   }
   update();
+  // The paginated Level 6 controller re-organises existing editorial cards
+  // without replacing their choice listeners or scoring logic.
+  window.MeridianLevel6Pager?.onRender();
  }
  function update(){
   const state=qualityResult();
