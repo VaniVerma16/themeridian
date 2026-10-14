@@ -1,8 +1,8 @@
-/* The Meridian: desktop shell for ?dev=1 only.
-   Never routes the public game or overrides puzzle answers. */
+/* The Meridian: shared browser desktop for public levels 1–5.
+   The privileged dev navigation remains gated in core.js. */
 (function(){
  'use strict';
- if(typeof developerPreview==='undefined'||!developerPreview)return;
+ if(!document.body.classList.contains('dev-newsprint'))return;
  const $=id=>document.getElementById(id);
  const wrapper=document.querySelector('.wrapper');
  const chrome=document.querySelector('.retro-browser-chrome');
@@ -59,6 +59,13 @@
 
  const nav=$('dev-navigation');
  // A Windows taskbar belongs to the desktop, not the scrolled website.
+ // Its developer controls are suppressed for public visitors; keep the
+ // actual Start button, browser task and clock available to everyone.
+ if(!developerPreview){
+   nav.hidden=false;
+   nav.setAttribute('aria-label','Desktop taskbar');
+   nav.querySelectorAll('.dev-tag,label,#dev-level,#dev-pass,#dev-audio').forEach(el=>{el.hidden=true;el.tabIndex=-1;});
+ }
  if(page.contains(nav))document.body.appendChild(nav);
  const start=document.createElement('button');
  start.id='retro-start';start.className='retro-start';start.type='button';start.textContent='▦ Start';
@@ -282,6 +289,10 @@
  let trail=[],trailPos=-1,historyNavigation=false;
  function navigateTo(section){
    if(!section)return;
+   if(!developerPreview){
+     window.MeridianNavigate?.(section);
+     return;
+   }
    const menu=$('dev-level');menu.value=section;
    menu.dispatchEvent(new Event('change',{bubbles:true}));
  }
