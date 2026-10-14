@@ -208,8 +208,9 @@
       if(!recordProgress && !canRevisit(section))return;
       if(!developerPreview&&(section==='six'||section==='sixAfter'))section='complete';
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
-      if(developerPreview&&(section==='six'||section==='sixAfter'))sixAwakened=true;
-      document.body.classList.toggle('blood-era',developerPreview&&sixAwakened);
+      // The site remains a restrained archive interface. Horror belongs to
+      // momentary interruptions, not a permanent red theme after Level 6.
+      document.body.classList.remove('blood-era');
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
