@@ -5,6 +5,11 @@
  if(!developerPreview)return;
  var tabs={front:'retro-six-welcome',proof:'retro-six-proof',index:'retro-six-index',help:'retro-six-help'};
  var currentTab='front';
+ var visitedTabs={};
+ try{
+  var seen=JSON.parse(sessionStorage.getItem('meridian-dev-visited-links')||'[]');
+  if(Array.isArray(seen))seen.forEach(function(tab){if(tabs[tab])visitedTabs[tab]=true});
+ }catch(error){/* Session history is optional. */}
  var labels={
   home:'index.htm',readOne:'assess/01.htm',level:'assess/01-work.htm',
   readTwo:'assess/02.htm',two:'assess/02-work.htm',
@@ -27,6 +32,11 @@
  function openTab(which){
    if(!tabs[which])return;
    currentTab=which;
+   visitedTabs[which]=true;
+   try{sessionStorage.setItem('meridian-dev-visited-links',JSON.stringify(Object.keys(visitedTabs)))}catch(error){}
+   document.querySelectorAll('#level-six [data-retro-tab]').forEach(function(link){
+     link.classList.toggle('retro-visited',Boolean(visitedTabs[link.getAttribute('data-retro-tab')]));
+   });
    Object.keys(tabs).forEach(function(key){
       var node=document.getElementById(tabs[key]);
       if(node)node.hidden=key!==which;
