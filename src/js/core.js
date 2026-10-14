@@ -4,7 +4,7 @@
     if (developerPreview) {
       document.body.classList.add('dev-newsprint');
       devNavigation.hidden = false;
-      document.querySelector('meta[name="theme-color"]')?.setAttribute('content','#e9dfc8');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content','#007b7b');
     }
     // The original completion narration is preserved for public and developer views.
 
@@ -214,6 +214,7 @@
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
+      window.MeridianRetro?.setPage(section);
       refreshHistory(section);
       window.scrollTo({top:0,left:0,behavior:'instant'});
       if(section==='four')requestAnimationFrame(()=>ensureFourMap());

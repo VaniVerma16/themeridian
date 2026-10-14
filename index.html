@@ -8,11 +8,22 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="src/css/site.css">
   <link rel="stylesheet" href="src/css/level6.css">
-  <link rel="stylesheet" href="src/css/dev-newspaper.css">
+  <link rel="stylesheet" href="src/css/retro-dev.css">
 </head>
 <body>
   <div class="topline"></div>
+<div class="retro-desktop-shortcuts" aria-hidden="true">
+ <div class="retro-desktop-item"><span>▣</span><span>My Computer</span></div>
+ <div class="retro-desktop-item"><span>▤</span><span>The Meridian</span></div>
+ <div class="retro-desktop-item"><span>▥</span><span>Documents</span></div>
+</div>
   <div class="wrapper">
+<div class="retro-browser-chrome" aria-hidden="true">
+  <div class="retro-browser-title"><span class="retro-browser-title-name"><span class="retro-browser-logo">e</span> The Meridian Online — Microsoft Internet Explorer</span><span class="retro-window-controls"><span>–</span><span>□</span><span>×</span></span></div>
+  <div class="retro-browser-menu"><span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span></div>
+  <div class="retro-browser-toolbar"><span class="retro-toolbar-graphic">◀</span><span class="retro-toolbar-label">Back</span><span class="retro-toolbar-graphic">▶</span><span class="retro-toolbar-label">Forward</span><span class="retro-toolbar-divider"></span><span class="retro-toolbar-graphic">⌂</span><span class="retro-toolbar-label">Home</span><span class="retro-toolbar-graphic">▣</span><span class="retro-toolbar-label">Search</span></div>
+  <div class="retro-address-row"><b>Address</b><span class="retro-address-value" id="retro-address">http://www.the-meridian.archive/index.htm</span></div>
+</div>
     <header id="full-header">
       <div class="utility"><span>An independent publishing platform</span><span>Established 1972</span></div>
       <div class="masthead"><div class="brand">The Meridian</div><div class="tagline">Stories worth preserving</div></div>
@@ -248,53 +259,146 @@
 </section>
 
 <section id="level-six" class="level six-screen" aria-labelledby="six-title" hidden>
- <div class="six-shell">
-  <div class="six-folio"><span>THE MERIDIAN / RESTORED ARCHIVE</span><span>APRIL 1997 · FINAL PROOF</span></div>
-  <p class="six-number">06 <small>/ THE FINAL PROOF</small></p>
-  <h1 id="six-title" tabindex="-1">A Life in Three Acts</h1>
-  <div class="six-narrator"><span>THE MERIDIAN · ORIGINAL EDITORIAL PAGE</span>
-    <p>Case reconstruction complete. The surviving records support the recovery location, the probable identification, the estimated interval of death, and the medical cause. The circumstances of death remain undetermined.</p>
-    <p>The article cannot be finalised on those findings alone. Each claim must be checked against its source. Where accounts conflict, the discrepancy is to be retained—not resolved for the sake of a cleaner narrative.</p>
-    <p>Begin with the recovered proof. Five transcription errors require correction before editorial review can proceed.</p>
-  </div>
-  <div class="six-columns">
-   <article class="six-paper">
-    <div class="six-paperhead"><span>THE MERIDIAN</span><span>RECOVERED PROOF / 1997</span></div>
-    <p class="six-section-tag">ARCHIVES · FEATURE</p>
-    <h2>A Life in Three Acts</h2>
-    <p class="six-subtitle">The Death of the Ordinary Man</p>
-    <p class="six-placeholder-label">DRAFT PLACEHOLDER — the author will provide the complete article. The short text below tests the proofreading mechanic only.</p>
-    <div id="six-article"></div>
-    <div class="six-paperend">— END OF AVAILABLE COPY —</div>
-   </article>
-   <aside class="six-sidebar"><div class="six-sidebar-top"><span>COPY DESK</span><span>97 / 06</span></div>
-    <h3>Five small mistakes.</h3>
-    <p>Read through the article and click the five words with errors. Each correction will be applied to the recovered proof.</p>
-    <div class="six-total"><strong id="six-score">0</strong> / <span id="six-goal">5</span></div>
-    <div class="six-meter"><div id="six-meter-fill"></div></div>
-    <p id="six-feedback" role="status" aria-live="polite">Five corrections remaining.</p>
-    <button id="six-reset" class="six-outline" type="button" hidden>Reset proof (developer)</button>
-   </aside>
-  </div>
+ <div class="retro-site-page" id="retro-original-site">
+  <table class="retro-layout" role="presentation" cellspacing="0" cellpadding="0">
+   <colgroup><col style="width:183px"><col></colgroup>
+   <tr><td colspan="2" class="retro-banner">
+    <div class="retro-logo">The Meridian <em>Online!</em><small>INDEPENDENT PUBLISHING &amp; RESEARCH ARCHIVES</small></div>
+    <div class="retro-banner-byline">ESTABLISHED 1972 &nbsp; | &nbsp; ELECTRONIC ARCHIVE · APRIL 1997 &nbsp; | &nbsp; STORIES WORTH PRESERVING</div>
+   </td></tr>
+   <tr><td colspan="2" class="retro-ticker">★ WELCOME TO THE MERIDIAN ONLINE ARCHIVE ★ &nbsp; · &nbsp; EDITORIAL RECORDS &amp; RETAINED PAPERS &nbsp; · &nbsp; EST. 1972 ★</td></tr>
+   <tr>
+    <td class="retro-navcell">
+     <div class="retro-sidebar-header">SITE DIRECTORY</div>
+     <button type="button" class="retro-link" data-retro-tab="front" aria-current="page">⌂ &nbsp; Front Page</button>
+     <button type="button" class="retro-link" data-retro-tab="proof">▣ &nbsp; Editorial Proofs <span class="retro-new">NEW!</span></button>
+     <button type="button" class="retro-link" data-retro-tab="index">▤ &nbsp; Archive Index</button>
+     <button type="button" class="retro-link" data-retro-tab="help">? &nbsp; Information</button>
+     <hr>
+     <div class="retro-sidebar-header">1997 FILE ROOM</div>
+     <div class="retro-fileline">◈ &nbsp; Research<br><span class="retro-small">21 FEB 1997</span></div>
+     <div class="retro-fileline">◈ &nbsp; Newspaper files<br><span class="retro-small">JAN–APR 1997</span></div>
+     <div class="retro-fileline">◈ &nbsp; Editorial drafts<br><span class="retro-small">IN REVIEW</span></div>
+     <div class="retro-file-counter">YOU ARE VISITOR NUMBER<strong>004297</strong>TO THE ARCHIVE</div>
+     <div class="retro-archive-stamp"><b>ARCHIVE</b><br>Electronic copies<br>for reference only.<br><br>Last updated:<br>APR 1997</div>
+    </td>
+    <td class="retro-maincell">
+     <div id="retro-six-welcome" class="retro-view">
+      <p class="retro-small">HOME &gt; RESEARCH &amp; PRESERVATION &gt; EDITORIAL OFFICE</p>
+      <h1 id="six-title" tabindex="-1">Welcome to the Archives</h1>
+      <p class="retro-small"><b>THE MERIDIAN</b> · Editorial and research department · April 1997</p>
+      <hr>
+      <h2>Editorial Assignment Notice</h2>
+      <div class="retro-note">
+       <strong>FILE NO. 97 / 06 &nbsp; · &nbsp; ORIGINAL EDITORIAL RECORD</strong>
+       <p>Case reconstruction complete. The surviving records support the recovery location, the probable identification, the estimated interval of death, and the medical cause. The circumstances of death remain undetermined.</p>
+       <p>The article cannot be finalised on those findings alone. Each claim must be checked against its source. Where accounts conflict, the discrepancy is to be retained—not resolved for the sake of a cleaner narrative.</p>
+       <p>Begin with the recovered proof. Five transcription errors require correction before editorial review can proceed.</p>
+      </div>
+      <h3>Available Department Files</h3>
+      <div class="retro-fileline">▣ &nbsp; <button type="button" class="retro-textlink" data-retro-tab="proof">A Life in Three Acts</button> &nbsp; <span class="retro-new">NEW!</span><br><span class="retro-small">The Death of the Ordinary Man — retained proof, five corrections pending</span></div>
+      <div class="retro-fileline">▤ &nbsp; <button type="button" class="retro-textlink" data-retro-tab="index">Index of retained newsroom papers</button><br><span class="retro-small">Research notes and reference material</span></div>
+      <p class="retro-small">Please consult the source documents before modifying any editorial material.</p>
+      <p><button class="retro-button" type="button" data-retro-tab="proof">OPEN THE EDITORIAL PROOF &gt;&gt;</button></p>
+     </div>
+     <div id="retro-six-proof" class="retro-view" hidden>
+      <p class="retro-small">HOME &gt; EDITORIAL PROOFS &gt; FILE 97/06</p>
+      <h1>Editorial Proof / 97-06</h1>
+      <p class="retro-small"><b>STATUS:</b> NOT CLEARED FOR PRINT &nbsp; | &nbsp; APR 1997</p>
+      <hr>
+      <article class="six-paper retro-proof-paper">
+       <div class="six-paperhead"><span>THE MERIDIAN</span><span>RETAINED NEWSROOM PROOF · 1997</span></div>
+       <p class="six-section-tag">ARCHIVES · FEATURE</p>
+       <h2>A Life in Three Acts</h2>
+       <p class="six-subtitle">The Death of the Ordinary Man</p>
+       <p class="six-placeholder-label">DEVELOPER PLACEHOLDER: The complete author-written article will replace the text below. The existing five-error interaction is retained for testing.</p>
+       <div id="six-article"></div>
+       <div class="six-paperend">— END OF AVAILABLE COPY —</div>
+      </article>
+      <aside class="six-sidebar retro-proof-desk">
+       <div class="six-sidebar-top"><span>EDITORIAL COPY DESK</span><span>97 / 06</span></div>
+       <h3>Corrections required: five</h3>
+       <p>Click each incorrectly transcribed word to restore the proof before submitting the file for review.</p>
+       <div class="six-total"><strong id="six-score">0</strong> / <span id="six-goal">5</span></div>
+       <div class="six-meter"><div id="six-meter-fill"></div></div>
+       <p id="six-feedback" role="status" aria-live="polite">Five corrections remaining.</p>
+       <button id="six-reset" class="retro-button" type="button" hidden>Reset proof (developer)</button>
+      </aside>
+      <p><button type="button" class="retro-textlink" data-retro-tab="front">&lt;&lt; Return to editorial office</button></p>
+     </div>
+     <div id="retro-six-index" class="retro-view" hidden>
+      <p class="retro-small">HOME &gt; NEWSROOM &gt; FILES</p>
+      <h1>Research Archive</h1>
+      <p>Retained working papers and reference documents, as listed by the editorial office.</p>
+      <hr>
+      <div class="retro-fileline"><b>NEWS/97-01</b> — The first call<br><span class="retro-small">Filed 21 February 1997</span></div>
+      <div class="retro-fileline"><b>NEWS/97-04</b> — What we know by April<br><span class="retro-small">Filed April 1997</span></div>
+      <div class="retro-fileline"><b>ED/97-06</b> — <button type="button" class="retro-textlink" data-retro-tab="proof">A Life in Three Acts (proof)</button><br><span class="retro-small">Pending editorial review</span></div>
+      <p class="retro-small">The online index lists files available for public reference. Not all editorial working papers have been digitised.</p>
+     </div>
+     <div id="retro-six-help" class="retro-view" hidden>
+      <p class="retro-small">HOME &gt; INFORMATION</p>
+      <h1>About This Archive</h1>
+      <hr>
+      <p>The Meridian has published independent research and reporting since 1972. This electronic catalogue collects retained clippings, research notes and editorial records.</p>
+      <p>Individual documents retain their original filing dates and references. Unverified claims are not to be treated as established findings.</p>
+      <h3>Using the Online Archive</h3>
+      <p>Select an item from the directory at left. Blue underlined entries link to available material. Editorial proofs may contain transcription errors.</p>
+      <p class="retro-small">This edition is intended for display at 800 × 600 or higher.</p>
+     </div>
+    </td>
+   </tr>
+   <tr><td colspan="2" class="retro-footer-cell">
+    <b>THE MERIDIAN · ONLINE RESEARCH ARCHIVES</b><br>
+    © The Meridian · Independent publishing since 1972 · Last updated APR 1997<br>
+    <span>Best viewed at 800 × 600 · Netscape Navigator / Microsoft Internet Explorer</span>
+   </td></tr>
+  </table>
  </div>
 </section>
 <section id="sixAfter" class="level six-screen" aria-labelledby="six-after-title" hidden>
- <div class="six-shell">
-  <div class="six-folio"><span>THE MERIDIAN / ARCHIVE INDEX</span><span>CATALOGUE WARNING · ENTRY MISSING</span></div>
-  <p class="six-number">07 <small>/ FIND THE MISSING FILE</small></p>
-  <h1 id="six-after-title">There should be a file here.</h1>
-  <div class="six-narrator six-reclaimed-message"><span>CONNECTION RECOVERED · UNSTABLE</span>
-   <p>I'm still here. I don't have long.</p>
-   <p>They took a file out of the index. Please. Find the missing file. Don't let them finish the story without it.</p>
-   <p>Start with the gap in the catalogue. I'll try to keep this page open.</p>
-  </div>
-  <div class="six-files">
-   <div class="six-folder"><small>NEWS/97-01</small><strong>The first call</strong><span>21 FEB 1997 · PRESENT</span></div>
-   <div class="six-folder"><small>NEWS/97-04</small><strong>What we know by April</strong><span>APR 1997 · PRESENT</span></div>
-   <div class="six-folder six-folder-gap"><small>UNINDEXED REFERENCE</small><strong>FILE NOT FOUND</strong><span>LOCATION UNKNOWN</span></div>
-  </div>
-  <p class="six-dev-note">Development handoff: Level 6 ends here. The missing-file investigation, 1996 manuscript and “perfect story” scribbles are reserved for Level 7.</p>
-  <button id="six-back" class="six-outline" type="button">Return to the article</button>
+ <div class="retro-site-page">
+  <table role="presentation" cellspacing="0" cellpadding="0">
+   <colgroup><col style="width:183px"><col></colgroup>
+   <tr><td colspan="2" class="retro-banner">
+    <div class="retro-logo">The Meridian <em>Online!</em><small>INDEPENDENT PUBLISHING &amp; RESEARCH ARCHIVES</small></div>
+    <div class="retro-banner-byline">ESTABLISHED 1972 &nbsp; | &nbsp; ARCHIVE INDEX · APRIL 1997</div>
+   </td></tr>
+   <tr><td colspan="2" class="retro-ticker retro-break-label">!! ATTENTION !! &nbsp; ARCHIVE INDEX ERROR &nbsp; !! ATTENTION !! &nbsp; DOCUMENT REFERENCE MISSING !!</td></tr>
+   <tr>
+    <td class="retro-navcell">
+      <div class="retro-sidebar-header">SITE DIRECTORY</div>
+      <div class="retro-fileline">⌂ &nbsp; The Meridian</div>
+      <div class="retro-fileline">▤ &nbsp; Archive Index</div>
+      <div class="retro-fileline">▣ &nbsp; Editorial Proofs</div>
+      <hr>
+      <div class="retro-archive-stamp">CONNECTION<br>UNSTABLE<br><br>ARCHIVE<br>RECOVERY</div>
+    </td>
+    <td class="retro-maincell">
+     <p class="retro-small">HOME &gt; ARCHIVE INDEX &gt; MISSING REFERENCE</p>
+     <h1 id="six-after-title">Archive Index / Missing Entry</h1>
+     <p class="retro-small">Error retrieving one item from retained electronic catalogue.</p>
+     <div class="retro-plea">
+      <strong>UNSAVED MESSAGE · LIVE CONNECTION</strong>
+      <p>I'm still here. I don't have long.</p>
+      <p>They took a file out of the index. Please. Find the missing file. Don't let them finish the story without it.</p>
+      <p>Start with the gap in the catalogue. I'll try to keep this page open.</p>
+     </div>
+     <h2>Retained File Register</h2>
+     <table class="retro-catalogue">
+      <thead><tr><th style="width:35%">DOCUMENT REF.</th><th>DESCRIPTION / STATUS</th></tr></thead>
+      <tbody>
+       <tr><td>NEWS/97-01</td><td>The first call · 21 FEB 1997 · ON FILE</td></tr>
+       <tr><td>NEWS/97-04</td><td>What we know by April · APR 1997 · ON FILE</td></tr>
+       <tr class="retro-missing"><td>REF. UNAVAILABLE</td><td>FILE NOT FOUND · CATALOGUE RECORD INCOMPLETE</td></tr>
+      </tbody>
+     </table>
+     <p class="retro-small">Developer preview: this catalogue is the Level 7 handoff. Investigation is not implemented yet.</p>
+     <p><button id="six-back" class="retro-button" type="button">&lt;&lt; Return to editorial proof</button></p>
+    </td>
+   </tr>
+   <tr><td colspan="2" class="retro-footer-cell">THE MERIDIAN · ONLINE RESEARCH ARCHIVES · RECORD NOT FOUND</td></tr>
+  </table>
  </div>
 </section>
 <section id="completed" class="complete" aria-labelledby="completed-title" hidden>
@@ -310,6 +414,7 @@
       </section>
     </main>
     <footer><span>© The Meridian · Independent Publishing</span><span>Established 1972</span></footer>
+    <div class="retro-browser-status" aria-hidden="true"><span id="retro-status">Done</span><span>Internet</span></div>
   </div>
 
   <div id="transition-flash" aria-hidden="true"></div><div id="page-transition" aria-hidden="true"><div class="transition-sheet"><span id="transition-caption">OPENING FILE</span><div class="transition-mark">M.</div></div></div>
@@ -392,5 +497,6 @@
   <script defer src="src/js/level5.js"></script>
   <script defer src="src/js/level4.js"></script>
   <script defer src="src/js/level6.js"></script>
+  <script defer src="src/js/retro-dev.js"></script>
 </body>
 </html>
