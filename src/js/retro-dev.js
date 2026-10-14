@@ -1,8 +1,8 @@
-/* 1997 Meridian developer-only chrome/navigation. No public-game changes.
+/* 1997 Meridian browser addresses/navigation for public and developer site.
    Plain ES5-era interfaces are intentional, but code is modern and accessible. */
 (function(){
  'use strict';
- if(!developerPreview)return;
+ if(!document.body.classList.contains('dev-newsprint'))return;
  var tabs={front:'retro-six-welcome',proof:'retro-six-proof',index:'retro-six-index',help:'retro-six-help'};
  var currentTab='front';
  var visitedTabs={};
