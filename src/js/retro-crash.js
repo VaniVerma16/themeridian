@@ -1,8 +1,8 @@
-/* THE MERIDIAN developer preview — desktop corruption / BIOS recovery.
+/* THE MERIDIAN — desktop corruption / BIOS recovery (public and developer).
    Exactly one takeover at a time; original game text and puzzle code are intact. */
 (function(){
  'use strict';
- if(typeof developerPreview==='undefined'||!developerPreview)return;
+ if(!document.body.classList.contains('dev-newsprint'))return;
  const root=document.createElement('div');
  root.className='meridian-crash phase-desktop';
  root.id='meridian-crash';
@@ -124,6 +124,7 @@
   if(status)status.textContent='Recovery needed — '+where;
  }
  document.addEventListener('click',event=>{
+   if(!developerPreview)return; // Only dev may intercept progression buttons.
    const button=event.target.closest?.('button[id]');
    if(!button)return;
    const game=window.MeridianGame;
