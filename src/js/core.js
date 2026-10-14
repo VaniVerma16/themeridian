@@ -191,6 +191,7 @@
     let pageTransitionBusy=false;
     function enterPuzzle(section,caption){
       if(pageTransitionBusy)return;
+      if(developerPreview){show(section);return;}
       if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){show(section);return;}
       pageTransitionBusy=true;
       const screen=document.getElementById('page-transition');
@@ -208,6 +209,7 @@
       if(!recordProgress && !canRevisit(section))return;
       if(!developerPreview&&(section==='six'||section==='sixAfter'))section='complete';
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
+      if(developerPreview)window.MeridianDesktop?.beginNavigation(section);
       // The site remains a restrained archive interface. Horror belongs to
       // momentary interruptions, not a permanent red theme after Level 6.
       document.body.classList.remove('blood-era');
@@ -226,6 +228,7 @@
         requestAnimationFrame(()=>document.getElementById('six-warning-continue').focus());
       }
       if(recordProgress)safelySaveSession();
+      if(developerPreview)window.MeridianDesktop?.pageChanged(section);
     }
     document.getElementById('six-warning-continue').addEventListener('click',()=>{
       const dialog=document.getElementById('six-warning');
