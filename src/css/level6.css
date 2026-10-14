@@ -81,3 +81,380 @@ body.six-intro-lock{overflow:hidden}
   padding:14px 23px;color:#e9c5c7;font:11px monospace;letter-spacing:.17em;cursor:pointer}
 #six-warning-continue:hover,#six-warning-continue:focus-visible{background:#601d2a;outline:2px solid #c96d82;outline-offset:4px}
 #six-warning-continue span{margin-left:10px}
+
+
+/* LEVEL 06 — PROTOTYPE 2: THE BLOODIED PROOF.
+   White original Meridian newspaper on first arrival, not a global dark tint.
+   Stains invade the paper as the player makes editorial decisions; a full
+   blood-soaked print failure accompanies submission. Developer preview only. */
+body.blood-era {
+  --paper:#f8f8f6;--ink:#121212;--muted:#646464;--rule:#d4d4d2;
+  --green:#39826b;--red:#bf554d;--blue:#4778b1;
+  background:#f8f8f6!important;color:#171717!important;
+}
+body.blood-era .topline{background:#111!important}
+body.blood-era header .masthead{border-color:#121212!important}
+body.blood-era header .brand,body.blood-era #mini-header .mini-title{
+  color:#111!important;text-shadow:none!important;
+}
+body.blood-era header .utility,body.blood-era header nav,body.blood-era header .tagline,body.blood-era footer{
+  color:#515151!important;border-color:#c3c3c3!important;
+}
+body.blood-era #dev-navigation{background:#303235!important;border-color:#636364!important}
+body.blood-era #player-history{background:var(--paper)!important;border-color:#d4d4d2!important}
+body.blood-era #player-history button,body.blood-era #player-history span{color:#181818!important}
+#level-six.six-screen,#sixAfter.six-screen{
+  position:relative;padding:24px 0 95px!important;color:#21201c;
+  background:#f7f5ef!important;
+  overflow:visible;isolation:isolate;
+}
+#level-six.six-screen[hidden],#sixAfter.six-screen[hidden]{display:none!important}
+#level-six .six-shell,#sixAfter .six-shell{
+  width:min(1270px,100%);margin:auto;padding:12px clamp(10px,2vw,38px)!important;
+  box-sizing:border-box;position:relative;z-index:1;
+}
+#level-six .six-folio,#sixAfter .six-folio{
+  color:#53514f;border-color:#999;background:#ece9e0;
+  padding:9px 12px;font:10px/1.5 "Courier New",monospace;
+  letter-spacing:.045em;
+}
+#level-six .six-number,#sixAfter .six-number{
+  color:#861b25;margin:20px 0 5px;font:normal 39px/1.2 Georgia,serif;
+}
+#level-six .six-number small,#sixAfter .six-number small{
+  color:#6b5f57;font:bold 11px "Courier New",monospace;
+}
+#level-six .six-shell>h1{
+  color:#221d1a;font:normal clamp(40px,5vw,62px)/1.05 Georgia,serif;
+  letter-spacing:-.05em;margin:0 0 22px;text-shadow:none;
+}
+#level-six .six-narrator{
+  transform:none;background:#f3f1eb;border:1px solid #c1b8aa;
+  border-left:4px solid #7d252b;box-shadow:none;
+  max-width:930px;padding:18px 23px;margin:0 0 25px;
+}
+#level-six .six-narrator span{
+  color:#6a3633;font:bold 10px/1.4 "Courier New",monospace;letter-spacing:.065em;
+}
+#level-six .six-narrator p{
+  color:#27231e;font:15px/1.65 Georgia,serif;margin:9px 0;
+}
+#level-six .six-narrator p strong{color:#631d27}
+#level-six .six-columns{
+  display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:22px;align-items:start;
+}
+#level-six .six-paper{
+  --blood-opacity:.08;
+  position:relative;isolation:isolate;box-sizing:border-box;
+  padding:clamp(23px,4.2vw,59px);
+  background:#f4eddd;color:#29231e;
+  border:1px solid #b6a58e;box-shadow:2px 3px 0 #ccc2b5,10px 16px 35px #3020191e;
+  transform:rotate(-.17deg);overflow:hidden;
+}
+#level-six .six-paper::before{
+  content:"";pointer-events:none;position:absolute;inset:-50px -15px -25px -20px;z-index:0;
+  background:
+    radial-gradient(circle at 96% 11%,#7e1014 0 4px,transparent 6px),
+    radial-gradient(circle at 92% 13%,#801519 0 2px,transparent 4px),
+    radial-gradient(ellipse at 101% 10%,#7c1015 0 9%,#9b293020 22%,transparent 41%),
+    radial-gradient(circle at 9% 72%,#631018 0 2px,transparent 4px),
+    radial-gradient(circle at 13% 74%,#7a0914 0 3px,transparent 5px),
+    radial-gradient(ellipse at -12% 81%,#6f0d15 0 8%,#7b182722 18%,transparent 29%),
+    repeating-linear-gradient(0deg,transparent 0 29px,#764d3310 30px 31px);
+  opacity:var(--blood-opacity);transition:opacity 1.2s;
+}
+#level-six .six-paper::after{
+  content:"";position:absolute;right:10px;top:0;z-index:0;
+  width:128px;height:150px;pointer-events:none;
+  background:
+   linear-gradient(#6c0910,#710a12) 6px 0/8px 64px no-repeat,
+   linear-gradient(#710a12,#710a12) 26px 0/3px 125px no-repeat,
+   linear-gradient(#780a13,#780a13) 44px 0/12px 84px no-repeat,
+   linear-gradient(#790b11,#790b11) 68px 0/5px 112px no-repeat,
+   radial-gradient(ellipse at 42% 0,#67050e 0 54%,transparent 57%) 0 0/120px 25px no-repeat;
+  filter:blur(.5px);opacity:calc(var(--blood-opacity) * .8);
+}
+#level-six .six-paper>*{position:relative;z-index:1}
+#level-six[data-corruption="1"] .six-paper{--blood-opacity:.23}
+#level-six[data-corruption="2"] .six-paper{--blood-opacity:.40}
+#level-six[data-corruption="3"] .six-paper{--blood-opacity:.55}
+#level-six[data-corruption="4"] .six-paper{--blood-opacity:.69}
+#level-six[data-corruption="5"] .six-paper{--blood-opacity:.80}
+#level-six[data-corruption="6"] .six-paper{--blood-opacity:.90}
+#level-six[data-corruption="7"] .six-paper{--blood-opacity:1}
+#level-six .six-paperhead{border-color:#816958;color:#685648}
+#level-six .six-section-tag{color:#8a4a42;letter-spacing:.12em;margin-top:26px}
+#level-six .six-paper h2{color:#32211c;font:normal clamp(31px,4vw,52px)/1.12 Georgia,serif}
+#level-six .six-subtitle{color:#785c4e;border-color:#c4b7a4}
+#level-six .six-article-intro{
+  font:italic 17px/1.75 Georgia,serif;color:#514137!important;
+  margin:0 0 32px;padding:0 0 23px;border-bottom:1px solid #b7a28c;
+}
+#level-six .six-act{margin:38px 0 53px;counter-reset:none}
+#level-six .six-act h3{
+  font:700 11px/1.5 "Courier New",monospace;color:#6d2229;
+  letter-spacing:.11em;border-bottom:1px solid #ac9785;padding-bottom:9px;margin:0 0 15px;
+}
+#level-six .six-act>p{
+  font:17px/1.88 Georgia,serif;color:#332b24!important;margin:0 0 15px;
+}
+#level-six .six-decision{
+  margin:22px 0 28px;border:1px solid #a89482;
+  background:#fffbef;box-shadow:3px 4px 0 #bdb09c5c;
+  overflow:hidden;
+}
+#level-six .six-decision-head{
+  display:flex;justify-content:space-between;gap:8px;align-items:center;
+  background:#eee6d8;border-bottom:1px solid #c1ad96;padding:10px 13px;
+  color:#634343;font:700 10px/1.3 "Courier New",monospace;letter-spacing:.05em;
+}
+#level-six .six-decision.is-complete .six-decision-head{
+  background:#e1e7dc;color:#375442;
+}
+#level-six .six-decision-body{padding:17px 18px 19px}
+#level-six .six-decision-body h4{
+  color:#29221d;font:normal 25px/1.2 Georgia,serif;margin:0 0 9px;
+}
+#level-six .six-decision-body>p{
+  color:#44352c!important;font:15px/1.6 Georgia,serif!important;margin:0 0 13px;
+}
+#level-six .six-source{
+  background:#f0e7d4;border-left:3px solid #977b61;padding:11px 13px;margin:16px 0;
+}
+#level-six .six-source b{
+  display:block;color:#644b3f;font:bold 10px/1.4 "Courier New",monospace;
+  letter-spacing:.06em;margin-bottom:6px;
+}
+#level-six .six-source p{
+  color:#503e30!important;font:italic 14px/1.55 Georgia,serif!important;margin:0!important;
+}
+#level-six .six-options{
+  display:grid;gap:8px;margin:16px 0 12px;
+}
+#level-six .six-option{
+  display:grid;grid-template-columns:23px minmax(0,1fr);align-items:start;gap:11px;
+  cursor:pointer;border:1px solid #d0c2af;background:#f9f4ea;
+  padding:11px 12px;transition:background .16s,border-color .16s;
+}
+#level-six .six-option:hover{background:#f4eadb;border-color:#a78a73}
+#level-six .six-option:has(input:checked){
+  border-color:#7e2729;background:#f3e6dc;box-shadow:inset 3px 0 #7e2729;
+}
+#level-six .six-option input{
+  margin:3px 0 0;accent-color:#7b2630;width:17px;height:17px;
+}
+#level-six .six-option span{display:grid;gap:5px}
+#level-six .six-option strong{font:normal 15px/1.4 Georgia,serif;color:#241f1c}
+#level-six .six-option em{font:normal 12px/1.5 Arial,sans-serif;color:#685c50}
+#level-six .six-decision-commit{
+  cursor:pointer;display:inline-block;background:#222019;color:#fff;
+  border:1px solid #222019;padding:10px 17px;font:bold 11px Arial,sans-serif;
+  letter-spacing:.055em;text-transform:uppercase;min-height:39px;
+}
+#level-six .six-decision-commit:hover{background:#5c1d26;border-color:#5c1d26}
+#level-six .six-decision-commit:focus-visible{
+  outline:3px solid #8d2635;outline-offset:3px;
+}
+#level-six .six-commit-feedback{margin:8px 0 0;color:#4d6d4d;font:12px/1.5 Arial,sans-serif}
+#level-six .six-result-edit{
+  margin:15px 0 0;padding:14px 16px;background:#ede6da;
+  border-left:4px solid #7d3031;color:#342b26;
+}
+#level-six .six-result-edit[hidden]{display:none!important}
+#level-six .six-result-edit small{
+  display:block;color:#702630;font:bold 10px/1.5 "Courier New",monospace;
+  letter-spacing:.06em;margin:0 0 7px;
+}
+#level-six .six-result-edit p{
+  color:#2c2924!important;font:16px/1.7 Georgia,serif!important;margin:0!important;
+}
+#level-six .six-ethical-query{
+  color:#704c3e!important;font:italic 14px/1.5 Georgia,serif!important;
+  padding-top:12px;margin:10px 0 0!important;
+  border-top:1px dotted #c5b9a6;
+}
+#level-six .six-paperend{color:#685347}
+#level-six .six-sidebar{
+  top:14px;position:sticky;padding:19px 17px;background:#eeeae2;
+  border:1px solid #a69a8b;box-shadow:3px 4px 0 #bbb3a7;
+  color:#29211c;
+}
+#level-six .six-sidebar-top{
+  color:#6c4c47;border-color:#bbb0a4;
+  font:bold 10px/1.4 "Courier New",monospace;
+}
+#level-six .six-sidebar h3{
+  color:#29231d;font:normal 26px/1.2 Georgia,serif;margin:16px 0 11px;
+}
+#level-six .six-sidebar p{font:14px/1.6 Georgia,serif;color:#4a4136}
+#level-six .six-score-label{
+  margin:24px 0 1px;font:bold 10px/1.4 Arial,sans-serif;color:#674d47;
+  letter-spacing:.08em;
+}
+#level-six .six-total{margin:4px 0 10px;color:#681f2b;font:normal 44px/1 Georgia,serif}
+#level-six .six-total strong{font-weight:400}
+#level-six .six-total span{font:18px Georgia,serif;color:#6f645a}
+#level-six .six-meter{height:7px;background:#c7b9aa;border:1px solid #ab9b8a}
+#level-six .six-meter>div{background:#872731;transition:width .35s}
+#level-six #six-feedback{color:#504a41;font:12px/1.6 Arial,sans-serif;min-height:25px;margin:13px 0}
+#level-six .six-decision-status{font:700 11px Arial,sans-serif;color:#5a453c;margin:13px 0 18px}
+#level-six .six-submit{
+  width:100%;padding:12px 11px;min-height:43px;
+  background:#3c2826;color:#f8f5f1;
+  border:1px solid #362321;font:bold 11px Arial,sans-serif;
+  letter-spacing:.055em;text-transform:uppercase;cursor:pointer;
+}
+#level-six .six-submit:disabled{
+  background:#bbb4aa;color:#746c61;border-color:#aaa297;cursor:not-allowed;
+}
+#level-six .six-submit:not(:disabled):hover{background:#86222d}
+#level-six .six-submit:focus-visible{outline:3px solid #922b33;outline-offset:3px}
+#level-six .six-submit-hint{font:11px/1.4 Arial,sans-serif!important;color:#777!important;margin:12px 0 8px}
+#level-six #six-reset{
+  margin-top:15px;background:transparent;border:1px dotted #a79a89;color:#7c5f59;
+  font:11px Arial,sans-serif;padding:7px 9px;width:100%;
+}
+#level-six #six-reset[hidden]{display:none!important}
+
+/* The final message sits on damaged paper with the original public site
+   still recognizable around it. It changes according to the ending. */
+#sixAfter.six-screen{background:#f2ede5!important;min-height:75vh}
+#sixAfter .six-ending-shell{max-width:1000px}
+#sixAfter .six-ending-result{
+  position:relative;isolation:isolate;
+  background:#e9e0d1;
+  border:1px solid #a9917c;
+  margin:18px 0 25px;padding:clamp(24px,6vw,62px);
+  box-shadow:5px 8px 0 #cbbbaa;
+  overflow:hidden;
+}
+#sixAfter .six-ending-result::before{
+  position:absolute;z-index:-1;content:"";inset:-5%;
+  background:
+   radial-gradient(circle at 96% 10%,#851020 0 10px,transparent 13px),
+   radial-gradient(circle at 92% 22%,#780512 0 4px,transparent 6px),
+   radial-gradient(ellipse at 100% 0,#760a19bb 0 15%,transparent 46%),
+   radial-gradient(ellipse at -8% 94%,#6c071480 0 13%,transparent 34%);
+}
+#sixAfter .six-ending-kicker{font:bold 11px "Courier New",monospace;color:#6f1824;letter-spacing:.09em}
+#sixAfter .six-ending-result h1{
+  font:normal clamp(35px,5vw,63px)/1.1 Georgia,serif;letter-spacing:-.045em;
+  color:#261b19;margin:25px 0 21px;
+}
+#sixAfter #six-ending-summary{font:18px/1.8 Georgia,serif;color:#28221e;max-width:735px}
+#sixAfter .six-ending-echo{
+  border-left:3px solid #852631;background:#f7f1e6;padding:16px 19px;
+  margin:24px 0;font:italic 17px/1.7 Georgia,serif;color:#4c2c2c;
+}
+#sixAfter .six-ending-stat{
+  border-top:1px solid #ab9987;border-bottom:1px solid #ab9987;
+  padding:13px 0;display:flex;justify-content:space-between;gap:14px;
+  align-items:center;
+}
+#sixAfter .six-ending-stat span{font:bold 11px "Courier New",monospace;color:#514438}
+#sixAfter .six-ending-stat strong{font:normal 35px Georgia,serif;color:#731b2b}
+#sixAfter #six-ending-question{
+  font:italic 23px/1.5 Georgia,serif;color:#472a28;margin:26px 0 0;
+}
+#sixAfter .six-ending-actions{display:flex;flex-wrap:wrap;gap:11px;margin:18px 0}
+#sixAfter .six-outline{background:#f3eadc;border:1px solid #9a8076;color:#3d302a;padding:10px 15px;font:12px Arial,sans-serif}
+#sixAfter .six-outline:hover{background:#dbcbbb}
+#sixAfter .six-dev-note{color:#666;font:12px/1.6 "Courier New",monospace}
+
+/* The eerie intrusion: not a uniform red filter. It is a rupture that appears
+   to leak directly from under the paper, with red drips, ink bleeding and a
+   stark engraved handprint. */
+#level-six .six-blood-curtain[hidden]{display:none!important}
+#level-six .six-blood-curtain{
+  position:fixed;inset:0;z-index:10850;display:flex;justify-content:center;
+  align-items:center;overflow:hidden;background:#f4eee4;
+  color:#4b151c;isolation:isolate;
+}
+#level-six .six-blood-curtain::before{
+  content:"";position:absolute;inset:-15%;z-index:-1;
+  background:
+   radial-gradient(ellipse at 18% 0%,#62040b 0 12%,#961224 12.5% 17%,transparent 40%),
+   radial-gradient(ellipse at 78% 105%,#59000b 0 15%,#a31125 15.5% 22%,transparent 55%),
+   radial-gradient(circle at 55% 24%,#8d1220 0 6px,transparent 8px),
+   radial-gradient(circle at 52% 27%,#730918 0 4px,transparent 7px),
+   radial-gradient(circle at 61% 37%,#7d0c13 0 2px,transparent 5px),
+   radial-gradient(circle at 24% 56%,#67000f 0 5px,transparent 7px);
+  animation:six-stain-flood 2.9s ease-out forwards;
+}
+#level-six .six-blood-curtain::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent 0 6px,#230d0d12 7px 9px);
+  mix-blend-mode:multiply;animation:six-scan .2s steps(2) infinite;
+}
+#level-six .six-blood-curtain span{
+  font:900 clamp(30px,7.6vw,108px)/.99 Georgia,serif;max-width:940px;
+  text-transform:uppercase;letter-spacing:-.055em;text-align:center;
+  z-index:1;color:#f9e9db;text-shadow:-4px 0 #7f1720,4px 0 #2b0009,0 4px 30px #45050a;
+  animation:six-phrase-in 2.7s steps(3) both;
+}
+@keyframes six-stain-flood{
+  0%{transform:scale(.2) rotate(-5deg);filter:blur(30px);opacity:.1}
+  42%{opacity:1}
+  100%{transform:scale(1.3) rotate(3deg);filter:blur(0);opacity:1}
+}
+@keyframes six-phrase-in{
+  0%,20%{transform:translateY(80px) skew(-8deg);opacity:0;filter:blur(12px)}
+  33%,41%,49%{opacity:1;transform:translateX(7px)}
+  38%,46%{opacity:0}
+  100%{opacity:1;transform:none;filter:none}
+}
+#six-breach{
+  background:#ede4d7!important;isolation:isolate;
+}
+#six-breach::before{
+  content:"";z-index:0!important;inset:-10%!important;
+  background:
+    radial-gradient(ellipse at 50% 104%,#490008 0 27%,#9d1728 28% 35%,transparent 65%),
+    radial-gradient(ellipse at 4% -2%,#58030e 0 17%,transparent 48%),
+    radial-gradient(circle at 75% 20%,#59020d 0 6px,transparent 9px),
+    radial-gradient(circle at 71% 26%,#6b020d 0 3px,transparent 7px),
+    repeating-linear-gradient(0deg,transparent 0 11px,#7c14200d 12px 13px)!important;
+  animation:six-breach-pulse 3s ease-in-out infinite!important;
+}
+#six-breach::after{
+  content:"";position:absolute;pointer-events:none;z-index:1;
+  inset:0;background:
+   linear-gradient(#60000a,#6a0714) 7% 0/9px 40vh no-repeat,
+   linear-gradient(#52000a,#670912) 12% 0/4px 62vh no-repeat,
+   linear-gradient(#52000a,#670912) 36% 0/16px 19vh no-repeat,
+   linear-gradient(#52000a,#670912) 82% 0/7px 47vh no-repeat,
+   linear-gradient(#52000a,#670912) 87% 0/12px 28vh no-repeat;
+   opacity:.85;
+}
+#six-breach .six-cry{
+  color:#f5eadd!important;text-shadow:6px 3px #53000d,-7px 0 #a51427,0 7px 24px #350008!important;
+  font:900 clamp(42px,11vw,160px)/1 Georgia,serif;
+  z-index:4;animation:six-jerk .13s steps(2) infinite;
+}
+#six-breach .six-lines{z-index:3!important}
+#six-breach .six-lines span{
+  color:#57040e!important;text-shadow:3px 2px #af3443,-3px 0 #efe0d1!important;
+}
+#six-breach .six-lines span:nth-child(3n){color:#8e1725!important}
+@keyframes six-breach-pulse{
+  0%,100%{filter:contrast(1) saturate(.9);transform:scale(1)}
+  50%{filter:contrast(1.3) saturate(1.4);transform:scale(1.11)}
+}
+@media(max-width:920px){
+ #level-six .six-columns{grid-template-columns:1fr!important}
+ #level-six .six-sidebar{position:static!important}
+ #level-six .six-paper{transform:none}
+}
+@media(max-width:640px){
+ #level-six .six-decision-body{padding:13px!important}
+ #level-six .six-option{grid-template-columns:20px minmax(0,1fr);padding:10px 9px}
+ #level-six .six-narrator{padding:13px 15px}
+ #sixAfter .six-ending-stat{align-items:start}
+}
+@media(prefers-reduced-motion:reduce){
+ #level-six .six-blood-curtain::before,
+ #level-six .six-blood-curtain span,
+ #six-breach::before,#six-breach .six-cry,#six-breach .six-lines{
+   animation:none!important;
+ }
+}
