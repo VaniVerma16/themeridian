@@ -1276,3 +1276,164 @@ body.blood-era #six-warning #six-warning-continue{
 #six-blood-curtain{background:#160e14!important}
 #six-breach{background:#0f0b0e!important}
 #six-breach .six-lines span{color:#ed9aa9!important;text-shadow:3px 2px #410515,-3px 0 #86223a!important}
+
+
+/* LEVEL 06 / SEPARATE INTRODUCTION
+   The narrator gets her own room in the archive: a dark, almost elegant
+   editorial letter, without the proof or questions visible underneath. */
+#read-six.six-intro-screen{
+  display:flex;
+  position:relative;
+  isolation:isolate;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+  width:100%;
+  max-width:none;
+  min-height:min(790px,85dvh);
+  margin:0 auto!important;
+  padding:clamp(30px,6vh,70px) clamp(16px,4vw,58px) 90px!important;
+  color:#eee7e4;
+  background:
+    radial-gradient(ellipse at -8% 12%,#581327a1,transparent 43%),
+    radial-gradient(ellipse at 110% 90%,#4d112284,transparent 42%),
+    repeating-linear-gradient(0deg,transparent 0 42px,#ddd5d206 43px 44px),
+    #0e0c10!important;
+  overflow:hidden;
+}
+#read-six.six-intro-screen[hidden]{display:none!important}
+#read-six.six-intro-screen::before{
+  content:"";pointer-events:none;
+  position:absolute;inset:0;z-index:0;
+  background:
+    linear-gradient(#781527,#671322) 4.5% 0/8px 30% no-repeat,
+    linear-gradient(#550a17,#591021) 6.8% 0/3px 49% no-repeat,
+    linear-gradient(#761226,#521021) 91.5% 0/12px 22% no-repeat,
+    radial-gradient(circle at 89% 18%,#862037 0 3px,transparent 5px),
+    radial-gradient(circle at 92% 20%,#771b2c 0 6px,transparent 8px);
+  opacity:.52;
+}
+#read-six .six-intro-alone{
+  width:min(805px,100%);
+  position:relative;
+  z-index:1;
+  background:#201c20;
+  border:1px solid #684751;
+  box-shadow:0 0 0 7px #120e12,9px 10px 0 #601b2b,0 34px 100px #000d;
+  transform:rotate(-.2deg);
+}
+#read-six .six-intro-alone::before{
+  content:"";position:absolute;pointer-events:none;inset:0 0 auto auto;
+  width:215px;height:230px;
+  background:
+    radial-gradient(ellipse at 100% 0%,#7811249e 0 15%,#751e3a33 40%,transparent 66%),
+    radial-gradient(circle at 78% 27%,#8a172a 0 4px,transparent 6px),
+    radial-gradient(circle at 57% 18%,#681020 0 2px,transparent 5px);
+}
+#read-six .six-intro-folio,#read-six .six-intro-bottom{
+  position:relative;z-index:1;
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;
+  padding:13px clamp(22px,5vw,48px);
+  font:700 10px/1.5 "Courier New",monospace;
+  letter-spacing:.08em;color:#af8d96;
+}
+#read-six .six-intro-folio{
+  border-bottom:1px solid #573943;
+  background:#181318;
+}
+#read-six .six-intro-bottom{
+  border-top:1px solid #573943;
+  background:#1a1519;
+  color:#896f78;
+}
+#read-six .six-intro-content{
+  position:relative;
+  z-index:1;
+  padding:clamp(28px,5.7vw,64px) clamp(24px,6vw,73px);
+}
+#read-six .six-intro-overline{
+  font:700 11px/1.6 "Courier New",monospace;
+  letter-spacing:.18em;
+  color:#de9cab;
+  margin:0 0 17px;
+}
+#read-six #six-intro-title{
+  color:#f6eee9;
+  font:400 clamp(32px,4.3vw,55px)/1.12 Georgia,serif;
+  letter-spacing:-.04em;
+  margin:0 0 26px;
+  text-shadow:4px 3px 0 #4a1a2a;
+}
+#read-six .six-editor-intro{
+  position:relative;
+  padding:0;
+  margin:0;
+  background:transparent;
+  box-shadow:none;
+  border:0;
+}
+#read-six .six-editor-intro p{
+  color:#e0d4d2;
+  max-width:650px;
+  font:400 clamp(16px,1.75vw,19px)/1.69 Georgia,serif;
+  margin:0 0 20px;
+  letter-spacing:0;
+}
+#read-six .six-editor-intro em{font-style:italic;color:#f1dee0}
+#read-six .six-editor-intro .six-intro-last{
+  color:#efb7bf;
+  font:italic clamp(23px,2.65vw,32px)/1.3 Georgia,serif;
+  margin:29px 0 0;
+  padding:20px 0 0;
+  border-top:1px solid #674951;
+  text-shadow:2px 2px 0 #5a1825;
+}
+#read-six .six-opening-button{
+  display:inline-flex;
+  align-items:center;justify-content:center;gap:13px;
+  box-sizing:border-box;
+  margin:32px 0 0;
+  min-height:50px;
+  padding:13px 24px;
+  color:#fff3ed;
+  background:#83273b;
+  border:1px solid #bd6475;
+  box-shadow:4px 5px 0 #0b070b;
+  font:700 12px/1.4 "Courier New",monospace;
+  letter-spacing:.065em;
+  cursor:pointer;
+  transition:background .15s,transform .15s;
+}
+#read-six .six-opening-button:hover{background:#a33a51;transform:translateY(-2px)}
+#read-six .six-opening-button:focus-visible{
+  outline:3px solid #dc7189;
+  outline-offset:4px;
+}
+body.blood-era:has(#read-six:not([hidden])) header{
+  background:#141115!important;
+  color:#efe8e5!important;
+  border-color:#5a3542!important;
+}
+body.blood-era:has(#read-six:not([hidden])) header .masthead{
+  border-color:#5c3442!important;
+}
+body.blood-era:has(#read-six:not([hidden])) footer{
+  color:#a9969b!important;
+  border-color:#4e303a!important;
+}
+@media(max-width:670px){
+  #read-six.six-intro-screen{
+    min-height:0;
+    padding:30px 12px 63px!important;
+  }
+  #read-six .six-intro-folio,#read-six .six-intro-bottom{
+    font-size:9px;
+    padding:12px 17px;
+  }
+  #read-six .six-intro-content{padding:28px 21px 34px}
+  #read-six .six-editor-intro p{font-size:16px;line-height:1.64}
+  #read-six .six-opening-button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  #read-six .six-opening-button{transition:none!important}
+}
