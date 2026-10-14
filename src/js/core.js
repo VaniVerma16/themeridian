@@ -230,6 +230,9 @@
       if(recordProgress)safelySaveSession();
       if(developerPreview)window.MeridianDesktop?.pageChanged(section);
     }
+    // Let dev-only website navigation reach the same trusted route that
+    // the original game buttons use, preserving progress and save state.
+    if(developerPreview)window.MeridianGame={show};
     document.getElementById('six-warning-continue').addEventListener('click',()=>{
       const dialog=document.getElementById('six-warning');
       dialog.hidden=true;
