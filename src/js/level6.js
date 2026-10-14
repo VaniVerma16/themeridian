@@ -673,6 +673,15 @@
     revised.hidden=!Number.isInteger(selected);
     const revisedText=text('p',Number.isInteger(selected)?encounter.options[selected].revision:'');
     revised.append(text('small','CURRENT RESTORED PASSAGE'),revisedText);
+    const editorNote=document.createElement('aside');editorNote.className='six-editor-reaction';
+    const editorText=text('p','');
+    editorNote.append(text('small','A NOTE FROM YOUR EDITOR'),editorText);
+    const showEditorNote=choice=>{
+      const line=encounter.reaction?.[choice];
+      editorNote.hidden=!line;
+      editorText.textContent=line||'';
+    };
+    showEditorNote(selected);
     apply.addEventListener('click',()=>{
       if(inTransition)return;
       const current=fieldset.querySelector('input:checked');
@@ -680,6 +689,8 @@
       const index=Number(current.value);
       saved[encounter.id]=index;
       save();
+      storeCampaignState(false);
+      showEditorNote(index);
       revisedText.textContent=encounter.options[index].revision;
       revised.hidden=false;
       card.classList.add('is-complete');
@@ -688,7 +699,7 @@
       status.textContent='Change recorded. You can revise it before submission.';
       update();
     });
-    inner.append(fieldset,apply,status,revised,text('p',encounter.question,'six-ethical-query'));
+    inner.append(fieldset,apply,status,revised,editorNote);
     card.append(top,inner);
     if(Number.isInteger(selected))card.classList.add('is-complete');
     section.append(card);
