@@ -453,6 +453,22 @@
       Object.values(outroMedia).forEach(a=>a.pause());
       outroGhost.pause();
       const root=document.getElementById('five-outro');
+      if(developerPreview&&window.MeridianDesktop){
+        // Preserve every recovered voice line; replace only the terminal
+        // fullscreen glitch with a progressively failing desktop.
+        root.hidden=true;
+        window.MeridianDesktop.fault('cascade');
+        window.MeridianDesktop.openAlert({
+          title:'Media Player — RECOVERED RECORDING',
+          body:'Playback interrupted.\nThe following source information is unavailable: [REDACTED]',
+          code:'UNKNOWN AUTHOR · RECORD 2027',
+          kind:'severe',autoClose:5600
+        });
+        playOutroJumpScare();
+        stopOutroMusic(2050);
+        outroDelay(()=>finishOutro(run),1750);
+        return;
+      }
       root.className='five-outro outro-final-glitch';
       document.getElementById('outro-title').hidden=true;
       document.getElementById('outro-dialogue').hidden=true;
