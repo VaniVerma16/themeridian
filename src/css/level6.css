@@ -536,3 +536,480 @@ body.blood-era #six-warning-continue:hover{
  font:italic 16px/1.6 Georgia,serif!important;
  color:#693238!important;
 }
+
+
+/* LEVEL SIX V3 — THE ARTICLE IS INFECTED.
+   Horror is physical and localized: dark surrounding void, damaged newsprint,
+   bleeding edges, page tears, abrupt typographic intrusions and short,
+   viewport-wide ruptures. Public pages are outside this scope. */
+#level-six.six-screen{
+  --inkblood:#8f0b1c;
+  background:
+    radial-gradient(ellipse 32% 50% at 0% 37%,#4b070e 0%,transparent 77%),
+    radial-gradient(ellipse 25% 42% at 100% 80%,#5d0815 0%,transparent 76%),
+    linear-gradient(90deg,#2e050c 0 1.5%,transparent 2% 97%,#2d060f 99%),
+    #0b0b0c!important;
+  border-top:5px solid #16080a;
+  min-height:calc(100vh - 100px);
+  color:#e7e0d7!important;
+  overflow:hidden!important;
+  padding:18px 0 130px!important;
+}
+#level-six.six-screen::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  pointer-events:none;opacity:.62;
+  background:
+    linear-gradient(#4c0714,#3a0308) 3% 0 / 9px 33% no-repeat,
+    linear-gradient(#620d19,#45030c) 8% 0 / 3px 47% no-repeat,
+    linear-gradient(#630816,#35030b) 11% 0 / 14px 13% no-repeat,
+    linear-gradient(#44030a,#590a18) 97% 0 / 6px 59% no-repeat,
+    linear-gradient(#4c0611,#4a050f) 94% 0 / 11px 27% no-repeat,
+    radial-gradient(ellipse at 7% 72%,#590915 0%,transparent 33%),
+    radial-gradient(ellipse at 98% 21%,#650a18 0%,transparent 28%);
+  background-repeat:no-repeat;
+}
+#level-six.six-screen::after{
+  content:"THE MERIDIAN  /  RECOVERED COPY  /  DO NOT ALTER";
+  position:absolute;top:210px;right:-170px;
+  width:450px;transform:rotate(90deg);pointer-events:none;z-index:0;
+  color:#793440;font:700 11px "Courier New",monospace;letter-spacing:.25em;
+  opacity:.5;
+}
+#level-six .six-shell{
+  position:relative;z-index:1;
+  width:min(1300px,100%)!important;padding:14px clamp(16px,3vw,48px)!important;
+}
+#level-six .six-folio{
+  background:#181318!important;
+  border-color:#4e2029!important;
+  color:#ba9398!important;
+  font:700 11px/1.5 "Courier New",monospace!important;
+  letter-spacing:.075em;
+}
+#level-six .six-number{
+  font:normal clamp(39px,5vw,62px)/1 Georgia,serif!important;
+  color:#bb273b!important;text-shadow:0 0 19px #6f102344;
+}
+#level-six .six-number small{color:#c6a6a3!important}
+#level-six .six-shell>h1{
+  color:#f7ece4!important;font:normal clamp(39px,5vw,72px)/1.1 Georgia,serif!important;
+  text-shadow:4px 3px 0 #4b1421!important;
+  margin-bottom:25px!important;
+}
+#level-six .six-editor-intro{
+  max-width:910px!important;
+  position:relative;isolation:isolate;
+  background:#e8dfd1!important;
+  color:#241917!important;border:0!important;
+  border-top:4px solid #6d141d!important;border-left:0!important;
+  box-shadow:0 0 0 6px #20151b,0 22px 50px #000b,9px 12px 0 #5b1a27!important;
+  padding:clamp(22px,4vw,45px)!important;
+  margin:12px auto 50px!important;
+  transform:rotate(-.3deg)!important;
+  overflow:hidden;
+}
+#level-six .six-editor-intro::before{
+  content:"";position:absolute;inset:-25px -25px auto auto;
+  width:270px;height:230px;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse at 100% 0%,#6d0716c9 0 25%,#8c183733 53%,transparent 70%),
+    radial-gradient(circle at 64% 36%,#770914 0 4px,transparent 6px),
+    radial-gradient(circle at 60% 40%,#680711 0 2px,transparent 4px);
+  opacity:.87;
+}
+#level-six .six-editor-intro>*{position:relative;z-index:1}
+#level-six .six-editor-intro span{
+  color:#781922!important;
+  font:700 10px/1.5 "Courier New",monospace!important;
+  letter-spacing:.16em!important;
+}
+#level-six .six-editor-intro p{
+  font:clamp(15px,1.6vw,18px)/1.72 Georgia,serif!important;
+  color:#241e1c!important;max-width:780px!important;
+  margin:14px 0!important;
+}
+#level-six .six-editor-intro .six-intro-last{
+  color:#761019!important;
+  font:italic clamp(19px,2.2vw,27px)/1.4 Georgia,serif!important;
+  border-top:1px solid #b5a69b!important;
+  padding-top:19px!important;margin-top:25px!important;
+  text-shadow:1px 1px 0 #9a16251a;
+}
+#level-six .six-editor-intro[hidden],#level-six #six-workspace[hidden]{
+  display:none!important;
+}
+#level-six .six-opening-button{
+  display:block;min-height:52px;margin:26px 0 0;
+  padding:12px 21px;color:#f8eee6;background:#231a1c;
+  border:2px solid #180d11;box-shadow:5px 6px 0 #721a28;
+  font:bold 12px/1.4 "Courier New",monospace;
+  letter-spacing:.075em;cursor:pointer;text-align:left;
+  transition:background .17s,box-shadow .17s,transform .17s;
+}
+#level-six .six-opening-button:hover{background:#801426;box-shadow:7px 8px 0 #290910;transform:translateY(-2px)}
+#level-six .six-opening-button:focus-visible{outline:3px solid #b6384c;outline-offset:4px}
+#level-six .six-workspace{width:100%;position:relative}
+#level-six .six-chapter-nav{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  background:#0e0b0d;border:1px solid #4e2931!important;
+  padding:0!important;margin:0 0 13px!important;
+  gap:0!important;letter-spacing:0!important;
+}
+#level-six .six-chapter-nav>span{
+  display:flex;flex-direction:column;gap:5px;
+  padding:13px 18px;border-right:1px solid #48212a;
+  color:#726a6d;font:700 15px/1.1 "Courier New",monospace!important;
+  letter-spacing:.035em;text-transform:none;
+}
+#level-six .six-chapter-nav>span:last-child{border-right:0}
+#level-six .six-chapter-nav>span small{
+  color:#71676a;font:700 10px/1.35 Arial,sans-serif;letter-spacing:.08em;
+}
+#level-six .six-chapter-nav>span.is-past{color:#967177}
+#level-six .six-chapter-nav>span.is-current{
+  position:relative;color:#faf2eb;
+  background:#68111f;border-bottom:3px solid #d84558;
+  text-shadow:1px 1px #1e0207;
+}
+#level-six .six-chapter-nav>span.is-current small{color:#edd1d3}
+#level-six .six-reading-progress{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+  margin:0 0 15px;padding:10px 3px;
+  color:#d3babe;
+  font:700 11px/1.3 "Courier New",monospace;
+  letter-spacing:.09em;border-bottom:1px dotted #552530;
+}
+#level-six .six-paper{
+  --blood-opacity:.1;
+  background:#ebdfcd!important;
+  color:#26201c!important;
+  border:0!important;
+  outline:1px solid #c5b8a6;
+  outline-offset:-13px;
+  box-shadow:0 0 0 7px #211417,9px 12px 0 #49141d,0 28px 68px #000c!important;
+  padding:clamp(25px,5.5vw,67px)!important;
+  transform:rotate(-.35deg)!important;
+  min-height:570px;
+}
+#level-six .six-paper::before{
+  background:
+    radial-gradient(ellipse at 98% 2%,#6a010b 0 8%,#89152955 17%,transparent 35%),
+    radial-gradient(ellipse at -6% 61%,#66050e 0 8%,#76132170 16%,transparent 34%),
+    radial-gradient(circle at 70% 17%,#870b19 0 9px,transparent 11px),
+    radial-gradient(circle at 72% 22%,#72101a 0 4px,transparent 7px),
+    radial-gradient(circle at 34% 98%,#850c1a 0 3px,transparent 6px),
+    radial-gradient(ellipse at 10% 105%,#6e07117d 0 10%,transparent 30%),
+    repeating-linear-gradient(0deg,transparent 0 21px,#5d3c3010 22px 23px)!important;
+  opacity:var(--blood-opacity)!important;
+  transition:opacity 1s ease!important;
+}
+#level-six .six-paper::after{
+  background:
+   linear-gradient(#69040e,#780910) 89% 0 / 11px 116px no-repeat,
+   linear-gradient(#6f050e,#6f050e) 57% 0 / 5px 176px no-repeat,
+   linear-gradient(#780b13,#690311) 72% 0 / 18px 70px no-repeat,
+   linear-gradient(#780b13,#690311) 37% 0 / 6px 153px no-repeat,
+   radial-gradient(ellipse at 60% 0%,#5a010c 0 29%,transparent 34%) center top/100% 55px no-repeat!important;
+  width:220px!important;height:230px!important;
+  opacity:var(--blood-opacity)!important;
+  z-index:0!important;
+}
+#level-six[data-horror="0"] .six-paper{--blood-opacity:.07}
+#level-six[data-horror="1"] .six-paper{--blood-opacity:.17}
+#level-six[data-horror="2"] .six-paper{--blood-opacity:.30}
+#level-six[data-horror="3"] .six-paper{--blood-opacity:.43}
+#level-six[data-horror="4"] .six-paper{--blood-opacity:.59}
+#level-six[data-horror="5"] .six-paper{--blood-opacity:.74}
+#level-six[data-horror="6"] .six-paper{--blood-opacity:.86}
+#level-six[data-horror="7"] .six-paper{--blood-opacity:.98}
+#level-six .six-section-tag{color:#601921!important}
+#level-six .six-paperhead{color:#55413c!important}
+#level-six .six-paper h2{color:#21181a!important}
+#level-six .six-paper .six-subtitle{
+  margin-bottom:15px!important;padding-bottom:16px!important;
+  border-color:#bb9e8d!important;
+}
+#level-six .six-paper .six-article-intro{
+  font:italic 14px/1.6 Georgia,serif!important;
+  margin-bottom:21px!important;padding-bottom:15px!important;
+}
+#level-six #six-article .six-editor-page[hidden]{display:none!important}
+#level-six #six-article .six-editor-page{
+  display:block;
+  position:relative;min-width:0;
+  animation:six-page-arrive .4s ease-out both;
+}
+#level-six .six-editor-page>h3{
+  color:#721522!important;border-bottom:2px solid #7f3036!important;
+  font:700 12px/1.5 "Courier New",monospace!important;
+  letter-spacing:.11em!important;
+}
+#level-six .six-editor-page>p{
+  font:16px/1.75 Georgia,serif!important;
+  color:#30251f!important;
+  margin:13px 0!important;
+}
+#level-six .six-decision{
+  margin:23px 0!important;
+  background:#f8efe2!important;
+  border:1px solid #aa8a78!important;
+  box-shadow:5px 6px 0 #671e2a30!important;
+}
+#level-six .six-decision-head{
+  background:#2a2020!important;
+  color:#f5e5e0!important;border-bottom:3px solid #711624!important;
+  padding:11px 14px!important;
+}
+#level-six .six-decision-head span{color:#e6c9c6!important}
+#level-six .six-decision.is-complete .six-decision-head{
+  background:#541522!important;color:#fff!important;
+}
+#level-six .six-decision-body{padding:19px!important}
+#level-six .six-decision-body h4{
+  font:normal clamp(23px,3vw,32px)/1.23 Georgia,serif!important;
+  color:#261d1a!important;
+}
+#level-six .six-source{
+  border:1px dashed #8d5149!important;
+  border-left:5px solid #6f1d25!important;
+  background:#ded1bd!important;
+}
+#level-six .six-source b{color:#662129!important}
+#level-six .six-option{
+  border:1px solid #c0a899!important;background:#f6eee3!important;
+  box-shadow:2px 2px 0 #8370671c;
+}
+#level-six .six-option:hover{background:#ece0d4!important;border-color:#8c3036!important}
+#level-six .six-option:has(input:checked){
+  background:#efe0d7!important;border-color:#872b33!important;
+  box-shadow:inset 5px 0 #701a27,3px 3px 0 #80283736!important;
+}
+#level-six .six-decision-commit{
+  background:#271d1d!important;color:#fff!important;
+  border:1px solid #1c1717!important;
+  box-shadow:3px 4px 0 #711827!important;
+  min-height:44px!important;
+}
+#level-six .six-decision-commit:hover{background:#831b29!important}
+#level-six .six-result-edit{
+  background:#e9d7cc!important;border-left:5px solid #731822!important;
+}
+#level-six .six-sidebar{
+  background:#171214!important;color:#e8d6cf!important;
+  border:1px solid #74323c!important;
+  box-shadow:7px 9px 0 #020102,0 15px 30px #0009!important;
+}
+#level-six .six-sidebar-top{
+  color:#b97f89!important;border-color:#67303c!important;
+}
+#level-six .six-sidebar h3{color:#f5e4dc!important}
+#level-six .six-sidebar p,#level-six .six-sidebar .six-decision-status{
+  color:#c1a7a6!important;
+}
+#level-six .six-sidebar .six-score-label{color:#c69da2!important}
+#level-six .six-sidebar .six-total,
+#level-six .six-sidebar .six-total strong{color:#f1e2d9!important}
+#level-six .six-sidebar .six-total span{color:#bcb4ab!important}
+#level-six .six-sidebar .six-meter{background:#443035!important}
+#level-six .six-sidebar .six-meter>div{background:#cc2340!important}
+#level-six .six-sidebar #six-feedback{color:#d0aeb0!important}
+#level-six .six-sidebar .six-submit{background:#861629!important;border-color:#ae4050!important}
+#level-six .six-sidebar .six-submit:disabled{background:#312428!important;color:#665457!important;border-color:#483039!important}
+#level-six .six-sidebar #six-reset{color:#d0abb1!important;border-color:#975964!important}
+#level-six .six-page-nav{
+  display:grid;grid-template-columns:minmax(130px,1fr) auto minmax(130px,1fr);
+  align-items:center;gap:12px;
+  margin:26px 0 20px;padding:21px 0;
+  border-top:1px solid #6e333d;
+  font:700 12px "Courier New",monospace;
+  color:#d3b3b4;
+}
+#level-six .six-page-nav button{
+  min-height:47px;padding:10px 16px;
+  background:#241a1d;border:1px solid #995262;
+  color:#f5e5e6;
+  font:bold 11px/1.4 "Courier New",monospace;
+  cursor:pointer;letter-spacing:.06em;
+}
+#level-six #six-prev{justify-self:start}
+#level-six #six-next{justify-self:end;background:#751523;border-color:#b53648}
+#level-six .six-page-nav button:not(:disabled):hover{
+  background:#a61e32!important;color:#fff;
+  box-shadow:0 0 18px #951c375c;
+}
+#level-six .six-page-nav button:disabled{
+  opacity:.35;cursor:not-allowed;box-shadow:none!important;
+}
+#level-six .six-page-nav button:focus-visible{outline:3px solid #d23d52;outline-offset:4px}
+#level-six .six-page-nav #six-page-state{min-width:65px;text-align:center}
+
+/* A frightening intrusion is not a modal warning. It takes the whole screen,
+   cuts the document into bands, floods the edges and then vanishes. */
+#six-signal[hidden],#six-act-interrupt[hidden]{display:none!important}
+#six-signal,#six-act-interrupt{
+  position:fixed;inset:0;z-index:12550;
+  pointer-events:none;overflow:hidden;isolation:isolate;
+}
+#six-signal{
+  display:flex;flex-direction:column;
+  align-items:stretch;justify-content:center;
+  background:
+    radial-gradient(ellipse at 4% 18%,#610612 0%,transparent 45%),
+    radial-gradient(ellipse at 93% 76%,#7e0618 0%,transparent 51%),
+    #e8ded0;
+  animation:six-intrude .68s steps(3,end) both;
+}
+#six-signal .six-signal-band{
+  position:absolute;left:-5%;right:-5%;height:clamp(30px,10vh,140px);
+  top:21%;background:
+    linear-gradient(90deg,#580514,#9b1225 28%,#50030d 50%,#a22034 79%,#4b0309);
+  transform:skewY(-4deg);
+  mix-blend-mode:multiply;
+  box-shadow:0 0 30px #4508117a;
+}
+#six-signal .six-signal-band:last-child{
+  top:auto;bottom:18%;height:9vh;transform:skewY(5deg);
+}
+#six-signal>span{
+  position:relative;z-index:2;
+  padding:28px 10px;
+  background:#f6e6d8;
+  border-top:7px solid #750918;border-bottom:7px solid #750918;
+  color:#6e000e;text-align:center;
+  font:900 clamp(26px,6.4vw,86px)/1 "Courier New",monospace;
+  letter-spacing:-.05em;text-transform:uppercase;
+  text-shadow:4px 0 #b62832,-3px 0 #d7a8a8;
+  transform:rotate(-1.7deg);
+}
+#six-signal[data-intensity="severe"]{
+  background:
+    radial-gradient(ellipse at 50% 105%,#490007 0 23%,transparent 70%),
+    repeating-linear-gradient(93deg,#6d0310 0 20px,#9c0c1c 24px 46px,#340009 50px 71px);
+}
+#six-signal[data-intensity="severe"]>span{
+  background:#e9d1c1!important;
+  font-size:clamp(31px,8vw,105px);
+  border-width:13px;
+  animation:six-intrude-severe .18s steps(2) 4;
+}
+#six-act-interrupt{
+  display:flex;flex-direction:column;justify-content:center;gap:27px;
+  align-items:center;text-align:center;padding:clamp(22px,7vw,75px);
+  background:
+    radial-gradient(ellipse at 11% 8%,#51020d 0 10%,transparent 40%),
+    radial-gradient(ellipse at 100% 100%,#67040f 0 17%,transparent 55%),
+    linear-gradient(116deg,#e8dccd 0 65%,#aa8b83 100%);
+  animation:six-act-in 1.45s both;
+}
+#six-act-interrupt::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(#69010e,#780913) 7% 0/14px 48% no-repeat,
+    linear-gradient(#710a17,#58010e) 22% 0/5px 24% no-repeat,
+    linear-gradient(#78010e,#58010e) 88% 0/11px 63% no-repeat,
+    repeating-linear-gradient(0deg,transparent 0 3px,#44000a08 4px 5px);
+}
+#six-act-interrupt>span,#six-act-interrupt>p{
+  position:relative;z-index:1;margin:0;
+}
+#six-act-interrupt>span{
+  font:700 clamp(16px,2.2vw,25px) "Courier New",monospace;
+  letter-spacing:.14em;color:#3c1016;
+  text-shadow:1px 1px #e8c3c3;
+}
+#six-act-interrupt>p{
+  max-width:1100px;
+  font:900 clamp(36px,7vw,95px)/.99 Georgia,serif;
+  letter-spacing:-.065em;color:#7e0c1b;
+  text-shadow:5px 6px 0 #c2a097;
+  animation:six-cry-twitch .27s steps(2) infinite;
+}
+#level-six.six-flicker .six-paper{
+  animation:six-paper-tear .65s steps(3,end) both!important;
+}
+#level-six.six-flicker .six-sidebar{
+  animation:six-dashboard-shift .7s steps(3,end) both!important;
+}
+@keyframes six-paper-tear{
+  0%,100%{transform:rotate(-.35deg);clip-path:inset(0)}
+  24%{transform:translate(-13px,1px) skew(2deg);clip-path:inset(0 0 44% 0)}
+  30%{transform:translate(12px,-2px) skew(-2deg);clip-path:inset(43% 0 0 0)}
+  51%{transform:translate(8px,3px);filter:contrast(1.8) saturate(.4)}
+  75%{transform:translate(-6px,-1px);filter:contrast(1.5) sepia(.7)}
+}
+@keyframes six-dashboard-shift{
+  0%,100%{transform:none}
+  34%{transform:translateX(8px)}
+  37%{transform:translateX(-7px)}
+}
+@keyframes six-intrude{
+  0%,100%{opacity:0;filter:contrast(1)}
+  13%,67%{opacity:1;filter:contrast(1.6)}
+  22%,43%,72%{transform:translateX(17px) skew(-1deg)}
+  31%,49%,84%{transform:translateX(-12px) skew(1deg)}
+}
+@keyframes six-intrude-severe{
+  0%,100%{transform:translateX(0) skewX(-5deg)}
+  50%{transform:translateX(22px) skewX(7deg)}
+}
+@keyframes six-act-in{
+  0%,100%{opacity:0}
+  14%,83%{opacity:1}
+}
+@keyframes six-cry-twitch{
+  0%,100%{transform:translate(0)}
+  35%{transform:translate(-4px,2px)}
+  72%{transform:translate(5px,-2px)}
+}
+@keyframes six-page-arrive{
+  from{opacity:.3;transform:translateY(16px)}
+  to{opacity:1;transform:none}
+}
+
+/* The endings stay inside the horror world, rather than snapping to a clean
+   neutral background after the final act. */
+#sixAfter.six-screen{
+  background:
+    radial-gradient(ellipse at 10% 4%,#5d0b16 0%,transparent 45%),
+    radial-gradient(ellipse at 100% 85%,#420910 0%,transparent 43%),
+    #0e0b0d!important;
+  color:#eedbd6!important;
+}
+#sixAfter .six-folio{background:#171013!important;color:#cea6a8!important}
+#sixAfter .six-ending-result{
+  background:#e8d9c8!important;
+  box-shadow:10px 13px 0 #5b131e,0 22px 65px #000c!important;
+  transform:rotate(-.2deg);
+}
+#sixAfter .six-ending-result::before{
+  z-index:0!important;opacity:.8;
+}
+#sixAfter .six-ending-result>*{position:relative;z-index:1}
+#sixAfter .six-dev-note{color:#c4abb0!important}
+#sixAfter .six-ending-actions .six-outline{
+  background:#e6d2c4!important;color:#3f161b!important;
+  border:1px solid #772c35!important;
+}
+#sixAfter .six-ending-actions .six-outline:hover{background:#dcb2ab!important}
+@media(max-width:950px){
+  #level-six .six-columns{grid-template-columns:1fr!important}
+  #level-six .six-sidebar{position:static!important}
+  #level-six .six-paper{transform:none!important}
+}
+@media(max-width:650px){
+ #level-six .six-shell{padding:11px 13px!important}
+ #level-six .six-chapter-nav>span{padding:9px 8px!important;font-size:12px!important}
+ #level-six .six-chapter-nav>span small{font-size:8px!important}
+ #level-six .six-page-nav{grid-template-columns:1fr auto 1fr;gap:6px!important}
+ #level-six .six-page-nav button{padding:9px 8px!important;font-size:9px!important}
+ #level-six .six-paper{padding:24px 19px!important}
+ #level-six .six-reading-progress{font-size:9px!important}
+ #level-six .six-editor-intro{padding:22px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #six-signal,#six-signal *,
+ #six-act-interrupt,#six-act-interrupt *,
+ #level-six .six-editor-page,
+ #level-six.six-flicker .six-paper,
+ #level-six.six-flicker .six-sidebar{animation:none!important}
+}
