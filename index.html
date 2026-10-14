@@ -258,8 +258,19 @@
    <p>Now we finally get to have a look at the brilliant piece we're reviving. An article called <em>A Life in Three Acts</em>. We'll have to decide which parts of the original article to keep, and which to discard.</p>
    <p>Some of these choices might be tough. I'd say pick whichever gives you the best score. After all, winning is always the most important objective, right?</p>
    <p class="six-intro-last">Makes for such a perfect story.</p>
+   <button id="six-start" class="six-opening-button" type="button">OPEN ORIGINAL PROOF <span aria-hidden="true">→</span></button>
   </div>
-  <div class="six-columns">
+  <div id="six-workspace" class="six-workspace" hidden>
+   <nav class="six-chapter-nav" aria-label="Three acts of Adam's life">
+    <span data-six-act="1">ACT I <small>THE PROMISE</small></span>
+    <span data-six-act="2">ACT II <small>THE FALL &amp; RETURN</small></span>
+    <span data-six-act="3">ACT III <small>THE UNFINISHED</small></span>
+   </nav>
+   <div class="six-reading-progress">
+    <span id="six-reading-chapter">ACT I · THE PROMISE</span>
+    <span id="six-page-counter">DOCUMENT 01 / 07</span>
+   </div>
+   <div class="six-columns">
    <article class="six-paper" aria-label="Recovered editorial proof">
     <div class="six-paperhead"><span>THE MERIDIAN · FEATURE DESK</span><span>ORIGINAL PROOF / APRIL 1997</span></div>
     <p class="six-section-tag">THE LIFE AND DEATH OF AN ORDINARY MAN</p>
@@ -267,7 +278,7 @@
     <p class="six-subtitle">An unfinished portrait of Adam E. · 1970–1997</p>
     <p class="six-article-intro">He was twenty-seven. The accounts agree on his talent, his troubled years and an engagement announced the previous September. On what sort of man he was, the accounts are less certain. This is the story the surviving papers leave behind.</p>
     <div id="six-article"></div>
-    <div class="six-paperend">— END OF RECOVERED PROOF · EDITORIAL CHANGES TRACKED —</div>
+    <div class="six-paperend">— RECOVERED ARTICLE · ONE PASSAGE AT A TIME —</div>
    </article>
    <aside class="six-sidebar" aria-label="Editorial scoring and submission">
     <div class="six-sidebar-top"><span>THE MERIDIAN</span><span>ASSESSMENT · 06</span></div>
@@ -282,9 +293,13 @@
     <p class="six-submit-hint">All seven passages must be reviewed before submission.</p>
     <button id="six-reset" class="six-outline" type="button" hidden>Restart editorial review (developer)</button>
    </aside>
+   </div>
+   <div class="six-page-nav" aria-label="Editorial page navigation">
+    <button id="six-prev" type="button">← PREVIOUS RECORD</button>
+    <span id="six-page-state" aria-live="polite">1 OF 7</span>
+    <button id="six-next" type="button" disabled>NEXT RECORD →</button>
+   </div>
   </div>
- </div>
-
 </section>
 <section id="sixAfter" class="level six-screen" aria-labelledby="six-after-title" hidden>
  <div class="six-shell six-ending-shell">
@@ -331,7 +346,14 @@
   <button id="six-warning-continue" type="button">ENTER THE ARCHIVE <span aria-hidden="true">→</span></button>
  </div>
 </div>
- <div id="six-blood-curtain" class="six-blood-curtain" hidden aria-hidden="true"><span>THE RECORD DOES NOT END HERE</span></div>
+ <div id="six-signal" class="six-signal" hidden aria-hidden="true">
+ <div class="six-signal-band"></div><span id="six-signal-message">THIS WAS NOT IN THE ORIGINAL</span><div class="six-signal-band"></div>
+</div>
+<div id="six-act-interrupt" class="six-act-interrupt" hidden aria-hidden="true">
+ <span id="six-act-interrupt-label">ACT II · THE FALL AND THE RETURN</span>
+ <p id="six-act-interrupt-message">SOME THINGS ARE NOT SUPPOSED TO BE RECOVERED.</p>
+</div>
+<div id="six-blood-curtain" class="six-blood-curtain" hidden aria-hidden="true"><span>THE RECORD DOES NOT END HERE</span></div>
 <div id="six-breach" hidden role="dialog" aria-modal="true" aria-label="A distress signal has interrupted the archive">
  <svg class="six-blood-hand" viewBox="0 0 220 310" aria-hidden="true" focusable="false">
   <g fill="#64040e" stroke="#64040e" stroke-linecap="round" stroke-linejoin="round">
