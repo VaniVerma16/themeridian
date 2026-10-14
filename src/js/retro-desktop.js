@@ -152,24 +152,106 @@
  function clearAlerts(){
    alertTimers.forEach(clearTimeout);alertTimers=[];
    windows.replaceChildren();
+   windows.classList.remove('retro-errors-active');
+   wrapper.classList.remove('retro-under-attack');
+ }
+ function queueError(fn,delay){alertTimers.push(window.setTimeout(fn,delay));}
+ function corruptError(windowEl,changes){
+   if(!windowEl)return;
+   const heading=windowEl.querySelector('.retro-error-title span');
+   const message=windowEl.querySelector('.retro-error-message');
+   const button=windowEl.querySelector('.retro-error-actions button');
+   if(changes.title)queueError(()=>{if(heading?.isConnected)heading.textContent=changes.title;},changes.at||850);
+   if(changes.message)queueError(()=>{if(message?.isConnected)message.firstChild.textContent=changes.message;},(changes.at||850)+180);
+   if(changes.button)queueError(()=>{if(button?.isConnected)button.textContent=changes.button;},(changes.at||850)+350);
  }
  function fault(kind){
-   // An ordinary old browser error becomes a collection of contradictory
-   // application warnings. The archive's content underneath is never changed.
+   clearAlerts();
+   windows.classList.add('retro-errors-active');
+   const haunted=kind==='cascade'||kind==='breach';
+   wrapper.classList.toggle('retro-under-attack',haunted);
    if(kind==='soft'){
-     openAlert({title:'Microsoft Internet Explorer',body:'An error has occurred in the script on this page.\nContinue loading the document?',code:'Line 97 · archive/index.htm',autoClose:3100});
+     const w=openAlert({
+       title:'Internet Explorer — Script Error',
+       body:'The archive has received a revised page from an unknown source.\nThe requested original is still open.',
+       code:'FILE 04 · LINE 0 · REVISION NOT AUTHORISED',
+       autoClose:4900
+     });
+     corruptError(w,{title:'Internet Explorer — SOURCE CONFLICT',at:1250});
    }else if(kind==='cascade'){
-     clearAlerts();
-     openAlert({title:'Internet Explorer',body:'The document you are viewing has been modified by another application.',code:'File state: changed',autoClose:6500});
-     alertTimers.push(setTimeout(()=>openAlert({title:'Archive Index — Application Error',body:'The original file cannot be located.\nA different version is already open.',code:'FILE_NOT_FOUND · 0x80070002',autoClose:6400}),310));
-     alertTimers.push(setTimeout(()=>openAlert({title:'Microsoft WordPad',body:'This document is currently in use.\nDo you want to open another copy?',code:'AUTHOR UNVERIFIED',autoClose:5900}),760));
+     const first=openAlert({
+       title:'Microsoft Internet Explorer',
+       body:'A previous instance of the archive is still running.\nYou did not open it.',
+       code:'ARCHIVE.EXE / PID UNKNOWN',autoClose:7800
+     });
+     corruptError(first,{message:'This file is already open elsewhere.\nIt is currently being changed.',at:1800});
+     queueError(()=>{
+       const w=openAlert({
+         title:'Windows Explorer — File Conflict',
+         body:'Two originals were found in the same directory.\nBoth files report the same timestamp.',
+         code:'C:\MERIDIAN\ARCHIVE\ORIGINAL.HTM',
+         kind:'severe',autoClose:7900
+       });
+       corruptError(w,{title:'C:\MERIDIAN\ARCHIVE\DO_NOT_REPLACE.HTM',button:'CANCEL',at:1150});
+     },340);
+     queueError(()=>{
+       const w=openAlert({
+         title:'Archive Recovery Utility',
+         body:'Restoration completed. The restored document was not created by this author.',
+         code:'RETAINED COPY / OWNER: [UNAVAILABLE]',
+         kind:'severe',corrupted:true,autoClose:7300
+       });
+       corruptError(w,{message:'Restoration completed.\nThe original document has been overwritten again.',button:'STAY',at:850});
+     },1020);
+     queueError(()=>openAlert({
+       title:'Media Player — PLAYBACK ERROR',
+       body:'The recording has stopped. A second track is still playing.',
+       code:'TRACK 02 / SOURCE UNRESOLVED',
+       kind:'severe',autoClose:6400
+     }),1580);
    }else if(kind==='breach'){
-     clearAlerts();
-     openAlert({title:'The Meridian Online — Notice',body:'The page was restored from an unexpected location.',code:'Source path does not match the archive index.',autoClose:8400});
-     alertTimers.push(setTimeout(()=>openAlert({title:'Explorer — File Conflict',body:'Two versions of this document exist.\nBoth claim to be the original.',code:'C:\\MERIDIAN\\ARCHIVE\\INDEX.HTM',autoClose:8100}),310));
-     alertTimers.push(setTimeout(()=>openAlert({title:'INTERNET EXPLORER',body:'The document has changed while you were reading it.',code:'A previous instance is still running.',kind:'severe',autoClose:8300}),660));
-     alertTimers.push(setTimeout(()=>openAlert({title:'SYSTEM ERROR',body:'The recovered index is not the index that was requested.',code:'REF: [CANNOT RESOLVE]',kind:'severe',corrupted:true,autoClose:6900}),1150));
+     const first=openAlert({
+       title:'Internet Explorer — ARCHIVE 1997',
+       body:'The document has changed since it was first loaded.\nThe original copy is attempting to restore itself.',
+       code:'EDITORIAL PROOF / CONFLICTING WRITES',autoClose:10500
+     });
+     corruptError(first,{title:'THE MERIDIAN — THIS IS NOT THE ORIGINAL',at:1500});
+     queueError(()=>{
+       const w=openAlert({
+         title:'Explorer — Duplicate File',
+         body:'The original site was found in two different locations.\nOne of these files does not belong here.',
+         code:'C:\MERIDIAN\OLD_SITE\INDEX.HTM',kind:'severe',autoClose:10000
+       });
+       corruptError(w,{message:'One of these files does not belong here.\nWhy does it keep returning?',at:1280});
+     },260);
+     queueError(()=>{
+       const w=openAlert({
+         title:'Write Protection Failure',
+         body:'A retained document is requesting control of this browser window.',
+         code:'ORIGINAL AUTHOR / ACCESS DENIED',kind:'severe',corrupted:true,autoClose:9000
+       });
+       corruptError(w,{title:'THE PAGE IS TRYING TO SPEAK',button:'DO NOT CLOSE',at:740});
+     },740);
+     queueError(()=>{
+       const w=openAlert({
+         title:'ARCHIVE.EXE — FATAL EXCEPTION',
+         body:'This window was not opened by you.\nThe file you need was removed from the index.',
+         code:'REF. UNAVAILABLE / FIND THE MISSING FILE',
+         kind:'severe',corrupted:true,autoClose:8900
+       });
+       corruptError(w,{message:'FIND THE MISSING FILE.\nFIND THE MISSING FILE.\nIT WAS HERE BEFORE.',button:'STAY',at:1150});
+     },1340);
+     queueError(()=>{
+       const w=openAlert({
+         title:'Windows — Application Not Responding',
+         body:'The previous window cannot be closed.\nIt has already opened again.',
+         code:'THE MERIDIAN — UNKNOWN PROCESS',
+         kind:'severe',autoClose:7700
+       });
+       corruptError(w,{title:'FIND THE MISSING FILE',at:1200});
+     },2060);
    }
+   queueError(()=>{wrapper.classList.remove('retro-under-attack');windows.classList.remove('retro-errors-active');},11500);
  }
  const shortcuts=document.querySelector('.retro-desktop-shortcuts');
  if(shortcuts){
