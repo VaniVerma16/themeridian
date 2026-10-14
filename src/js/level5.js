@@ -571,7 +571,13 @@
       outroGhost.pause();
       stopOutroMusic();
       const root=document.getElementById('five-outro');root.hidden=true;root.className='five-outro';
-      show('complete');
+      if(developerPreview && window.MeridianTape){
+        // Keep the entire authored recording, but replace the modern demo
+        // interstitial with a period-correct tape handoff to the original site.
+        window.MeridianTape.play(()=>show('six'));
+      }else{
+        show('complete');
+      }
     }
     function flashAfterFive(){
       if(fiveOutroPending||(!developerPreview&&document.getElementById('five-result').hidden))return;
