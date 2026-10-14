@@ -292,19 +292,30 @@
       if(fiveFlashPending)return;
       fiveFlashPending=true;
       const overlay=document.getElementById('five-interference');
-      // Audio is unlocked during earlier gestures; if the browser suspended it,
-      // wait for resume and schedule both against the same hardware clock.
-      playInterference(()=>{
+      let visualStarted=false;
+      let audioWatchdog;
+      const startVisual=()=>{
+        if(visualStarted)return; // Audio resume and the watchdog may both fire.
+        visualStarted=true;
+        window.clearTimeout(audioWatchdog);
         overlay.classList.remove('active');
         // Restart the CSS animation on every replay, without altering its length.
         void overlay.offsetWidth;
         overlay.classList.add('active');
         window.setTimeout(()=>{
           overlay.classList.remove('active');
-          show('readFive');
-          fiveFlashPending=false;
+          // Navigation cannot be held hostage by an unavailable audio device.
+          try{show('readFive');}finally{fiveFlashPending=false;}
         },INTERFERENCE_SECONDS*1000);
-      });
+      };
+      // AudioContext.resume() is allowed to remain pending indefinitely on
+      // some browsers, especially on mobile or after an audio policy change.
+      // The visual transition is always started, even when audio cannot resume.
+      audioWatchdog=window.setTimeout(startVisual,600);
+      try{playInterference(startVisual)}catch(error){
+        console.warn('Interference audio failed; continuing visually',error);
+        startVisual();
+      }
     }
     // Physical desk: the objects are the navigation. Only one workspace opens at a time.
     const deskOverlay=document.getElementById('desk-overlay');
