@@ -667,3 +667,14 @@ body.dev-newsprint :is(#level-one,#level-four):is([hidden]){
   body.dev-newsprint #level-four .four-map-col::before{margin:0 -8px 9px!important}
   body.dev-newsprint #directory-modal .directory-page{padding:15px 15px 60px!important}
 }
+
+
+/* Only one masthead per page.
+   The common #full-header predates the 1997 Meridian Online page shells.
+   Hide it only when an original-style archive page is active; keep it on
+   home/completion pages that do not have their own site masthead.
+   Previous Sections navigation is independent and remains usable. */
+body.dev-newsprint:has(.retro-browser-page > main > section:not([hidden]) > .meridian-era-site) .retro-browser-page > #full-header,
+body.dev-newsprint:has(.retro-browser-page > main > #level-six:not([hidden])) .retro-browser-page > #full-header {
+  display:none!important;
+}
