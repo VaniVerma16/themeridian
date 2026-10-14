@@ -502,3 +502,192 @@ body.dev-newsprint .meridian-era-site :is(.era-ticker,.era-sidehead,.logic-panel
  body.dev-newsprint #level-five .desk-object{min-height:96px!important}
  body.dev-newsprint #level-five .desk-overlay-body{padding:8px!important}
 }
+
+
+/* THE RECOVERED CASSETTE: authentic 4:3 VHS playback, not a modern title sequence. */
+body.dev-newsprint #five-outro{
+ background:#040605!important;padding:7vh 6vw!important;z-index:10002;
+}
+body.dev-newsprint #five-outro::before{
+ background:repeating-linear-gradient(0deg,transparent 0 2px,#ffffff08 3px 4px),
+ linear-gradient(90deg,#000b00,#000 20%,#0c1110 57%,#000)!important;
+ opacity:.48!important;animation:vhs-weave 1.8s steps(4,end) infinite!important;
+}
+body.dev-newsprint #five-outro .outro-film{
+ width:min(850px,100%)!important;min-height:0!important;max-height:86vh!important;
+ aspect-ratio:4/3!important;max-width:none!important;
+ padding:30px 44px!important;box-sizing:border-box!important;
+ border:2px solid #7d857b!important;outline:12px solid #090c0b;
+ background:linear-gradient(175deg,#1b2621 0%,#111912 18%,#131613 45%,#252921 48%,#070908 51%,#101811 100%);
+ box-shadow:inset 0 0 75px #000,0 0 0 3px #252b28,0 14px 70px #000!important;
+ position:relative!important;overflow:hidden!important;
+}
+body.dev-newsprint #five-outro .outro-film::before{
+ content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.34;
+ background:repeating-linear-gradient(to bottom,transparent 0 2px,#e5e7ce16 3px 4px),
+ linear-gradient(90deg,#05110045 1%,transparent 10%,transparent 92%,#000c 100%);
+ animation:vhs-scanline 1.2s linear infinite;
+}
+body.dev-newsprint #five-outro .outro-film::after{
+ content:"";position:absolute;left:-8%;right:-8%;height:18px;z-index:4;top:-15px;
+ pointer-events:none;opacity:.42;
+ background:linear-gradient(to bottom,transparent,#bbc5ad38 35%,#c7d5d47a 53%,#5a686d22 67%,transparent);
+ box-shadow:0 -5px 19px #bbb5;animation:vhs-head-tracking 5.8s linear infinite;
+}
+body.dev-newsprint #five-outro .outro-film-top,
+body.dev-newsprint #five-outro .outro-film-bottom{
+ z-index:5!important;color:#dce2cd!important;text-shadow:1px 1px #000,0 0 5px #ccc6!important;
+ font:700 13px/1.3 "Courier New",monospace!important;letter-spacing:.035em!important;
+}
+body.dev-newsprint #five-outro .outro-film-top::before{
+ content:"PLAY  ▸   SP";position:absolute;right:48px;top:61px;
+ color:#e4e8d8;font:bold 14px "Courier New",monospace;letter-spacing:.08em;
+}
+body.dev-newsprint #five-outro .vhs-rec-indicator{
+ display:block;position:absolute;top:66px;left:40px;z-index:6;
+ color:#e2e6d8;font:bold 12px "Courier New",monospace;letter-spacing:.06em;
+}
+body.dev-newsprint #five-outro :is(.outro-film-title,.outro-film-dialogue){
+ z-index:2!important;position:relative!important;
+}
+body.dev-newsprint #five-outro .outro-film-title{
+ color:#e3e3d5!important;font:clamp(26px,4vw,52px)/1.18 "Courier New",monospace!important;
+ letter-spacing:-.045em!important;text-shadow:1px 1px 0 #000,-2px 0 #58777777!important;
+}
+body.dev-newsprint #five-outro .outro-title-year{color:#d0d4c4!important}
+body.dev-newsprint #five-outro .outro-film-speaker{
+ color:#d6d9c6!important;font:bold 13px "Courier New",monospace!important;
+}
+body.dev-newsprint #five-outro .outro-film-caption{
+ font:clamp(22px,3.6vw,43px)/1.36 "Courier New",monospace!important;
+ color:#e4e5d5!important;text-shadow:2px 1px #090c09,-1px 0 #6d8f8f!important;
+}
+body.dev-newsprint #five-outro.outro-unknown .outro-film-caption{
+ color:#eec9c5!important;text-shadow:-2px 0 #9b1c34,2px 0 #307384!important;
+}
+body.dev-newsprint #five-outro.outro-narrator .outro-film-caption{
+ color:#e1ded7!important;
+}
+body.dev-newsprint #five-outro .outro-cursor{color:#dedbce!important}
+body.dev-newsprint #five-outro .outro-film-top span:first-child{font-size:11px!important}
+body.dev-newsprint #five-outro #outro-timestamp{
+ background:#111;padding:2px 5px;color:#dce4d0!important;
+}
+body.dev-newsprint .meridian-tape{
+ position:fixed;inset:0;z-index:10010;display:grid;place-items:center;
+ background:#000!important;padding:3vh;box-sizing:border-box;overflow:hidden;color:#e4e5d5;
+}
+body.dev-newsprint .meridian-tape[hidden]{display:none!important}
+body.dev-newsprint .meridian-tape .tape-image{
+ position:relative;width:min(850px,96vw);aspect-ratio:4/3;max-height:88dvh;
+ background:linear-gradient(178deg,#0e160f 0%,#17211a 46%,#253026 49%,#090d0b 52%,#040604 100%);
+ border:1px solid #656e62;box-shadow:0 0 0 15px #070a08,0 8px 70px #000;
+ overflow:hidden;color:#e4e5d5;font:16px "Courier New",monospace;
+}
+body.dev-newsprint .meridian-tape .tape-image::before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:repeating-linear-gradient(to bottom,transparent 0 2px,#e7eae517 3px 4px);
+ opacity:.38;animation:vhs-scanline 1.2s linear infinite;
+}
+body.dev-newsprint .meridian-tape .tape-image::after{
+ content:"";position:absolute;left:0;right:0;height:30px;top:-12px;pointer-events:none;
+ background:linear-gradient(180deg,transparent,#ccd5b149,#a0bcc53b,transparent);
+ animation:vhs-head-tracking 4.4s linear infinite;
+}
+body.dev-newsprint .meridian-tape :is(.tape-head,.tape-foot){
+ display:flex;justify-content:space-between;position:absolute;z-index:5;
+ left:28px;right:28px;color:#eff2dd;text-shadow:0 0 4px #ded9;
+ font:bold clamp(11px,1.3vw,17px) "Courier New",monospace;letter-spacing:.08em;
+}
+body.dev-newsprint .meridian-tape .tape-head{top:27px}
+body.dev-newsprint .meridian-tape .tape-foot{bottom:27px}
+body.dev-newsprint .meridian-tape .tape-bars{
+ font:700 18px "Courier New",monospace;letter-spacing:-.22em!important;opacity:.75;
+}
+body.dev-newsprint .meridian-tape .tape-intertitle{
+ display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;
+ position:absolute;inset:0;padding:55px;text-align:center;z-index:2;color:#eeeeda!important;
+ font:bold clamp(19px,3vw,37px)/1.4 "Courier New",monospace!important;
+ text-shadow:2px 1px #142e2c,-2px 0 #633340;
+}
+body.dev-newsprint .meridian-tape #tape-intertitle-sub{
+ display:block;color:#c7d0bc;font:13px/1.4 "Courier New",monospace!important;letter-spacing:.08em;
+}
+body.dev-newsprint .meridian-tape.tape-seeking .tape-image{
+ filter:contrast(1.25);background:linear-gradient(180deg,#263025,#030604,#202821,#030403);
+}
+@keyframes vhs-scanline{0%{transform:translateY(0)}100%{transform:translateY(4px)}}
+@keyframes vhs-weave{0%,90%,100%{transform:translateX(0)}93%{transform:translateX(2px)}96%{transform:translateX(-1px)}}
+@keyframes vhs-head-tracking{0%{top:-25px;opacity:.25}45%{opacity:.55}100%{top:105%;opacity:.3}}
+
+/* 1990s OS error windows gradually behave like a hostile interface.
+   Brief overlapping ghost images, corrupt titles, conflicting instructions.
+   Avoid strobing the entire page or obscuring the puzzles permanently. */
+body.dev-newsprint .retro-errors-active{isolation:isolate}
+body.dev-newsprint .retro-error{
+ box-shadow:2px 2px 0 #002627,9px 11px 0 #0c172644,13px 17px 34px #0008!important;
+}
+body.dev-newsprint .retro-error[data-fault="severe"]{
+ background:#c1c1b9!important;
+ box-shadow:-2px 0 #8a0b27,3px 0 #147d89,7px 9px #000,12px 16px 30px #000a!important;
+}
+body.dev-newsprint .retro-error[data-fault="severe"] .retro-error-title{
+ background:linear-gradient(90deg,#050056 0%,#000080 27%,#62051f 71%,#080023 100%)!important;
+ text-shadow:-2px 0 #b5223e,2px 0 #11677f!important;
+ letter-spacing:.035em!important;overflow:hidden!important;
+}
+body.dev-newsprint .retro-error[data-fault="severe"]::before{
+ content:"";position:absolute;inset:29px 0 0;z-index:4;pointer-events:none;opacity:.52;
+ background:repeating-linear-gradient(to bottom,transparent 0 3px,#ffffff30 4px 5px),
+ linear-gradient(90deg,transparent 43%,#b40e1655 44%,transparent 46%,#23839c44 47%,transparent 49%);
+ animation:os-window-corruption 1.9s steps(4,end) infinite;
+}
+body.dev-newsprint .retro-error[data-fault="severe"]::after{
+ content:"ARCHIVE.EXE / MEMORY ACCESS VIOLATION";
+ position:absolute;left:15px;right:12px;bottom:5px;z-index:2;
+ font:8px "Courier New",monospace!important;letter-spacing:.07em;color:#68051b;
+ opacity:.65;pointer-events:none;
+}
+body.dev-newsprint .retro-error[data-fault="severe"] .retro-error-body{
+ background:repeating-linear-gradient(180deg,#c5c5bd 0 20px,#d6d6c9 21px 22px);
+ padding-bottom:22px!important;
+}
+body.dev-newsprint .retro-error[data-fault="severe"] .retro-error-message{
+ color:#070707!important;text-shadow:1px 0 #b3263955,-1px 0 #007c9955!important;
+ font:13px/1.4 "Courier New",monospace!important;
+}
+body.dev-newsprint .retro-error[data-fault="severe"] .retro-error-symbol{
+ border-radius:0!important;transform:rotate(-2deg);background:#101010!important;
+ color:#f3e3df!important;border:2px solid #8c1728!important;
+ box-shadow:3px 0 #2f9299,-3px 0 #b50e28!important;
+}
+body.dev-newsprint .retro-error.corrupted{
+ animation:os-window-spawn .13s steps(2,end) both,os-window-breathe 4s steps(1,end) infinite!important;
+}
+body.dev-newsprint .retro-error.corrupted .retro-error-title span{
+ animation:os-title-scramble 3.8s steps(2,end) infinite;
+}
+body.dev-newsprint .retro-errors-active .retro-error:nth-last-child(2) {
+ filter:contrast(1.16) saturate(.72);
+}
+body.dev-newsprint .wrapper.retro-under-attack .retro-browser-title{
+ background:linear-gradient(90deg,#000080,#600817 46%,#000080 60%,#3e5782 100%)!important;
+}
+body.dev-newsprint .wrapper.retro-under-attack .retro-address-value{
+ color:#890319!important;text-shadow:1px 0 #00adbd55!important;
+}
+@keyframes os-window-spawn{0%{opacity:0;transform:translate(14px,-8px) skewX(4deg)}100%{opacity:1;transform:none}}
+@keyframes os-window-breathe{0%,88%,100%{clip-path:inset(0)}90%{clip-path:inset(0 0 3px 0)}92%{clip-path:inset(5px 0 0 0)}94%{clip-path:inset(0)}}
+@keyframes os-title-scramble{0%,87%,100%{transform:none}90%{transform:translateX(3px);filter:invert(1)}92%{transform:translateX(-2px);filter:none}95%{transform:none}}
+@keyframes os-window-corruption{0%,80%,100%{opacity:.19}83%{opacity:.58;transform:translateY(3px)}86%{opacity:.05}89%{opacity:.5}}
+@media(prefers-reduced-motion:reduce){
+ body.dev-newsprint :is(#five-outro,.meridian-tape) *,
+ body.dev-newsprint :is(#five-outro,.meridian-tape)::before,
+ body.dev-newsprint :is(#five-outro,.meridian-tape)::after,
+ body.dev-newsprint .retro-error,
+ body.dev-newsprint .retro-error::before,
+ body.dev-newsprint .retro-error.corrupted,
+ body.dev-newsprint .retro-error.corrupted *{
+ animation:none!important;transition:none!important;
+ }
+}
