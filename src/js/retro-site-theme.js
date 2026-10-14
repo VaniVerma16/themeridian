@@ -5,6 +5,21 @@
  if(typeof developerPreview==='undefined'||!developerPreview)return;
 
  const siteSpecs=[
+  {id:'level-one',serial:'01',title:'Transcription Review',
+   subtitle:'Archived newspaper scan and electronic transcription · proofreading assignment',
+   ticker:'RETAINED NEWSPAPER ISSUE · PROOFREAD THE ELECTRONIC TRANSCRIPTION',
+   links:[
+     ['Original Newspaper Scan','.transcription-source'],
+     ['Digital Proof Sheet','.transcription-review'],
+     ['Verification Form','#verify']]},
+  {id:'level-four',serial:'04',title:'Photographic Survey Archive',
+   subtitle:'Original location survey · photographic evidence and camera orientation records',
+   ticker:'TOWN SURVEY MAP · HISTORICAL PHOTOGRAPHS · EDITORIAL FIELD NOTES',
+   links:[
+     ['Recovered Photograph','.four-photograph-col'],
+     ['Town Survey Map','#four-map'],
+     ['Supplementary Notes','#directory-open'],
+     ['File Review','#four-summary']]},
   {id:'level-two',serial:'02',title:'Chronological Newspaper Index',
    subtitle:'Retained local-news editions · arranged for manual date verification',
    ticker:'DIGITISED CLIPPINGS · NEWSROOM SCANS · SORT OLDEST TO NEWEST',
@@ -32,6 +47,12 @@
  // Introduction letters use the same site chrome so entering a puzzle
  // never changes the website's design language.
  siteSpecs.push(
+   {id:'read-one',serial:'01',title:'A Brief Assessment',subtitle:'Editorial assignment notice',
+    ticker:'THE MERIDIAN · ARCHIVAL QUALITY REVIEW · TRANSCRIPTION ASSESSMENT',
+    links:[['Begin Transcription Review','#begin-one']]},
+   {id:'read-four',serial:'04',title:'Annual Revival Project',subtitle:'Editorial assignment notice',
+    ticker:'THE MERIDIAN · PHOTOGRAPHIC SURVEY · REVIVAL PROJECT',
+    links:[['Open Survey Records','#begin-four']]},
    {id:'read-two',serial:'02',title:'Newspaper Date Review',subtitle:'Editorial assignment notice',
     ticker:'THE MERIDIAN · NEWSROOM CLIPPINGS · CHRONOLOGICAL REVIEW',
     links:[['Open Date Review','#begin-two']]},
