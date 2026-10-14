@@ -721,3 +721,17 @@ body.dev-newsprint :is(#read-two,#read-three,#read-five) .narrator-letter{
  background:#fff!important;color:#111!important;border:0!important;box-shadow:none!important;
  padding:0!important;margin:0!important;max-width:none!important;
 }
+
+
+/* REGRESSION FIX — sections are routed by core.js via the hidden attribute.
+   Intro pages were set to display:block!important, which overrode [hidden]
+   and stacked every introduction on the current page.
+   These rules are deliberately last and stronger than the themed display rules. */
+body.dev-newsprint #read-two[hidden],
+body.dev-newsprint #read-three[hidden],
+body.dev-newsprint #read-five[hidden],
+body.dev-newsprint .retro-browser-page > main > section[hidden],
+body.dev-newsprint .retro-browser-page > main > .reading-page[hidden],
+body.dev-newsprint .retro-browser-page > main > .level[hidden] {
+ display:none!important;
+}
