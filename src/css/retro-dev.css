@@ -24,7 +24,7 @@ body.dev-newsprint .wrapper{
 }
 body.dev-newsprint .wrapper::before,body.dev-newsprint .wrapper::after{content:none!important}
 body.dev-newsprint .wrapper>*{position:relative}
-.retro-browser-chrome,.retro-desktop-shortcuts{display:none}
+.retro-browser-chrome,.retro-desktop-shortcuts,.retro-browser-status{display:none}
 body.dev-newsprint .retro-browser-chrome{display:block;font-family:Tahoma,Verdana,Arial,sans-serif;color:#111!important}
 body.dev-newsprint .retro-browser-title{
  display:flex;justify-content:space-between;align-items:center;gap:10px;height:27px;
