@@ -7,26 +7,26 @@
  'use strict';
  if(typeof developerPreview==='undefined'||!developerPreview)return;
 
- const STORAGE_KEY='meridian-six-editorial-v3';
- const VERSION=3;
+ const STORAGE_KEY='meridian-six-editorial-v4';
+ const VERSION=4;
  const encounters=[
  {
-  "id": "infidelity",
+  "id": "broken-confidence",
   "act": 1,
   "number": 1,
-  "title": "Would you tell your best friend's partner they're being cheated on?",
-  "lead": "Adam discovers Daniel cheated on Sophie, who is about to move cities to live with him. Both are Adam's friends.",
-  "sourceTitle": "COLLEGE NOTES · 1990–1991",
-  "source": "Daniel begged Adam to stay silent. The surviving notes don't establish what Adam told Sophie.",
-  "question": "Is staying silent loyalty—or betrayal?",
+  "title": "Would you tell a friend they're being mocked behind their back?",
+  "lead": "Sophie trusted Daniel with her family's money troubles. At a college party, Daniel repeated her private story for laughs. Adam overheard.",
+  "sourceTitle": "COLLEGE NOTES · 1990",
+  "source": "Daniel said it was a stupid joke and begged Adam to keep quiet. Sophie still trusted Daniel. We don't know what Adam told her.",
+  "question": "Is sparing someone a painful truth an act of kindness—or another betrayal?",
   "story": [
-   "Adam was a gifted college student who fixed broken radios for fun. Daniel was his roommate; Sophie trusted them both."
+   "Adam was an unusually gifted college student who fixed broken radios for fun. Daniel was his closest friend, and Sophie trusted them both. Adam never expected their friendship to put him in this position."
   ],
   "options": [
    {
-    "label": "Tell Sophie.",
-    "detail": "She deserves the truth, even if Adam loses his best friend.",
-    "revision": "Sophie was preparing to move without knowing Daniel had cheated. Adam's loyalty and her right to choose were in conflict.",
+    "label": "Tell Sophie what he said.",
+    "detail": "She deserves to know. But hearing the joke might humiliate her twice.",
+    "revision": "Daniel repeated a private story about Sophie's family to get a laugh. Telling her would honour her trust, but force her to hear how she had been mocked.",
     "quality": [
      9,
      8,
@@ -42,9 +42,9 @@
     }
    },
    {
-    "label": "Give Daniel a chance to confess.",
-    "detail": "But every day of waiting lets Sophie plan her life around a lie.",
-    "revision": "Daniel asked to tell Sophie himself. Giving him that chance could be mercy—or another opportunity to deceive her.",
+    "label": "Make Daniel apologise himself.",
+    "detail": "He should take responsibility. But he might downplay what happened.",
+    "revision": "Adam could have demanded that Daniel confess and apologise. That would give Daniel a chance to repair the harm, or to control how much Sophie learned.",
     "quality": [
      8,
      8,
@@ -60,9 +60,9 @@
     }
    },
    {
-    "label": "Stay out of it.",
-    "detail": "It's their relationship. But Sophie is his friend too.",
-    "revision": "Adam could have remained silent rather than interfere. Sophie would still have been making a decision without the truth.",
+    "label": "Don't tell Sophie.",
+    "detail": "Spare her the embarrassment, but leave her trusting someone who betrayed her.",
+    "revision": "Adam could have protected Sophie from the humiliating details. Silence would also leave her trusting a friend who had shared her private pain for laughs.",
     "quality": [
      6,
      8,
@@ -608,7 +608,7 @@
    const result=qualityResult(),previous=data.levels['6'];
    data.version=1;
    data.levels['6']={
-    version:3,decisions:{...saved},parameters:{...result.parameters},
+    version:4,decisions:{...saved},parameters:{...result.parameters},
     editorialScore:result.score,
     completed:completed||(previous?.completed===true&&result.count===7),
     updatedAt:new Date().toISOString()
