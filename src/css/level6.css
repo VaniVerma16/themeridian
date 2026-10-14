@@ -364,13 +364,13 @@ body.blood-era #player-history button,body.blood-era #player-history span{color:
 /* The eerie intrusion: not a uniform red filter. It is a rupture that appears
    to leak directly from under the paper, with red drips, ink bleeding and a
    stark engraved handprint. */
-#level-six .six-blood-curtain[hidden]{display:none!important}
-#level-six .six-blood-curtain{
+#six-blood-curtain[hidden]{display:none!important}
+#six-blood-curtain{
   position:fixed;inset:0;z-index:10850;display:flex;justify-content:center;
   align-items:center;overflow:hidden;background:#f4eee4;
   color:#4b151c;isolation:isolate;
 }
-#level-six .six-blood-curtain::before{
+#six-blood-curtain::before{
   content:"";position:absolute;inset:-15%;z-index:0;
   background:
    radial-gradient(ellipse at 18% 0%,#62040b 0 12%,#961224 12.5% 17%,transparent 40%),
@@ -381,12 +381,12 @@ body.blood-era #player-history button,body.blood-era #player-history span{color:
    radial-gradient(circle at 24% 56%,#67000f 0 5px,transparent 7px);
   animation:six-stain-flood 2.9s ease-out forwards;
 }
-#level-six .six-blood-curtain::after{
+#six-blood-curtain::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:repeating-linear-gradient(0deg,transparent 0 6px,#230d0d12 7px 9px);
   mix-blend-mode:multiply;animation:six-scan .2s steps(2) infinite;
 }
-#level-six .six-blood-curtain span{
+#six-blood-curtain span{
   font:900 clamp(30px,7.6vw,108px)/.99 Georgia,serif;max-width:940px;
   text-transform:uppercase;letter-spacing:-.055em;text-align:center;
   z-index:1;color:#f9e9db;text-shadow:-4px 0 #7f1720,4px 0 #2b0009,0 4px 30px #45050a;
@@ -452,8 +452,8 @@ body.blood-era #player-history button,body.blood-era #player-history span{color:
  #sixAfter .six-ending-stat{align-items:start}
 }
 @media(prefers-reduced-motion:reduce){
- #level-six .six-blood-curtain::before,
- #level-six .six-blood-curtain span,
+ #six-blood-curtain::before,
+ #six-blood-curtain span,
  #six-breach::before,#six-breach .six-cry,#six-breach .six-lines{
    animation:none!important;
  }
