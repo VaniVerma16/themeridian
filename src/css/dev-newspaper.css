@@ -409,3 +409,163 @@ body.dev-newsprint.blood-era .six-paper{background:linear-gradient(115deg,#e4d6b
  body.dev-newsprint #level-three .assignment{padding:13px}
  body.dev-newsprint #level-five .case-desk>h1{font-size:34px}
 }
+
+
+/* =========================================================
+   THIRD PASS: PERIOD-CREDIBLE WEB ARCHIVE, NOT A HORROR SET
+   1997–2001-era newspaper archive website: utilitarian web
+   chrome around original scans. No permanent red/dark filter.
+   ========================================================= */
+body.dev-newsprint,
+body.dev-newsprint.blood-era{
+  --paper:#e8e6dd;--ink:#272b2e;--muted:#5f6668;--rule:#a7ada9;
+  --card:#f6f3e8;--green:#446858;--red:#974a49;--blue:#254f6b;
+  background:#abb2b0!important;
+  background-image:repeating-linear-gradient(90deg,#ffffff0a 0 1px,transparent 1px 3px)!important;
+  color:#292e30;font-family:Verdana,Arial,sans-serif;
+}
+body.dev-newsprint .topline{background:#314452;height:3px}
+body.dev-newsprint .wrapper,body.dev-newsprint.blood-era .wrapper{
+  max-width:1140px;margin:17px auto 36px;padding:0 27px 22px;
+  background:#e3e7e4!important;background-image:none!important;
+  border:1px solid #6e7b80;box-shadow:0 2px 0 #f7f8f3 inset,0 0 0 5px #89969a,2px 7px 14px #27333a36;
+}
+body.dev-newsprint .wrapper::before{display:none}
+body.dev-newsprint #full-header{padding:13px 0 0;background:transparent}
+body.dev-newsprint #full-header .utility,
+body.dev-newsprint.blood-era #full-header .utility{
+  border:0;border-bottom:1px solid #9ea9ad;color:#50616b;
+  font:10px/1.45 Verdana,Arial,sans-serif;letter-spacing:0;text-transform:none;
+  padding:3px 0 7px;
+}
+body.dev-newsprint #full-header .masthead,
+body.dev-newsprint.blood-era #full-header .masthead{
+  padding:18px 0 15px;border-bottom:3px double #465a65;background:transparent;
+}
+body.dev-newsprint #full-header .masthead::before,
+body.dev-newsprint #full-header .masthead::after{display:none}
+body.dev-newsprint #full-header .brand,
+body.dev-newsprint.blood-era #full-header .brand{
+  font:700 clamp(51px,7vw,91px)/.99 Georgia,'Times New Roman',serif;
+  text-transform:none;font-variant:normal;letter-spacing:-.07em;
+  color:#273943;text-shadow:0 1px #fff;
+}
+body.dev-newsprint #full-header .tagline,
+body.dev-newsprint.blood-era #full-header .tagline{
+  font:italic 13px Georgia,serif;color:#4e6267;letter-spacing:0;margin:8px 0 0;
+}
+body.dev-newsprint #full-header nav,
+body.dev-newsprint.blood-era #full-header nav{
+  padding:9px 11px;background:#475d69;border:1px solid #334b58;
+  color:#f3f2e9;font:700 10px/1.3 Verdana,Arial,sans-serif;
+  letter-spacing:.04em;margin:13px 0 0;
+}
+body.dev-newsprint #full-header nav span:last-child{color:#d5e0e0}
+body.dev-newsprint #mini-header,body.dev-newsprint.blood-era #mini-header{
+  background:#d5dcda!important;color:#273941!important;border-color:#7b8d91!important;
+}
+body.dev-newsprint #mini-header .mini-title,body.dev-newsprint #mini-header .mini-mark{
+  color:#304b59!important
+}
+body.dev-newsprint #player-history,body.dev-newsprint.blood-era #player-history{
+  background:#d6dddb!important;border:1px solid #8a9a9b!important;color:#293942!important;
+}
+body.dev-newsprint #player-history *,body.dev-newsprint.blood-era #player-history *{color:#293942!important}
+body.dev-newsprint #player-history .history-menu{background:#f5f4ed!important}
+body.dev-newsprint #home.hero,body.dev-newsprint.blood-era #home.hero{
+  background:#f5f2e7!important;background-image:none!important;
+  border:1px solid #9caaa7;box-shadow:0 1px 0 #fff inset;
+  max-width:none;margin:22px 0 36px;padding:21px 26px 26px;
+  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(230px,.8fr);gap:10px 34px;
+}
+body.dev-newsprint #home.hero::before{content:"THE MERIDIAN ONLINE  /  ARCHIVE ACCESS";
+  color:#52626b;border-color:#abb9b8;font:700 10px Verdana,Arial,sans-serif;
+}
+body.dev-newsprint #home .kicker{color:#69787c;font:700 10px Verdana,Arial,sans-serif}
+body.dev-newsprint #home h1,body.dev-newsprint.blood-era #home h1{
+  color:#2a3436;font:700 clamp(37px,4.3vw,59px)/1.05 Georgia,serif;
+  border-right:1px solid #c0c9c2;padding-right:23px;
+}
+body.dev-newsprint #home .lead,body.dev-newsprint.blood-era #home .lead{
+  font:italic 19px/1.35 Georgia,serif;color:#354247;border-color:#829399;
+}
+body.dev-newsprint #home .copy,body.dev-newsprint.blood-era #home .copy{
+  color:#374348;font:14px/1.7 Georgia,serif;
+}
+body.dev-newsprint .primary{
+  background:#435d68;border:1px solid #2d4755;color:#fff;
+  box-shadow:1px 1px 0 #faffff inset,2px 2px 0 #8a9897;
+  border-radius:0;font:700 11px Verdana,Arial,sans-serif;letter-spacing:.03em;
+}
+body.dev-newsprint .primary:hover{background:#314e5e;color:#fff}
+body.dev-newsprint .reading-page{
+  background:transparent!important;padding:20px 0 58px;min-height:58vh;
+}
+body.dev-newsprint .reading-inner,
+body.dev-newsprint.blood-era .reading-inner{
+  max-width:900px!important;padding:28px 38px!important;
+  background:#f0eee4!important;background-image:none!important;
+  border:1px solid #a2b0af;border-top:3px solid #576b74;
+  box-shadow:0 1px 0 #fff inset!important;
+}
+body.dev-newsprint .reading-inner::before{content:"EDITORIAL DEPARTMENT  /  ASSIGNMENT NOTICE";
+  font:700 10px Verdana,Arial,sans-serif;color:#536975;border-color:#b0bab9;
+}
+body.dev-newsprint .reading-page h1,body.dev-newsprint.blood-era .reading-page h1{
+  font:700 clamp(37px,5vw,58px)/1 Georgia,serif;color:#27383f;
+}
+body.dev-newsprint .reading-page .reading-copy p,body.dev-newsprint.blood-era .reading-page .reading-copy p{
+  color:#374149;font:17px/1.75 Georgia,serif;
+}
+body.dev-newsprint .level:not(.six-screen){border-top:0;padding-top:0}
+body.dev-newsprint .level:not(.six-screen)::before{
+  background:#d4dcda;color:#405763;border:1px solid #a0b2b3;
+  font:700 10px Verdana,Arial,sans-serif;letter-spacing:.08em;
+  padding:10px 12px;margin-bottom:13px;
+}
+body.dev-newsprint #level-one .assignment,body.dev-newsprint #level-two .assignment,
+body.dev-newsprint #level-three .assignment{
+  color:#2d342f;background:#f1f0e9!important;background-image:none!important;
+  border:1px solid #a0ada8;box-shadow:0 1px 0 #fff inset;padding:23px;
+}
+body.dev-newsprint #level-one .task-line,body.dev-newsprint #level-two .task-line,
+body.dev-newsprint #level-three .task-line{color:#303b3a}
+body.dev-newsprint #level-one .assignment-title h2,body.dev-newsprint #level-two .assignment-title h2,
+body.dev-newsprint #level-three .assignment-title h2{color:#273b44}
+body.dev-newsprint #level-one .transcription-layout{color:#26352e}
+body.dev-newsprint #level-two .corkboard-frame{background:#61574a!important}
+body.dev-newsprint #level-three .roster-card{background:#eee8d8!important}
+body.dev-newsprint #level-four .four-assignment{
+  background:#d2d8d4!important;border:1px solid #9faaa7;
+  box-shadow:0 1px 0 #fff inset;color:#26353e;
+}
+body.dev-newsprint #level-five .case-desk{
+  background:#bfc8c5!important;border:1px solid #778781;
+  box-shadow:0 1px 0 #edf0e9 inset;
+}
+body.dev-newsprint #level-five .case-desk>h1{
+  color:#27383f;font:700 42px/1.1 Georgia,serif;border-color:#728b91;
+}
+body.dev-newsprint #level-five .case-desk-grid{color:#26333a}
+body.dev-newsprint footer,body.dev-newsprint.blood-era footer{
+  color:#56686d;border-color:#7b9297;font:10px Verdana,Arial,sans-serif;
+}
+body.dev-newsprint .clipping-card,body.dev-newsprint .sort-card{transform:none}
+body.dev-newsprint .clipping-card:hover,body.dev-newsprint .sort-card:hover{transform:translateY(-2px)}
+body.dev-newsprint #dev-navigation{background:#364a55!important;border:1px solid #192e39!important}
+body.dev-newsprint #dev-level{background:#e8ece9;color:#243744;border-color:#708189}
+body.dev-newsprint .six-screen{color:#d4d8d4}
+body.dev-newsprint .six-paper{background:#dfd4ba!important;color:#302922}
+body.dev-newsprint .six-narrator{font-family:Georgia,serif}
+@media(max-width:800px){
+ body.dev-newsprint #home.hero{grid-template-columns:1fr;padding:18px}
+ body.dev-newsprint #home h1{border-right:0;border-bottom:1px solid #bdc7c2;padding:0 0 17px}
+ body.dev-newsprint #home.hero::before,body.dev-newsprint #home .kicker,
+ body.dev-newsprint #home h1,body.dev-newsprint #home .lead,body.dev-newsprint #home .copy,
+ body.dev-newsprint #home #get-started{grid-column:1;grid-row:auto}
+}
+@media(max-width:600px){
+ body.dev-newsprint .wrapper{margin:0;padding:0 11px 19px}
+ body.dev-newsprint .reading-inner{padding:20px 16px!important}
+ body.dev-newsprint #full-header .brand{font-size:clamp(43px,11vw,65px)}
+}
