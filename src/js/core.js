@@ -372,3 +372,24 @@
     });
     document.getElementById('begin-four').addEventListener('click',()=>enterPuzzle('four','UNROLLING THE SURVEY'));
     document.getElementById('begin-five').addEventListener('click',()=>enterPuzzle('five','OPENING CASE DOSSIER'));
+
+    // Attach the two public Continue controls in the core controller. They
+    // previously depended on reaching the very end of the much larger Level 5
+    // initialization script. Keep the completed-puzzle visibility guards,
+    // and fall back to the next section if transition code fails.
+    document.getElementById('four-finish').addEventListener('click',()=>{
+      if(sections.four.hidden||document.getElementById('four-summary').hidden)return;
+      try{flashToLevelFive()}catch(err){
+        console.error('Level 4 Continue transition failed:',err);
+        document.getElementById('five-interference').classList.remove('active');
+        show('readFive');
+      }
+    });
+    document.getElementById('five-continue').addEventListener('click',()=>{
+      if(sections.five.hidden||document.getElementById('five-result').hidden)return;
+      try{flashAfterFive()}catch(err){
+        console.error('Level 5 Continue transition failed:',err);
+        document.getElementById('five-outro').hidden=true;
+        show('complete');
+      }
+    });
