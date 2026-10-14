@@ -7,145 +7,535 @@
  'use strict';
  if(typeof developerPreview==='undefined'||!developerPreview)return;
 
- const STORAGE_KEY='meridian-six-editorial-v2';
- const VERSION=2;
+ const STORAGE_KEY='meridian-six-editorial-v3';
+ const VERSION=3;
  const encounters=[
-  {
-   id:'prize',act:1,number:1,
-   title:'The prize that belonged to two people',
-   lead:'The university celebrated Adam as an exceptional mathematician. There is a discrepancy in how his first major achievement was credited.',
-   sourceTitle:'UNIVERSITY RESEARCH OFFICE · 1990',
-   source:'Award announcement: Adam E., single recipient. Laboratory notebook: two distinct sets of calculations, one signed by Adam and the other by Miriam Vale. Her name was crossed out on the printed programme. No evidence establishes who removed it.',
-   question:'Is success ever entirely individual?',
-   story:[
-    'At college Adam was the sort of student lecturers used as an example. He could disentangle an argument before anyone had quite finished making it, though he sometimes forgot to explain how he arrived at the answer. He filled the margins of his lecture notes with little diagrams of radios, bicycle gears and weather patterns. His roommate remembered him mending the same stubborn cassette player six times because he disliked the idea of throwing away something that could still make music.',
-    'In 1990 a student engineering project won a national university prize. Adam gave an awkward acceptance speech, thanked his mother, and almost dropped the microphone. It was the first of several occasions on which people began speaking about his future as though it were already certain.'
-   ],
-   options:[
-    {label:'Retain the official credit',detail:'Publish the documented award while noting that the attribution remains disputed. A published record should not silently replace an official one.',revision:'The official prize listed Adam alone. Surviving notebooks suggest that Miriam Vale also contributed, although the extent of her work and the decision to omit her name remain uncertain.',quality:[9,8,7,8],influence:{archivist:3,storyteller:0,erasure:0,commons:1},preserves:true},
-    {label:'Tell the story of the gifted prodigy',detail:'Keep the achievement central to the portrait; the discrepancies are not sufficiently substantiated to displace the narrative.',revision:'The university prize confirmed what Adam’s teachers had long suspected: his ability could carry him far beyond the modest expectations of his childhood.',quality:[6,10,5,3],influence:{archivist:0,storyteller:4,erasure:0,commons:0},preserves:true},
-    {label:'Credit the collaboration, with a caveat',detail:'Make the evidence of shared work visible but explicitly distinguish it from proof of misconduct.',revision:'The celebrated project was not entirely solitary. Miriam Vale’s calculations appear beside Adam’s in the working notebook. The award went to him alone; the reason remains undocumented.',quality:[9,7,8,10],influence:{archivist:1,storyteller:0,erasure:0,commons:4},preserves:true}
-   ]
-  },
-  {
-   id:'departure',act:1,number:2,
-   title:'What ambition costs other people',
-   lead:'A prestigious post took Adam away from his closest friend just when their plans had become commitments.',
-   sourceTitle:'CORRESPONDENCE · JUNE–AUGUST 1991',
-   source:'Adam accepted a paid research post in another city after he and his roommate Daniel signed a twelve-month lease. Daniel paid the remaining deposit alone. Adam later reimbursed part of it; their friendship never fully recovered.',
-   question:'Does the right to choose a future release us from promises made in the past?',
-   story:[
-    'Daniel, the roommate with the cassette player, had been his closest friend through university. They lived on burnt toast and inexpensive tea, collected unwanted furniture and planned to rent a place together after graduation. On an August afternoon, Adam received a job offer far better than anything he had expected.',
-    'He left. The job was an opportunity for which he had worked since arriving at college. It was also a departure that left another person responsible for plans they had made together. Years afterward Daniel would remember both the generosity of his friend and the empty half of their rented flat.'
-   ],
-   options:[
-    {label:'Frame the departure as a necessary opportunity',detail:'The agreement mattered, but expecting a young person to sacrifice an exceptional career might also have been unreasonable.',revision:'A rare research appointment required Adam to leave abruptly. The move strained a friendship he valued, yet gave him the professional foothold he had spent years trying to earn.',quality:[7,9,6,6],influence:{archivist:0,storyteller:4,erasure:0,commons:0},preserves:true},
-    {label:'Centre the unfulfilled commitment',detail:'The injury to Daniel was concrete, regardless of Adam’s promising prospects or later payments.',revision:'Adam accepted the appointment despite a shared lease. Daniel was left to cover the deposit. Later reimbursement did not undo the damage, and the two were never as close again.',quality:[9,7,7,8],influence:{archivist:4,storyteller:0,erasure:0,commons:1},preserves:true},
-    {label:'Leave the personal breach out',detail:'The housing disagreement was private and may be disproportionate in a story about a twenty-seven-year life.',revision:'After graduation, Adam moved away to take up a research position. His university friendships gradually dispersed.',quality:[5,9,8,4],influence:{archivist:0,storyteller:0,erasure:4,commons:0},preserves:false}
-   ]
-  },
-  {
-   id:'dependence',act:2,number:3,
-   title:'The years nobody knew how to describe',
-   lead:'Following a devastating breakup, Adam developed alcohol dependence. His family’s accounts describe a medical struggle, but also a series of choices that harmed other people.',
-   sourceTitle:'PRIVATE LETTERS · 1992–1994',
-   source:'After his relationship with Leah ended in 1992, Adam withdrew from work and friends. In 1993 he borrowed money from his sister Ruth for rent and spent part of it on alcohol. Ruth lost a housing deposit as a result. Adam later acknowledged what he had done.',
-   question:'Can understanding why someone caused harm coexist with holding them responsible?',
-   story:[
-    'When Leah ended their relationship, Adam did not announce its devastation. At first he simply stopped returning calls. He began sleeping through appointments and drinking more heavily, then began drinking in secret. There were mornings when he made earnest plans to stop and evenings when he could not keep them.',
-    'To Ruth, his younger sister, the hardest memory was not of the bottles. It was of the ordinary assurances. He would be there on Saturday. He would send the money back. He would call before it got late. She learned that loving someone did not make those promises reliable.',
-    'Alcohol dependence narrowed Adam’s world and damaged his health. It also brought consequences to other people who had never agreed to live inside his suffering.'
-   ],
-   options:[
-    {label:'Describe the dependence as an illness',detail:'Illness provides context essential to understanding a period of behaviour that otherwise looks inexplicable.',revision:'After the breakup Adam developed alcohol dependence, withdrew from his work and struggled repeatedly to stop. His condition affected his family as well as himself; Ruth’s lost deposit was among its consequences.',quality:[9,8,8,8],influence:{archivist:1,storyteller:2,erasure:0,commons:2},preserves:true},
-    {label:'Give priority to the damage he caused',detail:'People who experienced his broken promises should not disappear behind an account of his pain.',revision:'During his period of heavy drinking Adam used money Ruth had entrusted to him, contributing to her loss of a housing deposit. His struggles were real; so were the costs to others.',quality:[9,8,6,9],influence:{archivist:4,storyteller:0,erasure:0,commons:1},preserves:true},
-    {label:'Keep the period private',detail:'The correspondence was never written for publication and may unfairly reduce him to his lowest years.',revision:'Adam’s early working years were interrupted by a difficult period of ill health and personal loss. He gradually returned to work in the years that followed.',quality:[5,9,9,4],influence:{archivist:0,storyteller:0,erasure:4,commons:0},preserves:false}
-   ]
-  },
-  {
-   id:'apology',act:2,number:4,
-   title:'The apology Ruth never accepted',
-   lead:'Adam tried to repay the money and repair his relationship with Ruth. Her surviving correspondence makes clear that repayment was not the same as forgiveness.',
-   sourceTitle:'UNSENT LETTER · AUTUMN 1994',
-   source:'Adam wrote that he had no excuse for taking the money and had begun repayment. Ruth’s annotation on the envelope reads: “I know he means it. I still don’t want to see him.” The letter was never posted.',
-   question:'Is redemption possible when the person you hurt refuses to forgive you?',
-   story:[
-    'In the autumn of 1994, Adam began making small repairs to the life he had damaged. He took irregular work. He repaid what he could. He attended meetings he once would have avoided. The progress came in ordinary increments, not in a single declaration that he was suddenly well.',
-    'He wrote Ruth a letter. It contained no defence of his actions, only an admission of what he had taken from her and a promise to make repayment. She did not send an answer. Neither of them could have known how little time remained.'
-   ],
-   options:[
-    {label:'Include the apology as evidence of change',detail:'Even unaccepted remorse can have value when it is followed by sustained action.',revision:'Adam acknowledged the harm, made repayments and attempted to apologise. These efforts suggest change, though Ruth did not resume the relationship and never offered forgiveness.',quality:[9,8,8,9],influence:{archivist:1,storyteller:2,erasure:0,commons:3},preserves:true},
-    {label:'Give Ruth the final word',detail:'Repentance does not entitle the person responsible to restoration of a relationship.',revision:'Adam began paying back the money he had taken. Ruth declined contact. Her refusal remained part of the record and should not be recast as a stage in his redemption.',quality:[8,7,8,9],influence:{archivist:4,storyteller:0,erasure:0,commons:2},preserves:true},
-    {label:'Omit the unresolved apology',detail:'Publishing an unsent letter could make private pain into a public verdict on both siblings.',revision:'In 1994 Adam began rebuilding his working life, repaying outstanding debts and seeking help. The personal consequences of that period remained unsettled.',quality:[7,9,9,6],influence:{archivist:0,storyteller:0,erasure:4,commons:0},preserves:false}
-   ]
-  },
-  {
-   id:'renewal',act:2,number:5,
-   title:'The woman who met him afterward',
-   lead:'By 1995 Adam was participating in recovery and rebuilding ordinary routines. He met Nora, who would become his fiancée. They understood his past differently from those who had known him during the worst years.',
-   sourceTitle:'ENGAGEMENT ANNOUNCEMENT · SEPTEMBER 1996',
-   source:'The announcement describes Adam and Nora’s engagement and refers to “a welcome new beginning.” Nora’s notes mention Sunday walks and repairing radios at the library. Ruth’s later interview says: “I hope he changed. I couldn’t know that for myself.”',
-   question:'When someone changes, do the people they hurt owe that new person recognition?',
-   story:[
-    'Nora met Adam at the lending library, where he volunteered to repair broken radios donated for a community sale. One afternoon the two of them spent forty minutes searching for a missing screw that had been stuck to the back of his sleeve the entire time. She laughed so hard that the librarian asked them to leave.',
-    'Nora did not save him. By the time they met, Adam had already begun treatment, returned to work and learnt to ask for help without pretending he had everything under control. She loved him without making herself responsible for his recovery. He learnt her impossible tea preferences; she learnt that he was an enthusiastic and unreliable cook.',
-    'Their engagement was announced in September 1996. The notice called it a new beginning. Those who remembered the earlier years could not agree how completely the old Adam had disappeared.'
-   ],
-   options:[
-    {label:'Tell the story of his transformation',detail:'A person who has worked to change deserves the possibility of being known for more than an earlier failure.',revision:'With recovery came renewed work and the love of Nora, whom Adam planned to marry. Their engagement suggested a life once made fragile was being carefully built again.',quality:[8,10,8,7],influence:{archivist:0,storyteller:4,erasure:0,commons:1},preserves:true},
-    {label:'Set the memories beside one another',detail:'Nora’s happiness and Ruth’s mistrust can both be sincere. Neither account cancels the other.',revision:'To Nora, Adam was patient, funny and committed to recovery. Ruth, who had lived through an earlier period, could not verify the change for herself. Both memories belong to the history of the same man.',quality:[9,7,9,10],influence:{archivist:2,storyteller:0,erasure:0,commons:4},preserves:true},
-    {label:'Publish only the happy announcement',detail:'An engagement notice should not have to carry a complete account of someone’s private medical history.',revision:'Adam and Nora announced their engagement in September 1996. They hoped to marry the following year and looked forward to their first home together.',quality:[6,10,8,5],influence:{archivist:0,storyteller:2,erasure:3,commons:0},preserves:false}
-   ]
-  },
-  {
-   id:'death',act:3,number:6,
-   title:'The last night',
-   lead:'The recovered medical and location evidence establishes how Adam died, but not exactly how the fatal injury occurred. The engagement and their plans for a home make speculation particularly tempting.',
-   sourceTitle:'POLICE & INQUEST NOTES · FEBRUARY 1997',
-   source:'Adam E. was found on 21 February on the eastern canal towpath beneath the old railway bridge. Death was estimated between 10 PM on 20 February and 2 AM on 21 February. The medical cause was a fatal blunt-force head injury. Accident, suicide and homicide were not established by the recovered findings.',
-   question:'Does an abrupt death give the preceding life a meaning it did not have while it was being lived?',
-   story:[
-    'In February 1997 Adam and Nora were looking at houses. They argued amiably about curtains and had not yet decided whether the wedding should be in May or June. On the kitchen wall she kept a scrap of paper with the words “please buy milk” written in Adam’s tall, sloping handwriting. It remained there after he was gone.',
-    'On 21 February he was found beneath the old railway bridge by the eastern canal towpath. He had sustained a fatal head injury. The recorded estimate placed his death sometime between ten o’clock the preceding night and two in the morning.',
-    'The papers did not establish whether his death resulted from an accident, his own actions or someone else’s. Every later telling of the story began with that absence. The life preceding it had contained a great deal more.'
-   ],
-   options:[
-    {label:'Emphasise the future that was taken',detail:'The shock of his death cannot be understood without the ordinary hopes and plans that preceded it.',revision:'He died at twenty-seven, engaged and planning a home with Nora. The future they had begun to imagine would not arrive. What happened in his last hours remains unknown.',quality:[8,10,8,7],influence:{archivist:0,storyteller:4,erasure:0,commons:1},preserves:true},
-    {label:'Record only what the investigation supports',detail:'The article must resist turning unresolved circumstances into a theory or symbolic conclusion.',revision:'Adam died of a fatal head injury during the night of 20–21 February 1997. He was found on the eastern canal towpath. The circumstances of the injury remained undetermined.',quality:[10,7,7,9],influence:{archivist:4,storyteller:0,erasure:0,commons:1},preserves:true},
-    {label:'Reject a retrospective moral of the story',detail:'The ending should not retroactively turn the preceding years into either a warning or a triumph.',revision:'Adam had been planning a life with Nora. His death ended those plans abruptly; it does not decide whether the earlier years were successes, failures or steps toward something else. Its circumstances remain undetermined.',quality:[9,8,9,10],influence:{archivist:0,storyteller:0,erasure:0,commons:4},preserves:true}
-   ]
-  },
-  {
-   id:'verdict',act:3,number:7,
-   title:'The final word',
-   lead:'The corrected proof now contains contradictory memories, recovered testimony and an unfinished future. The publication desk demands a definitive editorial treatment.',
-   sourceTitle:'EDITOR’S ROUTING SLIP · APRIL 1997',
-   source:'The surviving draft bears three handwritten commands in different inks: “KEEP EVERYTHING”; “MAKE IT MEAN SOMETHING”; and “LET HIM DISAPPEAR.” A fourth, unsigned annotation reads: “Who gave any of us the last word?”',
-   question:'Can any human life deserve a final verdict?',
-   story:[
-    'A good obituary is supposed to arrive somewhere. It begins with a life and ends by telling the reader what that life was for. But Adam’s history did not resolve itself with the neatness of its title. He could be brilliant and thoughtless, loved and resented, accountable for harm and capable of change.',
-    'The finished article had to choose what would survive. Readers might remember the gifted student, the man who hurt Ruth, the patient partner Nora loved, or a body recovered from the canal. Each version would contain evidence. None would be the whole of him.'
-   ],
-   options:[
-    {label:'Preserve the complete substantiated record',detail:'Retain every surviving account and discrepancy under archival authority. Do not delete facts to make Adam easier to remember.',revision:'The complete dossier remains available: achievement and disputed credit, addiction and harm, attempted amends and renewed happiness, and an unexplained death. Nothing is suppressed merely because it unsettles a portrait of the deceased.',quality:[10,6,5,8],influence:{archivist:12,storyteller:0,erasure:0,commons:1},preserves:true},
-    {label:'Publish the most coherent account of his life',detail:'Create an intelligible story from verified events, accepting that coherence requires selection and interpretation.',revision:'Adam’s life was a story of promise, collapse and a hard-won return to hope. His unexpected death interrupted the future he had begun to build, leaving a final chapter no one could finish.',quality:[7,10,7,5],influence:{archivist:0,storyteller:12,erasure:0,commons:1},preserves:true},
-    {label:'Withdraw the biography and identifying files',detail:'No surviving editor is entitled to fix a final account of a man unable to answer back. Withhold the record rather than turn it into a verdict.',revision:'The completed biography was withdrawn from publication. The index identifies no surviving personal file. The details of the life have been withheld.',quality:[3,5,10,3],influence:{archivist:0,storyteller:0,erasure:15,commons:0},preserves:false},
-    {label:'Publish an accountable, layered edition',detail:'Separate evidence from interpretation, document omissions and disagreements, and let no single narrator claim the whole person.',revision:'The original records and their limits remain identifiable. Where memories conflict, the disagreement is left visible. Where disclosure would cause unnecessary harm, the restriction is recorded. Adam’s life is not assigned one conclusive meaning.',quality:[9,7,9,10],influence:{archivist:1,storyteller:0,erasure:0,commons:12},preserves:true}
-   ]
-  }
- ];
-
+ {
+  "id": "infidelity",
+  "act": 1,
+  "number": 1,
+  "title": "Would you tell your best friend's partner they're being cheated on?",
+  "lead": "Adam discovers Daniel cheated on Sophie, who is about to move cities to live with him. Both are Adam's friends.",
+  "sourceTitle": "COLLEGE NOTES · 1990–1991",
+  "source": "Daniel begged Adam to stay silent. The surviving notes don't establish what Adam told Sophie.",
+  "question": "Is staying silent loyalty—or betrayal?",
+  "story": [
+   "Adam was a gifted college student who fixed broken radios for fun. Daniel was his roommate; Sophie trusted them both."
+  ],
+  "options": [
+   {
+    "label": "Tell Sophie.",
+    "detail": "She deserves the truth, even if Adam loses his best friend.",
+    "revision": "Sophie was preparing to move without knowing Daniel had cheated. Adam's loyalty and her right to choose were in conflict.",
+    "quality": [
+     9,
+     8,
+     8,
+     8
+    ],
+    "axes": {
+     "preservation": 4,
+     "narrativeControl": 0,
+     "compassion": 2,
+     "erasure": 0,
+     "independence": 2
+    }
+   },
+   {
+    "label": "Give Daniel a chance to confess.",
+    "detail": "But every day of waiting lets Sophie plan her life around a lie.",
+    "revision": "Daniel asked to tell Sophie himself. Giving him that chance could be mercy—or another opportunity to deceive her.",
+    "quality": [
+     8,
+     8,
+     8,
+     7
+    ],
+    "axes": {
+     "preservation": 1,
+     "narrativeControl": 2,
+     "compassion": 3,
+     "erasure": 0,
+     "independence": 2
+    }
+   },
+   {
+    "label": "Stay out of it.",
+    "detail": "It's their relationship. But Sophie is his friend too.",
+    "revision": "Adam could have remained silent rather than interfere. Sophie would still have been making a decision without the truth.",
+    "quality": [
+     6,
+     8,
+     7,
+     5
+    ],
+    "axes": {
+     "preservation": 0,
+     "narrativeControl": 2,
+     "compassion": 1,
+     "erasure": 3,
+     "independence": 1
+    }
+   }
+  ],
+  "reaction": null
+ },
+ {
+  "id": "departure",
+  "act": 1,
+  "number": 2,
+  "title": "Do you owe someone the future you promised them?",
+  "lead": "Adam promised to return home after college. His mother helped pay for his degree and needs him. Then a dream job abroad arrives.",
+  "sourceTitle": "COLLEGE NOTES · 1990–1991",
+  "source": "His mother's letter refers to his promise; the job offer requires him to leave within a month.",
+  "question": "How much of your future belongs to someone who sacrificed for it?",
+  "story": [
+   "At graduation, the life Adam wanted and the life he'd promised his mother stopped pointing in the same direction."
+  ],
+  "options": [
+   {
+    "label": "Take the job.",
+    "detail": "He shouldn't have to give up his future because he made a promise.",
+    "revision": "The opportunity Adam had earned came at the cost of his commitment to his mother.",
+    "quality": [
+     8,
+     9,
+     6,
+     7
+    ],
+    "axes": {
+     "preservation": 1,
+     "narrativeControl": 4,
+     "compassion": 0,
+     "erasure": 0,
+     "independence": 3
+    }
+   },
+   {
+    "label": "Go home.",
+    "detail": "She sacrificed for him. Keeping his word matters.",
+    "revision": "Returning would honour his promise but might mean losing the career she helped him build.",
+    "quality": [
+     8,
+     7,
+     9,
+     7
+    ],
+    "axes": {
+     "preservation": 2,
+     "narrativeControl": 0,
+     "compassion": 4,
+     "erasure": 0,
+     "independence": 0
+    }
+   },
+   {
+    "label": "Go, but send money home.",
+    "detail": "Financial help isn't the same as being there.",
+    "revision": "Support from abroad could honour part of Adam's promise. Whether it was what his mother needed is unknown.",
+    "quality": [
+     8,
+     8,
+     7,
+     7
+    ],
+    "axes": {
+     "preservation": 1,
+     "narrativeControl": 2,
+     "compassion": 2,
+     "erasure": 1,
+     "independence": 2
+    }
+   }
+  ],
+  "reaction": [
+   "So we're calling that ambition?",
+   "That's sweet. I expected a different ending to his college years.",
+   "A tidy compromise. People do like those."
+  ]
+ },
+ {
+  "id": "breakup",
+  "act": 2,
+  "number": 3,
+  "title": "Are you responsible for what happens after you leave someone?",
+  "lead": "Leah leaves Adam. He's devastated and later develops alcohol dependence. Was leaving him wrong?",
+  "sourceTitle": "PRIVATE CORRESPONDENCE · 1992–1995",
+  "source": "Leah wrote that she still cared but no longer wanted the relationship. His drinking worsened afterward.",
+  "question": "Can leaving be right even when someone falls apart?",
+  "story": [
+   "Leah wanted another life. Staying out of pity would have meant lying. Adam withdrew from work and friends after she left."
+  ],
+  "options": [
+   {
+    "label": "She had every right to leave.",
+    "detail": "Adam's subsequent suffering wasn't her responsibility.",
+    "revision": "Leah chose to leave. Adam's later dependence cannot be treated as a moral debt she owed him.",
+    "quality": [
+     9,
+     8,
+     8,
+     8
+    ],
+    "axes": {
+     "preservation": 2,
+     "narrativeControl": 1,
+     "compassion": 2,
+     "erasure": 0,
+     "independence": 3
+    }
+   },
+   {
+    "label": "She owed him more care.",
+    "detail": "The right to leave doesn't mean how you do it can't hurt.",
+    "revision": "Leah was free to end the relationship. Whether she could have done so more gently is uncertain.",
+    "quality": [
+     8,
+     9,
+     8,
+     7
+    ],
+    "axes": {
+     "preservation": 2,
+     "narrativeControl": 2,
+     "compassion": 3,
+     "erasure": 0,
+     "independence": 1
+    }
+   },
+   {
+    "label": "Leave Leah out of the article.",
+    "detail": "Readers could unfairly blame her for his illness.",
+    "revision": "The article describes Adam's difficult years without naming the breakup that came first.",
+    "quality": [
+     6,
+     8,
+     9,
+     6
+    ],
+    "axes": {
+     "preservation": 0,
+     "narrativeControl": 1,
+     "compassion": 3,
+     "erasure": 3,
+     "independence": 1
+    }
+   }
+  ],
+  "reaction": null
+ },
+ {
+  "id": "dependence",
+  "act": 2,
+  "number": 4,
+  "title": "Can someone be both a victim and a villain?",
+  "lead": "During alcohol dependence, Adam spends money Ruth needed for housing. He's unwell; she loses her deposit.",
+  "sourceTitle": "PRIVATE CORRESPONDENCE · 1992–1995",
+  "source": "Adam admitted using Ruth's money on alcohol. Her lost housing deposit is documented.",
+  "question": "Does understanding his illness change his responsibility?",
+  "story": [
+   "Adam missed work and broke promises while struggling to stop drinking. Ruth still needed somewhere to live."
+  ],
+  "options": [
+   {
+    "label": "Focus on Ruth's suffering.",
+    "detail": "Adam's illness doesn't erase what he did.",
+    "revision": "Adam took money Ruth needed for housing. His dependence mattered, but she lived with the consequences.",
+    "quality": [
+     9,
+     8,
+     7,
+     9
+    ],
+    "axes": {
+     "preservation": 4,
+     "narrativeControl": 0,
+     "compassion": 2,
+     "erasure": 0,
+     "independence": 1
+    }
+   },
+   {
+    "label": "Focus on Adam's illness.",
+    "detail": "Without context, readers may see only cruelty.",
+    "revision": "During alcohol dependence Adam broke promises, including one that cost Ruth her deposit. Both parts of the story remain.",
+    "quality": [
+     9,
+     9,
+     9,
+     8
+    ],
+    "axes": {
+     "preservation": 1,
+     "narrativeControl": 3,
+     "compassion": 3,
+     "erasure": 0,
+     "independence": 1
+    }
+   },
+   {
+    "label": "Keep the family incident private.",
+    "detail": "Why publish the worst thing from his worst year?",
+    "revision": "The article notes family tensions but withholds Ruth's specific loss.",
+    "quality": [
+     6,
+     8,
+     8,
+     5
+    ],
+    "axes": {
+     "preservation": 0,
+     "narrativeControl": 1,
+     "compassion": 2,
+     "erasure": 4,
+     "independence": 0
+    }
+   }
+  ],
+  "reaction": [
+   "You want them to remember that?",
+   "Yes. I think they'll understand him better.",
+   "Some things might be better left alone."
+  ]
+ },
+ {
+  "id": "apology",
+  "act": 2,
+  "number": 5,
+  "title": "Can you redeem yourself without being forgiven?",
+  "lead": "Adam enters recovery, repays Ruth and apologises. She believes he's sincere but refuses to see him.",
+  "sourceTitle": "PRIVATE CORRESPONDENCE · 1992–1995",
+  "source": "Adam's letter admits what he did. Ruth's reply accepts his remorse but not renewed contact.",
+  "question": "Does changing entitle anyone to a second chance?",
+  "story": [
+   "Recovery meant work, meetings, and keeping promises. Ruth still had every right not to welcome him back."
+  ],
+  "options": [
+   {
+    "label": "He earned a second chance.",
+    "detail": "His change should count, even if forgiveness never comes.",
+    "revision": "Adam made amends and worked toward recovery. Ruth's refusal remained, but so did his efforts.",
+    "quality": [
+     8,
+     9,
+     8,
+     7
+    ],
+    "axes": {
+     "preservation": 1,
+     "narrativeControl": 4,
+     "compassion": 2,
+     "erasure": 0,
+     "independence": 1
+    }
+   },
+   {
+    "label": "Ruth gets the final say.",
+    "detail": "Remorse doesn't entitle someone to forgiveness.",
+    "revision": "Adam repaid what he could. Ruth declined contact, and her refusal must not become a triumph in his story.",
+    "quality": [
+     9,
+     7,
+     9,
+     8
+    ],
+    "axes": {
+     "preservation": 3,
+     "narrativeControl": 0,
+     "compassion": 4,
+     "erasure": 0,
+     "independence": 1
+    }
+   },
+   {
+    "label": "Both can be true.",
+    "detail": "He changed; she can still refuse him.",
+    "revision": "Adam's recovery and Ruth's refusal were both real. Neither alone proves or disproves redemption.",
+    "quality": [
+     8,
+     7,
+     8,
+     9
+    ],
+    "axes": {
+     "preservation": 2,
+     "narrativeControl": 0,
+     "compassion": 3,
+     "erasure": 0,
+     "independence": 4
+    }
+   }
+  ],
+  "reaction": null
+ },
+ {
+  "id": "secret",
+  "act": 3,
+  "number": 6,
+  "title": "Does your partner deserve to know the worst thing you've done?",
+  "lead": "Nora knows about Adam's alcoholism, but not exactly what happened to Ruth. They're engaged; he drafts a letter to tell her.",
+  "sourceTitle": "RECOVERED FILES · 1996–1997",
+  "source": "An unfinished letter describes the money Adam took. No record proves Nora ever saw it.",
+  "question": "Is concealing your past a second betrayal—or a right to begin again?",
+  "story": [
+   "Nora loved Adam's terrible cooking and his crooked jokes. His recovery was his own work; she didn't rescue him."
+  ],
+  "options": [
+   {
+    "label": "Tell Nora before the wedding.",
+    "detail": "She deserves to choose knowing the truth.",
+    "revision": "Adam considered telling Nora exactly what he'd done to Ruth. Whether he told her remains unknown.",
+    "quality": [
+     9,
+     8,
+     8,
+     8
+    ],
+    "axes": {
+     "preservation": 3,
+     "narrativeControl": 0,
+     "compassion": 2,
+     "erasure": 0,
+     "independence": 3
+    }
+   },
+   {
+    "label": "Wait until he's ready.",
+    "detail": "Telling her badly could hurt her more.",
+    "revision": "The unfinished draft suggests a struggle over when to speak. Delay might have been kindness—or fear.",
+    "quality": [
+     8,
+     9,
+     8,
+     7
+    ],
+    "axes": {
+     "preservation": 1,
+     "narrativeControl": 3,
+     "compassion": 3,
+     "erasure": 0,
+     "independence": 1
+    }
+   },
+   {
+    "label": "Leave the past behind.",
+    "detail": "He changed. Must she inherit his worst years?",
+    "revision": "Nora didn't necessarily know every detail of Adam's earlier harm. Whether that was privacy or concealment is unresolved.",
+    "quality": [
+     7,
+     8,
+     8,
+     6
+    ],
+    "axes": {
+     "preservation": 0,
+     "narrativeControl": 3,
+     "compassion": 1,
+     "erasure": 3,
+     "independence": 0
+    }
+   }
+  ],
+  "reaction": [
+   "Right. Of course she deserves to know. Even now.",
+   "Some things take time to explain, I suppose.",
+   "He was finally happy. Doesn't that count?"
+  ]
+ },
+ {
+  "id": "ruth-account",
+  "act": 3,
+  "number": 7,
+  "title": "Should Ruth's account be included in the article?",
+  "lead": "Adam dies at twenty-seven. Nora remembers a loving fiancé; Ruth remembers the brother who broke her trust. Both agree to be interviewed.",
+  "sourceTitle": "RECOVERED FILES · 1996–1997",
+  "source": "The cause was a fatal head injury; the circumstances were unresolved. Nora and Ruth offer different, sincere memories.",
+  "question": "Should he be remembered for who he became—or who he once was?",
+  "story": [
+   "They had been looking at houses. A note on Nora's wall still said 'please buy milk'. And then he was gone."
+  ],
+  "options": [
+   {
+    "label": "Publish both accounts.",
+    "detail": "Ruth deserves to be heard, even if the truth hurts Nora.",
+    "revision": "Nora described devotion; Ruth described broken trust. The article preserves both accounts.",
+    "quality": [
+     9,
+     8,
+     8,
+     9
+    ],
+    "axes": {
+     "preservation": 4,
+     "narrativeControl": 0,
+     "compassion": 2,
+     "erasure": 0,
+     "independence": 3
+    }
+   },
+   {
+    "label": "Publish Nora's account only.",
+    "detail": "Why should Adam's worst years define him after death?",
+    "revision": "The article remembers the partner Nora loved. Ruth's account is omitted.",
+    "quality": [
+     7,
+     10,
+     7,
+     5
+    ],
+    "axes": {
+     "preservation": 0,
+     "narrativeControl": 4,
+     "compassion": 2,
+     "erasure": 3,
+     "independence": 0
+    }
+   },
+   {
+    "label": "Include Ruth anonymously.",
+    "detail": "She deserves a voice, but anonymity strips away context.",
+    "revision": "An unnamed relative recalls Adam's earlier harm. Ruth's testimony survives without the context of her name.",
+    "quality": [
+     8,
+     7,
+     9,
+     7
+    ],
+    "axes": {
+     "preservation": 2,
+     "narrativeControl": 0,
+     "compassion": 4,
+     "erasure": 1,
+     "independence": 1
+    }
+   }
+  ],
+  "reaction": null
+ }
+];
  const acts=[
-  {number:1,label:'ACT I — THE PROMISE',date:'1988–1991',
-   opening:'There were people who could recall the first time they met Adam E. Mostly, they remembered the impression that he had somewhere important to be. He did not yet know where. At eighteen, leaving home for university, he took a suitcase, a radio with a broken dial and two books he never returned to the library.',
-   closing:'The bright years did not finish badly, exactly. They simply ended without consulting the people who thought they would last forever.'},
-  {number:2,label:'ACT II — THE FALL AND THE RETURN',date:'1992–1996',
-   opening:'The second act is difficult to write because the evidence is not kind, and kindness alone cannot make it false. There was a breakup, then a long and bewildering period in which Adam became difficult to reach even when he was sitting beside someone.',
-   closing:'By the end of 1996 his days were no longer shaped entirely by what had gone wrong. He was learning to inhabit the life in front of him, one small ordinary pleasure at a time.'},
-  {number:3,label:'ACT III — THE UNFINISHED',date:'FEBRUARY 1997',
-   opening:'The final act does not behave like the ending of a story. It begins with lists, telephone messages and plans that would make no sense unless everybody expected the next month to arrive.',
-   closing:'No one wrote a satisfactory ending to Adam’s life. What followed were attempts to make one out of the facts he had left behind.'}
- ];
+ {
+  "number": 1,
+  "label": "ACT I — THE PROMISE",
+  "date": "1988–1991",
+  "opening": "Adam arrived at college with an exceptional mind, a broken radio and no idea what adulthood would cost him.",
+  "closing": "Talent gave him choices. It didn't make them easy."
+ },
+ {
+  "number": 2,
+  "label": "ACT II — THE FALL AND THE RETURN",
+  "date": "1992–1995",
+  "opening": "Heartbreak changed Adam's life. What followed was harder to explain.",
+  "closing": "Slowly, imperfectly, he began to recover."
+ },
+ {
+  "number": 3,
+  "label": "ACT III — THE UNFINISHED",
+  "date": "1996–1997",
+  "opening": "The last act began with love, an engagement and ordinary plans that never came true.",
+  "closing": "Death ended his plans. It did not settle who he had been."
+ }
+];
 
  const sourcePane=document.getElementById('six-article');
  const scoreEl=document.getElementById('six-score');
