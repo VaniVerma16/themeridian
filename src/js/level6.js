@@ -372,19 +372,19 @@
   "id": "secret",
   "act": 3,
   "number": 6,
-  "title": "Should Nora discover his secret through this article?",
-  "lead": "Nora knew Adam had struggled with alcohol. A private, unfinished letter suggests he considered telling her the full story of how he hurt Ruth. We don't know if he did.",
-  "sourceTitle": "UNFINISHED LETTER · 1996",
-  "source": "Adam's draft describes Ruth's lost money. It stops before he reaches a conclusion; no record shows whether Nora saw it.",
-  "question": "Does the public deserve a truth that the person closest to him may never have heard?",
+  "title": "Should Adam's unfinished confession be published?",
+  "lead": "Among Adam's papers is a private letter addressed to Nora, never finished. It refers to what happened with Ruth. We don't know whether Nora heard the story from Adam.",
+  "sourceTitle": "UNFINISHED PERSONAL LETTER · 1996",
+  "source": "The draft begins, “There's something I should have told you about Ruth.” It stops before Adam explains further. No complete version survives.",
+  "question": "Does someone's death give an editor the right to publish words they never sent?",
   "story": [
-   "Nora remembered Adam as funny, thoughtful and devoted. He was planning a future with her while still reckoning with his past."
+   "Nora remembered a patient, funny partner. The unfinished letter suggests that even during their happy years, Adam still wrestled with what to share about his past."
   ],
   "options": [
    {
-    "label": "Publish what the letter reveals.",
-    "detail": "Nora may deserve the truth, but could learn it from a newspaper.",
-    "revision": "An unfinished letter suggests Adam considered telling Nora about the money he took from Ruth. Whether he ever did is unknown.",
+    "label": "Print the unfinished letter.",
+    "detail": "Shows Adam's private uncertainty, but exposes Nora to words not intended for the public.",
+    "revision": "An unfinished letter addressed to Nora shows Adam struggled to talk about his past with Ruth. The article quotes the draft, without assuming Nora ever saw it.",
     "quality": [
      9,
      8,
@@ -400,9 +400,9 @@
     }
    },
    {
-    "label": "Say he had a secret, not what it was.",
-    "detail": "Leaves readers intrigued, but casts suspicion without giving anyone facts.",
-    "revision": "Adam left an unfinished letter about something he struggled to disclose. The article withholds the subject and recipient's private details.",
+    "label": "Mention the letter, not its words.",
+    "detail": "Protects intimate details, but leaves readers imagining something worse.",
+    "revision": "Among Adam's papers was an unfinished letter to Nora about his past. The article notes its existence without reproducing his private words.",
     "quality": [
      8,
      9,
@@ -418,9 +418,9 @@
     }
    },
    {
-    "label": "Keep the letter out.",
-    "detail": "Protects Nora's privacy, but may make Adam's new life seem simpler than it was.",
-    "revision": "The article describes Adam's recovery and relationship with Nora without publishing his unfinished private correspondence.",
+    "label": "Leave the letter out.",
+    "detail": "Protects Nora's privacy, but hides how difficult honesty remained for Adam.",
+    "revision": "The article does not publish Adam's unfinished correspondence to Nora. What he told her privately remains unknown.",
     "quality": [
      7,
      8,
@@ -437,9 +437,9 @@
    }
   ],
   "reaction": [
-   "You'd let her find out from the newspaper?",
-   "So we'll imply there's something terrible but won't say what. Interesting.",
-   "His happy years deserve the space. Don't they?"
+   "You'd publish a letter he never sent?",
+   "Just enough for readers to invent the rest. Interesting.",
+   "Yes. Let their happier years have some peace."
   ]
  },
  {
