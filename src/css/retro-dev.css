@@ -218,7 +218,7 @@ body.dev-newsprint .retro-sidebar-header{background:#000080;color:white;
  font:bold 12px Arial,sans-serif;padding:6px 8px;margin:3px 0 9px}
 body.dev-newsprint .retro-site-page .retro-link{
  display:block;width:100%;background:transparent!important;border:0!important;
- text-align:left;color:#0000ee!important;font:underline 13px/1.45 "Times New Roman",serif!important;
+ text-align:left;color:#0000ee!important;font:13px/1.45 "Times New Roman",serif!important;
  text-decoration:underline!important;padding:6px 5px!important;cursor:pointer}
 body.dev-newsprint .retro-site-page .retro-link:hover{background:#ffffd5!important;color:#a00000!important}
 body.dev-newsprint .retro-site-page .retro-link[aria-current="page"]{font-weight:bold!important;color:#a00000!important}
@@ -334,6 +334,7 @@ body.dev-newsprint #sixAfter .retro-catalogue .retro-missing td{background:#fff2
  body.dev-newsprint #full-header .masthead{padding:13px 7px!important}
  body.dev-newsprint .wrapper>main{padding:5px!important}
  body.dev-newsprint .retro-site-page{width:100%}
+ body.dev-newsprint .retro-site-page col:first-child{width:120px!important}
  body.dev-newsprint .retro-navcell{width:120px;padding:5px!important}
  body.dev-newsprint .retro-maincell{padding:10px!important}
  body.dev-newsprint .retro-logo{font-size:32px}
