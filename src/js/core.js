@@ -144,7 +144,6 @@
       finally{sessionRestoring=false;}
     }
     const progressOrder=['home','readOne','level','readTwo','two','readThree','three','readFour','four','readFive','five','complete','six','sixAfter'];
-    let sixAwakened=false;
     let sixWarningSeen=false;
     let furthestSection=0;
     const historySelect=document.getElementById('history-select');
@@ -204,8 +203,10 @@
       if(!recordProgress && !canRevisit(section))return;
       if(!developerPreview&&(section==='six'||section==='sixAfter'))section='complete';
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
-      if(developerPreview&&(section==='six'||section==='sixAfter'))sixAwakened=true;
-      document.body.classList.toggle('blood-era',developerPreview&&sixAwakened);
+      // Horror styling belongs only to the unreleased Level 6 screens.
+      // Leaving Level 6 must restore the standard dark Meridian site.
+      document.body.classList.toggle('blood-era',
+        developerPreview&&(section==='six'||section==='sixAfter'));
       document.body.classList.toggle('game-active',section!=='home');
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
