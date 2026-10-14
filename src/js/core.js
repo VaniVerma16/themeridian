@@ -145,6 +145,7 @@
     }
     const progressOrder=['home','readOne','level','readTwo','two','readThree','three','readFour','four','readFive','five','complete','six','sixAfter'];
     let sixAwakened=false;
+    let sixWarningSeen=false;
     let furthestSection=0;
     const historySelect=document.getElementById('history-select');
     const historyNav=document.getElementById('player-history');
@@ -211,8 +212,21 @@
       refreshHistory(section);
       window.scrollTo({top:0,left:0,behavior:'instant'});
       if(section==='four')requestAnimationFrame(()=>ensureFourMap());
+      // First Level 6 visit: warning is system text, not spoken by the Archivist.
+      if(developerPreview&&section==='six'&&!sixWarningSeen){
+        sixWarningSeen=true;
+        document.getElementById('six-warning').hidden=false;
+        document.body.classList.add('six-intro-lock');
+        requestAnimationFrame(()=>document.getElementById('six-warning-continue').focus());
+      }
       if(recordProgress)safelySaveSession();
     }
+    document.getElementById('six-warning-continue').addEventListener('click',()=>{
+      const dialog=document.getElementById('six-warning');
+      dialog.hidden=true;
+      document.body.classList.remove('six-intro-lock');
+      document.getElementById('six-title').focus({preventScroll:true});
+    });
     historySelect.addEventListener('change',e=>{if(canRevisit(e.target.value))show(e.target.value,false);else refreshHistory(document.getElementById('dev-level').value)});
     
     function getArticle(id){return articles.find(a=>a.id===id)}
