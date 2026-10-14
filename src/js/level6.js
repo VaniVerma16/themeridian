@@ -551,7 +551,7 @@
  const endingSection=document.getElementById('sixAfter');
  const endTitle=document.getElementById('six-after-title');
  let saved=Object.create(null);
- let lastEnding=null;
+ let transitionComplete=false;
  let inTransition=false;
  let soundCtx=null;
  let timers=[];
@@ -574,6 +574,7 @@
  function wipeTrial(){
   saved=Object.create(null);
   try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+  clearCampaignLevel();
  }
  function text(tag,content,className){
   const el=document.createElement(tag);
@@ -583,41 +584,47 @@
  }
  function qualityResult(){
   const dimensions={accuracy:0,clarity:0,care:0,accountability:0};
-  const influence={archivist:0,storyteller:0,erasure:0,commons:0};
-  let count=0,preserved=0;
+  const parameters={preservation:0,narrativeControl:0,compassion:0,erasure:0,independence:0};
+  let count=0;
   for(const item of encounters){
-   const optionIndex=saved[item.id];
-   if(!Number.isInteger(optionIndex))continue;
-   const opt=item.options[optionIndex];
-   ['accuracy','clarity','care','accountability'].forEach((key,i)=>{dimensions[key]+=opt.quality[i];});
-   Object.keys(influence).forEach(key=>{influence[key]+=(opt.influence[key]||0);});
-   if(opt.preserves)preserved++;
+   const i=saved[item.id];
+   if(!Number.isInteger(i))continue;
+   const opt=item.options[i];
+   ['accuracy','clarity','care','accountability'].forEach((key,j)=>{dimensions[key]+=opt.quality[j];});
+   Object.keys(parameters).forEach(key=>{parameters[key]+=opt.axes[key]||0;});
    count++;
   }
-  const weighted=.35*dimensions.accuracy+.25*dimensions.clarity+
-    .20*dimensions.care+.20*dimensions.accountability;
-  return {
-   count,preserved,dimensions,influence,
-   score:Math.min(100,Math.round(weighted*10/encounters.length))
-  };
+  const weighted=.35*dimensions.accuracy+.25*dimensions.clarity+.20*dimensions.care+.20*dimensions.accountability;
+  return {count,dimensions,parameters,score:Math.min(100,Math.round(weighted*10/encounters.length))};
  }
- function calculateEnding(result){
-  const finalOption=saved.verdict;
-  // The Commons ending is not awarded merely for clicking D. The preceding
-  // review must have retained sources and demonstrated accountability.
-  const qualifies=finalOption===3 &&
-    result.influence.commons>=21 &&
-    result.preserved>=5 &&
-    result.dimensions.accountability>=48;
-  if(qualifies)return 'commons';
-  if(finalOption===2 && result.influence.erasure>=15)return 'erasure';
-  const order=['archivist','storyteller','erasure','commons'];
-  // Failed shared authority cannot be imposed by an unsupported declaration:
-  // the dominant established position determines what happens instead.
-  const candidates=finalOption===3?['archivist','storyteller','erasure']:order;
-  return candidates.reduce((best,key)=>result.influence[key]>result.influence[best]?key:best,candidates[0]);
+ function storeCampaignState(completed=false){
+  // Choices from all levels 6–10 belong to independent entries; no winner
+  // is calculated until Level 10.
+  try{
+   const key='the-meridian-moral-choices-v1';
+   const data=JSON.parse(localStorage.getItem(key)||'{}');
+   if(!data||typeof data!=='object'||Array.isArray(data))return;
+   if(!data.levels||typeof data.levels!=='object'||Array.isArray(data.levels))data.levels={};
+   const result=qualityResult(),previous=data.levels['6'];
+   data.version=1;
+   data.levels['6']={
+    version:3,decisions:{...saved},parameters:{...result.parameters},
+    editorialScore:result.score,
+    completed:completed||(previous?.completed===true&&result.count===7),
+    updatedAt:new Date().toISOString()
+   };
+   localStorage.setItem(key,JSON.stringify(data));
+  }catch(e){}
  }
-
+ function clearCampaignLevel(){
+  try{
+   const key='the-meridian-moral-choices-v1';
+   const data=JSON.parse(localStorage.getItem(key)||'{}');
+   if(data?.levels?.['6']){
+    delete data.levels['6'];localStorage.setItem(key,JSON.stringify(data));
+   }
+  }catch(e){}
+ }
  function render(){
   sourcePane.replaceChildren();
   for(const act of acts){
@@ -703,61 +710,23 @@
   const left=encounters.length-state.count;
   feedback.textContent=left?
    left+' editorial decision'+(left===1?'':'s')+' remaining.' :
-   'All seven passages reviewed. Submit the restored article to receive your result.';
+   'All seven passages reviewed. Submit the restored article to continue.';
   submitButton.disabled=left>0||inTransition;
   resetButton.hidden=state.count===0;
   document.getElementById('level-six').dataset.corruption=String(state.count);
  }
 
- const endings={
-  archivist:{
-   kicker:'ENDING 01 / THE UNALTERED RECORD',
-   title:'The Archivist Wins',
-   summary:'Every admissible source is kept: the prize, the wrongs, the apology Ruth never accepted, Nora’s memories, and the limits of the death investigation. Adam’s contradictions have been preserved. So has material that some of the living never wanted published. The archive calls this completeness.',
-   echo:'“Nothing has been lost,” the Archivist writes. You cannot tell whether this is a promise or a threat.',
-   question:'If everything about someone can be known, does that make it right to know it?'
-  },
-  storyteller:{
-   kicker:'ENDING 02 / THE PERFECT STORY',
-   title:'The Storyteller Wins',
-   summary:'The article is moving, clear and difficult to forget. A gifted boy falls, struggles, and finds love before an untimely death. Readers weep at the final paragraph. The ambiguities have quietly disappeared. The people who remember Adam differently can no longer find their version in the public record.',
-   echo:'“That,” the Storyteller says, “is what he was always meant to become.” No one asks Adam.',
-   question:'When a beautiful story is built from true events, what happens to the truths it leaves behind?'
-  },
-  erasure:{
-   kicker:'ENDING 03 / NO RECORD FOUND',
-   title:'Nobody Wins',
-   summary:'The manuscript vanishes. References disappear from the index; the correspondence no longer resolves to a name. The Archivist has no record to protect. The Storyteller has no life to retell. Adam’s harm and his kindness are erased together. The archive behaves as though it never knew him.',
-   echo:'The next search returns: NO SUCH PERSON. The system has forgotten your editorial choices too.',
-   question:'If erasure prevents judgment, what else does it prevent?'
-  },
-  commons:{
-   kicker:'ENDING 04 / NO SINGLE AUTHOR',
-   title:'The Player Refuses the Verdict',
-   summary:'Neither the Archivist nor the Storyteller receives the final proof. The preserved evidence is labelled, each interpretation remains distinguishable, and some sensitive details stay restricted with the restriction itself recorded. Ruth and Nora are allowed to remember different men. Adam is not assigned a final moral value.',
-   echo:'For the first time, the archive does not answer with a single voice. It is messier. It is also possible to disagree with.',
-   question:'Maybe a life is not a story that anyone gets to finish.'
-  }
- };
- function displayEnding(key,assessment){
-  const ending=endings[key]||endings.archivist;
-  lastEnding=key;
-  endingSection.dataset.ending=key;
-  document.getElementById('six-ending-kicker').textContent=ending.kicker;
-  endTitle.textContent=ending.title;
-  document.getElementById('six-ending-summary').textContent=ending.summary;
-  document.getElementById('six-ending-echo').textContent=ending.echo;
-  document.getElementById('six-ending-question').textContent=ending.question;
-  document.getElementById('six-ending-ref').textContent=ending.kicker;
-  document.getElementById('six-ending-score').textContent=assessment.score+' / 100';
-  if(key==='erasure'){
-    // Erase only this unreleased Level 6 draft, not Levels 1–5 game progress.
-    // The score shown in the ending is the last thing retained on screen.
-    wipeTrial();
-    render();
-  }
+ function displayHandoff(result){
+  // Preserve the user's chosen transition. Level 6 never assigns a winner.
+  endingSection.dataset.ending='pending';
+  document.getElementById('six-ending-kicker').textContent='FILE 06 / ARCHIVE INTERRUPTED';
+  endTitle.textContent='Find the Missing File';
+  document.getElementById('six-ending-summary').textContent='Your revisions have been recorded. But the recovered article still points to a missing file.';
+  document.getElementById('six-ending-echo').textContent='FILE NOT FOUND — The missing-file investigation comes next.';
+  document.getElementById('six-ending-question').textContent='No verdict. Not yet.';
+  document.getElementById('six-ending-ref').textContent='RECOVERY INCOMPLETE';
+  document.getElementById('six-ending-score').textContent=result.score+' / 100';
  }
-
  function prepareAudio(){
   const C=window.AudioContext||window.webkitAudioContext;
   if(!C)return;
@@ -790,7 +759,7 @@
   if(inTransition)return;
   inTransition=true;
   const result=qualityResult();
-  const outcome=forcedEnding||calculateEnding(result);
+  if(result.count===7)storeCampaignState(true);
   submitButton.disabled=true;
   prepareAudio();
   curtain.hidden=false;
@@ -807,7 +776,8 @@
    clearTimers();
    breachRoot.hidden=true;breachCry.hidden=false;breachLines.hidden=true;
    curtain.hidden=true;curtain.setAttribute('aria-hidden','true');
-   displayEnding(outcome,result);
+   displayHandoff(result);
+    transitionComplete=true;
    inTransition=false;
    update();
    show('sixAfter');
@@ -816,7 +786,7 @@
  function restart(){
   if(inTransition)return;
   clearTimers();
-  wipeTrial();lastEnding=null;
+  wipeTrial();transitionComplete=false;
   render();
  }
  submitButton.addEventListener('click',()=>{
@@ -837,9 +807,9 @@
  // Dev skip remains meaningful: it previews the Archivist ending even before
  // all seven choices have been supplied, but does not write any answers.
  window.MeridianSix={
-   breach:()=>breach(qualityResult().count===7?undefined:'archivist'),
+   breach:()=>breach(),
    reset:restart,
-   snapshot:()=>({assessment:qualityResult(),decisions:{...saved},ending:lastEnding}),
+   snapshot:()=>({assessment:qualityResult(),decisions:{...saved},completed:transitionComplete}),
    dilemmas:encounters.map(x=>({id:x.id,act:x.act,title:x.title,options:x.options.length}))
  };
 })();
