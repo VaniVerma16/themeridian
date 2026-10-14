@@ -1328,3 +1328,20 @@ animation:outro-final-slice .14s steps(2,end) infinite}
 @keyframes outro-final-slice{0%,100%{clip-path:inset(35% 0 45% 0);transform:translate(8px,-4px)}50%{clip-path:inset(65% 0 15% 0);transform:translate(-16px,7px)}}
 @keyframes outro-final-background{0%,100%{background:#000}45%{background:#20070b}70%{background:#010506}}
 @media(prefers-reduced-motion:reduce){#five-outro .outro-redacted-end,#five-outro .outro-redacted-end::before,#five-outro .outro-redacted-end span,#five-outro .outro-redacted-end span::after{animation:none!important}}
+
+/* Level 5 — source-linked documentary pinning. */
+#level-five .case-support{display:block!important;border-top:1px solid #b6a58b;margin:16px 0 9px;padding-top:13px}
+#level-five .case-pin-instructions{color:#6b5b49;font:12px/1.5 Georgia,serif;margin:7px 0 10px}
+#level-five .case-evidence-picks{display:grid;gap:7px}
+#level-five .case-pin-empty{font:italic 12px/1.5 Georgia,serif;color:#6b5c4d;padding:7px 0;margin:0}
+#level-five .case-pin-card{background:#f2e6ce;border:1px solid #b7a185;padding:10px;min-width:0;box-shadow:2px 3px 0 #907b6121}
+#level-five .case-pin-card strong{font:12px/1.4 Georgia,serif;color:#483d32;display:block}
+#level-five .case-pin-card p{font:italic 12px/1.45 Georgia,serif;color:#695341;margin:7px 0;overflow-wrap:anywhere}
+#level-five .case-pin-card button{background:transparent;border:0;color:#914b3e;font:11px Georgia,serif;text-decoration:underline;cursor:pointer;padding:3px 0}
+#level-five .case-source-block{border-left:3px solid transparent;padding:4px 8px 8px;margin:5px -8px 12px}
+#level-five .case-source-block.case-evidence-selected{border-left-color:#57764e;background:#d8dfc37c}
+#level-five .case-source-block p{margin:8px 0}
+#level-five .case-pin-source{background:#e5d7b9;border:1px dashed #93795f;padding:6px 9px;margin:8px 0 5px;color:#554738;font:11px/1.4 Georgia,serif;text-align:left;cursor:pointer}
+#level-five .case-pin-source:hover{background:#d5dfc3;border-color:#57724b}
+#level-five .case-pin-source[aria-pressed="true"]{background:#b9cdad;color:#2d492e;border:1px solid #58784e}
+#level-five #case-extra-text.case-evidence-selected{background:#d9dfb98c;outline:2px solid #5b774a;outline-offset:5px}
