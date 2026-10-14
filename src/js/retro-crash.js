@@ -111,19 +111,67 @@
  }
  window.MeridianCrash={play,get playing(){return playing},dismiss};
 
- // Stable routing for the five intro page actions in developer mode. These
- // buttons are moved into a 1997 table by retro-site-theme.js; route through
- // the actual core game rather than synthesizing a restricted dev-menu change.
+ // All genuine developer-page progression buttons are routed through one
+ // delegated capture handler. Moving their DOM nodes into 1997 table cells must
+ // never make the original listeners inaccessible or permit double transitions.
  const introDestinations={
   'begin-one':'level','begin-two':'two','begin-three':'three',
   'begin-four':'four','begin-five':'five'
  };
+ function reportFailure(error,where){
+  console.error('Meridian navigation failed ('+where+'):',error);
+  const status=document.getElementById('retro-status');
+  if(status)status.textContent='Recovery needed — '+where;
+ }
  document.addEventListener('click',event=>{
-   const button=event.target.closest('button[id]');
-   if(!button || !Object.hasOwn(introDestinations,button.id))return;
+   const button=event.target.closest?.('button[id]');
+   if(!button)return;
+   const game=window.MeridianGame;
+   if(!game || typeof game.show!=='function')return;
+   const introDestination=introDestinations[button.id];
    const intro=button.closest('section.reading-page');
-   if(!intro||intro.hidden||!window.MeridianGame?.show)return;
-   event.preventDefault();event.stopImmediatePropagation();
-   window.MeridianGame.show(introDestinations[button.id],true);
+
+   if(introDestination && intro && !intro.hidden){
+     event.preventDefault();
+     event.stopImmediatePropagation();
+     try{game.show(introDestination,true);}catch(error){reportFailure(error,button.id);}
+     return;
+   }
+
+   if(button.id==='four-finish' && !document.getElementById('four-summary').hidden){
+     event.preventDefault();
+     event.stopImmediatePropagation();
+     try{
+       // Use the game's original crash, sound, and chapter transition.
+       game.continueFromFour();
+     }catch(error){
+       reportFailure(error,'four-finish');
+       // Even if optional audio/device APIs fail, progression is guaranteed.
+       const next=()=>game.show('readFive',true);
+       if(!window.MeridianCrash?.play({kind:'survey',onComplete:next}))next();
+     }
+     return;
+   }
+
+   if(button.id==='five-continue' && !document.getElementById('five-result').hidden){
+     event.preventDefault();
+     event.stopImmediatePropagation();
+     try{
+       // Never skip Jane, the narrator or the unknown speaker's recordings.
+       game.continueFromFive();
+     }catch(error){
+       reportFailure(error,'five-continue');
+       // A failed media subsystem may still recover into the original site.
+       const next=()=>game.show('six',true);
+       if(!window.MeridianTape?.play(next))next();
+     }
+     return;
+   }
+
+   if(button.id==='six-warning-continue' && !document.getElementById('six-warning').hidden){
+     event.preventDefault();
+     event.stopImmediatePropagation();
+     try{game.dismissSixWarning();}catch(error){reportFailure(error,'six-warning-continue');}
+   }
  },true);
 })();
