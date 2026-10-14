@@ -8,6 +8,8 @@
  const chrome=document.querySelector('.retro-browser-chrome');
  const header=$('full-header'),footer=wrapper.querySelector('footer');
  if(!wrapper||!chrome||!header||!footer)return;
+ // Real browser controls must be available to keyboard and screen-reader users.
+ chrome.removeAttribute('aria-hidden');
 
  // The document is the ONLY scrolling region. Chrome and desktop are stationary.
  const page=document.createElement('div');
