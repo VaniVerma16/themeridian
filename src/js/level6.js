@@ -1,5 +1,5 @@
 /* THE MERIDIAN · LEVEL 06 DEV PROTOTYPE
- * A Life in Three Acts — seven editorial decisions, original article,
+ * Life in Three Acts — seven editorial decisions, original article,
  * separate restoration quality and hidden competing narrative influences.
  * No impact on publicly released Levels 1–5 or their saved sessions.
  */
