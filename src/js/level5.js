@@ -19,7 +19,7 @@
     "ref": "NEWS/97-02",
     "body": [
       "Monday. We have a little more now. A police follow-up says he was twenty-seven, that his surname began with E, and that his birthday was in January. I found three possible names in our enquiry book. One looks promising, but I want to be really certain.",
-      "One of the names seemed familiar. I think I remember seeing an engagement announcement last September. Something about a new beginning after a difficult few years. I've kept the cutting; we can compare it once we know the name."
+      "I tried matching the names against old files, but found nothing I could trust. Mercer says to keep the names separate from the witness accounts until the police confirm an identity. A list of possibilities isn't a name we can print."
     ],
     "note": "Finally, some identifying information. We can use this with the other slips to narrow down who the victim was."
   },
@@ -79,7 +79,7 @@
   {
     "tag": "MERCER / ARCHIVE & DRAFT",
     "title": "The feature title",
-    "text": "24 February — Found the September 1996 engagement announcement filed under A.E. The accompanying caption gave his age as twenty-six; the piece mentions a couple hoping for a new beginning after difficult years. Might be useful background, but a newspaper cutting isn't proof of anyone's identity. Wait for the police to confirm it before using the name in print. Working title for a possible feature: The Death of the Ordinary Man. Suggested by: [[REDACTED]]. Editor to review before copy is set. — E. Mercer"
+    "text": "24 February — We have a location, several accounts and three possible names. None of them has been confirmed. Someone has already started turning the fragments into a story; please keep the originals separate until we know what belongs together. If there's enough for a longer feature, the working title is Life in Three Acts. Suggested by: [[REDACTED]]. Hold the copy until the identity and sources are checked. — E. Mercer"
   }
 ];
     // Draw archival redactions as the same corrupted mark in every surface,
