@@ -1,8 +1,8 @@
-/* Developer-only Meridian Online period site / archival VCR playback.
+/* The Meridian Online period site / archival VCR playback for public Levels 1–5.
    Keep all puzzle handlers, IDs, progress rules and recorded dialogue intact. */
 (function(){
  'use strict';
- if(typeof developerPreview==='undefined'||!developerPreview)return;
+ if(!document.body.classList.contains('dev-newsprint'))return;
 
  const siteSpecs=[
   {id:'level-one',serial:'01',title:'Transcription Review',
@@ -84,7 +84,8 @@
    front.textContent='Front Page';
    front.addEventListener('click',()=>{
      const select=document.getElementById('dev-level');
-     if(select){select.value='home';select.dispatchEvent(new Event('change',{bubbles:true}));}
+     if(developerPreview && select){select.value='home';select.dispatchEvent(new Event('change',{bubbles:true}));}
+     else window.MeridianNavigate?.('home');
    });side.append(front);
    const chapter=document.createElement('div');chapter.className='era-side-label';
    chapter.textContent='FILE ROOM / '+spec.serial;side.append(chapter);
