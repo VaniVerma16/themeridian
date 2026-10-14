@@ -15,25 +15,10 @@
  const counter=document.getElementById('six-page-counter');
  const pageState=document.getElementById('six-page-state');
  const chapter=document.getElementById('six-reading-chapter');
- const signal=document.getElementById('six-signal');
- const signalText=document.getElementById('six-signal-message');
- const actScreen=document.getElementById('six-act-interrupt');
- const actLabel=document.getElementById('six-act-interrupt-label');
- const actMessage=document.getElementById('six-act-interrupt-message');
  if(!root||!host||!workspace||!intro||!start||!prev||!next)return;
  const KEY='meridian-six-pager-v1';
  const actNames=['ACT I — THE PROMISE','ACT II — THE FALL AND THE RETURN','ACT III — THE UNFINISHED'];
- const intrusion=[
-  'ANOTHER NAME WAS HERE.',
-  'THEY REMEMBER IT DIFFERENTLY.',
-  'DID YOU ASK HER?',
-  'SHE NEVER FORGAVE HIM.',
-  'SHE ONLY KNEW THIS VERSION.',
-  'THERE IS BLOOD ON THIS PAGE.',
-  'YOU ARE NOT THE AUTHOR.'
- ];
- let active=0,started=false,pages=[],timer=null,actTimer=null;
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let active=0,started=false,pages=[];
  try{
    const saved=JSON.parse(localStorage.getItem(KEY)||'null');
    if(saved && saved.version===1){
@@ -44,40 +29,11 @@
  function persist(){
    try{localStorage.setItem(KEY,JSON.stringify({version:1,active,started}));}catch(e){}
  }
- function stopVisuals(){
-   if(timer!==null){clearTimeout(timer);timer=null;}
-   if(actTimer!==null){clearTimeout(actTimer);actTimer=null;}
-   signal.hidden=true;actScreen.hidden=true;
- }
  function snapshot(){
    return window.MeridianSix?.snapshot?.()||{assessment:{count:0},decisions:{},ending:null};
  }
  function scrollArticle(){
    try{root.scrollIntoView({behavior:'instant',block:'start'});}catch(e){window.scrollTo(0,0);}
- }
- function indicate(type,index){
-   if(reduced||!started)return;
-   if(timer!==null)clearTimeout(timer);
-   signalText.textContent=intrusion[index]||'THE RECORD WAS CHANGED.';
-   signal.dataset.intensity=type;
-   signal.hidden=false;
-   root.classList.remove('six-flicker');
-   void root.offsetWidth;
-   root.classList.add('six-flicker');
-   timer=setTimeout(()=>{
-     signal.hidden=true;root.classList.remove('six-flicker');timer=null;
-   },type==='severe'?1200:680);
- }
- function actInterruption(target){
-   if(reduced||target===1)return;
-   if(actTimer!==null)clearTimeout(actTimer);
-   actLabel.textContent=actNames[target-1];
-   actMessage.textContent=target===2?
-     'HE DID NOT WANT YOU TO READ THIS.' :
-     'THERE WAS SUPPOSED TO BE MORE.';
-   actScreen.dataset.act=String(target);
-   actScreen.hidden=false;
-   actTimer=setTimeout(()=>{actScreen.hidden=true;actTimer=null;},1450);
  }
  function sync(){
    // The intro is a separate navigable section, not a panel inside Level 6.
@@ -154,14 +110,11 @@
    if(!started||index<0||index>=7)return;
    const data=snapshot();
    if(index>active && !Number.isInteger(data.decisions[pages[active].dataset.question]))return;
-   const from=Number(pages[active].dataset.act);
+   // Navigation is immediate. The three-act bar gives the context without
+   // inventing clues or interrupting the player's reading.
    active=index;persist();sync();scrollArticle();
-   const target=Number(pages[index].dataset.act);
-   if(from!==target)actInterruption(target);
-   else if(index>=3)indicate(index>=5?'severe':'minor',index);
  }
  function clearPager(){
-   stopVisuals();
    active=0;started=false;
    try{localStorage.removeItem(KEY);}catch(e){}
    sync();
@@ -170,7 +123,6 @@
    started=true;persist();sync();
    show('six');
    scrollArticle();
-   indicate('minor',0);
  });
  prev.addEventListener('click',()=>navigate(active-1));
  next.addEventListener('click',()=>{
@@ -182,10 +134,7 @@
  host.addEventListener('click',event=>{
    if(!event.target.closest('.six-decision-commit'))return;
    // This runs after level6.js applies, scores, and saves the chosen option.
-   queueMicrotask(()=>{
-     sync();
-     indicate(active>=5?'severe':'minor',active);
-   });
+   queueMicrotask(sync);
  });
  document.getElementById('six-reset').addEventListener('click',clearPager);
  // The ending Retry action is owned by level6.js so it can also navigate
