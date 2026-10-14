@@ -248,3 +248,139 @@ body.dev-newsprint img.retro-missing-asset{outline:2px dashed #a80000!important}
  body.dev-newsprint .retro-error,body.dev-newsprint .retro-error.corrupted{animation:none!important}
  body.dev-newsprint .retro-load-progress>span{transition:none!important}
 }
+
+/* 1990s hyperlinks: persistently underlined, no animated hover treatment. */
+body.dev-newsprint .retro-browser-page a,
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-link,
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-textlink,
+body.dev-newsprint .retro-browser-page .archive-open span,
+body.dev-newsprint .retro-browser-page #case-open-reconstruction {
+ color:#0000ee!important;
+ text-decoration:underline!important;
+ text-decoration-thickness:auto!important;
+ text-underline-offset:auto!important;
+ text-decoration-skip-ink:auto!important;
+ cursor:pointer!important;
+ transition:none!important;
+ animation:none!important;
+}
+body.dev-newsprint .retro-browser-page a:visited,
+body.dev-newsprint .retro-browser-page .retro-site-page :is(.retro-link,.retro-textlink).retro-visited,
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-link[aria-current="page"]{
+ color:#551a8b!important;
+}
+body.dev-newsprint .retro-browser-page a:hover,
+body.dev-newsprint .retro-browser-page .retro-site-page :is(.retro-link,.retro-textlink):hover,
+body.dev-newsprint .retro-browser-page .archive-open:hover span,
+body.dev-newsprint .retro-browser-page #case-open-reconstruction:hover{
+ text-decoration:underline!important;
+ text-underline-offset:auto!important;
+ background:transparent!important;
+ opacity:1!important;
+ filter:none!important;
+ transform:none!important;
+ box-shadow:none!important;
+}
+body.dev-newsprint .retro-browser-page a:active,
+body.dev-newsprint .retro-browser-page .retro-site-page :is(.retro-link,.retro-textlink):active{
+ color:#ee0000!important;
+}
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-link,
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-textlink{
+ display:inline-block!important;
+ padding:3px 1px!important;
+ margin:0!important;
+ width:auto!important;
+ min-width:0!important;
+ border:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ transform:none!important;
+ font:15px/1.45 "Times New Roman",Times,serif!important;
+ text-align:left!important;
+ vertical-align:baseline;
+}
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-navcell .retro-link{
+ display:block!important;
+ width:100%!important;
+ padding:5px 1px!important;
+}
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-link:hover,
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-textlink:hover{
+ color:#0000ee!important;
+}
+body.dev-newsprint .retro-browser-page .retro-site-page :is(.retro-link,.retro-textlink).retro-visited:hover{
+ color:#551a8b!important;
+}
+/* Site navigation should resemble a link, not an oversized modern CTA. */
+body.dev-newsprint .retro-browser-page #get-started,
+body.dev-newsprint .retro-browser-page .reading-page .primary,
+body.dev-newsprint .retro-browser-page #read-guide,
+body.dev-newsprint .retro-browser-page #four-finish,
+body.dev-newsprint .retro-browser-page #five-continue,
+body.dev-newsprint .retro-browser-page #return-home,
+body.dev-newsprint .retro-browser-page #six-dev-open,
+body.dev-newsprint .retro-browser-page #six-back,
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-button[data-retro-tab],
+body.dev-newsprint .retro-browser-page #case-open-reconstruction{
+ display:inline-block!important;
+ width:auto!important;
+ min-width:0!important;
+ height:auto!important;
+ padding:0!important;
+ margin:12px 0 5px!important;
+ border:0!important;
+ border-radius:0!important;
+ background:transparent!important;
+ color:#0000ee!important;
+ box-shadow:none!important;
+ text-shadow:none!important;
+ text-transform:none!important;
+ letter-spacing:normal!important;
+ font:16px/1.4 "Times New Roman",Times,serif!important;
+ text-align:left!important;
+ text-decoration:underline!important;
+ text-decoration-thickness:auto!important;
+ text-underline-offset:auto!important;
+ transform:none!important;
+ transition:none!important;
+ animation:none!important;
+ cursor:pointer!important;
+}
+body.dev-newsprint .retro-browser-page :is(#get-started,.reading-page .primary,#read-guide,#four-finish,#five-continue,#return-home,#six-dev-open,#six-back,.retro-site-page .retro-button[data-retro-tab],#case-open-reconstruction):is(:hover,:focus-visible,:active){
+ background:transparent!important;
+ box-shadow:none!important;
+ border:0!important;
+ transform:none!important;
+ filter:none!important;
+ text-decoration:underline!important;
+ text-underline-offset:auto!important;
+}
+body.dev-newsprint .retro-browser-page :is(#get-started,.reading-page .primary,#read-guide,#four-finish,#five-continue,#return-home,#six-dev-open,#six-back,.retro-site-page .retro-button[data-retro-tab],#case-open-reconstruction):active{
+ color:#ee0000!important;
+}
+body.dev-newsprint .retro-browser-page .retro-site-page .retro-button[data-retro-tab].retro-visited{
+ color:#551a8b!important;
+}
+/* Keep submit, reset, and verification actions as bevelled OS-era buttons. */
+body.dev-newsprint .retro-browser-page :is(button,.clipping-card,.roster-card,.archive-open,.desk-object){
+ transition:none!important;
+}
+body.dev-newsprint .retro-browser-page :is(button.primary,button.secondary):not(:disabled):hover{
+ transform:none!important;
+}
+body.dev-newsprint #level-two .clipping-card:hover{
+ transform:none!important;
+ box-shadow:3px 5px 5px #3927156b!important;
+}
+body.dev-newsprint .retro-browser-page .archive-open:hover,
+body.dev-newsprint .retro-browser-page .archive-open:hover img{
+ opacity:1!important;
+ transform:none!important;
+ filter:none!important;
+}
+/* Keep keyboard focus visible without introducing an animated underline. */
+body.dev-newsprint .retro-browser-page :is(a,.retro-link,.retro-textlink,#get-started,.reading-page .primary,#read-guide,#four-finish,#five-continue,#return-home,#six-dev-open,#six-back):focus-visible{
+ outline:1px dotted currentColor!important;
+ outline-offset:2px!important;
+}
