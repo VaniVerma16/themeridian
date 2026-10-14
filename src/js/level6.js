@@ -7,26 +7,26 @@
  'use strict';
  if(typeof developerPreview==='undefined'||!developerPreview)return;
 
- const STORAGE_KEY='meridian-six-editorial-v4';
- const VERSION=4;
+ const STORAGE_KEY='meridian-six-editorial-v5';
+ const VERSION=5;
  const encounters=[
  {
   "id": "broken-confidence",
   "act": 1,
   "number": 1,
-  "title": "Would you tell a friend they're being mocked behind their back?",
-  "lead": "Sophie trusted Daniel with her family's money troubles. At a college party, Daniel repeated her private story for laughs. Adam overheard.",
-  "sourceTitle": "COLLEGE NOTES · 1990",
-  "source": "Daniel said it was a stupid joke and begged Adam to keep quiet. Sophie still trusted Daniel. We don't know what Adam told her.",
-  "question": "Is sparing someone a painful truth an act of kindness—or another betrayal?",
+  "title": "Should a friend's betrayal become part of Adam's story?",
+  "lead": "Daniel mocked Sophie's private family problems at a college party. Adam knew. Sophie says nobody warned her; Daniel claims Adam told him to apologise.",
+  "sourceTitle": "TWO COLLEGE ACCOUNTS · 1990",
+  "source": "Sophie: “I wish someone had told me.” Daniel: “Adam said I should put it right.” Neither establishes what Adam ultimately did.",
+  "question": "What do you print when the witnesses disagree—and the story could embarrass someone still living?",
   "story": [
-   "Adam was an unusually gifted college student who fixed broken radios for fun. Daniel was his closest friend, and Sophie trusted them both. Adam never expected their friendship to put him in this position."
+   "An old college recollection interrupts the glowing accounts of Adam's talent. His friends remember the same evening very differently."
   ],
   "options": [
    {
-    "label": "Tell Sophie what he said.",
-    "detail": "She deserves to know. But hearing the joke might humiliate her twice.",
-    "revision": "Daniel repeated a private story about Sophie's family to get a laugh. Telling her would honour her trust, but force her to hear how she had been mocked.",
+    "label": "Print both memories.",
+    "detail": "Sophie is heard, but her family's private difficulties become public again.",
+    "revision": "Sophie remembered being left in the dark. Daniel recalled Adam urging him to apologise. Their accounts do not settle what Adam did.",
     "quality": [
      9,
      8,
@@ -42,9 +42,9 @@
     }
    },
    {
-    "label": "Make Daniel apologise himself.",
-    "detail": "He should take responsibility. But he might downplay what happened.",
-    "revision": "Adam could have demanded that Daniel confess and apologise. That would give Daniel a chance to repair the harm, or to control how much Sophie learned.",
+    "label": "Print Daniel's praise of Adam.",
+    "detail": "It makes Adam look loyal, but gives the friend who caused the harm control of the story.",
+    "revision": "Daniel remembered Adam as the friend who urged him to make things right. Sophie recalled the hurt but is not quoted.",
     "quality": [
      8,
      8,
@@ -60,9 +60,9 @@
     }
    },
    {
-    "label": "Don't tell Sophie.",
-    "detail": "Spare her the embarrassment, but leave her trusting someone who betrayed her.",
-    "revision": "Adam could have protected Sophie from the humiliating details. Silence would also leave her trusting a friend who had shared her private pain for laughs.",
+    "label": "Leave the incident out.",
+    "detail": "Protects Sophie from fresh embarrassment, but leaves out a revealing dispute about Adam.",
+    "revision": "The article omits the college incident. It cannot establish Adam's response without reviving Sophie's private hurt.",
     "quality": [
      6,
      8,
@@ -84,19 +84,19 @@
   "id": "departure",
   "act": 1,
   "number": 2,
-  "title": "Do you owe someone the future you promised them?",
-  "lead": "Adam promised to return home after college. His mother helped pay for his degree and needs him. Then a dream job abroad arrives.",
-  "sourceTitle": "COLLEGE NOTES · 1990–1991",
-  "source": "His mother's letter refers to his promise; the job offer requires him to leave within a month.",
-  "question": "How much of your future belongs to someone who sacrificed for it?",
+  "title": "Was Adam's big break also a broken promise?",
+  "lead": "Adam accepted a research job abroad after promising his mother he'd come home to help. His appointment letter celebrates him. Her letter asks when he'll return.",
+  "sourceTitle": "APPOINTMENT LETTER & FAMILY LETTER · 1991",
+  "source": "Research office: “We are pleased to confirm your appointment.” His mother: “You told me you'd come home when college ended.”",
+  "question": "Does a career success still look heroic when someone else paid its price?",
   "story": [
-   "At graduation, the life Adam wanted and the life he'd promised his mother stopped pointing in the same direction."
+   "The university celebrated Adam's potential. At home, his mother was counting on a promise he could no longer keep."
   ],
   "options": [
    {
-    "label": "Take the job.",
-    "detail": "He shouldn't have to give up his future because he made a promise.",
-    "revision": "The opportunity Adam had earned came at the cost of his commitment to his mother.",
+    "label": "Celebrate the research appointment.",
+    "detail": "True to his achievements, but leaves his mother's sacrifices invisible.",
+    "revision": "Adam accepted a prestigious research appointment abroad, an opportunity he had worked years to earn.",
     "quality": [
      8,
      9,
@@ -112,9 +112,9 @@
     }
    },
    {
-    "label": "Go home.",
-    "detail": "She sacrificed for him. Keeping his word matters.",
-    "revision": "Returning would honour his promise but might mean losing the career she helped him build.",
+    "label": "Include his mother's letter.",
+    "detail": "Readers see the human cost, but she never wrote those words for a newspaper.",
+    "revision": "Adam left for a research post despite a promise to return home. His mother's private letter described what his absence meant to her.",
     "quality": [
      8,
      7,
@@ -130,9 +130,9 @@
     }
    },
    {
-    "label": "Go, but send money home.",
-    "detail": "Financial help isn't the same as being there.",
-    "revision": "Support from abroad could honour part of Adam's promise. Whether it was what his mother needed is unknown.",
+    "label": "Mention both, without quoting her.",
+    "detail": "Respects her privacy, but reduces a difficult choice to one neat sentence.",
+    "revision": "Adam's new post took him abroad, away from a mother who had helped him through college and expected him home.",
     "quality": [
      8,
      8,
@@ -149,28 +149,28 @@
    }
   ],
   "reaction": [
-   "So we're calling that ambition?",
-   "That's sweet. I expected a different ending to his college years.",
-   "A tidy compromise. People do like those."
+   "So we're calling that success? Fine. Leave the rest out.",
+   "You'd print her letter? She didn't write it for strangers.",
+   "Both sides in one sentence. Convenient, isn't it?"
   ]
  },
  {
   "id": "breakup",
   "act": 2,
   "number": 3,
-  "title": "Are you responsible for what happens after you leave someone?",
-  "lead": "Leah leaves Adam. He's devastated and later develops alcohol dependence. Was leaving him wrong?",
-  "sourceTitle": "PRIVATE CORRESPONDENCE · 1992–1995",
-  "source": "Leah wrote that she still cared but no longer wanted the relationship. His drinking worsened afterward.",
-  "question": "Can leaving be right even when someone falls apart?",
+  "title": "Would naming Leah make readers blame her?",
+  "lead": "Leah ended their relationship. Adam withdrew and later developed alcohol dependence. The dates are clear; the cause of his illness isn't.",
+  "sourceTitle": "LEAH'S LETTER & WORK RECORD · 1992",
+  "source": "Leah: “I still care for him. I can't stay.” His missed appointments and worsening health are recorded later. The documents do not establish causation.",
+  "question": "Should a true detail be published if readers are likely to draw an unfair conclusion?",
   "story": [
-   "Leah wanted another life. Staying out of pity would have meant lying. Adam withdrew from work and friends after she left."
+   "Adam's years of illness did not happen in isolation. But telling events in order can make one person seem responsible for the next."
   ],
   "options": [
    {
-    "label": "She had every right to leave.",
-    "detail": "Adam's subsequent suffering wasn't her responsibility.",
-    "revision": "Leah chose to leave. Adam's later dependence cannot be treated as a moral debt she owed him.",
+    "label": "Name Leah and the breakup.",
+    "detail": "It's part of his life, but readers may blame her for his decline.",
+    "revision": "After his relationship with Leah ended, Adam withdrew from work and later developed alcohol dependence. The records establish sequence, not cause.",
     "quality": [
      9,
      8,
@@ -186,9 +186,9 @@
     }
    },
    {
-    "label": "She owed him more care.",
-    "detail": "The right to leave doesn't mean how you do it can't hurt.",
-    "revision": "Leah was free to end the relationship. Whether she could have done so more gently is uncertain.",
+    "label": "Mention the breakup, not Leah.",
+    "detail": "Protects her identity, but still invites readers to treat heartbreak as the explanation.",
+    "revision": "A relationship ended before Adam's withdrawal and later illness. The article withholds his former partner's identity.",
     "quality": [
      8,
      9,
@@ -204,9 +204,9 @@
     }
    },
    {
-    "label": "Leave Leah out of the article.",
-    "detail": "Readers could unfairly blame her for his illness.",
-    "revision": "The article describes Adam's difficult years without naming the breakup that came first.",
+    "label": "Leave the breakup out.",
+    "detail": "Avoids making Leah a villain, but removes important context from Adam's life.",
+    "revision": "The article describes Adam's withdrawal and period of alcohol dependence without discussing his private relationship.",
     "quality": [
      6,
      8,
@@ -228,19 +228,19 @@
   "id": "dependence",
   "act": 2,
   "number": 4,
-  "title": "Can someone be both a victim and a villain?",
-  "lead": "During alcohol dependence, Adam spends money Ruth needed for housing. He's unwell; she loses her deposit.",
-  "sourceTitle": "PRIVATE CORRESPONDENCE · 1992–1995",
-  "source": "Adam admitted using Ruth's money on alcohol. Her lost housing deposit is documented.",
-  "question": "Does understanding his illness change his responsibility?",
+  "title": "Should his illness soften the account of what he did?",
+  "lead": "During alcohol dependence, Adam spent money Ruth needed for housing. He was struggling to recover. She lost her deposit.",
+  "sourceTitle": "RUTH'S RECEIPTS & ADAM'S LETTER · 1993",
+  "source": "Ruth documented the lost deposit. Adam acknowledged spending the money. His letters also describe his struggle with drinking.",
+  "question": "How do you write about his suffering without erasing hers?",
   "story": [
-   "Adam missed work and broke promises while struggling to stop drinking. Ruth still needed somewhere to live."
+   "Ruth remembered a brother she loved and promises she could no longer trust. Adam's illness was real. The lost deposit was real too."
   ],
   "options": [
    {
-    "label": "Focus on Ruth's suffering.",
-    "detail": "Adam's illness doesn't erase what he did.",
-    "revision": "Adam took money Ruth needed for housing. His dependence mattered, but she lived with the consequences.",
+    "label": "Lead with Ruth's loss.",
+    "detail": "Shows who was hurt, but readers may reduce Adam to his worst act.",
+    "revision": "Adam used money Ruth needed for housing, leaving her without the deposit. His alcohol dependence was part of the context, not an excuse.",
     "quality": [
      9,
      8,
@@ -256,9 +256,9 @@
     }
    },
    {
-    "label": "Focus on Adam's illness.",
-    "detail": "Without context, readers may see only cruelty.",
-    "revision": "During alcohol dependence Adam broke promises, including one that cost Ruth her deposit. Both parts of the story remain.",
+    "label": "Lead with Adam's illness.",
+    "detail": "May inspire compassion, but risks making Ruth's suffering a footnote.",
+    "revision": "While struggling with alcohol dependence, Adam broke promises and used money Ruth needed for housing. She lost her deposit.",
     "quality": [
      9,
      9,
@@ -274,9 +274,9 @@
     }
    },
    {
-    "label": "Keep the family incident private.",
-    "detail": "Why publish the worst thing from his worst year?",
-    "revision": "The article notes family tensions but withholds Ruth's specific loss.",
+    "label": "Omit the private incident.",
+    "detail": "Protects family details, but leaves readers unable to understand why Ruth kept her distance.",
+    "revision": "Adam's dependence damaged some family relationships. The article does not describe the specific harm Ruth experienced.",
     "quality": [
      6,
      8,
@@ -293,28 +293,28 @@
    }
   ],
   "reaction": [
-   "You want them to remember that?",
-   "Yes. I think they'll understand him better.",
-   "Some things might be better left alone."
+   "You want that to be how they remember him?",
+   "That's better. People might understand him that way.",
+   "Some things really should remain private."
   ]
  },
  {
   "id": "apology",
   "act": 2,
   "number": 5,
-  "title": "Can you redeem yourself without being forgiven?",
-  "lead": "Adam enters recovery, repays Ruth and apologises. She believes he's sincere but refuses to see him.",
-  "sourceTitle": "PRIVATE CORRESPONDENCE · 1992–1995",
-  "source": "Adam's letter admits what he did. Ruth's reply accepts his remorse but not renewed contact.",
-  "question": "Does changing entitle anyone to a second chance?",
+  "title": "Can the article call this redemption?",
+  "lead": "Adam sought treatment, repaid Ruth and apologised. Ruth believed his regret but never welcomed him back. The draft calls him “redeemed.”",
+  "sourceTitle": "RECOVERY RECORD & FAMILY LETTERS · 1994",
+  "source": "Adam documented his repayments and apology. Ruth wrote that she believed his remorse but did not wish to resume contact.",
+  "question": "Who has the right to call someone forgiven—or redeemed?",
   "story": [
-   "Recovery meant work, meetings, and keeping promises. Ruth still had every right not to welcome him back."
+   "The improvement was slow and imperfect. Adam changed his actions. Ruth did not change her mind."
   ],
   "options": [
    {
-    "label": "He earned a second chance.",
-    "detail": "His change should count, even if forgiveness never comes.",
-    "revision": "Adam made amends and worked toward recovery. Ruth's refusal remained, but so did his efforts.",
+    "label": "Keep the word “redeemed.”",
+    "detail": "Honours his progress, but turns Ruth's pain into a chapter he overcame.",
+    "revision": "Adam worked toward recovery and made amends. The article presents those efforts as his redemption, though Ruth never forgave him.",
     "quality": [
      8,
      9,
@@ -330,9 +330,9 @@
     }
    },
    {
-    "label": "Ruth gets the final say.",
-    "detail": "Remorse doesn't entitle someone to forgiveness.",
-    "revision": "Adam repaid what he could. Ruth declined contact, and her refusal must not become a triumph in his story.",
+    "label": "Remove the claim of redemption.",
+    "detail": "Respects Ruth's refusal, but may deny the significance of his efforts.",
+    "revision": "Adam sought treatment and repaid what he could. Ruth declined contact; the article does not present his attempts as moral absolution.",
     "quality": [
      9,
      7,
@@ -348,9 +348,9 @@
     }
    },
    {
-    "label": "Both can be true.",
-    "detail": "He changed; she can still refuse him.",
-    "revision": "Adam's recovery and Ruth's refusal were both real. Neither alone proves or disproves redemption.",
+    "label": "Print the private apology.",
+    "detail": "Readers can judge for themselves, but Ruth's family correspondence becomes public evidence.",
+    "revision": "Adam acknowledged his wrongdoing in a personal apology. The article reproduces that private admission while noting that Ruth did not accept renewed contact.",
     "quality": [
      8,
      7,
@@ -372,19 +372,19 @@
   "id": "secret",
   "act": 3,
   "number": 6,
-  "title": "Does your partner deserve to know the worst thing you've done?",
-  "lead": "Nora knows about Adam's alcoholism, but not exactly what happened to Ruth. They're engaged; he drafts a letter to tell her.",
-  "sourceTitle": "RECOVERED FILES · 1996–1997",
-  "source": "An unfinished letter describes the money Adam took. No record proves Nora ever saw it.",
-  "question": "Is concealing your past a second betrayal—or a right to begin again?",
+  "title": "Should Nora discover his secret through this article?",
+  "lead": "Nora knew Adam had struggled with alcohol. A private, unfinished letter suggests he considered telling her the full story of how he hurt Ruth. We don't know if he did.",
+  "sourceTitle": "UNFINISHED LETTER · 1996",
+  "source": "Adam's draft describes Ruth's lost money. It stops before he reaches a conclusion; no record shows whether Nora saw it.",
+  "question": "Does the public deserve a truth that the person closest to him may never have heard?",
   "story": [
-   "Nora loved Adam's terrible cooking and his crooked jokes. His recovery was his own work; she didn't rescue him."
+   "Nora remembered Adam as funny, thoughtful and devoted. He was planning a future with her while still reckoning with his past."
   ],
   "options": [
    {
-    "label": "Tell Nora before the wedding.",
-    "detail": "She deserves to choose knowing the truth.",
-    "revision": "Adam considered telling Nora exactly what he'd done to Ruth. Whether he told her remains unknown.",
+    "label": "Publish what the letter reveals.",
+    "detail": "Nora may deserve the truth, but could learn it from a newspaper.",
+    "revision": "An unfinished letter suggests Adam considered telling Nora about the money he took from Ruth. Whether he ever did is unknown.",
     "quality": [
      9,
      8,
@@ -400,9 +400,9 @@
     }
    },
    {
-    "label": "Wait until he's ready.",
-    "detail": "Telling her badly could hurt her more.",
-    "revision": "The unfinished draft suggests a struggle over when to speak. Delay might have been kindness—or fear.",
+    "label": "Say he had a secret, not what it was.",
+    "detail": "Leaves readers intrigued, but casts suspicion without giving anyone facts.",
+    "revision": "Adam left an unfinished letter about something he struggled to disclose. The article withholds the subject and recipient's private details.",
     "quality": [
      8,
      9,
@@ -418,9 +418,9 @@
     }
    },
    {
-    "label": "Leave the past behind.",
-    "detail": "He changed. Must she inherit his worst years?",
-    "revision": "Nora didn't necessarily know every detail of Adam's earlier harm. Whether that was privacy or concealment is unresolved.",
+    "label": "Keep the letter out.",
+    "detail": "Protects Nora's privacy, but may make Adam's new life seem simpler than it was.",
+    "revision": "The article describes Adam's recovery and relationship with Nora without publishing his unfinished private correspondence.",
     "quality": [
      7,
      8,
@@ -437,9 +437,9 @@
    }
   ],
   "reaction": [
-   "Right. Of course she deserves to know. Even now.",
-   "Some things take time to explain, I suppose.",
-   "He was finally happy. Doesn't that count?"
+   "You'd let her find out from the newspaper?",
+   "So we'll imply there's something terrible but won't say what. Interesting.",
+   "His happy years deserve the space. Don't they?"
   ]
  },
  {
@@ -447,18 +447,18 @@
   "act": 3,
   "number": 7,
   "title": "Should Ruth's account be included in the article?",
-  "lead": "Adam dies at twenty-seven. Nora remembers a loving fiancé; Ruth remembers the brother who broke her trust. Both agree to be interviewed.",
-  "sourceTitle": "RECOVERED FILES · 1996–1997",
-  "source": "The cause was a fatal head injury; the circumstances were unresolved. Nora and Ruth offer different, sincere memories.",
-  "question": "Should he be remembered for who he became—or who he once was?",
+  "lead": "After Adam's death, Nora remembered a loving fiancé. Ruth remembered the brother who broke her trust. Both agreed to speak to the newspaper.",
+  "sourceTitle": "NORA & RUTH · INTERVIEWS, 1997",
+  "source": "Nora recalled a patient, funny partner. Ruth described an earlier period of broken promises. Both gave sincere accounts.",
+  "question": "Does someone deserve to be remembered for who they became—or who they once were?",
   "story": [
-   "They had been looking at houses. A note on Nora's wall still said 'please buy milk'. And then he was gone."
+   "The last weeks of Adam's life were filled with ordinary plans. The people left behind did not agree on which memories should outlive him."
   ],
   "options": [
    {
     "label": "Publish both accounts.",
-    "detail": "Ruth deserves to be heard, even if the truth hurts Nora.",
-    "revision": "Nora described devotion; Ruth described broken trust. The article preserves both accounts.",
+    "detail": "Ruth deserves to be heard, but Nora may feel her grief has been overshadowed.",
+    "revision": "Nora described devotion; Ruth described broken trust. The article preserves both women's memories of Adam.",
     "quality": [
      9,
      8,
@@ -475,7 +475,7 @@
    },
    {
     "label": "Publish Nora's account only.",
-    "detail": "Why should Adam's worst years define him after death?",
+    "detail": "Honours his later happiness, but erases the hurt Ruth still carries.",
     "revision": "The article remembers the partner Nora loved. Ruth's account is omitted.",
     "quality": [
      7,
@@ -493,8 +493,8 @@
    },
    {
     "label": "Include Ruth anonymously.",
-    "detail": "She deserves a voice, but anonymity strips away context.",
-    "revision": "An unnamed relative recalls Adam's earlier harm. Ruth's testimony survives without the context of her name.",
+    "detail": "Preserves her testimony, but readers lose the context of who she was to him.",
+    "revision": "An unnamed relative recalls Adam's earlier harm. Ruth's testimony survives without her name, leaving readers less context for judging it.",
     "quality": [
      8,
      7,
@@ -608,7 +608,7 @@
    const result=qualityResult(),previous=data.levels['6'];
    data.version=1;
    data.levels['6']={
-    version:4,decisions:{...saved},parameters:{...result.parameters},
+    version:5,decisions:{...saved},parameters:{...result.parameters},
     editorialScore:result.score,
     completed:completed||(previous?.completed===true&&result.count===7),
     updatedAt:new Date().toISOString()
