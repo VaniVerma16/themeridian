@@ -112,6 +112,8 @@
         showRedactedText(document.getElementById('case-extra-text'),item.text);
         document.getElementById('case-extra-view').hidden=false;
         document.getElementById('desk-slip-counter').textContent='SLIP '+String(i+1).padStart(2,'0')+' / '+String(caseInserts.length).padStart(2,'0');
+        document.getElementById('case-pin-slip').dataset.caseEvidence='slip:'+i;
+        paintCasePins();
         extraHost.querySelectorAll('.case-extra-card').forEach((b,n)=>{
           b.classList.toggle('selected',n===i);b.setAttribute('aria-pressed',String(n===i));
         });
@@ -119,6 +121,7 @@
       extraHost.appendChild(btn);
     });
     let activeCaseFile=0,caseZoom=100;
+    let casePinsReady=false;
     const caseTabs=document.getElementById('case-tabs');
     caseFiles.forEach((file,i)=>{
       const button=document.createElement('button');button.type='button';button.className='case-tab';
@@ -134,7 +137,16 @@
       const kind=document.createElement('div');kind.className='case-paper-kind';showRedactedText(kind,file.type);paper.appendChild(kind);
       const h=document.createElement('h2');h.textContent=file.title;paper.appendChild(h);
       const date=document.createElement('p');date.className='case-paper-date';date.textContent='FILED '+file.date;paper.appendChild(date);
-      file.body.forEach(t=>{const p=document.createElement('p');showRedactedText(p,t);paper.appendChild(p)});
+      file.body.forEach((t,n)=>{
+        const section=document.createElement('div');section.className='case-source-block';
+        section.dataset.caseEvidence='file:'+activeCaseFile+':'+n;
+        const p=document.createElement('p');showRedactedText(p,t);section.appendChild(p);
+        const pin=document.createElement('button');pin.type='button';pin.className='case-pin-source';
+        pin.textContent='Pin paragraph as evidence';
+        pin.addEventListener('click',()=>pinCaseEvidence('file:'+activeCaseFile+':'+n));
+        section.appendChild(pin);paper.appendChild(section);
+      });
+      if(casePinsReady)paintCasePins();
       const foot=document.createElement('div');foot.className='case-paper-foot';foot.textContent='RETAINED NEWSROOM COPY · NOT AN OFFICIAL CASE FILE';paper.appendChild(foot);
       document.getElementById('case-page-counter').textContent='DOCUMENT 0'+(activeCaseFile+1)+' / 0'+caseFiles.length;
       document.getElementById('case-narrator-note').textContent=file.note;
@@ -166,14 +178,73 @@
       safelySaveSession();
     });
     openCaseFile(0);
-    // Four factual questions, not an evidence-label matching exam.
+    // Four deductions, each requiring actual documents pinned from the desk.
     const caseStages=[
-      {title:'01 — Where was he found?',instruction:'Find the confirmed recovery location in the loose inserts.',options:['Canal steps off Station Road','Eastern towpath beneath the old rail bridge','Prince Arthur / Milton Street corner'],answer:'Eastern towpath beneath the old rail bridge',clue:'The first loose insert records the exact location. The Station Road steps were only the way down to the canal.'},
-      {title:'02 — Who was the deceased?',instruction:'Which of the three names is the best-supported match for the unidentified man?',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',clue:'Two people fit the birth month and year, but not every surname matches the police description. Compare all three details in the notebook with the enquiry page.'},
-      {title:'03 — When did he die?',instruction:'Use the medical estimate, not the time the emergency call was made.',options:['20 February 18:00–22:00','20 February 22:00 – 21 February 02:00','21 February 02:00–06:00'],answer:'20 February 22:00 – 21 February 02:00',clue:'The doctor examined him at approximately 7 a.m. Count back both ends of the estimated five-to-nine-hour interval.'},
-      {title:'04 — What was the medical cause?',instruction:'Select the cause shown by the injuries, not an unproven explanation of how they occurred.',options:['Drowning in the canal','Fatal blunt-force head injury','A fall onto the towpath'],answer:'Fatal blunt-force head injury',clue:'The hearing notes describe a skull fracture and bleeding inside the head; whether it was an accident or an assault was not established.'}
+      {title:'01 — Where was he found?',instruction:'Find the confirmed recovery location in the loose inserts.',options:['Canal steps off Station Road','Eastern towpath beneath the old rail bridge','Prince Arthur / Milton Street corner'],answer:'Eastern towpath beneath the old rail bridge',clue:'The first loose insert records the exact location. The Station Road steps were only the way down to the canal.',evidence:['slip:0']},
+      {title:'02 — Who was the deceased?',instruction:'Which of the three names is the best-supported match for the unidentified man?',options:['Adam E.','Arthur E.','Martin Vale'],answer:'Adam E.',clue:'Two people fit the birth month and year, but not every surname matches the police description. Compare all three details in the notebook with the enquiry page.',evidence:['file:1:0','slip:1']},
+      {title:'03 — When did he die?',instruction:'Use the medical estimate, not the time the emergency call was made.',options:['20 February 18:00–22:00','20 February 22:00 – 21 February 02:00','21 February 02:00–06:00'],answer:'20 February 22:00 – 21 February 02:00',clue:'The doctor examined him at approximately 7 a.m. Count back both ends of the estimated five-to-nine-hour interval.',evidence:['slip:3']},
+      {title:'04 — What was the medical cause?',instruction:'Select the cause shown by the injuries, not an unproven explanation of how they occurred.',options:['Drowning in the canal','Fatal blunt-force head injury','A fall onto the towpath'],answer:'Fatal blunt-force head injury',clue:'The hearing notes describe a skull fracture and bleeding inside the head; whether it was an accident or an assault was not established.',evidence:['slip:4']}
     ];
     let caseStage=0,caseTheory='',casePicked=[],caseEditorial='';
+    function caseEvidenceDetails(key){
+      const match=/^(file|slip):(\d+)(?::(\d+))?$/.exec(key);
+      if(!match)return null;
+      const i=Number(match[2]);
+      if(match[1]==='slip'){
+        if(i>=caseInserts.length)return null;
+        const slip=caseInserts[i];
+        return {label:'SLIP '+String(i+1).padStart(2,'0')+' · '+slip.title,quote:slip.text};
+      }
+      const para=Number(match[3]);
+      const file=caseFiles[i];
+      if(!file||!Number.isInteger(para)||para<0||para>=file.body.length)return null;
+      return {label:file.ref+' · '+file.title+' / ¶'+(para+1),quote:file.body[para]};
+    }
+    function paintCasePins(){
+      document.querySelectorAll('[data-case-evidence]').forEach(el=>{
+        const active=casePicked.includes(el.dataset.caseEvidence);
+        el.classList.toggle('case-evidence-selected',active);
+        const btn=el.matches('button')?el:el.querySelector('.case-pin-source');
+        if(btn){
+          btn.setAttribute('aria-pressed',String(active));
+          btn.textContent=active?'Pinned ✓':el.matches('button')?'Pin this slip to the deduction':'Pin paragraph as evidence';
+        }
+      });
+      document.getElementById('case-extra-text').classList.toggle('case-evidence-selected',casePicked.includes('slip:'+slipIndex));
+    }
+    function renderPinnedCaseEvidence(){
+      const host=document.getElementById('case-evidence-picks');host.replaceChildren();
+      if(!casePicked.length){
+        const hint=document.createElement('p');hint.className='case-pin-empty';
+        hint.textContent='No supporting documents pinned. Open the notebook or slips and pin a passage.';
+        host.append(hint);
+      }
+      for(const key of casePicked){
+        const documentData=caseEvidenceDetails(key);
+        if(!documentData)continue;
+        const card=document.createElement('div');card.className='case-pin-card';
+        const ref=document.createElement('strong');ref.textContent=documentData.label;
+        const quote=document.createElement('p');
+        quote.textContent='“'+documentData.quote.slice(0,190)+(documentData.quote.length>190?'…':'')+'”';
+        const remove=document.createElement('button');remove.type='button';remove.textContent='Remove pin ×';
+        remove.addEventListener('click',()=>pinCaseEvidence(key));
+        card.append(ref,quote,remove);host.append(card);
+      }
+    }
+    function pinCaseEvidence(key){
+      if(!caseEvidenceDetails(key))return;
+      const chosen=casePicked.includes(key);
+      if(chosen){casePicked=casePicked.filter(k=>k!==key);}
+      else if(casePicked.length<2){casePicked.push(key);}
+      else{
+        document.getElementById('five-feedback').textContent='Only two citations can be pinned. Remove one to make room.';
+        return;
+      }
+      document.getElementById('five-feedback').textContent='';
+      paintCasePins();renderPinnedCaseEvidence();safelySaveSession();
+    }
+    document.getElementById('case-pin-slip').addEventListener('click',()=>pinCaseEvidence('slip:'+slipIndex));
+
     function renderCaseStage(){
       const stage=caseStages[caseStage];
       document.getElementById('case-stage-title').textContent=stage.title;
@@ -188,13 +259,21 @@
         button.addEventListener('click',()=>{caseTheory=value;document.getElementById('five-feedback').textContent='';renderCaseStage();safelySaveSession()});
         theories.appendChild(button);
       });
-      document.querySelector('#case-form-panel .case-support').hidden=true;
+      document.querySelector('#case-form-panel .case-support').hidden=false;
+      const evidenceHeading=document.querySelector('#case-form-panel .case-support>small');
+      evidenceHeading.textContent='SUPPORTING EVIDENCE · '+stage.evidence.length+
+        (stage.evidence.length===1?' SOURCE REQUIRED':' SOURCES REQUIRED');
+      renderPinnedCaseEvidence();paintCasePins();
       document.getElementById('five-finish').textContent=caseStage===3?'Finish case reconstruction →':'Save finding →';
     }
     document.getElementById('five-finish').addEventListener('click',()=>{
       const stage=caseStages[caseStage],feedback=document.getElementById('five-feedback');
       if(!caseTheory){feedback.textContent='Choose one answer before continuing.';return}
       if(caseTheory!==stage.answer){feedback.textContent=stage.clue;return}
+      if(casePicked.length!==stage.evidence.length||!stage.evidence.every(key=>casePicked.includes(key))){
+        feedback.textContent='The hypothesis needs a matching document citation'+(stage.evidence.length>1?' from each of two independent records':'')+'. Pin supporting material directly from the notebook or loose slips.';
+        return;
+      }
       if(caseStage<3){
         caseStage++;caseTheory='';casePicked=[];renderCaseStage();safelySaveSession();
       }else{
@@ -206,6 +285,7 @@
         safelySaveSession();
       }
     });
+    casePinsReady=true;
     renderCaseStage();
 
     let fiveOutroPending=false;
