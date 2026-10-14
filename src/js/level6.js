@@ -93,6 +93,13 @@ function scareSound(){
 function breach(){
  if(!developerPreview||running)return;
  running=true;
+ if(window.MeridianDesktop){
+  scareSound();
+  show('sixAfter');
+  window.MeridianDesktop.fault('breach');
+  setTimeout(()=>{running=false},1600);
+  return;
+ }
  const root=document.getElementById('six-breach'),cry=document.getElementById('six-cry'),lines=document.getElementById('six-lines');
  root.hidden=false;cry.hidden=false;lines.hidden=true;scareSound();
  setTimeout(()=>{cry.hidden=true;lines.hidden=false},830);
