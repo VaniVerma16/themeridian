@@ -88,7 +88,7 @@
     let sortOrder=[...initialOrder];
     let draggedId=null;
 
-    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),readFour:document.getElementById("read-four"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),readFive:document.getElementById('read-five'),five:document.getElementById('level-five'),complete:document.getElementById('completed'),six:document.getElementById('level-six'),sixAfter:document.getElementById('sixAfter')};
+    const sections={readOne:document.getElementById("read-one"),readTwo:document.getElementById("read-two"),readThree:document.getElementById("read-three"),readFour:document.getElementById("read-four"),home:document.getElementById('home'),level:document.getElementById('level-one'),two:document.getElementById('level-two'),three:document.getElementById('level-three'),four:document.getElementById('level-four'),readFive:document.getElementById('read-five'),five:document.getElementById('level-five'),complete:document.getElementById('completed'),readSix:document.getElementById('read-six'),six:document.getElementById('level-six'),sixAfter:document.getElementById('sixAfter')};
     const sortFeedback=document.getElementById('sort-feedback');
     const modal=document.getElementById('modal');
     const modalTitle=document.getElementById('modal-title');
@@ -143,7 +143,7 @@
       }catch(err){show('home',false);}
       finally{sessionRestoring=false;}
     }
-    const progressOrder=['home','readOne','level','readTwo','two','readThree','three','readFour','four','readFive','five','complete','six','sixAfter'];
+    const progressOrder=['home','readOne','level','readTwo','two','readThree','three','readFour','four','readFive','five','complete','readSix','six','sixAfter'];
     let sixWarningSeen=false;
     let furthestSection=0;
     const historySelect=document.getElementById('history-select');
@@ -160,7 +160,7 @@
     document.addEventListener('click',e=>{if(!historyNav.contains(e.target))closeHistory()});
     historyNav.addEventListener('keydown',e=>{if(e.key==='Escape'){closeHistory();historyTrigger.focus()}});
 
-    const historyNames={home:'Home',readOne:'Level 1 introduction',level:'Level 1',readTwo:'Level 2 introduction',two:'Level 2',readThree:'Level 3 introduction',three:'Level 3',readFour:'Level 4 introduction',four:'Level 4',readFive:'Level 5 introduction',five:'Level 5',six:'Level 6 proof (developer)',sixAfter:'Level 6 aftermath (developer)'};
+    const historyNames={home:'Home',readOne:'Level 1 introduction',level:'Level 1',readTwo:'Level 2 introduction',two:'Level 2',readThree:'Level 3 introduction',three:'Level 3',readFour:'Level 4 introduction',four:'Level 4',readFive:'Level 5 introduction',five:'Level 5',readSix:'Level 6 introduction (developer)',six:'Level 6 proof (developer)',sixAfter:'Level 6 aftermath (developer)'};
     function canRevisit(section){
       const index=progressOrder.indexOf(section);
       return index>=0 && (developerPreview || index<=furthestSection);
@@ -201,20 +201,23 @@
       // Untrusted navigation (history, manually changed dropdown, or restored view)
       // must not advance progress. Forward story transitions explicitly record progress.
       if(!recordProgress && !canRevisit(section))return;
-      if(!developerPreview&&(section==='six'||section==='sixAfter'))section='complete';
+      if(!developerPreview&&(['readSix','six','sixAfter'].includes(section)))section='complete';
       if(recordProgress){const index=progressOrder.indexOf(section);if(index>furthestSection)furthestSection=index;}
       // Horror styling belongs only to the unreleased Level 6 screens.
       // Leaving Level 6 must restore the standard dark Meridian site.
       document.body.classList.toggle('blood-era',
-        developerPreview&&(section==='six'||section==='sixAfter'));
+        developerPreview&&(section==='readSix'||section==='six'||section==='sixAfter'));
       document.body.classList.toggle('game-active',section!=='home');
+      // Direct developer jumps to the article should never reveal an empty
+      // workspace when the introduction has not been played yet.
+      if(developerPreview&&section==='six')window.MeridianLevel6Pager?.ensureStarted?.();
       Object.entries(sections).forEach(([name,element])=>element.hidden=name!==section);
       document.getElementById('dev-level').value=section;
       refreshHistory(section);
       window.scrollTo({top:0,left:0,behavior:'instant'});
       if(section==='four')requestAnimationFrame(()=>ensureFourMap());
       // First Level 6 visit: warning is system text, not spoken by the Archivist.
-      if(developerPreview&&section==='six'&&!sixWarningSeen){
+      if(developerPreview&&section==='readSix'&&!sixWarningSeen){
         sixWarningSeen=true;
         document.getElementById('six-warning').hidden=false;
         document.body.classList.add('six-intro-lock');
@@ -226,7 +229,7 @@
       const dialog=document.getElementById('six-warning');
       dialog.hidden=true;
       document.body.classList.remove('six-intro-lock');
-      document.getElementById('six-title').focus({preventScroll:true});
+      document.getElementById('six-intro-title').focus({preventScroll:true});
     });
     // Attach the two public Continue controls in the core controller. They
     // previously depended on reaching the very end of the much larger Level 5
@@ -383,7 +386,7 @@
     document.getElementById('dev-pass').addEventListener('click',()=>{
       if(!developerPreview)return;
       const current=document.getElementById('dev-level').value;
-      const next={home:'readOne',readOne:'level',level:'readTwo',readTwo:'two',two:'readThree',readThree:'three',three:'flashFour',readFour:'four',four:'flashFive',readFive:'five',five:'flashOutro',complete:'six',six:'sixBreach',sixAfter:'six'};
+      const next={home:'readOne',readOne:'level',level:'readTwo',readTwo:'two',two:'readThree',readThree:'three',three:'flashFour',readFour:'four',four:'flashFive',readFive:'five',five:'flashOutro',complete:'readSix',readSix:'six',six:'sixBreach',sixAfter:'readSix'};
       const destination=next[current];
       if(destination==='flashFour')flashToLevelFour();
       else if(destination==='flashFive')flashToLevelFive();
