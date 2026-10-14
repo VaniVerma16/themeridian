@@ -115,7 +115,7 @@
      link.addEventListener('click',()=>{
        const targetEl=target.startsWith('#')?section.querySelector(target):target.startsWith('.')?section.querySelector(target):document.getElementById(target);
        if(!targetEl)return;
-       if(target.startsWith('desk-') || targetEl.matches('button[id^="begin-"]')){
+       if(target.startsWith('desk-') || targetEl.matches('button[id^="begin-"], #return-home')){
          targetEl.click();
          if(target.startsWith('desk-'))document.getElementById('desk-overlay')?.scrollIntoView({block:'nearest',behavior:'instant'});
        }else{
