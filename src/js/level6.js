@@ -21,9 +21,10 @@
   "source": "Sophie couldn't prove who leaked the story. Students remembered Adam confronting the bullies; her former boyfriend lived in the same dorm.",
   "question": "Should an accusation nobody can prove become part of a man's life story?",
   "story": [
-   "Adam lived a very predictable life, at least initially. He was a gifted student attending college on a full scholarship, even though his family could have bought his way in. An ideal son, he grew up with his family's hopes and dreams resting on his shoulders. He was a very bright kid going to big places.",
-   "An old college recollection interrupts the glowing accounts of Adam's talent. One of his former friends remembers an evening that puts him in a very different light.",
-   "Late on a Saturday, Sophie, a friend of Adam's, told him about her family's financial problems. By Sunday evening, everyone knew. Sophie faced incessant bullying at the relatively wealthy college, to the point where she could barely escape the ridicule. When she confronted Adam, he suggested that someone might have overheard their conversation in the shared dorm room. Sophie wasn't quite sure what to believe, especially since one of her former flames lived there too. Adam did, however, help quell the bullying considerably."
+   "Adam's life followed a remarkably predictable course, at least at first. A gifted student on a full scholarship, though his family could easily have paid his way through college. The ideal son, carrying his family's hopes and dreams on his shoulders. A very bright boy, everyone agreed, destined for bigger things.",
+   "But one recollection from his college years complicates this flattering picture. A former friend remembers a particular weekend, and a rather different side of Adam.",
+   "Late one Saturday, Sophie, a friend of Adam's, confided in him about her family's financial troubles. By Sunday evening, the news had spread across campus. At a college where most students came from money, Sophie became an easy target. The whispering soon gave way to relentless bullying, until she could scarcely escape it.",
+   "When Sophie confronted Adam, he suggested that someone might have overheard their conversation in the shared dorm room. It was possible; one of Sophie's former flames lived there too. Sophie wasn't sure what to believe. Adam, meanwhile, did much to quell the bullying—an act of kindness that did little to settle the question of how it had begun."
   ],
   "options": [
    {
