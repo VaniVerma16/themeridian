@@ -16,18 +16,18 @@
  const pageState=document.getElementById('six-page-state');
  const chapter=document.getElementById('six-reading-chapter');
  if(!root||!host||!workspace||!intro||!start||!prev||!next)return;
- const KEY='meridian-six-pager-v4';
+ const KEY='meridian-six-pager-v5';
  const actNames=['ACT I — THE PROMISE','ACT II — THE FALL AND THE RETURN','ACT III — THE UNFINISHED'];
  let active=0,started=false,pages=[];
  try{
    const saved=JSON.parse(localStorage.getItem(KEY)||'null');
-   if(saved && saved.version===4){
+   if(saved && saved.version===5){
      started=saved.started===true;
      if(Number.isInteger(saved.active))active=Math.min(6,Math.max(0,saved.active));
    }
  }catch(e){/* storage is optional */}
  function persist(){
-   try{localStorage.setItem(KEY,JSON.stringify({version:4,active,started}));}catch(e){}
+   try{localStorage.setItem(KEY,JSON.stringify({version:5,active,started}));}catch(e){}
  }
  function snapshot(){
    return window.MeridianSix?.snapshot?.()||{assessment:{count:0},decisions:{},ending:null};
