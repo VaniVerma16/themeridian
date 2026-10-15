@@ -7,74 +7,77 @@
  'use strict';
  if(typeof developerPreview==='undefined'||!developerPreview)return;
 
- const STORAGE_KEY='meridian-six-editorial-v5';
- const VERSION=5;
+ const STORAGE_KEY='meridian-six-editorial-v6';
+ const LEGACY_STORAGE_KEY='meridian-six-editorial-v5';
+ const VERSION=6;
  const encounters=[
  {
   "id": "broken-confidence",
   "act": 1,
   "number": 1,
-  "title": "Should a friend's betrayal become part of Adam's story?",
-  "lead": "Daniel mocked Sophie's private family problems at a college party. Adam knew. Sophie says nobody warned her; Daniel claims Adam told him to apologise.",
-  "sourceTitle": "TWO COLLEGE ACCOUNTS · 1990",
-  "source": "Sophie: “I wish someone had told me.” Daniel: “Adam said I should put it right.” Neither establishes what Adam ultimately did.",
-  "question": "What do you print when the witnesses disagree—and the story could embarrass someone still living?",
+  "title": "Did Adam betray Sophie—or defend her?",
+  "lead": "Two sides of Adam survive in the college accounts: a possible betrayal, and an undeniable act of kindness.",
+  "sourceTitle": "SOPHIE'S ACCOUNT / STUDENT INTERVIEWS · 1990",
+  "source": "Sophie couldn't prove who leaked the story. Students remembered Adam confronting the bullies; her former boyfriend lived in the same dorm.",
+  "question": "Should an accusation nobody can prove become part of a man's life story?",
   "story": [
-   "An old college recollection interrupts the glowing accounts of Adam's talent. His friends remember the same evening very differently."
+   "Adam's future seemed almost scripted: a full scholarship his wealthy family hardly needed, dazzling grades, and a household's hopes resting on their golden boy.",
+   "Late on Saturday, Sophie confided in him about her family's financial troubles in his shared dorm. By Sunday evening, everyone on their affluent campus seemed to know. The bullying was relentless. Adam insisted someone must have overheard; Sophie's former boyfriend, with whom things had ended badly, lived there too.",
+   "Yet Adam confronted the bullies and helped quiet the ridicule. To some, he was Sophie's defender. To Sophie, he was the person she'd trusted in the first place."
   ],
   "options": [
    {
-    "label": "Print both memories.",
-    "detail": "Sophie is heard, but her family's private difficulties become public again.",
-    "revision": "Sophie remembered being left in the dark. Daniel recalled Adam urging him to apologise. Their accounts do not settle what Adam did.",
+    "label": "Publish Sophie's suspicions.",
+    "detail": "She deserves to be heard—but nobody proved Adam was responsible.",
+    "revision": "Sophie had trusted Adam with her family's financial troubles. When the secret spread, she doubted his explanation. No account proves he leaked it; he later helped stop the bullying.",
     "quality": [
-     9,
+     7,
      8,
-     8,
+     7,
      8
     ],
     "axes": {
      "preservation": 4,
      "narrativeControl": 0,
-     "compassion": 2,
+     "compassion": 1,
      "erasure": 0,
-     "independence": 2
+     "independence": 3
     }
    },
    {
-    "label": "Print Daniel's praise of Adam.",
-    "detail": "It makes Adam look loyal, but gives the friend who caused the harm control of the story.",
-    "revision": "Daniel remembered Adam as the friend who urged him to make things right. Sophie recalled the hurt but is not quoted.",
+    "label": "Print Adam as her defender.",
+    "detail": "His intervention was real, but Sophie's doubts disappear.",
+    "revision": "Adam confronted classmates who bullied Sophie after news of her family's financial difficulties spread. Former students remembered him as her defender; her doubts about the leak are omitted.",
     "quality": [
      8,
-     8,
-     8,
-     7
+     9,
+     6,
+     5
     ],
     "axes": {
      "preservation": 1,
-     "narrativeControl": 2,
-     "compassion": 3,
-     "erasure": 0,
-     "independence": 2
+     "narrativeControl": 4,
+     "compassion": 1,
+     "erasure": 2,
+     "independence": 0
     }
    },
    {
     "label": "Leave the incident out.",
-    "detail": "Protects Sophie from fresh embarrassment, but leaves out a revealing dispute about Adam.",
-    "revision": "The article omits the college incident. It cannot establish Adam's response without reviving Sophie's private hurt.",
+    "detail": "Spare Sophie another humiliation—but erase a revealing uncertainty.",
+    "revision": "The article leaves out Sophie's college ordeal. Nobody established who leaked her secret, and publishing the story would expose her family's private difficulties again.",
     "quality": [
-     6,
      8,
      7,
-     5
+     9,
+     6
     ],
     "axes": {
      "preservation": 0,
-     "narrativeControl": 2,
-     "compassion": 1,
-     "erasure": 3,
-     "independence": 1
+     "narrativeControl": 1,
+     "compassion": 4,
+     "erasure": 4,
+     "independence": 2
     }
    }
   ],
@@ -558,11 +561,19 @@
 
  function readSaved(){
   try{
-   const obj=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
-   if(!obj||obj.version!==VERSION||!obj.decisions)return;
+   const current=localStorage.getItem(STORAGE_KEY);
+   const legacy=current?null:localStorage.getItem(LEGACY_STORAGE_KEY);
+   const obj=JSON.parse(current||legacy||'null');
+   if(!obj||!obj.decisions||!(obj.version===VERSION||(legacy&&obj.version===5)))return;
    for(const encounter of encounters){
+    // Q1 has been rewritten; do not silently reinterpret a previous answer.
+    if(legacy&&encounter.number===1)continue;
     const n=obj.decisions[encounter.id];
     if(Number.isInteger(n)&&n>=0&&n<encounter.options.length)saved[encounter.id]=n;
+   }
+   if(legacy){
+    save();storeCampaignState(false);
+    localStorage.removeItem(LEGACY_STORAGE_KEY);
    }
   }catch(e){/* Optional storage failure must not break the game. */}
  }
@@ -573,7 +584,7 @@
  }
  function wipeTrial(){
   saved=Object.create(null);
-  try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+  try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(LEGACY_STORAGE_KEY);}catch(e){}
   clearCampaignLevel();
  }
  function text(tag,content,className){
@@ -608,7 +619,7 @@
    const result=qualityResult(),previous=data.levels['6'];
    data.version=1;
    data.levels['6']={
-    version:5,decisions:{...saved},parameters:{...result.parameters},
+    version:6,decisions:{...saved},parameters:{...result.parameters},
     editorialScore:result.score,
     completed:completed||(previous?.completed===true&&result.count===7),
     updatedAt:new Date().toISOString()
